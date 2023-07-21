@@ -1,5 +1,6 @@
 import { Card, Image,Stack, Text, Group, Badge, createStyles, Center, Button, rem } from '@mantine/core';
-import {  IconBedFilled, IconRuler, IconGavel, IconCalendarEvent, IconStar, IconStarFilled, IconAddressBook} from '@tabler/icons-react';
+import {  IconBedFilled, IconRuler, IconCalendarEvent, IconStar, IconStarFilled, IconAddressBook} from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -32,6 +33,16 @@ const useStyles = createStyles((theme) => ({
     }`,
   },
 
+  favButton: {
+    position: 'absolute',
+    top: '45%',
+    left: '2%',
+    transform: 'translate(-2%, -2%)',
+    cursor: 'pointer'
+    },
+
+
+
   icon: {
     marginRight: rem(5),
     color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
@@ -56,7 +67,7 @@ type CardProps = {
     // project: string,
     builder: string,
     completionDate: string,
-    // auctionDate: Date
+    auctionDate: string
   };
 
 export function AuctionCard(props:CardProps) {
@@ -71,7 +82,9 @@ export function AuctionCard(props:CardProps) {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section >
+        
         <Image src={props.image} alt="Tesla Model S" height={250}/>
+        <IconStar className={classes.favButton} color='Gold' size={30} stroke={1.5} />
       </Card.Section>
 
       <Group position="apart" mt="md">
@@ -81,7 +94,15 @@ export function AuctionCard(props:CardProps) {
             {props.builder}
           </Text>
         </Stack>
-        <Badge variant="outline">{props.auctionDate}</Badge>
+
+        {props.auctionDate === "Live" ? (
+          <Badge variant="filled" color='green' size='lg'>{props.auctionDate}</Badge>
+        ) : (
+          <Badge variant="outline" color='orange' size='lg'>{props.auctionDate}</Badge>
+        )}
+
+
+
       </Group>
 
       <Card.Section className={classes.section} mt="md">
@@ -105,9 +126,11 @@ export function AuctionCard(props:CardProps) {
             </Text>
           </div>
 
+          <Link to='/auction' style={{ marginLeft: "auto" }}>
           <Button radius="xl" style={{ flex: 1 }}>
             Go to Auction
           </Button>
+          </Link>
         </Group>
       </Card.Section>
     </Card>

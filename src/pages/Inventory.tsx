@@ -130,7 +130,8 @@ const Auctions = [
     bedroom: 0,
     size: 490,
     builder: 'Toronto Building Corp',
-    completionDate: 'December 2025'
+    completionDate: 'Dec 2025',
+    auctionDate: 'Live'
   },
 
   {
@@ -142,7 +143,9 @@ const Auctions = [
     bedroom: 1,
     size: 590,
     builder: 'Developers Inc',
-    completionDate: 'June 2026'
+    completionDate: 'June 2026',
+    auctionDate: '1 Oct 2023'
+    
   },
 
   {
@@ -154,7 +157,8 @@ const Auctions = [
     bedroom: 2,
     size: 750,
     builder: 'Developers Inc',
-    completionDate: 'August 2024'
+    completionDate: 'August 2024',
+    auctionDate: '1 Jul 2023'
   },
 ];
 
@@ -215,6 +219,7 @@ const Inventory = () => {
         bedroom={auction.bedroom}
         builder={auction.builder} 
         completionDate={auction.completionDate}
+        auctionDate={auction.auctionDate}
       />
     </Grid.Col>
   ));

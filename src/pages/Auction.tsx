@@ -22,11 +22,13 @@ import {
   Container,
   NumberInputHandlers,
   Paper,
+  Box,
 } from "@mantine/core";
 import { IconCurrencyDollarCanadian } from "@tabler/icons-react";
+import { useParams } from "react-router";
 
 function BidSelector(props: any) {
-  const [value, setValue] = useState<number | "">(auction.price * 1000);
+  const [value, setValue] = useState<number | "">(props.auction.price * 1000);
   const handlers = useRef<NumberInputHandlers>();
 
   return (
@@ -45,7 +47,7 @@ function BidSelector(props: any) {
         onChange={(val) => setValue(val)}
         handlersRef={handlers}
         max={1000000}
-        min={auction.price}
+        min={props.auction.price}
         step={10000}
         styles={{ input: { width: rem(150) } }}
         icon={<IconCurrencyDollarCanadian size="1rem" />}
@@ -90,27 +92,104 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const auction = {
-  images: [
-    "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
-    "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
-    "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
-    "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
-  ],
-  price: 550,
-  name: "The Condominimums",
-  address: "50 Richmond W",
-  bedroom: 0,
-  size: 490,
-  builder: "Toronto Building Corp",
-  status: "Live Auction",
-  lot: 5552,
-  parking: 1,
-  completionDate: "December 2023",
-};
+
+
+const auctionData = [
+  {
+    id: '1',
+    images: [
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
+      "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
+    ],
+    price: 550,
+    name: "The Condominimums",
+    address: "50 Richmond W",
+    bedroom: 0,
+    size: 490,
+    builder: "Toronto Building Corp",
+    completionDate: "Dec 2025",
+    auctionDate: "Live",
+    status: "Live Auction",
+    lot: 5552,
+    parking: 1,
+
+  },
+
+  {
+    id: '2',
+    images: [
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
+      "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
+    ],
+    price: 600,
+    name: "Condo 223",
+    address: "35 Bathurst",
+    bedroom: 1,
+    size: 590,
+    builder: "Developers Inc",
+    completionDate: "June 2026",
+    auctionDate: "1 Oct 2023",
+    status: "upcoming",
+    lot: 5554,
+    parking: 0,
+
+
+  },
+
+  {
+    id: '3',
+    images: [
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
+      "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
+      "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
+    ],
+    price: 900,
+    name: "King West Towers",
+    address: "100 Spadina",
+    bedroom: 2,
+    size: 750,
+    builder: "Developers Inc",
+    completionDate: "August 2024",
+    auctionDate: "1 Jul 2023",
+    status: "passed",
+    lot: 5555,
+    parking: 2,
+
+
+  },
+];
+
+
+// const auction = {
+//   images: [
+//     "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
+//     "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
+//     "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
+//     "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
+//   ],
+//   price: 550,
+//   name: "The Condominimums",
+//   address: "50 Richmond W",
+//   bedroom: 0,
+//   size: 490,
+//   builder: "Toronto Building Corp",
+//   status: "Live Auction",
+//   lot: 5552,
+//   parking: 1,
+//   completionDate: "December 2023",
+// };
 
 const Auction = () => {
+  const { id } = useParams();
   const { classes } = useStyles();
+
+  const auction = auctionData.find(x => (x.id === id)) || auctionData[0];
+
 
   return (
     <Container className="Auction" maw={1500} >
@@ -152,7 +231,10 @@ const Auction = () => {
           </Grid.Col>
           <Grid.Col xs={12} md={7}>
 
-          <PricePlot/>
+            <Center> <PricePlot /></Center>
+
+           
+          
           </Grid.Col>
 
         </Grid>
@@ -228,7 +310,7 @@ const Auction = () => {
                         Make a bid
                       </Text> */}
 
-                <BidSelector className={classes.bidSelector} />
+                <BidSelector className={classes.bidSelector} auction={auction}/>
                 <Button radius="xl">Place Your Bid</Button>
               </Stack>
               {/* </Grid.Col> */}

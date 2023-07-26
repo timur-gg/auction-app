@@ -16,7 +16,7 @@ const Main = () => {
       {" "}
       {/* The Switch decides which component to show based on the current URL.*/}
       <Route path="/inventory" element={<Inventory />}></Route>
-      <Route path="/auction" element={<Auction />}></Route>
+      <Route path="/auction/:id" element={<Auction />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/client_profile" element={<ClientProfile />}></Route>
 
@@ -34,7 +34,7 @@ function App(): React.JSX.Element {
             <HeaderSimple
               links={[
                 { link: "/inventory", label: "Inventory" },
-                { link: "/auction", label: "Auction" },
+                { link: "/auction/1", label: "Auction" },
                 { link: "/signup", label: "Signup" },
                 { link: "/client_profile", label: "Client Profile" },
               ]}

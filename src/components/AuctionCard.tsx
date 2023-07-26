@@ -126,7 +126,7 @@ export function AuctionCard(props:CardProps) {
             </Text>
           </div>
 
-          <Link to='/auction' style={{ marginLeft: "auto" }}>
+          <Link to={`/auction/${props.id}`} style={{ marginLeft: "auto" }}>
           <Button radius="xl" style={{ flex: 1 }}>
             Go to Auction
           </Button>

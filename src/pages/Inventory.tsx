@@ -134,6 +134,7 @@ const MARKS = [
 
 const Auctions = [
   {
+    id: '1',
     image:
       "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
     price: 550,
@@ -147,6 +148,7 @@ const Auctions = [
   },
 
   {
+    id: '2',
     image:
       "https://cache08.housesigma.com/file/pix-exclusive/HSE03040/9ca2c_8b275.jpg?594560a1",
     price: 600,
@@ -160,6 +162,7 @@ const Auctions = [
   },
 
   {
+    id: '3',
     image:
       "https://cache08.housesigma.com/file/pix-exclusive/HSE03006/5c783_ce332.jpg?b43e9ea7",
     price: 900,
@@ -236,6 +239,7 @@ const Inventory = () => {
         builder={auction.builder}
         completionDate={auction.completionDate}
         auctionDate={auction.auctionDate}
+        id={auction.id}
       />
     </Grid.Col>
   ));

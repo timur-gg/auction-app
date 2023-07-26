@@ -16,11 +16,12 @@ import {
   SegmentedControl,
   Text,
   Stack,
+  Menu,
 } from "@mantine/core";
 
 import { DatePickerInput } from "@mantine/dates";
 import { createStyles, RangeSlider, rem } from "@mantine/core";
-import { IconPoint, IconGripVertical, IconArrowsSort } from "@tabler/icons-react";
+import { IconPoint, IconGripVertical, IconArrowsSort, IconCoin, IconCalendar, IconRuler,} from "@tabler/icons-react";
 
 import AuctionCard from "../components/AuctionCard";
 
@@ -132,6 +133,23 @@ const MARKS = [
   { value: 99, label: "3+" },
 ];
 
+// type AuctionKeys = {
+//   [key: string]: any;
+//   id: string;
+//   price: number;
+//   image: string;
+//   name: string;
+//   address: string;
+//   bedroom: number;
+//   size: number;
+//   status: string;
+//   parking: number;
+//   builder: string;
+//   completionDate: string,
+//   auctionDate: string
+// };
+
+
 const Auctions = [
   {
     id: '1',
@@ -182,6 +200,8 @@ const Inventory = () => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
   const [size, setSize] = useState<[number, number]>([0, 100]);
   const [bedroom, setBedroom] = useState<number>(0);
+  const [sortBy, setSort] = useState<string>('price');
+
 
   const [filters, setFilter] = useState<string[]>(["All"]);
 
@@ -209,13 +229,7 @@ const Inventory = () => {
     // Completed: (auction) => auction.completed,
   };
 
-  console.log(filters);
-  console.log(
-    priceRange,
-    bedroom,
-    (size[0] + 20) * 12.5,
-    (size[1] + 20) * 12.5
-  );
+  
 
   // const RESULTING_FILTER = filters.map((filter) => FILTER_MAP[filter]).every(Boolean);
   // console.log(RESULTING_FILTER);
@@ -224,7 +238,9 @@ const Inventory = () => {
   filters.forEach((f) => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });
-  console.log(filteredAuctions);
+
+  // const sortedAuctions = filteredAuctions.sort((a,b) => b[sortBy].localeCompare(a[sortBy]));
+  // console.log(sortedAuctions);
 
   const AuctionList = filteredAuctions.map((auction) => (
     <Grid.Col md={6} lg={4}>
@@ -244,11 +260,35 @@ const Inventory = () => {
     </Grid.Col>
   ));
 
+  function onSortClick(sortBy:string) {
+    console.log(sortBy);
+    setSort(sortBy);
+  }
+
   return (
     <div className="Inventory">
       <Grid justify="space-around">
         <Grid.Col xs={1} md={1} pt={33}>
-        <Button><IconArrowsSort/></Button>
+        <Menu shadow="md" width={200} >
+          <Menu.Target>
+          <Button><IconArrowsSort/></Button>
+
+          </Menu.Target>
+
+          <Menu.Dropdown>
+   
+
+            <Menu.Item icon={<IconCoin size={14}/>} onClick={(e) => onSortClick('price')}>Price</Menu.Item>
+            <Menu.Item icon={<IconRuler size={14}/>} onClick={(e) => onSortClick('size')}>Size</Menu.Item>
+            <Menu.Item icon={<IconCalendar size={14}/>} onClick={(e) => onSortClick('auctionDate')}>Auction Date</Menu.Item>
+            <Menu.Item icon={<IconCalendar size={14}/>} onClick={(e) => onSortClick('completionDate')}>Completion Date</Menu.Item>
+
+          </Menu.Dropdown>
+          </Menu>
+
+
+
+        
 
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>

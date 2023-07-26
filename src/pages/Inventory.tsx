@@ -149,8 +149,11 @@ const MARKS = [
 //   auctionDate: string
 // };
 
+interface auctionType {  // 👈 typing for the "romanNumber" object
+  [key: string]: any;
+} 
 
-const Auctions = [
+const Auctions:auctionType[] = [
   {
     id: '1',
     image:
@@ -239,10 +242,10 @@ const Inventory = () => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });
 
-  // const sortedAuctions = filteredAuctions.sort((a,b) => b[sortBy].localeCompare(a[sortBy]));
-  // console.log(sortedAuctions);
+  const sortedAuctions = filteredAuctions.sort((a,b) => (b[sortBy] > a[sortBy]) ? -1: 1);
+  console.log(sortedAuctions);
 
-  const AuctionList = filteredAuctions.map((auction) => (
+  const AuctionList = sortedAuctions.map((auction) => (
     <Grid.Col md={6} lg={4}>
       <AuctionCard
         // status={auction.status}

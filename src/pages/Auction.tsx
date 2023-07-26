@@ -17,9 +17,9 @@ import {
   NumberInput,
   ActionIcon,
   NumberInputHandlers,
+  Paper
 } from "@mantine/core";
 import { IconCurrencyDollarCanadian } from "@tabler/icons-react";
-
 
 function BidSelector(props: any) {
   const [value, setValue] = useState<number | "">(auction.price * 1000);
@@ -88,7 +88,6 @@ const useStyles = createStyles((theme) => ({
 
 const auction = {
   images: [
-    
     "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
     "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
     "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
@@ -136,10 +135,10 @@ const Auction = () => {
         direction="row"
         wrap="wrap"> */}
 
-          <Grid  columns={24} align="center" justify="center">
+          <Grid columns={24} align="center" justify="center">
             <Grid.Col xs={12} md={5}>
               <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-                ${auction.price+100},000
+                ${auction.price + 100},000
               </Text>
               <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
                 current bid
@@ -153,37 +152,72 @@ const Auction = () => {
               </Text>
             </Grid.Col>
 
-            <Grid.Col xs={12} md={7}  lg={8}>
+            <Grid.Col xs={12} md={7} lg={8}>
+
+            <Paper shadow="md" p="md" bg='#dcedc8'>
+              
               <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
               <Space h={15} />
-              Your Bid: 600,000
-              <br />
-              Your Place: 4
-              <br />
-              Total bids: 5
+
+              <Group position="center">
+                <Stack spacing="3" align="left">
+                  <Group>
+                    <Text fz="sm" c="dimmed" fw={500}>
+                      Your bid
+                    </Text>
+                  </Group>
+                  <Group>
+                    <Text fz="sm" c="dimmed" fw={500}>
+                      Your place
+                    </Text>
+                  </Group>
+                  <Group>
+                    <Text fz="sm" c="dimmed" fw={500}>
+                      Total bids
+                    </Text>
+                  </Group>
+                </Stack>
+                <Stack spacing="3" align="center">
+                  <Group>
+                    <Text fz="lg" fw={700}>
+                      ${auction.price + 100},000
+                    </Text>
+                  </Group>
+                  <Group>
+                    <Text fz="md" fw={700}>
+                      4
+                    </Text>
+                  </Group>
+                  <Group>
+                    <Text fz="md" fw={700}>
+                      5
+                    </Text>
+                  </Group>
+                </Stack>
+              </Group>
+
+              </Paper>
             </Grid.Col>
 
             <Grid.Col xs={20} md={10} lg={6}>
-                {/* <Grid justify="center"> */}
-                  {/* <Grid.Col xs={10} md={8}> */}
-                    <Stack align="center">
-                      {/* <Text fz="sm" fw={500} sx={{ lineHeight: 1 }}>
+              {/* <Grid justify="center"> */}
+              {/* <Grid.Col xs={10} md={8}> */}
+              <Stack align="center">
+                {/* <Text fz="sm" fw={500} sx={{ lineHeight: 1 }}>
                         Make a bid
                       </Text> */}
 
-                      <BidSelector className={classes.bidSelector}/>
-                      <Button radius="xl" >
-                      Place Your Bid
-                    </Button>
-                    </Stack>
-                  {/* </Grid.Col> */}
+                <BidSelector className={classes.bidSelector} />
+                <Button radius="xl">Place Your Bid</Button>
+              </Stack>
+              {/* </Grid.Col> */}
 
-                  {/* <Grid.Col xs={10} md={4}> */}
-                    {/* <Button radius="xl" >
+              {/* <Grid.Col xs={10} md={4}> */}
+              {/* <Button radius="xl" >
                       Place Your Bid
                     </Button> */}
-                  {/* </Grid.Col> */}
-                {/* </Grid> */}
+              {/* </Grid.Col> */}
+              {/* </Grid> */}
             </Grid.Col>
           </Grid>
         </Card.Section>

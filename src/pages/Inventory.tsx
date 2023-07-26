@@ -15,11 +15,12 @@ import {
   Center,
   SegmentedControl,
   Text,
+  Stack,
 } from "@mantine/core";
 
 import { DatePickerInput } from "@mantine/dates";
 import { createStyles, RangeSlider, rem } from "@mantine/core";
-import { IconPoint, IconGripVertical } from "@tabler/icons-react";
+import { IconPoint, IconGripVertical, IconArrowsSort } from "@tabler/icons-react";
 
 import AuctionCard from "../components/AuctionCard";
 
@@ -108,9 +109,20 @@ export function SliderMarks() {
   );
 }
 
-const data = [
-  { value: "a", label: "a" },
-  { value: "b", label: "b" },
+const projectOptions = [
+  { value: "a", label: "The Condos on King" },
+  { value: "b", label: "House on Spadina" },
+];
+
+const builderOptions = [
+  { value: "1", label: "Builders Inc" },
+  { value: "2", label: "Construction Corp" },
+];
+
+const statusOptions = [
+  { value: "live", label: "Live" },
+  { value: "upcoming", label: "Upcoming" },
+  { value: "passed", label: "Passed" },
 ];
 
 const MARKS = [
@@ -129,9 +141,9 @@ const Auctions = [
     address: "50 Richmond W",
     bedroom: 0,
     size: 490,
-    builder: 'Toronto Building Corp',
-    completionDate: 'Dec 2025',
-    auctionDate: 'Live'
+    builder: "Toronto Building Corp",
+    completionDate: "Dec 2025",
+    auctionDate: "Live",
   },
 
   {
@@ -142,10 +154,9 @@ const Auctions = [
     address: "35 Bathurst",
     bedroom: 1,
     size: 590,
-    builder: 'Developers Inc',
-    completionDate: 'June 2026',
-    auctionDate: '1 Oct 2023'
-    
+    builder: "Developers Inc",
+    completionDate: "June 2026",
+    auctionDate: "1 Oct 2023",
   },
 
   {
@@ -156,9 +167,9 @@ const Auctions = [
     address: "100 Spadina",
     bedroom: 2,
     size: 750,
-    builder: 'Developers Inc',
-    completionDate: 'August 2024',
-    auctionDate: '1 Jul 2023'
+    builder: "Developers Inc",
+    completionDate: "August 2024",
+    auctionDate: "1 Jul 2023",
   },
 ];
 
@@ -187,16 +198,21 @@ const Inventory = () => {
       auction.size >= (size[0] + 20) * 12.5 &&
       auction.size <= (size[1] + 20) * 12.5,
     bedroom: (auction: any) => {
-      if(bedroom === -1) return true;
-      else if(bedroom === 3) return auction.bedroom >= 3;
+      if (bedroom === -1) return true;
+      else if (bedroom === 3) return auction.bedroom >= 3;
       else return auction.bedroom === bedroom;
-    }
+    },
     // Active: (auction, address) => !auction.completed,
     // Completed: (auction) => auction.completed,
   };
 
   console.log(filters);
-  console.log(priceRange, bedroom, (size[0] + 20) * 12.5, (size[1] + 20) * 12.5);
+  console.log(
+    priceRange,
+    bedroom,
+    (size[0] + 20) * 12.5,
+    (size[1] + 20) * 12.5
+  );
 
   // const RESULTING_FILTER = filters.map((filter) => FILTER_MAP[filter]).every(Boolean);
   // console.log(RESULTING_FILTER);
@@ -217,7 +233,7 @@ const Inventory = () => {
         name={auction.name}
         address={auction.address}
         bedroom={auction.bedroom}
-        builder={auction.builder} 
+        builder={auction.builder}
         completionDate={auction.completionDate}
         auctionDate={auction.auctionDate}
       />
@@ -227,7 +243,11 @@ const Inventory = () => {
   return (
     <div className="Inventory">
       <Grid justify="space-around">
-      <Grid.Col xs={3} md={2.5} lg={1.5}>
+        <Grid.Col xs={1} md={1} pt={33}>
+        <Button><IconArrowsSort/></Button>
+
+        </Grid.Col>
+        <Grid.Col xs={3} md={2.5} lg={1.5}>
           <AutocompleteLoading />
         </Grid.Col>
         <Grid.Col xs={2.5} md={2} lg={1}>
@@ -262,7 +282,7 @@ const Inventory = () => {
                   addFilter("priceRange");
                 }}
               />
-              <Space h='md'/>
+              <Space h="md" />
             </Popover.Dropdown>
           </Popover>
         </Grid.Col>
@@ -270,18 +290,19 @@ const Inventory = () => {
           <Select
             searchable
             clearable
-            data={data}
+            data={projectOptions}
             label="Project"
             placeholder="Project"
+            style={{
+              overflowWrap: 'normal'}}
           />
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>
           <Select
-            searchable
             clearable
-            data={data}
-            label="Builder"
-            placeholder="Builder"
+            data={statusOptions}
+            label="Status"
+            placeholder="Auction status"
           />
         </Grid.Col>
 
@@ -308,7 +329,11 @@ const Inventory = () => {
           />
         </Grid.Col>
         <Grid.Col xs={3} md={3} lg={2}>
-          Bedrooms
+          <Stack spacing="0">
+
+            
+          
+          <Text size='sm' fw={500}>Bedrooms</Text>
           {/* <Slider
             label={(val) => MARKS.find((mark) => mark.value === val)?.label}
             defaultValue={33}
@@ -320,59 +345,71 @@ const Inventory = () => {
             }}
             value={bedroom}
           /> */}
-
-<SegmentedControl
-color="blue"
-      radius="sm"
-      transitionDuration={500}
-        transitionTimingFunction="linear"
-      size="sm"
-      data={[
-        { label: 'All', value: '-1' },
-        { label: '0', value: '0' },
-        { label: '1', value: '1' },
-        { label: '2', value: '2' },
-        { label: '3+', value: '3' },
-      ]}
-      onChange={(value) => {
-        setBedroom(parseInt(value));
-        addFilter("bedroom");
-      }}
-      // classNames={classes}
-    />
+          <SegmentedControl
+            color="blue"
+            radius="sm"
+            transitionDuration={500}
+            transitionTimingFunction="linear"
+            size="sm"
+            data={[
+              { label: "All", value: "-1" },
+              { label: "0", value: "0" },
+              { label: "1", value: "1" },
+              { label: "2", value: "2" },
+              { label: "3+", value: "3" },
+            ]}
+            onChange={(value) => {
+              setBedroom(parseInt(value));
+              addFilter("bedroom");
+            }}
+            // classNames={classes}
+          />
+          </Stack>
         </Grid.Col>
       </Grid>
 
-      <Accordion defaultValue="">
+          <Space h="md" />
+      <Accordion chevronPosition="left" defaultValue="">
         <Accordion.Item value="customization">
           <Accordion.Control>More Filters</Accordion.Control>
           <Accordion.Panel>
-            <Grid>
+            <Grid gutter={50}>
               <Grid.Col xs={6} sm={6} md={4} lg={3}>
-              <Space h="md" />
-              <Text>Size (sqft)</Text>
-              <RangeSlider
-                size="lg"
-                radius="md"
-                scale={(v) => (v + 20) * 12.5}
-                step={4}
-                name="size"
-                marks={[
-                  { value: 0, label: "250" },
-                  { value: 20, label: "500" },
-                  { value: 40, label: "750" },
-                  { value: 60, label: "1000" },
-                  { value: 80, label: "1250" },
-                  { value: 100, label: "1500+" },
-                ]}
-                value={size}
-                onChange={(value) => {
-                  setSize(value);
-                  addFilter("size");
-                }}
-              />
-              <Space h="lg" />
+                <Space h="md" />
+                <Text>Size (sqft)</Text>
+                <RangeSlider
+                  size="lg"
+                  radius="md"
+                  scale={(v) => (v + 20) * 12.5}
+                  step={4}
+                  name="size"
+                  marks={[
+                    { value: 0, label: "250" },
+                    { value: 20, label: "500" },
+                    { value: 40, label: "750" },
+                    { value: 60, label: "1000" },
+                    { value: 80, label: "1250" },
+                    { value: 100, label: "1500+" },
+                  ]}
+                  value={size}
+                  onChange={(value) => {
+                    setSize(value);
+                    addFilter("size");
+                  }}
+                />
+                <Space h="lg" />
               </Grid.Col>
+
+              <Grid.Col xs={4} sm={4} md={3} lg={2}>
+                <Select
+                  searchable
+                  clearable
+                  data={builderOptions}
+                  label="Builder"
+                  placeholder="Builder"
+                />
+              </Grid.Col>
+
               {/* <Grid.Col md={6} lg={3}>
                 <Slider
                   label={(val) =>

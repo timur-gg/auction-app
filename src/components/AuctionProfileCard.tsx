@@ -114,10 +114,10 @@ export function AuctionProfileCard(props: ProfileCardProps) {
 
   return (
     <div className="AuctionProfileCard">
-      <Card withBorder radius="md" className={classes.card}>
+      <Card withBorder radius="md" className={classes.card} maw={1200} mx='auto'>
         <Card.Section className={classes.section}>
           <Grid>
-            <Grid.Col sm={12} md={2}>
+            <Grid.Col sm={12} md={2.5}>
               <Grid>
                 <Grid.Col xs={6} md={12}>
                   {/* <Group mt="md"> */}
@@ -155,7 +155,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                 </Grid.Col>
               </Grid>
             </Grid.Col>
-            <Grid.Col sm={12} md={10}>
+            <Grid.Col sm={12} md={9.5}>
               <Carousel
                 slideSize="70%"
                 height={330}

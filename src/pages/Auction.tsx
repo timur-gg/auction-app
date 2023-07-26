@@ -2,6 +2,8 @@ import React from "react";
 import AuctionProfileCard from "../components/AuctionProfileCard";
 import ShowCounter from "../components/ShowCounter";
 
+import PricePlot from "../components/PricePlot";
+
 import { useState, useRef } from "react";
 
 import {
@@ -16,8 +18,10 @@ import {
   createStyles,
   NumberInput,
   ActionIcon,
+  Center,
+  Container,
   NumberInputHandlers,
-  Paper
+  Paper,
 } from "@mantine/core";
 import { IconCurrencyDollarCanadian } from "@tabler/icons-react";
 
@@ -109,8 +113,10 @@ const Auction = () => {
   const { classes } = useStyles();
 
   return (
-    <div className="Auction">
+    <Container className="Auction" maw={1500} >
+      
       <AuctionProfileCard
+      
         status={auction.status}
         images={auction.images}
         size={auction.size}
@@ -123,9 +129,41 @@ const Auction = () => {
         parking={auction.parking}
         completionDate={auction.completionDate}
       />
-
       <Space h={15} />
-      <Card withBorder radius="md" className={classes.card}>
+      {/* <Stack align="center" > */}
+
+      <Card withBorder p={15} radius="md" className={classes.card} maw={1000} mx='auto'>
+        <Card.Section className={classes.section}>
+        <Grid align='center' justify='center'>
+          <Grid.Col xs={12} md={5} >
+            <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
+              ${auction.price + 100},000
+            </Text>
+            <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
+              current bid
+            </Text>
+            <Space h={20} />
+            <Text fz="lg" fw={500} sx={{ lineHeight: 1 }}>
+              ${auction.price},000
+            </Text>
+            <Text fz="sm" c="dimmed" fw={400} sx={{ lineHeight: 1 }} mt={3}>
+              starting price
+            </Text>
+          </Grid.Col>
+          <Grid.Col xs={12} md={7}>
+
+          <PricePlot/>
+          </Grid.Col>
+
+        </Grid>
+
+        
+        </Card.Section>
+      </Card>
+      <Space h={15} />
+
+      
+      <Card withBorder radius="md" className={classes.card} maw={1000} p={15} mx='auto'>
         <Card.Section className={classes.section}>
           {/* <Flex gap="md"
         mih={50}
@@ -136,70 +174,53 @@ const Auction = () => {
         wrap="wrap"> */}
 
           <Grid columns={24} align="center" justify="center">
-            <Grid.Col xs={12} md={5}>
-              <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-                ${auction.price + 100},000
-              </Text>
-              <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
-                current bid
-              </Text>
-              <Space h={20} />
-              <Text fz="lg" fw={500} sx={{ lineHeight: 1 }}>
-                ${auction.price},000
-              </Text>
-              <Text fz="sm" c="dimmed" fw={400} sx={{ lineHeight: 1 }} mt={3}>
-                starting price
-              </Text>
-            </Grid.Col>
+            <Grid.Col xs={20} md={10} >
+              <Paper shadow="md" p="md" bg="#dcedc8">
+                <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
+                <Space h={15} />
 
-            <Grid.Col xs={12} md={7} lg={8}>
+                <Group position="center">
+                  <Stack spacing="3" align="left">
+                    <Group>
+                      <Text fz="sm" c="dimmed" fw={500}>
+                        Your bid
+                      </Text>
+                    </Group>
+                    <Group>
+                      <Text fz="sm" c="dimmed" fw={500}>
+                        Your place
+                      </Text>
+                    </Group>
+                    <Group>
+                      <Text fz="sm" c="dimmed" fw={500}>
+                        Total bids
+                      </Text>
+                    </Group>
+                  </Stack>
+                  <Stack spacing="3" align="center">
+                    <Group>
+                      <Text fz="lg" fw={700}>
+                        {/* ${auction.price + 100},000 */}
+                        $570,000
 
-            <Paper shadow="md" p="md" bg='#dcedc8'>
-              
-              <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
-              <Space h={15} />
-
-              <Group position="center">
-                <Stack spacing="3" align="left">
-                  <Group>
-                    <Text fz="sm" c="dimmed" fw={500}>
-                      Your bid
-                    </Text>
-                  </Group>
-                  <Group>
-                    <Text fz="sm" c="dimmed" fw={500}>
-                      Your place
-                    </Text>
-                  </Group>
-                  <Group>
-                    <Text fz="sm" c="dimmed" fw={500}>
-                      Total bids
-                    </Text>
-                  </Group>
-                </Stack>
-                <Stack spacing="3" align="center">
-                  <Group>
-                    <Text fz="lg" fw={700}>
-                      ${auction.price + 100},000
-                    </Text>
-                  </Group>
-                  <Group>
-                    <Text fz="md" fw={700}>
-                      4
-                    </Text>
-                  </Group>
-                  <Group>
-                    <Text fz="md" fw={700}>
-                      5
-                    </Text>
-                  </Group>
-                </Stack>
-              </Group>
-
+                      </Text>
+                    </Group>
+                    <Group>
+                      <Text fz="md" fw={700}>
+                        2
+                      </Text>
+                    </Group>
+                    <Group>
+                      <Text fz="md" fw={700}>
+                        5
+                      </Text>
+                    </Group>
+                  </Stack>
+                </Group>
               </Paper>
             </Grid.Col>
 
-            <Grid.Col xs={20} md={10} lg={6}>
+            <Grid.Col xs={20} md={10} >
               {/* <Grid justify="center"> */}
               {/* <Grid.Col xs={10} md={8}> */}
               <Stack align="center">
@@ -222,7 +243,8 @@ const Auction = () => {
           </Grid>
         </Card.Section>
       </Card>
-    </div>
+      {/* </Stack> */}
+    </Container>
   );
 };
 

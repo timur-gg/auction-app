@@ -1,11 +1,7 @@
 import React from "react";
-import AuctionProfileCard from "../components/AuctionProfileCard";
-import ShowCounter from "../components/ShowCounter";
-
 import { useState, useRef } from "react";
 
 import {
-  Card,
   Box,
   Stack,
   Text,
@@ -15,7 +11,6 @@ import {
   Grid,
   Space,
   Flex,
-  rem,
   Container,
   Title,
   createStyles,

@@ -1,5 +1,5 @@
 import { Card, Image,Stack, Text, Group, Badge, createStyles, Center, Button, rem } from '@mantine/core';
-import {  IconBedFilled, IconRuler, IconCalendarEvent, IconStar, IconStarFilled, IconAddressBook} from '@tabler/icons-react';
+import {  IconBedFilled, IconRuler, IconCalendarEvent, IconStar, IconMoneybag, IconStarFilled, IconAddressBook} from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
@@ -35,7 +35,7 @@ const useStyles = createStyles((theme) => ({
 
   favButton: {
     position: 'absolute',
-    top: '45%',
+    top: '2%',
     left: '2%',
     transform: 'translate(-2%, -2%)',
     cursor: 'pointer'
@@ -53,7 +53,9 @@ const mockdata = [
   { label: 'completionDate', icon: IconCalendarEvent, },
   { label: 'address', icon: IconAddressBook },
   { label: 'bedroom', icon: IconBedFilled },
-  { label: 'size', icon: IconRuler , unit: 'sqft'},];
+  { label: 'size', icon: IconRuler , unit: 'sqft'},
+  { label: 'deposit', icon: IconMoneybag}
+];
 
 type CardProps = {
   [key: string]: any;
@@ -68,6 +70,7 @@ type CardProps = {
     builder: string,
     completionDate: string,
     auctionDate: string
+    deposit: string,
   };
 
 export function AuctionCard(props:CardProps) {

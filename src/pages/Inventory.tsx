@@ -21,9 +21,17 @@ import {
 
 import { DatePickerInput } from "@mantine/dates";
 import { createStyles, RangeSlider, rem } from "@mantine/core";
-import { IconPoint, IconGripVertical, IconArrowsSort, IconCoin, IconCalendar, IconRuler,} from "@tabler/icons-react";
+import {
+  IconPoint,
+  IconGripVertical,
+  IconArrowsSort,
+  IconCoin,
+  IconCalendar,
+  IconRuler,
+} from "@tabler/icons-react";
 
-import AuctionCard from "../components/AuctionCard";
+import AuctionCard from "../components/inventory/AuctionCard";
+import PriceFilter from "../components/inventory/PriceFilter";
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
@@ -126,6 +134,12 @@ const statusOptions = [
   { value: "passed", label: "Passed" },
 ];
 
+const depositOptions = [
+  { value: "5/5/5/5", label: "5/5/5/5" },
+  { value: "10/5/5", label: "10/5/5" },
+  { value: "10/10", label: "10/10" },
+];
+
 const MARKS = [
   { value: 0, label: "0" },
   { value: 33, label: "1" },
@@ -133,67 +147,55 @@ const MARKS = [
   { value: 99, label: "3+" },
 ];
 
-// type AuctionKeys = {
-//   [key: string]: any;
-//   id: string;
-//   price: number;
-//   image: string;
-//   name: string;
-//   address: string;
-//   bedroom: number;
-//   size: number;
-//   status: string;
-//   parking: number;
-//   builder: string;
-//   completionDate: string,
-//   auctionDate: string
-// };
-
-interface auctionType {  // 👈 typing for the "romanNumber" object
+interface auctionType {
+  // 👈 typing for the "romanNumber" object
   [key: string]: any;
-} 
+}
 
-const Auctions:auctionType[] = [
+const Auctions: auctionType[] = [
   {
-    id: '1',
+    id: "1",
     image:
       "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
     price: 550,
     name: "The Condominimums",
     address: "50 Richmond W",
-    bedroom: 0,
-    size: 490,
+    bedroom: "0-3",
+    size: "490-1200",
     builder: "Toronto Building Corp",
     completionDate: "Dec 2025",
     auctionDate: "Live",
+    deposit: "5/5/5/5",
   },
 
   {
-    id: '2',
+    id: "2",
     image:
       "https://cache08.housesigma.com/file/pix-exclusive/HSE03040/9ca2c_8b275.jpg?594560a1",
     price: 600,
     name: "Condo 223",
     address: "35 Bathurst",
-    bedroom: 1,
-    size: 590,
+    bedroom: "2-3",
+    size: "590-1000",
     builder: "Developers Inc",
     completionDate: "June 2026",
     auctionDate: "1 Oct 2023",
+    deposit: "10/5/5",
   },
 
   {
-    id: '3',
+    id: "3",
     image:
       "https://cache08.housesigma.com/file/pix-exclusive/HSE03006/5c783_ce332.jpg?b43e9ea7",
     price: 900,
     name: "King West Towers",
     address: "100 Spadina",
-    bedroom: 2,
-    size: 750,
+    bedroom: "1-2",
+    size: "400-750",
     builder: "Developers Inc",
     completionDate: "August 2024",
     auctionDate: "1 Jul 2023",
+    deposit: "10/10",
   },
 ];
 
@@ -203,8 +205,7 @@ const Inventory = () => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
   const [size, setSize] = useState<[number, number]>([0, 100]);
   const [bedroom, setBedroom] = useState<number>(0);
-  const [sortBy, setSort] = useState<string>('price');
-
+  const [sortBy, setSort] = useState<string>("price");
 
   const [filters, setFilter] = useState<string[]>(["All"]);
 
@@ -228,21 +229,19 @@ const Inventory = () => {
       else if (bedroom === 3) return auction.bedroom >= 3;
       else return auction.bedroom === bedroom;
     },
+    deposit: (auction: any) => auction.deposit === depositOptions[0].label,
     // Active: (auction, address) => !auction.completed,
     // Completed: (auction) => auction.completed,
   };
-
-  
-
-  // const RESULTING_FILTER = filters.map((filter) => FILTER_MAP[filter]).every(Boolean);
-  // console.log(RESULTING_FILTER);
 
   var filteredAuctions = Auctions;
   filters.forEach((f) => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });
 
-  const sortedAuctions = filteredAuctions.sort((a,b) => (b[sortBy] > a[sortBy]) ? -1: 1);
+  const sortedAuctions = filteredAuctions.sort((a, b) =>
+    b[sortBy] > a[sortBy] ? -1 : 1
+  );
   console.log(sortedAuctions);
 
   const AuctionList = sortedAuctions.map((auction) => (
@@ -259,11 +258,12 @@ const Inventory = () => {
         completionDate={auction.completionDate}
         auctionDate={auction.auctionDate}
         id={auction.id}
+        deposit={auction.deposit}
       />
     </Grid.Col>
   ));
 
-  function onSortClick(sortBy:string) {
+  function onSortClick(sortBy: string) {
     console.log(sortBy);
     setSort(sortBy);
   }
@@ -272,66 +272,51 @@ const Inventory = () => {
     <div className="Inventory">
       <Grid justify="space-around">
         <Grid.Col xs={1} md={1} pt={33}>
-        <Menu shadow="md" width={200} >
-          <Menu.Target>
-          <Button><IconArrowsSort/></Button>
+          <Menu shadow="md" width={200}>
+            <Menu.Target>
+              <Button>
+                <IconArrowsSort />
+              </Button>
+            </Menu.Target>
 
-          </Menu.Target>
-
-          <Menu.Dropdown>
-   
-
-            <Menu.Item icon={<IconCoin size={14}/>} onClick={(e) => onSortClick('price')}>Price</Menu.Item>
-            <Menu.Item icon={<IconRuler size={14}/>} onClick={(e) => onSortClick('size')}>Size</Menu.Item>
-            <Menu.Item icon={<IconCalendar size={14}/>} onClick={(e) => onSortClick('auctionDate')}>Auction Date</Menu.Item>
-            <Menu.Item icon={<IconCalendar size={14}/>} onClick={(e) => onSortClick('completionDate')}>Completion Date</Menu.Item>
-
-          </Menu.Dropdown>
+            <Menu.Dropdown>
+              <Menu.Item
+                icon={<IconCoin size={14} />}
+                onClick={(e) => onSortClick("price")}
+              >
+                Price
+              </Menu.Item>
+              <Menu.Item
+                icon={<IconRuler size={14} />}
+                onClick={(e) => onSortClick("size")}
+              >
+                Size
+              </Menu.Item>
+              <Menu.Item
+                icon={<IconCalendar size={14} />}
+                onClick={(e) => onSortClick("auctionDate")}
+              >
+                Auction Date
+              </Menu.Item>
+              <Menu.Item
+                icon={<IconCalendar size={14} />}
+                onClick={(e) => onSortClick("completionDate")}
+              >
+                Completion Date
+              </Menu.Item>
+            </Menu.Dropdown>
           </Menu>
-
-
-
-        
-
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>
           <AutocompleteLoading />
         </Grid.Col>
         <Grid.Col xs={2.5} md={2} lg={1}>
           <Text>Price</Text>
-          <Popover width={500} position="bottom" withArrow shadow="md">
-            <Popover.Target>
-              <Button>
-                ${priceRange[0] > 0 ? (priceRange[0] + 20) * 12.5 : 0} -{" "}
-                {priceRange[1] > 0 && priceRange[1] < 100
-                  ? "$" + (priceRange[1] + 20) * 12.5
-                  : "Max"}
-              </Button>
-            </Popover.Target>
-            <Popover.Dropdown>
-              <RangeSlider
-                size="lg"
-                radius="md"
-                scale={(v) => (v + 20) * 12.5}
-                step={4}
-                name="priceRange"
-                marks={[
-                  { value: 0, label: "250k" },
-                  { value: 20, label: "500k" },
-                  { value: 40, label: "750k" },
-                  { value: 60, label: "1m" },
-                  { value: 80, label: "1.25m" },
-                  { value: 100, label: "1.5m+" },
-                ]}
-                value={priceRange}
-                onChange={(value) => {
-                  setPriceRange(value);
-                  addFilter("priceRange");
-                }}
-              />
-              <Space h="md" />
-            </Popover.Dropdown>
-          </Popover>
+          <PriceFilter
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            addFilter={addFilter}
+          />
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>
           <Select
@@ -341,7 +326,8 @@ const Inventory = () => {
             label="Project"
             placeholder="Project"
             style={{
-              overflowWrap: 'normal'}}
+              overflowWrap: "normal",
+            }}
           />
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>
@@ -377,45 +363,33 @@ const Inventory = () => {
         </Grid.Col>
         <Grid.Col xs={3} md={3} lg={2}>
           <Stack spacing="0">
-
-            
-          
-          <Text size='sm' fw={500}>Bedrooms</Text>
-          {/* <Slider
-            label={(val) => MARKS.find((mark) => mark.value === val)?.label}
-            defaultValue={33}
-            step={33}
-            marks={MARKS}
-            onChange={(value) => {
-              setBedroom(value);
-              addFilter("bedroom");
-            }}
-            value={bedroom}
-          /> */}
-          <SegmentedControl
-            color="blue"
-            radius="sm"
-            transitionDuration={500}
-            transitionTimingFunction="linear"
-            size="sm"
-            data={[
-              { label: "All", value: "-1" },
-              { label: "0", value: "0" },
-              { label: "1", value: "1" },
-              { label: "2", value: "2" },
-              { label: "3+", value: "3" },
-            ]}
-            onChange={(value) => {
-              setBedroom(parseInt(value));
-              addFilter("bedroom");
-            }}
-            // classNames={classes}
-          />
+            <Text size="sm" fw={500}>
+              Bedrooms
+            </Text>
+            <SegmentedControl
+              color="blue"
+              radius="sm"
+              transitionDuration={500}
+              transitionTimingFunction="linear"
+              size="sm"
+              data={[
+                { label: "All", value: "-1" },
+                { label: "0", value: "0" },
+                { label: "1", value: "1" },
+                { label: "2", value: "2" },
+                { label: "3+", value: "3" },
+              ]}
+              onChange={(value) => {
+                setBedroom(parseInt(value));
+                addFilter("bedroom");
+              }}
+              // classNames={classes}
+            />
           </Stack>
         </Grid.Col>
       </Grid>
 
-          <Space h="md" />
+      <Space h="md" />
       <Accordion chevronPosition="left" defaultValue="">
         <Accordion.Item value="customization">
           <Accordion.Control>More Filters</Accordion.Control>
@@ -454,6 +428,16 @@ const Inventory = () => {
                   data={builderOptions}
                   label="Builder"
                   placeholder="Builder"
+                />
+              </Grid.Col>
+
+              <Grid.Col xs={4} sm={4} md={3} lg={2}>
+                <Select
+                  searchable
+                  clearable
+                  data={depositOptions}
+                  label="Deposit Structure"
+                  placeholder="Deposit"
                 />
               </Grid.Col>
 

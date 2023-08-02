@@ -14,10 +14,10 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 
-import SignupStep1 from "../components/SignupStep1";
+import SignupStep1 from "../components/signup/SignupStep1";
 import { useState } from "react";
-import SignupStep2 from "../components/SignupStep2";
-import SignupStep3 from "../components/SignupStep3";
+import SignupStep2 from "../components/signup/SignupStep2";
+import SignupStep3 from "../components/signup/SignupStep3";
 
 export default function Signup() {
   const [step, setStep] = useState(1);

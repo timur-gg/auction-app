@@ -19,6 +19,9 @@ import {
   IconMoneybag,
   IconStarFilled,
   IconAddressBook,
+  IconBath,
+  IconCar,
+  IconLock,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
@@ -87,7 +90,7 @@ const mockdata = [
   {
     label: "address",
     icon: IconAddressBook,
-    desc: <Image h={200} w={300} src={mapImg} />,
+    desc: <Image h={200} w={300} src={mapImg} mb={47} />,
   },
   { label: "bedroom", icon: IconBedFilled, desc: "Number of bedrooms" },
   {
@@ -101,6 +104,21 @@ const mockdata = [
     icon: IconMoneybag,
     desc: "Preconstruction deposit by year",
   },
+  {
+    label: "bathroom",
+    icon: IconBath,
+    desc: "# of bathrooms",
+  },
+  {
+    label: "parking",
+    icon: IconCar,
+    desc: "Parking spots",
+  },
+  {
+    label: "locker",
+    icon: IconLock,
+    desc: "Lockers",
+  }
 ];
 
 type CardProps = {
@@ -126,9 +144,8 @@ export function AuctionCard(props: CardProps) {
       key={feature.label}
       multiline
       p={5}
-      h={feature.label === "address" ? 256 : "auto"}
+      // h={feature.label === "address" ? 256 : "auto"}
       // h={500}
-      withArrow
       style={{ cursor: "pointer" }}
       transitionProps={{ duration: 200 }}
       label={feature.desc}

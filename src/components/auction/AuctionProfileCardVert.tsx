@@ -11,9 +11,7 @@ import {
   Space,
   Flex,
   rem,
-  Container,
-  TextInput,
-  AspectRatio,
+  Tooltip,
 } from "@mantine/core";
 import {
   IconBedFilled,
@@ -25,6 +23,7 @@ import {
 } from "@tabler/icons-react";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
+var mapImg = require("../../img/map.png");
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -61,12 +60,25 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const mockdata = [
-  { label: "completionDate", icon: IconCalendarEvent },
-  { label: "address", icon: IconAddressBook },
-  { label: "bedroom", icon: IconBedFilled },
-  { label: "size", icon: IconRuler, unit: "sqft" },
-  { label: "parking", icon: IconCar },
-  { label: "locker", icon: IconLock },
+  {
+    label: "completionDate",
+    icon: IconCalendarEvent,
+    desc: "Construction completion date",
+  },
+  {
+    label: "address",
+    icon: IconAddressBook,
+    desc: <Image h={200} w={300} src={mapImg} mb={-23} />,
+  },
+  { label: "bedroom", icon: IconBedFilled, desc: "Number of bedrooms" },
+  {
+    label: "size",
+    icon: IconRuler,
+    unit: "sqft",
+    desc: "Size of the property",
+  },
+  { label: "parking", icon: IconCar, desc: "Parking spots" },
+  { label: "locker", icon: IconLock, desc: "Storage lockers" },
 ];
 
 type ProfileCardProps = {
@@ -93,12 +105,22 @@ export function AuctionProfileCardVert(props: ProfileCardProps) {
 
   const features = mockdata.map((feature) => (
     <Grid.Col xs={10} py={5} key={feature.label}>
-      <Group spacing="1">
-        <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-        <Text size="sm">
-          {auction[feature.label] + (feature.unit ? feature.unit : "")}
-        </Text>
-      </Group>
+      <Tooltip
+        multiline
+        p={5}
+        // h={feature.label === "address" ? 200 : "auto"}
+        withArrow
+        style={{ cursor: "pointer" }}
+        transitionProps={{ duration: 200 }}
+        label={feature.desc}
+      >
+        <Group spacing="1">
+          <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
+          <Text size="sm">
+            {auction[feature.label] + (feature.unit ? feature.unit : "")}
+          </Text>
+        </Group>
+      </Tooltip>
     </Grid.Col>
   ));
 
@@ -143,7 +165,6 @@ export function AuctionProfileCardVert(props: ProfileCardProps) {
               </Stack>
             </Grid.Col>
           </Grid>
-
         </Card.Section>
       </Card>
     </div>

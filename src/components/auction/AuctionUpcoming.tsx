@@ -15,6 +15,7 @@ import {
   List,
   Checkbox,
   Title,
+  Tooltip,
   ThemeIcon,
   Center,
 } from "@mantine/core";
@@ -76,9 +77,9 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const mockdata = [
-  { label: "auctionDate", icon: IconCalendarEvent },
-  { label: "deposit", icon: IconMoneybag },
-  { label: "duration", icon: IconClock, unit: "hrs" },
+  { label: "auctionDate", icon: IconCalendarEvent, desc: "Auction Date" },
+  { label: "deposit", icon: IconMoneybag, desc: "Deposit Amount" },
+  { label: "duration", icon: IconClock, unit: "hrs", desc: "Auction Duration" },
 ];
 
 // const FILTER_MAP: { [char: string]: any } = {
@@ -109,12 +110,24 @@ export function AuctionUpcoming(props: any) {
 
   const auctionFeatures = mockdata.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>
-      <Group spacing="1">
-        <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-        <Text size="sm">
-          {auction[feature.label] + (feature.unit ? feature.unit : "")}
-        </Text>
-      </Group>
+      <Tooltip
+        key={feature.label}
+        multiline
+        p={5}
+        h={feature.label === "address" ? 256 : "auto"}
+        // h={500}
+        withArrow
+        style={{ cursor: "pointer" }}
+        transitionProps={{ duration: 200 }}
+        label={feature.desc}
+      >
+        <Group spacing="1">
+          <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
+          <Text size="sm">
+            {auction[feature.label] + (feature.unit ? feature.unit : "")}
+          </Text>
+        </Group>
+      </Tooltip>
     </Grid.Col>
   ));
 
@@ -129,7 +142,10 @@ export function AuctionUpcoming(props: any) {
   ));
 
   const conditionText = text.auctionRules.map((rule) => (
-    <List.Item><Title order={5}>{rule.title}</Title>{rule.text}</List.Item>
+    <List.Item>
+      <Title order={5}>{rule.title}</Title>
+      {rule.text}
+    </List.Item>
   ));
 
   const [modalOpened, { open: openModal, close: closeModal }] =
@@ -144,9 +160,7 @@ export function AuctionUpcoming(props: any) {
         />
       )}
 
-      {step < 3 && (
-      <Space h={10} />
-      )}
+      {step < 3 && <Space h={10} />}
 
       <Grid justify="center">
         {step === 3 && (
@@ -322,30 +336,22 @@ export function AuctionUpcoming(props: any) {
                   {conditionText}
                 </List>
                 <Space h={30} />
-                
               </Container>
 
               <Center>
-                
-               
-
-              <Group spacing={40}>
-              <Checkbox  size="md" label="I agree to the auction rules" />
-              <Button
-                // variant="dark"
-                color="green"
-                mr={"auto"}
-                // onClick={openModal}
-                onClick={() => setStep(3)}
-              >
-                Confirm & Sign Up
-              </Button>
-
-
-              </Group>
+                <Group spacing={40}>
+                  <Checkbox size="md" label="I agree to the auction rules" />
+                  <Button
+                    // variant="dark"
+                    color="green"
+                    mr={"auto"}
+                    // onClick={openModal}
+                    onClick={() => setStep(3)}
+                  >
+                    Confirm & Sign Up
+                  </Button>
+                </Group>
               </Center>
-
-              
             </Card>
           </Grid.Col>
         )}

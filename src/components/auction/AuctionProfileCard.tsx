@@ -14,6 +14,8 @@ import {
   Container,
   TextInput,
   AspectRatio,
+  Center,
+  Tooltip,
 } from "@mantine/core";
 import {
   IconBedFilled,
@@ -21,10 +23,11 @@ import {
   IconCalendarEvent,
   IconAddressBook,
   IconCar,
-  IconLock
+  IconLock,
 } from "@tabler/icons-react";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
+var mapImg = require("../../img/map.png");
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -71,12 +74,25 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const mockdata = [
-  { label: "completionDate", icon: IconCalendarEvent },
-  { label: "address", icon: IconAddressBook },
-  { label: "bedroom", icon: IconBedFilled },
-  { label: "size", icon: IconRuler, unit: "sqft" },
-  { label: "parking", icon: IconCar },
-  { label: "locker", icon: IconLock },
+  {
+    label: "completionDate",
+    icon: IconCalendarEvent,
+    desc: "Construction completion date",
+  },
+  {
+    label: "address",
+    icon: IconAddressBook,
+    desc: <Image h={200} w={300} src={mapImg} />,
+  },
+  { label: "bedroom", icon: IconBedFilled, desc: "Number of bedrooms" },
+  {
+    label: "size",
+    icon: IconRuler,
+    unit: "sqft",
+    desc: "Size of the property",
+  },
+  { label: "parking", icon: IconCar, desc: "Parking spots" },
+  { label: "locker", icon: IconLock, desc: "Storage lockers" },
 ];
 
 type ProfileCardProps = {
@@ -101,16 +117,28 @@ type ProfileCardProps = {
 export function AuctionProfileCard(props: ProfileCardProps) {
   const { classes } = useStyles();
   const auction = props.auction;
-  const cardSize = props.cardSize || 'full';
+  const cardSize = props.cardSize || "full";
 
   const features = mockdata.map((feature) => (
-    <Grid.Col xs={6} md={4} py={5} key={feature.label} >
-      <Group spacing="1">
-        <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-        <Text size="sm">
-          {auction[feature.label] + (feature.unit ? feature.unit : "")}
-        </Text>
-      </Group>
+    <Grid.Col xs={6} md={4} py={5} key={feature.label}>
+      <Tooltip
+        key={feature.label}
+        multiline
+        p={5}
+        h={feature.label === "address" ? 256 : "auto"}
+        // h={500}
+        withArrow
+        style={{ cursor: "pointer" }}
+        transitionProps={{ duration: 200 }}
+        label={feature.desc}
+      >
+        <Group spacing="1">
+          <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
+          <Text size="sm">
+            {auction[feature.label] + (feature.unit ? feature.unit : "")}
+          </Text>
+        </Group>
+      </Tooltip>
     </Grid.Col>
   ));
 
@@ -122,15 +150,17 @@ export function AuctionProfileCard(props: ProfileCardProps) {
     </Carousel.Slide>
   ));
 
-
   type ConditionalWrapperTypes = {
     condition: boolean;
     wrapper: any;
     children: any;
-  };  
+  };
 
-  const ConditionalWrapper = ({ condition, wrapper, children }:ConditionalWrapperTypes) => 
-  condition ? wrapper(children) : children;
+  const ConditionalWrapper = ({
+    condition,
+    wrapper,
+    children,
+  }: ConditionalWrapperTypes) => (condition ? wrapper(children) : children);
 
   return (
     <div className="AuctionProfileCard">
@@ -143,34 +173,41 @@ export function AuctionProfileCard(props: ProfileCardProps) {
       >
         <Card.Section className={classes.section}>
           <Grid>
-          <Grid.Col { ...(cardSize==='full') ? {sm: 12, md: 5 } : {xs:12} } > 
-
+            <Grid.Col
+              {...(cardSize === "full" ? { sm: 12, md: 5 } : { xs: 12 })}
+            >
               <Grid>
-              <Grid.Col { ...(cardSize==='full') ? {xs: 6, md: 12 } : {xs:7} } > 
-                <Flex { ...(cardSize==='full') ? {direction: 'column'} : {direction: 'row', gap: 'xl' } } > 
-                <Stack align="flex-start" spacing={-2}>
-                    <Badge
-                      color="green"
-                      size="lg"
-                      variant="filled"
-                      className={classes.statusBadge}
-                    >
-                      {auction.status}
-                    </Badge>
-                    <Text fw={700}>Lot #{auction.lot}</Text>
-                    <Text fw={500}>{auction.name}</Text>
-                    <Text fz="xs" c="dimmed">
-                      {auction.builder}
-                    </Text>
+                <Grid.Col
+                  {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 7 })}
+                >
+                  <Flex
+                    {...(cardSize === "full"
+                      ? { direction: "column" }
+                      : { direction: "row", gap: "xl" })}
+                  >
+                    <Stack align="flex-start" spacing={-2}>
+                      <Badge
+                        color="green"
+                        size="lg"
+                        variant="filled"
+                        className={classes.statusBadge}
+                      >
+                        {auction.status}
+                      </Badge>
+                      <Text fw={700}>Lot #{auction.lot}</Text>
+                      <Text fw={500}>{auction.name}</Text>
+                      <Text fz="xs" c="dimmed">
+                        {auction.builder}
+                      </Text>
                     </Stack>
                     <Space h={10} />
                     <Text
-                    { ...(cardSize==='mini') ? {maw: 350} : {}}
+                      {...(cardSize === "mini" ? { maw: 350 } : {})}
                       fz="xs"
                       // c="dimmed"
                       // className={classes.label}
                       align="left"
-                      m={'auto'}
+                      m={"auto"}
                     >
                       Allure Condos is a new condo development located at 250
                       King Street East, Toronto, ON. This project is bringing a
@@ -178,11 +215,11 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                       mixed-use building of 43 storeys. The estimated completion
                       date for occupancy of this property is 2027.
                     </Text>
-                    </Flex>
-
+                  </Flex>
                 </Grid.Col>
-                <Grid.Col { ...(cardSize==='full') ? {xs: 6, md: 12 } : {xs:5} } > 
-
+                <Grid.Col
+                  {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 5 })}
+                >
                   <Group position="apart" mt="md">
                     <Stack spacing={6} mb={-5} align="flex-start">
                       <Text
@@ -201,20 +238,19 @@ export function AuctionProfileCard(props: ProfileCardProps) {
               </Grid>
             </Grid.Col>
 
-            { (cardSize==='full') && (
+            {cardSize === "full" && (
               <Grid.Col sm={12} md={7}>
-              <Carousel
-                slideSize="90%"
-                height={310}
-                slideGap="sm"
-                align="start"
-                loop
-              >
-                {Images}
-              </Carousel>
-            </Grid.Col>
+                <Carousel
+                  slideSize="90%"
+                  height={310}
+                  slideGap="sm"
+                  align="start"
+                  loop
+                >
+                  {Images}
+                </Carousel>
+              </Grid.Col>
             )}
-            
           </Grid>
         </Card.Section>
       </Card>

@@ -17,6 +17,7 @@ import {
   Text,
   Stack,
   Menu,
+  Checkbox,
 } from "@mantine/core";
 
 import { DatePickerInput } from "@mantine/dates";
@@ -32,6 +33,7 @@ import {
 
 import AuctionCard from "../components/inventory/AuctionCard";
 import PriceFilter from "../components/inventory/PriceFilter";
+import data from "../data";
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
@@ -234,7 +236,7 @@ const Inventory = () => {
     // Completed: (auction) => auction.completed,
   };
 
-  var filteredAuctions = Auctions;
+  var filteredAuctions: auctionType[] = data.auctionData;
   filters.forEach((f) => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });
@@ -242,13 +244,12 @@ const Inventory = () => {
   const sortedAuctions = filteredAuctions.sort((a, b) =>
     b[sortBy] > a[sortBy] ? -1 : 1
   );
-  console.log(sortedAuctions);
 
   const AuctionList = sortedAuctions.map((auction) => (
     <Grid.Col md={6} lg={4} key={auction.id}>
       <AuctionCard
         // status={auction.status}
-        image={auction.image}
+        image={auction.images[0]}
         size={auction.size}
         price={auction.price}
         name={auction.name}
@@ -259,6 +260,9 @@ const Inventory = () => {
         auctionDate={auction.auctionDate}
         id={auction.id}
         deposit={auction.deposit}
+        bathroom={auction.bathroom}
+        parking={auction.parking}
+        locker={auction.locker}
       />
     </Grid.Col>
   ));
@@ -361,7 +365,7 @@ const Inventory = () => {
             maw={400}
           />
         </Grid.Col>
-        <Grid.Col xs={3} md={3} lg={2}>
+        <Grid.Col xs={3} md={2.5} lg={1.5}>
           <Stack spacing="0">
             <Text size="sm" fw={500}>
               Bedrooms
@@ -395,7 +399,7 @@ const Inventory = () => {
           <Accordion.Control>More Filters</Accordion.Control>
           <Accordion.Panel>
             <Grid gutter={50}>
-              <Grid.Col xs={6} sm={6} md={4} lg={3}>
+              <Grid.Col xs={6} sm={4} md={3} lg={2.5}>
                 <Space h="md" />
                 <Text>Size (sqft)</Text>
                 <RangeSlider
@@ -421,7 +425,7 @@ const Inventory = () => {
                 <Space h="lg" />
               </Grid.Col>
 
-              <Grid.Col xs={4} sm={4} md={3} lg={2}>
+              <Grid.Col xs={3} lg={2}>
                 <Select
                   searchable
                   clearable
@@ -431,7 +435,7 @@ const Inventory = () => {
                 />
               </Grid.Col>
 
-              <Grid.Col xs={4} sm={4} md={3} lg={2}>
+              <Grid.Col xs={3} lg={2}>
                 <Select
                   searchable
                   clearable
@@ -439,6 +443,38 @@ const Inventory = () => {
                   label="Deposit Structure"
                   placeholder="Deposit"
                 />
+              </Grid.Col>
+              <Grid.Col xs={5} sm={3} lg={2}>
+                <Stack spacing="0">
+                  <Text size="sm" fw={500}>
+                    Bathrooms
+                  </Text>
+                  <SegmentedControl
+                    color="blue"
+                    radius="sm"
+                    transitionDuration={500}
+                    transitionTimingFunction="linear"
+                    size="sm"
+                    data={[
+                      { label: "All", value: "-1" },
+                      { label: "0", value: "0" },
+                      { label: "1", value: "1" },
+                      { label: "2", value: "2" },
+                      { label: "3+", value: "3" },
+                    ]}
+                    onChange={(value) => {
+                      setBedroom(parseInt(value));
+                      addFilter("bathroom");
+                    }}
+                    // classNames={classes}
+                  />
+                </Stack>
+              </Grid.Col>
+              <Grid.Col xs={3} md={1.5}>
+                <Checkbox label="Locker" />
+              </Grid.Col>
+              <Grid.Col xs={3} md={1.5}>
+                <Checkbox label="Parking" />
               </Grid.Col>
 
               {/* <Grid.Col md={6} lg={3}>

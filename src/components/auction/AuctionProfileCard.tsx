@@ -191,7 +191,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                         className={classes.label}
                         align="left"
                       >
-                        Lot details
+                        building details
                       </Text>
 
                       <Grid>{features}</Grid>

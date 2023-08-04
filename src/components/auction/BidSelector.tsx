@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 
 
 export function BidSelector(props: any) {
-    const [value, setValue] = useState<number | "">(props.auction.price * 1000);
+    const [value, setValue] = useState<number | "">(props.lot.price * 1000);
     const handlers = useRef<NumberInputHandlers>();
   
     return (
@@ -25,7 +25,7 @@ export function BidSelector(props: any) {
           onChange={(val) => setValue(val)}
           handlersRef={handlers}
           max={1000000}
-          min={props.auction.price}
+          min={props.lot.price}
           step={10000}
           styles={{ input: { width: rem(150) } }}
           icon={<IconCurrencyDollarCanadian size="1rem" />}

@@ -27,13 +27,6 @@ import { LotSelectionTable } from "./LotSelectionTable";
 import {
   IconCalendarEvent,
   IconCircleCheck,
-  IconCircle1Filled,
-  IconCircle2Filled,
-  IconCircle3Filled,
-  IconCircle4Filled,
-  IconCircle5Filled,
-  IconCircle6Filled,
-  IconCircle7Filled,
   IconClock,
   IconMoneybag,
 } from "@tabler/icons-react";
@@ -150,7 +143,10 @@ export function AuctionUpcoming(props: any) {
           {...(step === 1 ? { cardSize: "full" } : { cardSize: "mini" })}
         />
       )}
+
+      {step < 3 && (
       <Space h={10} />
+      )}
 
       <Grid justify="center">
         {step === 3 && (

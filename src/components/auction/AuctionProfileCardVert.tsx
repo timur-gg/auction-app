@@ -124,7 +124,7 @@ export function AuctionProfileCardVert(props: ProfileCardProps) {
                   >
                     {auction.status}
                   </Badge>
-                  <Text fw={700}>Lot #{auction.lot}</Text>
+                  <Text fw={700}>Auction #{auction.lot}</Text>
                   <Text fw={500}>{auction.name}</Text>
                   <Text fz="xs" c="dimmed">
                     {auction.builder}
@@ -136,7 +136,7 @@ export function AuctionProfileCardVert(props: ProfileCardProps) {
             <Grid.Col xs={6} sm={12} mt={20}>
               <Stack spacing={6} mb={-5} align="flex-start">
                 <Text fz="sm" c="dimmed" className={classes.label} align="left">
-                  Lot details
+                  Building details
                 </Text>
 
                 <Grid>{features}</Grid>

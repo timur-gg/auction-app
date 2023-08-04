@@ -17,11 +17,12 @@ module.exports = {
       completionDate: "Dec 2025",
       auctionDate: "Live",
       status: "Live Auction",
-      lot: 5552,
       parking: 1,
       locker: 1,
       deposit: "5/5/5/5",
       duration: 48,
+      lot: 5552,
+      lots: [1,2]
     },
 
     {
@@ -45,7 +46,8 @@ module.exports = {
       parking: 0,
       locker: 0,
       deposit: "10/5/5",
-      duration: 24
+      lot: 8349,
+      duration: 24,
     },
 
     {
@@ -69,7 +71,32 @@ module.exports = {
       parking: 2,
       locker: 1,
       deposit: "5/5/5/5",
+      lot: 9008,
       duration: 24
+    },
+    {
+      id: "4",
+      images: [
+        "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
+        "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
+        "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
+        "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
+      ],
+      price: 550,
+      name: "The Condominimums",
+      address: "50 Richmond W",
+      bedroom: 0,
+      size: 490,
+      builder: "Developers Inc",
+      completionDate: "Dec 2025",
+      auctionDate: "Live",
+      status: "Live Auction",
+      parking: 1,
+      locker: 1,
+      deposit: "5/5/5/5",
+      duration: 24,
+      lot: 108,
+      lots: [3]
     },
   ],
   lots: [
@@ -80,6 +107,9 @@ module.exports = {
         price: 550,
         size: 300,
         unit: "2012",
+        parking: 1,
+        locker: 1,
+        bathroom: 1,
       },
       {
         id: 1,
@@ -88,6 +118,9 @@ module.exports = {
         price: 570,
         size: 300,
         unit: "1510",
+        parking: 0,
+        locker: 0,
+        bathroom: 1,
       },
       {
         id: 1,
@@ -96,6 +129,9 @@ module.exports = {
         price: 500,
         size: 300,
         unit: "2012",
+        parking: 2,
+        locker: 1,
+        bathroom: 1,
       },
       {
         id: 2,
@@ -104,6 +140,9 @@ module.exports = {
         price: 750,
         size: 700,
         unit: 1108,
+        parking: 0,
+        locker: 0,
+        bathroom: 1,
       },
       {
         id: 3,
@@ -112,6 +151,9 @@ module.exports = {
         price: 900,
         size: 800,
         unit: 3003,
+        parking: 1,
+        locker: 1,
+        bathroom: 2,
       },
       {
         id: 4,
@@ -120,6 +162,9 @@ module.exports = {
         price: 1.2,
         size: 950,
         unit: 2610,
+        parking: 0,
+        locker: 0,
+        bathroom: 2,
       },
   ]
 };

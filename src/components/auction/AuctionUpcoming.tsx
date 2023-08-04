@@ -11,19 +11,38 @@ import {
   Button,
   Flex,
   Group,
+  Modal,
+  List,
+  Checkbox,
+  Title,
+  ThemeIcon,
+  Center,
 } from "@mantine/core";
 import AuctionProfileCard from "./AuctionProfileCard";
-import PricePlot from "./PricePlot";
+import AuctionConfirmation from "./AuctionConfirmation";
 import { LotPreviewTable } from "./LotPreviewTable";
 import { useState } from "react";
 import { LotSelectionTable } from "./LotSelectionTable";
+
 import {
   IconCalendarEvent,
+  IconCircleCheck,
+  IconCircle1Filled,
+  IconCircle2Filled,
+  IconCircle3Filled,
+  IconCircle4Filled,
+  IconCircle5Filled,
+  IconCircle6Filled,
+  IconCircle7Filled,
   IconClock,
   IconMoneybag,
 } from "@tabler/icons-react";
 import { MRT_RowSelectionState } from "mantine-react-table";
 import data from "../../data.js";
+import text from "../../text.js";
+
+import { useDisclosure } from "@mantine/hooks";
+import AuctionProfileCardVert from "./AuctionProfileCardVert";
 // import mapImg from;
 
 var mapImg = require("../../img/map.png");
@@ -96,8 +115,8 @@ export function AuctionUpcoming(props: any) {
   const lots = data.lots;
 
   const auctionFeatures = mockdata.map((feature) => (
-    <Grid.Col xs={6} py={5}>
-      <Group key={feature.label} spacing="1">
+    <Grid.Col xs={4} py={5} key={feature.label}>
+      <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
           {auction[feature.label] + (feature.unit ? feature.unit : "")}
@@ -111,61 +130,74 @@ export function AuctionUpcoming(props: any) {
   console.log(rowSelection);
 
   const selectedUnits = Object.keys(rowSelection).map((key: string) => (
-    <Text size="sm" >
+    <Text size="sm" key={key}>
       Unit {lots[parseInt(key)].unit} - {lots[parseInt(key)].bedroom} bedroom{" "}
     </Text>
   ));
 
+  const conditionText = text.auctionRules.map((rule) => (
+    <List.Item><Title order={5}>{rule.title}</Title>{rule.text}</List.Item>
+  ));
+
+  const [modalOpened, { open: openModal, close: closeModal }] =
+    useDisclosure(false);
+
   return (
     <Container className="Auction" maw={1200}>
-      <AuctionProfileCard
-        auction={auction}
-        {...(step === 1 ? { cardSize: "full" } : { cardSize: "mini" })}
-      />
-      <Space h={15} />
+      {step < 3 && (
+        <AuctionProfileCard
+          auction={auction}
+          {...(step === 1 ? { cardSize: "full" } : { cardSize: "mini" })}
+        />
+      )}
+      <Space h={10} />
 
-      <Grid>
-        <Grid.Col {...(step === 1 ? { md: 8.5 } : { xs: 12, sm: 8 })}>
-          {step === 1 ? (
-            <Card
-              withBorder
-              p={15}
-              radius="md"
-              className={classes.card}
-              maw={1200}
-              mx="auto"
-            >
-              {step === 1 && (
-                <Flex direction="row">
-                  <Button
-                    variant="light"
-                    color="blue"
-                    mr={"auto"}
-                    onClick={() => setStep(2)}
-                  >
-                    Select Units →
-                  </Button>
-                </Flex>
-              )}
+      <Grid justify="center">
+        {step === 3 && (
+          <Grid.Col xs={10} sm={3}>
+            <AuctionProfileCardVert auction={auction} />
+          </Grid.Col>
+        )}
 
-              <Space h={10} />
+        {step < 3 && (
+          <Grid.Col {...(step === 1 ? { md: 8.5 } : { xs: 12, sm: 8 })}>
+            {step === 1 && (
+              <Card
+                withBorder
+                p={15}
+                radius="md"
+                className={classes.card}
+                maw={1200}
+                mx="auto"
+              >
+                {step === 1 && (
+                  <Flex direction="row">
+                    <Button
+                      variant="light"
+                      color="blue"
+                      mr={"auto"}
+                      onClick={() => setStep(2)}
+                    >
+                      Select Units →
+                    </Button>
+                  </Flex>
+                )}
 
-              <LotPreviewTable />
-            </Card>
-          ) : step === 2 ? (
-            <LotSelectionTable
-              lots={lots}
-              rowSelection={rowSelection}
-              setRowSelection={setRowSelection}
-            />
-          ) : (
-            <LotSelectionTable
-              lots={lots}
-              rowSelection={rowSelection}
-              setRowSelection={setRowSelection}
-            />
-          )}
-        </Grid.Col>
+                <Space h={10} />
+
+                <LotPreviewTable />
+              </Card>
+            )}
+
+            {step === 2 && (
+              <LotSelectionTable
+                lots={lots}
+                rowSelection={rowSelection}
+                setRowSelection={setRowSelection}
+              />
+            )}
+          </Grid.Col>
+        )}
         {step === 2 && (
           <Grid.Col xs={10} sm={4}>
             <Card
@@ -181,7 +213,7 @@ export function AuctionUpcoming(props: any) {
                   Auction details
                 </Text>
 
-                <Grid>{auctionFeatures}</Grid>
+                <Grid w={"100%"}>{auctionFeatures}</Grid>
               </Stack>
               <Space h={10} />
               <Stack spacing={6} mb={-5} align="flex-start" p={15}>
@@ -201,18 +233,123 @@ export function AuctionUpcoming(props: any) {
                   <Text size="sm">No units selected</Text>
                 )}
 
-                {selectedUnits.length > 0 && <Stack spacing={4}>{selectedUnits}</Stack>}
+                {selectedUnits.length > 0 && (
+                  <Stack spacing={4}>{selectedUnits}</Stack>
+                )}
 
                 <Space h={10} />
                 <Button
                   // variant="dark"
                   color="green"
                   mr={"auto"}
-                  onClick={() => setStep(2)}
+                  // onClick={openModal}
+                  onClick={() => setStep(3)}
                 >
                   Sign Up for Auction
                 </Button>
+
+                <Modal
+                  opened={modalOpened}
+                  onClose={closeModal}
+                  title="AuctionRegister"
+                >
+                  <AuctionConfirmation />
+                </Modal>
               </Stack>
+            </Card>
+          </Grid.Col>
+        )}
+        {step === 3 && (
+          <Grid.Col xs={10} sm={9}>
+            <Card
+              withBorder
+              p={8}
+              radius="md"
+              className={classes.card}
+              maw={1000}
+              mx="auto"
+              pb={20}
+            >
+              <Grid bg="#EFEBE9">
+                <Grid.Col span={6} p={0}>
+                  <Stack spacing={6} align="flex-start" p={15}>
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
+                      Auction details
+                    </Text>
+                    <Grid w={"100%"} maw={400}>
+                      {auctionFeatures}
+                    </Grid>
+                  </Stack>
+                </Grid.Col>
+                <Grid.Col span={6} p={0}>
+                  <Stack spacing={6} align="flex-start" p={15}>
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
+                      Selected Units
+                    </Text>
+                    {selectedUnits.length === 0 && (
+                      <Text size="sm">No units selected</Text>
+                    )}
+
+                    {selectedUnits.length > 0 && (
+                      <Group spacing={15}>{selectedUnits}</Group>
+                    )}
+                  </Stack>
+                </Grid.Col>
+              </Grid>
+
+              <Space h={15} />
+              <Container p={15} maw={700}>
+                <Title order={4}>Auction Rules</Title>
+                <Space h={20} />
+
+                <List
+                  type="ordered"
+                  spacing="xs"
+                  size="sm"
+                  ta="left"
+                  icon={
+                    <ThemeIcon color="teal" size={30} radius="xl">
+                      <IconCircleCheck size="1.5rem" />
+                    </ThemeIcon>
+                  }
+                >
+                  {conditionText}
+                </List>
+                <Space h={30} />
+                
+              </Container>
+
+              <Center>
+                
+               
+
+              <Group spacing={40}>
+              <Checkbox  size="md" label="I agree to the auction rules" />
+              <Button
+                // variant="dark"
+                color="green"
+                mr={"auto"}
+                // onClick={openModal}
+                onClick={() => setStep(3)}
+              >
+                Confirm & Sign Up
+              </Button>
+
+
+              </Group>
+              </Center>
+
+              
             </Card>
           </Grid.Col>
         )}

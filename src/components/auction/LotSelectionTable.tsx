@@ -83,18 +83,31 @@ export function LotSelectionTable(props: LotSelectionProps) {
         {
           accessorKey: "unit",
           header: "unit #",
+          minSize: 100, //min size enforced during resizing
+    size:80
+          
         },
+        
         {
           accessorKey: "bedroom",
           header: "Bedrooms",
+          minSize: 100, //min size enforced during resizing
+    maxSize: 200,
+    size:80
         },
         {
           accessorKey: "price",
           header: "Price",
+          minSize: 100, //min size enforced during resizing
+    maxSize: 200,
+    size:80
         },
         {
           accessorKey: "size",
           header: "Size (sqft)",
+          minSize: 100, //min size enforced during resizing
+    maxSize: 200,
+    size:80
         },
       ] as MRT_ColumnDef<any>[],
     []
@@ -137,8 +150,10 @@ export function LotSelectionTable(props: LotSelectionProps) {
       withBorder: false,
       style: { textAlign: "left" },
     },
+   
     renderTopToolbarCustomActions: ({ table }) => (
-      <Flex gap={50} style={{ width: "100%" }} p={7}>
+      <Grid style={{ width: "100%" }} p={7}>
+        <Grid.Col xs={6} sm={5} lg={3.5}>
         <SegmentedControl
           color="blue"
           radius="sm"
@@ -157,31 +172,30 @@ export function LotSelectionTable(props: LotSelectionProps) {
           //   addFilter("bedroom");
           // }}
         />
+        </Grid.Col>
+        <Grid.Col xs={6} sm={3} lg={2.833333333}>
         <PriceFilter
           priceRange={[0, 1000]}
           setPriceRange={() => ""}
           addFilter={() => ""}
         />
-        {/* <Button
-          variant="light"
-          color="green"
-          ml={"auto"}
-          // onClick={() => setStep(2)}
-        >
-          Confirm Selection
-        </Button> */}
 
+        </Grid.Col>
+        <Grid.Col xs={6} sm={4} lg={2.833333333}>
         <SizeFilter
           size={[0, 1000]}
           setSize={() => ""}
           addFilter={() => ""}
         />
+        </Grid.Col>
+        <Grid.Col xs={6} sm={4} lg={2.833333333}>
         <FloorFilter
           floor={[0, 100]}
           setFloor={() => ""}
           addFilter={() => ""}
         />
-      </Flex>
+        </Grid.Col>
+      </Grid>
     ),
   });
 

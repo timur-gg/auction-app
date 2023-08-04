@@ -245,7 +245,7 @@ const Inventory = () => {
   console.log(sortedAuctions);
 
   const AuctionList = sortedAuctions.map((auction) => (
-    <Grid.Col md={6} lg={4}>
+    <Grid.Col md={6} lg={4} key={auction.id}>
       <AuctionCard
         // status={auction.status}
         image={auction.image}

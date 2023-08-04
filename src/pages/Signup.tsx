@@ -1,6 +1,4 @@
 import {
-  TextInput,
-  PasswordInput,
   Anchor,
   Paper,
   Title,
@@ -8,7 +6,6 @@ import {
   Container,
   Group,
   Button,
-  Stack,
   Center,
   Space,
   useMantineTheme,

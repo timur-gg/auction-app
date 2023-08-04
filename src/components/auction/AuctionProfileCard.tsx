@@ -104,8 +104,8 @@ export function AuctionProfileCard(props: ProfileCardProps) {
   const cardSize = props.cardSize || 'full';
 
   const features = mockdata.map((feature) => (
-    <Grid.Col xs={6} md={4} py={5}>
-      <Group key={feature.label} spacing="1">
+    <Grid.Col xs={6} md={4} py={5} key={feature.label} >
+      <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
           {auction[feature.label] + (feature.unit ? feature.unit : "")}
@@ -115,7 +115,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
   ));
 
   const Images = auction.images.map((image: any) => (
-    <Carousel.Slide>
+    <Carousel.Slide key={image.id}>
       <AspectRatio ratio={16 / 10} mx="auto">
         <Image src={image} alt="Image1" width="100%" />
       </AspectRatio>
@@ -147,19 +147,6 @@ export function AuctionProfileCard(props: ProfileCardProps) {
 
               <Grid>
               <Grid.Col { ...(cardSize==='full') ? {xs: 6, md: 12 } : {xs:7} } > 
-                {/* <ConditionalWrapper
-                  condition={cardSize==='full'}
-                  wrapper={(children: React.ReactElement<any> | undefined) => <Stack align="flex-start" spacing={-2}>{children}</Stack>}
-                >
-                   <ConditionalWrapper
-                  condition={cardSize==='mini'}
-                  wrapper={(children: React.ReactElement<any> | undefined) => <Group>{children}</Group>}
-                > */}
-
-                {/* { (cardSize==='full') ? (<Stack align="flex-start" spacing={-2}>) :  */}
-                {/* (<Group position="apart" mt="md">)} */}
-
-
                 <Flex { ...(cardSize==='full') ? {direction: 'column'} : {direction: 'row', gap: 'xl' } } > 
                 <Stack align="flex-start" spacing={-2}>
                     <Badge
@@ -193,14 +180,9 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                     </Text>
                     </Flex>
 
-                    
-                {/* </ConditionalWrapper>
-                </ConditionalWrapper> */}
-                {/* <Space h={40} /> */}
                 </Grid.Col>
                 <Grid.Col { ...(cardSize==='full') ? {xs: 6, md: 12 } : {xs:5} } > 
 
-                {/* <Grid.Col xs={6} md={12}> */}
                   <Group position="apart" mt="md">
                     <Stack spacing={6} mb={-5} align="flex-start">
                       <Text

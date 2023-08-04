@@ -111,14 +111,12 @@ export default function ClientProfile() {
           <Badge color="green" size="md" variant="filled">
             {element.status}
           </Badge>
+        ) : element.status === "Passed" ? (
+          <Badge color="red" size="md" variant="filled">
+            {element.status}
+          </Badge>
         ) : (
-            element.status === "Passed" ? (
-                <Badge color="red" size="md" variant="filled">
-                  {element.status}
-                </Badge>
-              ) : (
-                element.status
-              )
+          element.status
         )}
       </td>
     </tr>
@@ -135,14 +133,12 @@ export default function ClientProfile() {
           <Badge color="green" size="md" variant="filled">
             {element.status}
           </Badge>
+        ) : element.status === "Passed" ? (
+          <Badge color="red" size="md" variant="filled">
+            {element.status}
+          </Badge>
         ) : (
-            element.status === "Passed" ? (
-                <Badge color="red" size="md" variant="filled">
-                  {element.status}
-                </Badge>
-              ) : (
-                element.status
-              )
+          element.status
         )}
       </td>
     </tr>
@@ -195,12 +191,9 @@ export default function ClientProfile() {
                     </Group>
                   </Stack>
                 </Group>
-                <Box mt={10} style={{textAlign: 'left'}}>
-                <Text color='blue'>Terms and Conditions</Text>
-
-
+                <Box mt={10} style={{ textAlign: "left" }}>
+                  <Text color="blue">Terms and Conditions</Text>
                 </Box>
-                
               </Grid.Col>
               <Grid.Col xs={12} md={4}>
                 <Flex justify="flex-end" align="flex-end" direction="column">

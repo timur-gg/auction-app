@@ -1,69 +1,60 @@
 import React from "react";
 import {
   Anchor,
+  Space,
   Text,
   Button,
   Group,
-  Container,
+  Paper,
   PasswordInput,
   Stack,
-  useMantineTheme,
-  Space,
+  TextInput,
+  Container,
 } from "@mantine/core";
-
-import { useRef } from "react";
-import { Dropzone } from "@mantine/dropzone";
-import { IconUpload,IconFile, IconX } from "@tabler/icons-react";
+import Countdown from "./Countdown";
 
 const SignupStep2 = () => {
-  const openRef = useRef<() => void>(null);
-  const theme = useMantineTheme();
-
-
   return (
-    <Container miw={400}>
-      <Text size="lg" inline mt={10}>
-              Please attach a photo of your Driver's License
-      </Text>
-      <Space h={20} />
-      <Dropzone
-        onDrop={(files) => console.log("accepted files", files)}
-        onReject={(files) => console.log("rejected files", files)}
-        openRef={openRef}
-      >
-         <Group position="center" spacing="lg" mih={120} sx={{ pointerEvents: 'none' }}>
-          <Dropzone.Accept>
-            <IconUpload
-              size="3.2rem"
-              stroke={1.5}
-              color={theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6]}
-            />
-          </Dropzone.Accept>
-          <Dropzone.Reject>
-            <IconX
-              size="3.2rem"
-              stroke={1.5}
-              color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
-            />
-          </Dropzone.Reject>
-          <Dropzone.Idle>
-            <IconFile size="3rem" stroke={1.5} />
-          </Dropzone.Idle>
+    <Container maw={600} miw={300}>
+      <Stack align="center" ta="left">
+      <Space h={10} />
+      <Text maw={400} ta="center">
+          You will receive a text message containing a 6-digit code within 3
+          minutes
+        </Text>
+        <TextInput w={250} label="Phone number" placeholder="#" required />
 
-          <div>
-            <Text size="xl" inline>
-              Drag file here 
-            </Text>
-            <Text size="sm" color="dimmed" inline mt={7}>
-              File should not exceed 5mb
-            </Text>
-          </div>
-        </Group>
-      </Dropzone>
+        <Space h={10} />
 
-      <Group position="center" mt="md">
-        <Button >Select files</Button>
+        
+
+        <Countdown seconds={60} />
+
+        <TextInput
+          w={250}
+          label="Code received in the text message "
+          placeholder="6-digit code"
+          required
+        />
+
+        <a>
+          <Text maw={400} size="xs" c="dimmed" ta="center">
+            Code not received?
+          </Text>
+        </a>
+      </Stack>
+      <Group position="apart" mt="xs">
+        {/* <Anchor<"a">
+              onClick={(event) => event.preventDefault()}
+              href="#"
+              size="sm"
+            >
+              Forgot password?
+            </Anchor> */}
       </Group>
+      {/* <Button fullWidth mt="xl">
+            Sign Up
+          </Button> */}
     </Container>
   );
 };

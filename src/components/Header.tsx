@@ -13,9 +13,7 @@ import {
   Menu,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { MantineLogo } from "@mantine/ds";
 import { Link } from "react-router-dom";
-import React from "react";
 import { IconGavel } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({

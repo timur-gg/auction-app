@@ -21,7 +21,6 @@ import {
   IconCar,
   IconLock,
 } from "@tabler/icons-react";
-import { Carousel } from "@mantine/carousel";
 import React from "react";
 var mapImg = require("../../img/map.png");
 
@@ -99,9 +98,26 @@ type ProfileCardProps = {
   // auctionDate: Date
 };
 
+type AuctionType = {
+  [key: string]: any;
+  lot: number;
+  images: string[];
+  price: number;
+  name: string;
+  address: string;
+  bedroom: number;
+  size: number;
+  status: string;
+  parking: number;
+  builder: string;
+  completionDate: string;
+  locker: number;
+  auctionDate: Date;
+};
+
 export function AuctionProfileCardVert(props: ProfileCardProps) {
   const { classes } = useStyles();
-  const auction = props.auction;
+  const auction: AuctionType = props.auction;
 
   const features = mockdata.map((feature) => (
     <Grid.Col xs={10} py={5} key={feature.label}>
@@ -124,6 +140,12 @@ export function AuctionProfileCardVert(props: ProfileCardProps) {
     </Grid.Col>
   ));
 
+  const badgeColorMap: { [key: string]: any } = {
+    "Live Auction": "green",
+    upcoming: "yellow",
+    passed: "orange",
+  };
+
   return (
     <div className="AuctionProfileCardVert">
       <Card
@@ -139,7 +161,7 @@ export function AuctionProfileCardVert(props: ProfileCardProps) {
               <Flex direction="column">
                 <Stack align="flex-start" spacing={-2}>
                   <Badge
-                    color="green"
+                    color={badgeColorMap[auction.status]}
                     size="lg"
                     variant="filled"
                     className={classes.statusBadge}

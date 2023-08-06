@@ -95,6 +95,12 @@ const mockdata = [
   { label: "locker", icon: IconLock, desc: "Storage lockers" },
 ];
 
+const badgeColorMap: { [key: string]: any } = {
+  "Live Auction": "green",
+  upcoming: "#7CB342",
+  passed: "orange",
+};
+
 type ProfileCardProps = {
   [key: string]: any;
   // lot: number;
@@ -187,7 +193,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                   >
                     <Stack align="flex-start" spacing={-2}>
                       <Badge
-                        color="green"
+                        bg={badgeColorMap[auction.status]}
                         size="lg"
                         variant="filled"
                         className={classes.statusBadge}

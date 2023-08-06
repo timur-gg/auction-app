@@ -24,8 +24,7 @@ import {
 import { useParams } from "react-router";
 import { AuctionUpcoming } from "../components/auction/AuctionUpcoming";
 import { AuctionLive } from "../components/auction/AuctionLive";
-
-
+import { AuctionPassed } from "../components/auction/AuctionPassed";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -58,23 +57,24 @@ const useStyles = createStyles((theme) => ({
 const Auction = () => {
   const { id } = useParams();
   const { classes } = useStyles();
-  
+
   const [auctionStep, setAuctionStep] = useState(1);
   const auction =
     data.auctionData.find((x) => x.id === id) || data.auctionData[0];
 
   return (
     <Container className="Auction" maw={1500}>
-
       {auction.status === "upcoming" && (
-        <AuctionUpcoming auction={auction} step={auctionStep}/>
+        <AuctionUpcoming auction={auction} step={auctionStep} />
       )}
-      
+
       {auction.status === "Live Auction" && (
         <AuctionLive auction={auction} step={auctionStep} />
       )}
 
-      
+      {auction.status === "passed" && (
+        <AuctionPassed auction={auction} step={auctionStep} />
+      )}
     </Container>
   );
 };

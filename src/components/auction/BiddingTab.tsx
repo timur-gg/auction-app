@@ -22,7 +22,6 @@ import {
 } from "@mantine/core";
 import PricePlot from "./PricePlot";
 import { BidSelector } from "./BidSelector";
-import { lots } from "../../data";
 import ShowCounter from "./ShowCounter";
 
 const useStyles = createStyles((theme) => ({
@@ -134,7 +133,7 @@ export function BiddingTab(props: any) {
                 </Text>
               </Grid.Col>
 
-              <Grid.Col  xs={6} {...(half ? { md: 6 } : { md: 12 })}>
+              <Grid.Col xs={6} {...(half ? { md: 6 } : { md: 12 })}>
                 <Text fz="lg" fw={500} sx={{ lineHeight: 1 }}>
                   ${lot.price},000
                 </Text>

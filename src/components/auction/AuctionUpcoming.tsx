@@ -32,7 +32,7 @@ import {
   IconMoneybag,
 } from "@tabler/icons-react";
 import { MRT_RowSelectionState } from "mantine-react-table";
-import data from "../../data.js";
+import { lots } from "../../data.js";
 import text from "../../text.js";
 
 import { useDisclosure } from "@mantine/hooks";
@@ -106,7 +106,6 @@ export function AuctionUpcoming(props: any) {
   const [step, setStep] = useState(1);
 
   const auction = props.auction;
-  const lots = data.lots;
 
   const auctionFeatures = mockdata.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>

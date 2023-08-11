@@ -94,6 +94,11 @@ const mockdata = [
   },
   { label: "bedroom", icon: IconBedFilled, desc: "Number of bedrooms" },
   {
+    label: "parking",
+    icon: IconCar,
+    desc: "Parking spots",
+  },
+  {
     label: "size",
     icon: IconRuler,
     unit: "sqft",
@@ -109,16 +114,12 @@ const mockdata = [
     icon: IconBath,
     desc: "# of bathrooms",
   },
-  {
-    label: "parking",
-    icon: IconCar,
-    desc: "Parking spots",
-  },
+
   {
     label: "locker",
     icon: IconLock,
     desc: "Lockers",
-  }
+  },
 ];
 
 type CardProps = {
@@ -135,6 +136,7 @@ type CardProps = {
   completionDate: string;
   auctionDate: string;
   deposit: string;
+  bedroomFilter: number;
 };
 
 export function AuctionCard(props: CardProps) {
@@ -190,12 +192,19 @@ export function AuctionCard(props: CardProps) {
         )}
       </Group>
 
+      <Card.Section className={classes.section} mt="sm" pb={0}>
+        <Text fz="xs" align="left" m={"auto"}>
+          Allure Condos is a new condo development located at 250 King Street
+          East, Toronto, ON
+        </Text>
+      </Card.Section>
+
       <Card.Section className={classes.section} mt="md">
         <Text fz="sm" c="dimmed" className={classes.label}>
           Lot details
         </Text>
 
-        <Group spacing={20} mb={-5}>
+        <Group spacing={17} mb={-5} style={{ rowGap: "0.6rem" }}>
           {features}
         </Group>
       </Card.Section>
@@ -207,7 +216,11 @@ export function AuctionCard(props: CardProps) {
               ${props.price}k
             </Text>
             <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
-              starting price
+              {props.bedroomFilter >= 0
+                ? props.bedroomFilter === 0
+                  ? "studios starting from"
+                  : `${props.bedroomFilter} bedroom starting from`
+                : "starting price"}
             </Text>
           </div>
 

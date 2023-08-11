@@ -33,7 +33,9 @@ import {
 
 import AuctionCard from "../components/inventory/AuctionCard";
 import PriceFilter from "../components/inventory/PriceFilter";
-import data from "../data";
+import SizeFilter from "../components/inventory/SizeFilter";
+
+import { auctionData } from "../data";
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
@@ -125,13 +127,20 @@ const projectOptions = [
   { value: "b", label: "House on Spadina" },
 ];
 
-const builderOptions = [
-  { value: "1", label: "Builders Inc" },
-  { value: "2", label: "Construction Corp" },
-];
+// const builderOptions = [
+//   { value: "1", label: "Builders Inc" },
+//   { value: "2", label: "Construction Corp" },
+// ];
+
+const builders = auctionData.map((a) => a.builder);
+
+const builderOptions = [...new Set(builders)].map((b) => ({
+  label: b,
+  value: b,
+}));
 
 const statusOptions = [
-  { value: "live", label: "Live" },
+  { value: "Live Auction", label: "Live" },
   { value: "upcoming", label: "Upcoming" },
   { value: "passed", label: "Passed" },
 ];
@@ -154,60 +163,15 @@ interface auctionType {
   [key: string]: any;
 }
 
-const Auctions: auctionType[] = [
-  {
-    id: "1",
-    image:
-      "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
-    price: 550,
-    name: "The Condominimums",
-    address: "50 Richmond W",
-    bedroom: "0-3",
-    size: "490-1200",
-    builder: "Toronto Building Corp",
-    completionDate: "Dec 2025",
-    auctionDate: "Live",
-    deposit: "5/5/5/5",
-  },
-
-  {
-    id: "2",
-    image:
-      "https://cache08.housesigma.com/file/pix-exclusive/HSE03040/9ca2c_8b275.jpg?594560a1",
-    price: 600,
-    name: "Condo 223",
-    address: "35 Bathurst",
-    bedroom: "2-3",
-    size: "590-1000",
-    builder: "Developers Inc",
-    completionDate: "June 2026",
-    auctionDate: "1 Oct 2023",
-    deposit: "10/5/5",
-  },
-
-  {
-    id: "3",
-    image:
-      "https://cache08.housesigma.com/file/pix-exclusive/HSE03006/5c783_ce332.jpg?b43e9ea7",
-    price: 900,
-    name: "King West Towers",
-    address: "100 Spadina",
-    bedroom: "1-2",
-    size: "400-750",
-    builder: "Developers Inc",
-    completionDate: "August 2024",
-    auctionDate: "1 Jul 2023",
-    deposit: "10/10",
-  },
-];
-
 const Inventory = () => {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
-
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
-  const [size, setSize] = useState<[number, number]>([0, 100]);
-  const [bedroom, setBedroom] = useState<number>(0);
+  const [size, setSizeRange] = useState<[number, number]>([0, 100]);
+  const [bedroom, setBedroom] = useState<number>(-1);
+  const [deposit, setDeposit] = useState<string>("");
   const [sortBy, setSort] = useState<string>("price");
+  const [builder, setBuilder] = useState<string>("");
+  const [status, setStatus] = useState<string>("All");
 
   const [filters, setFilter] = useState<string[]>(["All"]);
 
@@ -217,26 +181,68 @@ const Inventory = () => {
     }
   };
 
+  function filterPrice(
+    prices: { [key: number]: number },
+    priceRange: [number, number],
+    bedroomFilter: number
+  ) {
+    console.info(prices, priceRange, bedroomFilter);
+    if (bedroomFilter > 0) {
+      let bedroomPrice = prices[bedroomFilter];
+      return (
+        bedroomPrice >= (priceRange[0] + 20) * 12.5 &&
+        bedroomPrice <= (priceRange[1] + 20) * 12.5
+      );
+    } else {
+      let priceValues = Object.values(prices);
+
+      for (let i = 0; i < priceValues.length; i++) {
+        let pv = priceValues[i];
+        console.log(pv);
+        if (
+          pv >= (priceRange[0] + 20) * 12.5 &&
+          pv <= (priceRange[1] + 20) * 12.5
+        ) {
+          console.log("FOUND");
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }
+
   const FILTER_MAP: { [char: string]: any } = {
     All: () => true,
     priceRange: (auction: any) =>
-      auction.price >= (priceRange[0] + 20) * 12.5 &&
-      auction.price <= (priceRange[1] + 20) * 12.5,
+      filterPrice(auction.price, priceRange, bedroom),
 
     size: (auction: any) =>
       auction.size >= (size[0] + 20) * 12.5 &&
       auction.size <= (size[1] + 20) * 12.5,
     bedroom: (auction: any) => {
+      console.log(
+        auction.bedroom,
+        parseInt(auction.bedroom.slice(0)),
+        parseInt(auction.bedroom.slice(-1)),
+        bedroom
+      );
       if (bedroom === -1) return true;
-      else if (bedroom === 3) return auction.bedroom >= 3;
-      else return auction.bedroom === bedroom;
+      else
+        return (
+          parseInt(auction.bedroom.slice(0)) <= bedroom &&
+          parseInt(auction.bedroom.slice(-1)) >= bedroom
+        );
     },
-    deposit: (auction: any) => auction.deposit === depositOptions[0].label,
+    deposit: (auction: any) => (deposit ? auction.deposit === deposit : true),
+    builder: (auction: any) => (builder ? auction.builder === builder : true),
+    status: (auction: any) => (status ? auction.status === status : true),
+
     // Active: (auction, address) => !auction.completed,
     // Completed: (auction) => auction.completed,
   };
 
-  var filteredAuctions: auctionType[] = data.auctionData;
+  var filteredAuctions: auctionType[] = auctionData;
   filters.forEach((f) => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });
@@ -251,7 +257,8 @@ const Inventory = () => {
         // status={auction.status}
         image={auction.images[0]}
         size={auction.size}
-        price={auction.price}
+        // size={bedroom >= 0 ? auction.size[bedroom] : auction.minSize}
+        price={bedroom >= 0 ? auction.price[bedroom] : auction.minPrice}
         name={auction.name}
         address={auction.address}
         bedroom={auction.bedroom}
@@ -263,6 +270,7 @@ const Inventory = () => {
         bathroom={auction.bathroom}
         parking={auction.parking}
         locker={auction.locker}
+        bedroomFilter={bedroom}
       />
     </Grid.Col>
   ));
@@ -322,47 +330,12 @@ const Inventory = () => {
             addFilter={addFilter}
           />
         </Grid.Col>
-        <Grid.Col xs={3} md={2.5} lg={1.5}>
-          <Select
-            searchable
-            clearable
-            data={projectOptions}
-            label="Project"
-            placeholder="Project"
-            style={{
-              overflowWrap: "normal",
-            }}
-          />
-        </Grid.Col>
-        <Grid.Col xs={3} md={2.5} lg={1.5}>
-          <Select
-            clearable
-            data={statusOptions}
-            label="Status"
-            placeholder="Auction status"
-          />
-        </Grid.Col>
-
-        <Grid.Col xs={3} md={2.5} lg={1.5}>
-          <DatePickerInput
-            type="range"
-            label="Completion date"
-            placeholder="Pick dates range"
-            value={value}
-            onChange={setValue}
-            mx="auto"
-            maw={400}
-          />
-        </Grid.Col>
-        <Grid.Col xs={3} md={2.5} lg={1.5}>
-          <DatePickerInput
-            type="range"
-            label="Auction date"
-            placeholder="Pick dates range"
-            value={value}
-            onChange={setValue}
-            mx="auto"
-            maw={400}
+        <Grid.Col xs={2.5} md={2} lg={1.5}>
+          <Text>Size</Text>
+          <SizeFilter
+            size={size}
+            setSizeRange={setSizeRange}
+            addFilter={addFilter}
           />
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>
@@ -391,6 +364,53 @@ const Inventory = () => {
             />
           </Stack>
         </Grid.Col>
+        {/* <Grid.Col xs={3} md={2.5} lg={1.5}>
+          <Select
+            searchable
+            clearable
+            data={projectOptions}
+            label="Project"
+            placeholder="Project"
+            style={{
+              overflowWrap: "normal",
+            }}
+          />
+        </Grid.Col> */}
+        <Grid.Col xs={3} md={2.5} lg={1.5}>
+          <Select
+            clearable
+            data={statusOptions}
+            label="Status"
+            placeholder="Auction status"
+            onChange={(value: string) => {
+              setStatus(value);
+              addFilter("status");
+            }}
+          />
+        </Grid.Col>
+
+        <Grid.Col xs={3} md={2.5} lg={1.5}>
+          <DatePickerInput
+            type="range"
+            label="Completion date"
+            placeholder="Pick dates range"
+            value={value}
+            onChange={setValue}
+            mx="auto"
+            maw={400}
+          />
+        </Grid.Col>
+        <Grid.Col xs={3} md={2.5} lg={1.5}>
+          <DatePickerInput
+            type="range"
+            label="Auction date"
+            placeholder="Pick dates range"
+            value={value}
+            onChange={setValue}
+            mx="auto"
+            maw={400}
+          />
+        </Grid.Col>
       </Grid>
 
       <Space h="md" />
@@ -399,7 +419,7 @@ const Inventory = () => {
           <Accordion.Control>More Filters</Accordion.Control>
           <Accordion.Panel>
             <Grid gutter={50}>
-              <Grid.Col xs={6} sm={4} md={3} lg={2.5}>
+              {/* <Grid.Col xs={6} sm={4} md={3} lg={2.5}>
                 <Space h="md" />
                 <Text>Size (sqft)</Text>
                 <RangeSlider
@@ -423,7 +443,7 @@ const Inventory = () => {
                   }}
                 />
                 <Space h="lg" />
-              </Grid.Col>
+              </Grid.Col> */}
 
               <Grid.Col xs={3} lg={2}>
                 <Select
@@ -432,6 +452,10 @@ const Inventory = () => {
                   data={builderOptions}
                   label="Builder"
                   placeholder="Builder"
+                  onChange={(value: string) => {
+                    setBuilder(value);
+                    addFilter("builder");
+                  }}
                 />
               </Grid.Col>
 
@@ -442,6 +466,10 @@ const Inventory = () => {
                   data={depositOptions}
                   label="Deposit Structure"
                   placeholder="Deposit"
+                  onChange={(value: string) => {
+                    setDeposit(value);
+                    addFilter("deposit");
+                  }}
                 />
               </Grid.Col>
               <Grid.Col xs={5} sm={3} lg={2}>
@@ -471,10 +499,10 @@ const Inventory = () => {
                 </Stack>
               </Grid.Col>
               <Grid.Col xs={3} md={1.5}>
-                <Checkbox label="Locker" />
+                <Checkbox label="Locker" mt="1.9rem" />
               </Grid.Col>
               <Grid.Col xs={3} md={1.5}>
-                <Checkbox label="Parking" />
+                <Checkbox label="Parking" mt="1.9rem" />
               </Grid.Col>
 
               {/* <Grid.Col md={6} lg={3}>

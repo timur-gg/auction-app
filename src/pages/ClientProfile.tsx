@@ -216,7 +216,7 @@ export default function ClientProfile() {
             style={{ height: "100%" }}
           >
             <Title order={4} align="left">
-              My Realtor
+              My Authorized Person
             </Title>
             <Stack align="flex-start" spacing={1}>
               <Text fz="md" fw={500} className={classes.name}>

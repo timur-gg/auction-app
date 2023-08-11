@@ -1,16 +1,12 @@
 import {
-  Container,
   Card,
   Grid,
-  Paper,
   Space,
   Group,
   Stack,
-  Button,
   Text,
   createStyles,
   rem,
-  Center,
 } from "@mantine/core";
 import ShowCounter from "./ShowCounter";
 import AuctionProfileCardVert from "./AuctionProfileCardVert";

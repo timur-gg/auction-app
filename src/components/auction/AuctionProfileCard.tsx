@@ -192,14 +192,26 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                       : { direction: "row", gap: "xl" })}
                   >
                     <Stack align="flex-start" spacing={-2}>
-                      <Badge
-                        bg={badgeColorMap[auction.status]}
-                        size="lg"
-                        variant="filled"
-                        className={classes.statusBadge}
-                      >
-                        {auction.status}
-                      </Badge>
+                      <Group>
+                        <Badge
+                          bg={badgeColorMap[auction.status]}
+                          size="lg"
+                          variant="filled"
+                          className={classes.statusBadge}
+                        >
+                          {auction.status}
+                        </Badge>
+
+                        <Badge
+                          // bg={badgeColorMap[auction.status]}
+                          size="lg"
+                          // variant="filled"
+                          color="orange"
+                          className={classes.statusBadge}
+                        >
+                          {auction.auctionDate}
+                        </Badge>
+                      </Group>
                       <Text fw={700}>Lot #{auction.lot}</Text>
                       <Text fw={500}>{auction.name}</Text>
                       <Text fz="xs" c="dimmed">

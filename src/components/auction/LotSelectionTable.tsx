@@ -65,16 +65,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-
-
 type LotSelectionProps = {
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Function | any;
   lots: any[];
   // addFilter: Function;
-   // setFloor: Function;
+  // setFloor: Function;
 };
-
 
 export function LotSelectionTable(props: LotSelectionProps) {
   const columns = useMemo(
@@ -84,30 +81,29 @@ export function LotSelectionTable(props: LotSelectionProps) {
           accessorKey: "unit",
           header: "unit #",
           minSize: 100, //min size enforced during resizing
-    size:80
-          
+          size: 80,
         },
-        
+
         {
           accessorKey: "bedroom",
           header: "Bedrooms",
           minSize: 100, //min size enforced during resizing
-    maxSize: 200,
-    size:80
+          maxSize: 200,
+          size: 80,
         },
         {
           accessorKey: "price",
           header: "Price",
           minSize: 100, //min size enforced during resizing
-    maxSize: 200,
-    size:80
+          maxSize: 200,
+          size: 80,
         },
         {
           accessorKey: "size",
           header: "Size (sqft)",
           minSize: 100, //min size enforced during resizing
-    maxSize: 200,
-    size:80
+          maxSize: 200,
+          size: 80,
         },
       ] as MRT_ColumnDef<any>[],
     []
@@ -127,8 +123,10 @@ export function LotSelectionTable(props: LotSelectionProps) {
   const table = useMantineReactTable({
     columns,
     data: lots,
-    positionToolbarAlertBanner: 'none',
-    enableRowSelection: (row) => (Object.keys(rowSelection).includes(row.id)) || (Object.keys(rowSelection).length<3),
+    positionToolbarAlertBanner: "none",
+    enableRowSelection: (row) =>
+      Object.keys(rowSelection).includes(row.id) ||
+      Object.keys(rowSelection).length < 3,
     enablePagination: false,
     enableColumnActions: false,
     enableSorting: false,
@@ -150,50 +148,49 @@ export function LotSelectionTable(props: LotSelectionProps) {
       withBorder: false,
       style: { textAlign: "left" },
     },
-   
+
     renderTopToolbarCustomActions: ({ table }) => (
       <Grid style={{ width: "100%" }} p={7}>
         <Grid.Col xs={6} sm={5} lg={3.5}>
-        <SegmentedControl
-          color="blue"
-          radius="sm"
-          transitionDuration={500}
-          transitionTimingFunction="linear"
-          size="sm"
-          data={[
-            { label: "All", value: "-1" },
-            { label: "0", value: "0" },
-            { label: "1", value: "1" },
-            { label: "2", value: "2" },
-            { label: "3+", value: "3" },
-          ]}
-          // onChange={(value) => {
-          //   setBedroom(parseInt(value));
-          //   addFilter("bedroom");
-          // }}
-        />
+          <SegmentedControl
+            color="blue"
+            radius="sm"
+            transitionDuration={500}
+            transitionTimingFunction="linear"
+            size="sm"
+            data={[
+              { label: "All", value: "-1" },
+              { label: "0", value: "0" },
+              { label: "1", value: "1" },
+              { label: "2", value: "2" },
+              { label: "3+", value: "3" },
+            ]}
+            // onChange={(value) => {
+            //   setBedroom(parseInt(value));
+            //   addFilter("bedroom");
+            // }}
+          />
         </Grid.Col>
         <Grid.Col xs={6} sm={3} lg={2.833333333}>
-        <PriceFilter
-          priceRange={[0, 1000]}
-          setPriceRange={() => ""}
-          addFilter={() => ""}
-        />
-
+          <PriceFilter
+            priceRange={[0, 1000]}
+            setPriceRange={() => ""}
+            addFilter={() => ""}
+          />
         </Grid.Col>
         <Grid.Col xs={6} sm={4} lg={2.833333333}>
-        <SizeFilter
-          size={[0, 1000]}
-          setSize={() => ""}
-          addFilter={() => ""}
-        />
+          <SizeFilter
+            size={[0, 1000]}
+            setSizeRange={() => ""}
+            addFilter={() => ""}
+          />
         </Grid.Col>
         <Grid.Col xs={6} sm={4} lg={2.833333333}>
-        <FloorFilter
-          floor={[0, 100]}
-          setFloor={() => ""}
-          addFilter={() => ""}
-        />
+          <FloorFilter
+            floor={[0, 100]}
+            setFloor={() => ""}
+            addFilter={() => ""}
+          />
         </Grid.Col>
       </Grid>
     ),

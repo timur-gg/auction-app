@@ -82,6 +82,7 @@ module.exports = {
       lot: 9008,
       duration: 24,
       bathroom: "1-3",
+      lots: [4, 5, 6],
     },
     {
       id: "4",
@@ -219,7 +220,10 @@ module.exports = {
       parking: 0,
       locker: 0,
       bathroom: 2,
-      soldPrice: 1000,
+      totalBids: 8,
+      soldPrice: 1400,
+      bid: 1250,
+      position: 6,
     },
   ],
 };

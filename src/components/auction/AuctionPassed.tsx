@@ -69,6 +69,8 @@ export function AuctionPassed(props: any) {
 
   const auction = props.auction;
 
+  console.log(auction);
+
   const lots = auction.lots.map((lotId: number) =>
     lotsData.find((id) => id.id === lotId)
   );

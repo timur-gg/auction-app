@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { MantineProvider, AppShell, Header } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 
 import Inventory from "./pages/Inventory";
 import Auction from "./pages/Auction";
@@ -19,7 +20,6 @@ const Main = () => {
       <Route path="/auction/:id" element={<Auction />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/client_profile" element={<ClientProfile />}></Route>
-
     </Routes>
   );
 };
@@ -54,6 +54,7 @@ function App(): React.JSX.Element {
           <Main />
         </div>
       </AppShell>
+      <Notifications />
     </MantineProvider>
   );
 }

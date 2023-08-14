@@ -24,6 +24,7 @@ import AuctionConfirmation from "./AuctionConfirmation";
 import { LotPreviewTable } from "./LotPreviewTable";
 import { useState } from "react";
 import { LotSelectionTable } from "./LotSelectionTable";
+import { notifications } from "@mantine/notifications";
 
 import {
   IconCalendarEvent,
@@ -147,6 +148,20 @@ export function AuctionUpcoming(props: any) {
     </List.Item>
   ));
 
+  function signUpAction() {
+    if (Object.keys(rowSelection).length) {
+      console.log(rowSelection.length);
+      setStep(3);
+    } else {
+      notifications.show({
+        autoClose: 1500,
+        title: "Lots not selected",
+        color: "red",
+        message: "Please select 1 to 2 lots from the table",
+      });
+    }
+  }
+
   const [modalOpened, { open: openModal, close: closeModal }] =
     useDisclosure(false);
 
@@ -252,7 +267,7 @@ export function AuctionUpcoming(props: any) {
                   color="green"
                   mr={"auto"}
                   // onClick={openModal}
-                  onClick={() => setStep(3)}
+                  onClick={signUpAction}
                 >
                   Sign Up for Auction
                 </Button>

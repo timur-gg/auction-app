@@ -126,7 +126,7 @@ export function LotSelectionTable(props: LotSelectionProps) {
     positionToolbarAlertBanner: "none",
     enableRowSelection: (row) =>
       Object.keys(rowSelection).includes(row.id) ||
-      Object.keys(rowSelection).length < 3,
+      Object.keys(rowSelection).length < 2,
     enablePagination: false,
     enableColumnActions: false,
     enableSorting: false,

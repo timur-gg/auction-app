@@ -15,16 +15,16 @@ export default function FloorFilter({
     <Popover width={500} position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button>
-          {!(floor[1] > 0 && floor[1] < 100)
-            ? "All Floors"
-            : (floor[0] > 0 ? (floor[0] / 2) : 0) - (floor[1] / 2)}
+          {floor[0] > 0 || floor[1] < 100
+            ? (floor[0] > 0 ? floor[0] / 2 : 0) + "-" + floor[1] / 2
+            : "All Floors"}
         </Button>
       </Popover.Target>
       <Popover.Dropdown>
         <RangeSlider
           size="lg"
           radius="md"
-          scale={(v) => (v + 20) * 12.5}
+          scale={(v) => v / 2}
           step={4}
           name="floor"
           marks={[

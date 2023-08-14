@@ -74,6 +74,37 @@ type LotSelectionProps = {
 };
 
 export function LotSelectionTable(props: LotSelectionProps) {
+  const [bedroom, setBedroom] = useState<number>(-1);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
+  const [size, setSizeRange] = useState<[number, number]>([0, 100]);
+  const [floorRange, setFloorRange] = useState<[number, number]>([0, 100]);
+
+  const [filters, setFilter] = useState<string[]>(["All"]);
+
+  const addFilter = (filter: string) => {
+    if (!filters.includes(filter)) {
+      setFilter([...filters.filter((f) => f !== "All"), filter]);
+    }
+  };
+
+  console.log(floorRange);
+
+  const FILTER_MAP: { [char: string]: any } = {
+    All: () => true,
+    priceRange: (lot: any) =>
+      lot.price >= (priceRange[0] + 20) * 12.5 &&
+      lot.price <= (priceRange[1] + 20) * 12.5,
+
+    size: (lot: any) =>
+      lot.size >= (size[0] + 20) * 12.5 && lot.size <= (size[1] + 20) * 12.5,
+    floor: (lot: any) =>
+      lot.floor >= floorRange[0] / 2 && lot.floor <= floorRange[1] / 2,
+    bedroom: (lot: any) => {
+      if (bedroom === -1) return true;
+      else return lot.bedroom === bedroom;
+    },
+  };
+
   const columns = useMemo(
     () =>
       [
@@ -120,9 +151,14 @@ export function LotSelectionTable(props: LotSelectionProps) {
 
   const { colorScheme } = useMantineTheme();
 
+  var filteredLots: any = lots;
+  filters.forEach((f) => {
+    filteredLots = filteredLots.filter(FILTER_MAP[f]);
+  });
+
   const table = useMantineReactTable({
     columns,
-    data: lots,
+    data: filteredLots,
     positionToolbarAlertBanner: "none",
     enableRowSelection: (row) =>
       Object.keys(rowSelection).includes(row.id) ||
@@ -165,31 +201,31 @@ export function LotSelectionTable(props: LotSelectionProps) {
               { label: "2", value: "2" },
               { label: "3+", value: "3" },
             ]}
-            // onChange={(value) => {
-            //   setBedroom(parseInt(value));
-            //   addFilter("bedroom");
-            // }}
+            onChange={(value) => {
+              setBedroom(parseInt(value));
+              addFilter("bedroom");
+            }}
           />
         </Grid.Col>
         <Grid.Col xs={6} sm={3} lg={2.833333333}>
           <PriceFilter
-            priceRange={[0, 1000]}
-            setPriceRange={() => ""}
-            addFilter={() => ""}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            addFilter={addFilter}
           />
         </Grid.Col>
         <Grid.Col xs={6} sm={4} lg={2.833333333}>
           <SizeFilter
-            size={[0, 1000]}
-            setSizeRange={() => ""}
-            addFilter={() => ""}
+            size={size}
+            setSizeRange={setSizeRange}
+            addFilter={addFilter}
           />
         </Grid.Col>
         <Grid.Col xs={6} sm={4} lg={2.833333333}>
           <FloorFilter
-            floor={[0, 100]}
-            setFloor={() => ""}
-            addFilter={() => ""}
+            floor={floorRange}
+            setFloor={setFloorRange}
+            addFilter={addFilter}
           />
         </Grid.Col>
       </Grid>
@@ -206,54 +242,5 @@ export function LotSelectionTable(props: LotSelectionProps) {
     </tr>
   ));
 
-  return (
-    <div>
-      {/* <Grid>
-        <Grid.Col span={4}>
-          <SegmentedControl
-            color="blue"
-            radius="sm"
-            transitionDuration={500}
-            transitionTimingFunction="linear"
-            size="sm"
-            data={[
-              { label: "All", value: "-1" },
-              { label: "0", value: "0" },
-              { label: "1", value: "1" },
-              { label: "2", value: "2" },
-              { label: "3+", value: "3" },
-            ]}
-            // onChange={(value) => {
-            //   setBedroom(parseInt(value));
-            //   addFilter("bedroom");
-            // }}
-          />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          <PriceFilter
-            priceRange={[0, 1000]}
-            setPriceRange={() => ""}
-            addFilter={() => ""}
-          />
-        </Grid.Col>
-        <Grid.Col span={4}>
-          
-        </Grid.Col>
-      </Grid>
-      <Table style={{ textAlign: "left" }}>
-        <thead>
-          <tr>
-            <th>Unit #</th>
-            <th>Bedrooms</th>
-            <th>Floors</th>
-            <th>Price</th>
-            <th>Lot Size</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table> */}
-
-      <MantineReactTable table={table} />
-    </div>
-  );
+  return <MantineReactTable table={table} />;
 }

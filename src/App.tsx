@@ -10,6 +10,7 @@ import HeaderSimple from "./components/Header";
 import React from "react";
 import Signup from "./pages/Signup";
 import ClientProfile from "./pages/ClientProfile";
+import BuilderProfile from "./pages/BuilderProfile";
 
 const Main = () => {
   return (
@@ -20,6 +21,7 @@ const Main = () => {
       <Route path="/auction/:id" element={<Auction />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/client_profile" element={<ClientProfile />}></Route>
+      <Route path="/builder_profile" element={<BuilderProfile />}></Route>
     </Routes>
   );
 };
@@ -37,6 +39,7 @@ function App(): React.JSX.Element {
                 { link: "/auction/1", label: "Auction" },
                 { link: "/signup", label: "Signup" },
                 { link: "/client_profile", label: "Client Profile" },
+                { link: "/builder_profile", label: "Builder Profile" },
               ]}
             />
           </Header>

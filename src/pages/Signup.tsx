@@ -9,21 +9,27 @@ import {
   Center,
   Space,
   useMantineTheme,
+  SegmentedControl,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
-
 import SignupStep1 from "../components/signup/SignupStep1";
 import { useState } from "react";
 import SignupStep2 from "../components/signup/SignupStep2";
 import SignupStep3 from "../components/signup/SignupStep3";
 import SignupStep4 from "../components/signup/SignupStep4";
+import SignupStep4Realtor from "../components/signup/SignupStep4Realtor";
+import SignupStep4Builder from "../components/signup/SignupStep4Builder";
+
 import SignupStep5 from "../components/signup/SignupStep5";
 
 export default function Signup() {
   const [step, setStep] = useState(1);
-
-  console.log("STEP" + step);
+  const [role, setRole] = useState("buyer");
   const theme = useMantineTheme();
+
+  if (step === 4 && (role === "builder" || role === "realtor")) {
+    setStep(5);
+  }
 
   return (
     <Container maw={800} miw={420} my={5}>
@@ -39,7 +45,7 @@ export default function Signup() {
         </Title>
       )}
 
-      {step < 5 && (
+      {step < 4 && (
         <Text color="dimmed" size="sm" align="center" mt={5}>
           Already have an account ?{" "}
           <Anchor<"a">
@@ -62,14 +68,31 @@ export default function Signup() {
           {step === 1 && <SignupStep1 />}
           {step === 2 && <SignupStep2 />}
           {step === 3 && <SignupStep3 />}
-          {step === 4 && <SignupStep4 />}
-          {step === 5 && <SignupStep5 />}
+          {step === 4 && role === "buyer" && <SignupStep4 />}
+          {step === 5 && role === "realtor" && <SignupStep4Realtor />}
+          {step === 5 && role === "builder" && <SignupStep4Builder />}
+          {step === 5 && role === "buyer" && <SignupStep5 />}
           {step === 6 && <Title order={3}>Subscription Info</Title>}
-          {step == 7 && (
+          {step === 7 && (
             <>
               <Space h={10} />
               <Title order={4}>Thank you for signing up!</Title>
               <Title order={4}>Your subscription is now active!</Title>
+            </>
+          )}
+          {step === 1 && (
+            <>
+              <Space h={15} />
+              <SegmentedControl
+                onChange={setRole}
+                value={role}
+                color="blue"
+                data={[
+                  { value: "buyer", label: "Buyer" },
+                  { value: "builder", label: "Builder" },
+                  { value: "realtor", label: "Realtor" },
+                ]}
+              />
             </>
           )}
 

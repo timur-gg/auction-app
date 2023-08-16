@@ -27,6 +27,7 @@ import { LotSelectionTable } from "./LotSelectionTable";
 import { notifications } from "@mantine/notifications";
 
 import {
+  IconArrowLeft,
   IconCalendarEvent,
   IconCircleCheck,
   IconClock,
@@ -218,6 +219,7 @@ export function AuctionUpcoming(props: any) {
                 lots={lots}
                 rowSelection={rowSelection}
                 setRowSelection={setRowSelection}
+                backButtonAction={() => setStep(1)}
               />
             )}
           </Grid.Col>
@@ -354,6 +356,14 @@ export function AuctionUpcoming(props: any) {
 
               <Center>
                 <Group spacing={40}>
+                  <Button
+                    variant="light"
+                    color="blue"
+                    mr={"10rem"}
+                    onClick={() => setStep(2)}
+                  >
+                    ← Back
+                  </Button>
                   <Checkbox size="md" label="I agree to the auction rules" />
                   <Button
                     // variant="dark"

@@ -1,20 +1,16 @@
 import {
-  Container,
   SegmentedControl,
   Space,
-  Card,
   Grid,
-  Center,
   Text,
   createStyles,
   rem,
-  Table,
-  Flex,
-  Button,
   useMantineTheme,
   Group,
-  RangeSlider,
+  UnstyledButton,
 } from "@mantine/core";
+
+import { IconArrowLeft } from "@tabler/icons-react";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -63,13 +59,20 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[3]
     }`,
   },
+  icon: {
+    marginRight: rem(5),
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[2]
+        : theme.colors.gray[5],
+  },
 }));
 
 type LotSelectionProps = {
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Function | any;
   lots: any[];
-  // addFilter: Function;
+  backButtonAction: Function;
   // setFloor: Function;
 };
 
@@ -141,7 +144,7 @@ export function LotSelectionTable(props: LotSelectionProps) {
   );
   const { classes } = useStyles();
 
-  const { rowSelection, setRowSelection, lots } = props;
+  const { rowSelection, setRowSelection, lots, backButtonAction } = props;
   console.log(rowSelection);
 
   useEffect(() => {
@@ -155,6 +158,10 @@ export function LotSelectionTable(props: LotSelectionProps) {
   filters.forEach((f) => {
     filteredLots = filteredLots.filter(FILTER_MAP[f]);
   });
+
+  const backClick = () => {
+    backButtonAction();
+  };
 
   const table = useMantineReactTable({
     columns,
@@ -187,7 +194,12 @@ export function LotSelectionTable(props: LotSelectionProps) {
 
     renderTopToolbarCustomActions: ({ table }) => (
       <Grid style={{ width: "100%" }} p={7}>
-        <Grid.Col xs={6} sm={5} lg={3.5}>
+        <Grid.Col xs={6} sm={0.5} md={0.9} my="auto" ta="left">
+          <UnstyledButton onClick={backClick}>
+            <IconArrowLeft size="1.5rem" stroke={2} className={classes.icon} />
+          </UnstyledButton>
+        </Grid.Col>
+        <Grid.Col xs={6} sm={5} lg={2.9}>
           <SegmentedControl
             color="blue"
             radius="sm"
@@ -207,21 +219,21 @@ export function LotSelectionTable(props: LotSelectionProps) {
             }}
           />
         </Grid.Col>
-        <Grid.Col xs={6} sm={3} lg={2.833333333}>
+        <Grid.Col xs={6} sm={3} lg={2.7}>
           <PriceFilter
             priceRange={priceRange}
             setPriceRange={setPriceRange}
             addFilter={addFilter}
           />
         </Grid.Col>
-        <Grid.Col xs={6} sm={4} lg={2.833333333}>
+        <Grid.Col xs={6} sm={3.5} lg={2.7}>
           <SizeFilter
             size={size}
             setSizeRange={setSizeRange}
             addFilter={addFilter}
           />
         </Grid.Col>
-        <Grid.Col xs={6} sm={4} lg={2.833333333}>
+        <Grid.Col xs={6} sm={3.5} lg={2.7}>
           <FloorFilter
             floor={floorRange}
             setFloor={setFloorRange}

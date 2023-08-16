@@ -77,7 +77,12 @@ export function BiddingTab(props: any) {
 
   const half = props.half || false;
 
-  const [value, setValue] = useState<number | "">(lot.price * 1000);
+  const [tempValue, setTempValue] = useState<number | "">(lot.bid * 1000);
+  const [value, setValue] = useState<number | "">(0);
+
+  console.info(lot);
+
+  console.log(lot.bid);
 
   const unitFeatures = unitMockdata.map((feature) => (
     <Grid.Col
@@ -94,6 +99,10 @@ export function BiddingTab(props: any) {
       </Group>
     </Grid.Col>
   ));
+
+  const makeBid = () => {
+    setValue(tempValue);
+  };
 
   return (
     <Card
@@ -119,43 +128,26 @@ export function BiddingTab(props: any) {
 
       <Card.Section className={classes.section} pb={0}>
         <Grid align="center" justify="center">
-          {/* <Grid.Col xs={12} md={2}>
-              Unit #2003
-              </Grid.Col> */}
           <Grid.Col span="auto">
             <Grid>
-              <Grid.Col xs={6} {...(half ? { md: 6 } : { md: 12 })}>
+              <Grid.Col xs={6} sm={10} {...(half ? { md: 6 } : { md: 12 })}>
                 <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-                  ${lot.price + 100},000
+                  ${((lot.price + 100) * 1000).toLocaleString()}
                 </Text>
                 <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
                   current bid
                 </Text>
               </Grid.Col>
 
-              <Grid.Col xs={6} {...(half ? { md: 6 } : { md: 12 })}>
+              <Grid.Col xs={6} sm={10} {...(half ? { md: 6 } : { md: 12 })}>
                 <Text fz="lg" fw={500} sx={{ lineHeight: 1 }}>
-                  ${lot.price},000
+                  ${(lot.price * 1000).toLocaleString()}
                 </Text>
                 <Text fz="sm" c="dimmed" fw={400} sx={{ lineHeight: 1 }} mt={3}>
                   starting price
                 </Text>
               </Grid.Col>
             </Grid>
-
-            {/* <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-              ${lot.price + 100},000
-            </Text>
-            <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
-              current bid
-            </Text>
-            <Space h={20} />
-            <Text fz="lg" fw={500} sx={{ lineHeight: 1 }}>
-              ${lot.price},000
-            </Text>
-            <Text fz="sm" c="dimmed" fw={400} sx={{ lineHeight: 1 }} mt={3}>
-              starting price
-            </Text> */}
           </Grid.Col>
           <Grid.Col span="auto">
             <Center>
@@ -165,7 +157,6 @@ export function BiddingTab(props: any) {
         </Grid>
       </Card.Section>
       <Card.Section className={classes.section} bg="#E8F5E9">
-        {/* <Paper shadow="md" p="md"  */}
         <Grid align="center" justify="center">
           <Grid.Col span={12}>
             <Grid>
@@ -198,7 +189,7 @@ export function BiddingTab(props: any) {
                   <Stack spacing="3" align="center">
                     <Group>
                       <Text fz="lg" fw={700}>
-                        $570,000
+                        ${(value || lot.bid * 1000).toLocaleString()}
                       </Text>
                     </Group>
                     <Group>
@@ -226,8 +217,15 @@ export function BiddingTab(props: any) {
             </Text>
 
             <Stack align="center">
-              <BidSelector className={classes.bidSelector} lot={lot} />
-              <Button radius="xl">Place Your Bid</Button>
+              <BidSelector
+                value={tempValue}
+                setValue={setTempValue}
+                className={classes.bidSelector}
+                lot={lot}
+              />
+              <Button radius="xl" onClick={makeBid}>
+                Place Your Bid
+              </Button>
             </Stack>
           </Grid.Col>
         </Grid>

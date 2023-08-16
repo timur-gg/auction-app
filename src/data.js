@@ -154,6 +154,7 @@ module.exports = {
       price: 550,
       size: 300,
       unit: "2012",
+      bid: 555,
       parking: 1,
       locker: 1,
       bathroom: 1,
@@ -167,6 +168,7 @@ module.exports = {
       unit: "1510",
       parking: 0,
       locker: 0,
+      bid: 575,
       bathroom: 1,
     },
     {
@@ -178,6 +180,7 @@ module.exports = {
       unit: "2012",
       parking: 2,
       locker: 1,
+      bid: 510,
       bathroom: 1,
     },
     {

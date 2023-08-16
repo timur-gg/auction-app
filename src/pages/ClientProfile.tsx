@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
+import ExampleDoc from "../assets/terms_conditions.pdf";
 
 import {
   Box,
@@ -192,7 +193,14 @@ export default function ClientProfile() {
                   </Stack>
                 </Group>
                 <Box mt={10} style={{ textAlign: "left" }}>
-                  <Text color="blue">Terms and Conditions</Text>
+                  <a
+                    href={ExampleDoc}
+                    download="MyExampleDoc"
+                    target="_blank"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Text color="blue">Terms and Conditions</Text>
+                  </a>
                 </Box>
               </Grid.Col>
               <Grid.Col xs={12} md={4}>

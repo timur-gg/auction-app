@@ -3,14 +3,18 @@ import {
   Space,
   Grid,
   Text,
+  Image,
   createStyles,
   rem,
   useMantineTheme,
   Group,
   UnstyledButton,
+  Modal,
+  Button,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 
-import { IconArrowLeft } from "@tabler/icons-react";
+import { IconArrowLeft, IconZoomInArea } from "@tabler/icons-react";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -83,14 +87,15 @@ export function LotSelectionTable(props: LotSelectionProps) {
   const [floorRange, setFloorRange] = useState<[number, number]>([0, 100]);
 
   const [filters, setFilter] = useState<string[]>(["All"]);
+  const [opened, { open, close }] = useDisclosure(false);
+
+  let modalImage = "";
 
   const addFilter = (filter: string) => {
     if (!filters.includes(filter)) {
       setFilter([...filters.filter((f) => f !== "All"), filter]);
     }
   };
-
-  console.log(floorRange);
 
   const FILTER_MAP: { [char: string]: any } = {
     All: () => true,
@@ -117,6 +122,18 @@ export function LotSelectionTable(props: LotSelectionProps) {
           minSize: 100, //min size enforced during resizing
           size: 80,
         },
+        {
+          accessorKey: "floor",
+          header: "Floor",
+          minSize: 100, //min size enforced during resizing
+          size: 80,
+        },
+        {
+          accessorKey: "facing",
+          header: "Facing",
+          minSize: 100, //min size enforced during resizing
+          size: 80,
+        },
 
         {
           accessorKey: "bedroom",
@@ -139,13 +156,19 @@ export function LotSelectionTable(props: LotSelectionProps) {
           maxSize: 200,
           size: 80,
         },
+        {
+          accessorKey: "plan",
+          header: "Floor Plan",
+          minSize: 100, //min size enforced during resizing
+          maxSize: 200,
+          size: 80,
+        },
       ] as MRT_ColumnDef<any>[],
     []
   );
   const { classes } = useStyles();
 
   const { rowSelection, setRowSelection, lots, backButtonAction } = props;
-  console.log(rowSelection);
 
   useEffect(() => {
     //do something when the row selection changes...
@@ -154,6 +177,14 @@ export function LotSelectionTable(props: LotSelectionProps) {
 
   const { colorScheme } = useMantineTheme();
 
+  lots.forEach((lot) => {
+    lot.plan = (
+      <UnstyledButton onClick={() => openModal(lot.planLink)}>
+        <IconZoomInArea color="grey" />
+      </UnstyledButton>
+    );
+  });
+
   var filteredLots: any = lots;
   filters.forEach((f) => {
     filteredLots = filteredLots.filter(FILTER_MAP[f]);
@@ -161,6 +192,12 @@ export function LotSelectionTable(props: LotSelectionProps) {
 
   const backClick = () => {
     backButtonAction();
+  };
+
+  const openModal = (image: string) => {
+    modalImage = image;
+    console.log(modalImage);
+    open();
   };
 
   const table = useMantineReactTable({
@@ -244,15 +281,38 @@ export function LotSelectionTable(props: LotSelectionProps) {
     ),
   });
 
-  const rows = lots.map((element) => (
-    <tr key={element.id}>
-      <td>{element.unit}</td>
-      <td>{element.bedroom}</td>
-      <td>{element.floor}</td>
-      <td>${element.price}</td>
-      <td>{element.size}sqft</td>
-    </tr>
-  ));
+  // const rows = lots.map((element) => (
+  //   <tr key={element.id}>
+  //     <td>{element.unit}</td>
+  //     <td>{element.floor}</td>
+  //     <td>{element.facing}</td>
+  //     <td>{element.bedroom}</td>
+  //     <td>{element.floor}</td>
+  //     <td>${element.price}</td>
+  //     <td>{element.size}sqft</td>
+  //     <td>
+  //       <a>
+  //         {element.plan}
+  //         <IconZoomInArea color="blue" />
+  //       </a>
+  //     </td>
+  //   </tr>
+  // ));
 
-  return <MantineReactTable table={table} />;
+  return (
+    <>
+      <Modal opened={opened} onClose={close}>
+        <Image
+          maw={400}
+          mx="auto"
+          radius="md"
+          src={
+            "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg"
+          }
+          alt="Random image"
+        />
+      </Modal>
+      <MantineReactTable table={table} />
+    </>
+  );
 }

@@ -27,11 +27,12 @@ import { LotSelectionTable } from "./LotSelectionTable";
 import { notifications } from "@mantine/notifications";
 
 import {
-  IconArrowLeft,
+  IconWriting,
   IconCalendarEvent,
   IconCircleCheck,
   IconClock,
   IconMoneybag,
+  IconStar,
 } from "@tabler/icons-react";
 import { MRT_RowSelectionState } from "mantine-react-table";
 import { lots } from "../../data.js";
@@ -162,6 +163,23 @@ export function AuctionUpcoming(props: any) {
       });
     }
   }
+  function saveLotsAction() {
+    if (Object.keys(rowSelection).length) {
+      notifications.show({
+        autoClose: 1500,
+        title: "Saved!",
+        color: "yellow",
+        message: "Lots saved to Favorites",
+      });
+    } else {
+      notifications.show({
+        autoClose: 1500,
+        title: "Lots not selected",
+        color: "red",
+        message: "Please select 1 to 2 lots from the table",
+      });
+    }
+  }
 
   const [modalOpened, { open: openModal, close: closeModal }] =
     useDisclosure(false);
@@ -246,7 +264,7 @@ export function AuctionUpcoming(props: any) {
                 <Text fz="sm" align="left">
                   Select units from the table on the left.
                   <br />
-                  You can pick up to 3 units to participate in the auction
+                  You can pick up to 2 units to participate in the auction
                 </Text>
 
                 <Space h={7} />
@@ -264,15 +282,32 @@ export function AuctionUpcoming(props: any) {
                 )}
 
                 <Space h={10} />
-                <Button
-                  // variant="dark"
-                  color="green"
-                  mr={"auto"}
-                  // onClick={openModal}
-                  onClick={signUpAction}
-                >
-                  Sign Up for Auction
-                </Button>
+                <Group spacing={10}>
+                  <Button
+                    // variant="dark"
+                    color="green"
+                    mr={"auto"}
+                    // onClick={openModal}
+                    onClick={signUpAction}
+                  >
+                    <IconWriting size="1.2rem" />
+                    <Space w={7} />
+                    Sign Up for Auction
+                  </Button>
+                  {selectedUnits.length > 0 && (
+                    <Button
+                      // variant="dark"
+                      color="yellow"
+                      mr={"auto"}
+                      // onClick={openModal}
+                      onClick={saveLotsAction}
+                    >
+                      <IconStar size="1.2rem" />
+                      <Space w={7} />
+                      Save
+                    </Button>
+                  )}
+                </Group>
 
                 <Modal
                   opened={modalOpened}

@@ -90,7 +90,7 @@ export default function Signup() {
                 data={[
                   { value: "buyer", label: "Buyer" },
                   { value: "builder", label: "Builder" },
-                  { value: "realtor", label: "Realtor" },
+                  { value: "realtor", label: "Authorized Person" },
                 ]}
               />
             </>

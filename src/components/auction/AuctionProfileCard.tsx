@@ -212,7 +212,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                           {auction.auctionDate}
                         </Badge>
                       </Group>
-                      <Text fw={700}>Lot #{auction.lot}</Text>
+                      <Text fw={700}>Project #{auction.lot}</Text>
                       <Text fw={500}>{auction.name}</Text>
                       <Text fz="xs" c="dimmed">
                         {auction.builder}

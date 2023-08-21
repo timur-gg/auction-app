@@ -154,10 +154,13 @@ module.exports = {
       price: 550,
       size: 300,
       unit: "2012",
-      bid: 555,
+      bid: 650,
       parking: 1,
       locker: 1,
       bathroom: 1,
+      facing: "N",
+      planLink:
+        "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
     {
       id: 2,
@@ -170,6 +173,9 @@ module.exports = {
       locker: 0,
       bid: 575,
       bathroom: 1,
+      facing: "S",
+      planLink:
+        "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
     {
       id: 3,
@@ -180,8 +186,12 @@ module.exports = {
       unit: "2012",
       parking: 2,
       locker: 1,
-      bid: 510,
+      bid: 650,
       bathroom: 1,
+      place: 1,
+      facing: "E",
+      planLink:
+        "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
     {
       id: 4,
@@ -197,6 +207,9 @@ module.exports = {
       bid: 800,
       totalBids: 7,
       position: 1,
+      facing: "W",
+      planLink:
+        "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
     {
       id: 5,
@@ -212,6 +225,9 @@ module.exports = {
       totalBids: 4,
       bid: 1000,
       position: 3,
+      facing: "N",
+      planLink:
+        "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
     {
       id: 6,
@@ -227,6 +243,9 @@ module.exports = {
       soldPrice: 1400,
       bid: 1250,
       position: 6,
+      facing: "S",
+      planLink:
+        "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
   ],
 };

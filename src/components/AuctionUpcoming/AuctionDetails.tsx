@@ -14,6 +14,7 @@ import {
   AspectRatio,
   Center,
   Tooltip,
+  Tabs,
 } from "@mantine/core";
 import {
   IconBedFilled,
@@ -145,24 +146,151 @@ export function AuctionDetails(props: any) {
           </Stack>
         </Grid.Col>
         <Grid.Col xs={10} sm={9}>
-          <Text fz="md" ta="left">
-            West Queen West, Parkdale, Little Portugal & Liberty Village just
-            outside your doorstep! This 1 bedroom & rarely offered 2 washroom
-            condo with parking & locker is what 1st time buyers, professionals &
-            investors have been waiting for. Bright, South facing wall2wall
-            windows w/ walk out to balcony floods the suite with natural light.
-            Open concept & versatile layout makes efficient use of every square
-            inch. Amenities galore w/ gym, party room, concierge, visitor
-            parking, rooftop garden plus steps to all of downtown West
-            restaurants, bars, clubs, gyms, immediate TTC access and more! Open
-            concept & versatile layout makes efficient use of every square inch.
-            Amenities galore w/ gym, party room, concierge, visitor parking,
-            rooftop garden plus steps to all of downtown West restaurants, bars,
-            clubs, gyms, immediate TTC access and more!Floorplans & Feature
-            sheet with inclusions attached. See Virtual tour link for multimedia
-            access. Highlights of the area include the Drake Hotel, Gladstone
-            Hotel, Bar Poet, & Levetto
-          </Text>
+          <Tabs defaultValue="ceil" mt="-10px">
+            <Tabs.List>
+              <Tabs.Tab fz="sm" px="sm" fw={400} value="ceil">
+                Ceilings / Floors / Paint
+              </Tabs.Tab>
+              <Tabs.Tab fz="sm" px="sm" fw={400} value="doors">
+                Doors / Hardware / Carpentry
+              </Tabs.Tab>
+              <Tabs.Tab fw={400} px="sm" value="kitchen" fz="sm">
+                Kitchen
+              </Tabs.Tab>
+              <Tabs.Tab fw={400} px="sm" value="appliances" fz="sm">
+                Appliances
+              </Tabs.Tab>
+              <Tabs.Tab fw={400} px="sm" value="bathroom" fz="sm">
+                Bathrooms
+              </Tabs.Tab>
+            </Tabs.List>
+
+            <Tabs.Panel value="ceil" pt="15px" ta="left">
+              • Approximately 9 ft. ceiling heights in principal rooms, defined
+              as the Living Room and Dining Room.
+              <br />
+              • Approximately 9 ft. ceiling heights at upper level of two-storey
+              walkouts. Where bulkheads or dropped ceilings are required. The
+              height of the ceiling will be less than 9 ft. All measurements are
+              calculated from the finished concrete slab floor to the underside
+              of the concrete slab or finished ceiling above.
+              <br />
+              • Approximately 10 ft. ceiling heights in principal rooms, defined
+              as the Living Room and Dining Room for suites on Levels 2 and 3.
+              Where bulkheads or dropped ceilings are required, the height of
+              the ceiling will be less than 10 ft. All measurements are
+              calculated from the finished concrete slab floor to the underside
+              of the concrete slab or finished ceiling above.
+              <br />
+              • Smooth ceilings throughout.
+              <br />
+              • Porcelain tile floor and baseboard in Bathroom(s).
+              <br />
+              • Ceramic tile floor and baseboard in Laundry Closet.
+              <br />
+              • Laminate flooring in all other areas.
+              <br />
+              • Semi-gloss, off-white latex paint in Bathroom(s), Laundry
+              Closet, and on all trim.
+              <br />
+              • Flat, off-white latex paint on all other walls and ceilings.
+              <br />
+              <br />
+            </Tabs.Panel>
+            <Tabs.Panel value="doors" pt="15px" ta="left">
+              • Entry door to be solid core, with door viewer.
+              <br />
+              • Interior swing doors to be hollow-core, flat panel.
+              <br />
+              • Closet sliding door(s) to be framed and mirrored (as per
+              Schedule A, if applicable).
+              <br />
+              • Internal Bedroom to have clear glass partition and/or clear
+              glass sliding door (as per Schedule A, if applicable).
+              <br />
+              • Dark bronze lever hardware on entry door and brushed chrome
+              lever hardware interior swing doors.
+              <br />
+              • Privacy lock on all Bathroom doors.
+              <br />
+              • 4” baseboards in all areas where laminate or vinyl flooring is
+              located.
+              <br />
+              • 2” casings throughout.
+              <br />• Stairs in two-storey walkouts with stained treads to
+              coordinate with laminate floors, with white painted risers. Black
+              metal pickets with stained handrail to coordinate with laminate
+              floors (as per Schedule A, if applicable).
+            </Tabs.Panel>
+            <Tabs.Panel value="kitchen" pt="15px" ta="left">
+              • Custom-designed cabinetry with soft-close hardware.
+              <br />
+              • Quartz countertop.
+              <br />
+              • Islands with dining accommodations (as per Schedule A, if
+              applicable).
+              <br />
+              • Single bowl, stainless steel, undermount sink.
+              <br />
+              • Single lever, chrome faucet.
+              <br />• Ceramic tile backsplash.
+            </Tabs.Panel>
+            <Tabs.Panel value="appliances" pt="15px" ta="left">
+              • Studio, one-bedroom, one-bedroom + den, two- bedroom, and
+              two-bedroom + den units to receive:
+              <br />
+              • 24” stainless steel refrigerator.
+              <br />
+              • 24” cooktop and wall oven with over-the-range microwave.
+              <br />
+              • 24” panelized dishwasher.
+              <br />
+              • 24” stacked, front-load washer and ventless heat pump dryer.
+              <br />
+              • Three-bedroom and two-storey walkouts to receive:
+              <br />
+              • 30” stainless steel refrigerator.
+              <br />
+              • 30” cooktop and wall oven with over-the-range microwave.
+              <br />
+              • 24” panelized dishwasher.
+              <br />• 27” stacked, front-load washer and ventless heat pump
+              dryer.
+            </Tabs.Panel>
+            <Tabs.Panel value="bathroom" pt="15px" ta="left">
+              • Custom-designed vanity cabinetry with soft-close hardware.
+              <br />
+              • Surface-mounted, frameless mirror.
+              <br />
+              • Off-white quartz countertop with single edge profile.
+              <br />
+              • Single bowl, white porcelain, undermount sink.
+              <br />
+              • Single lever, chrome faucet.
+              <br />
+              • Low consumption toilet.
+              <br />
+              • Chrome accessories (towel bar or ring, toilet paper holder, robe
+              hook).
+              <br />
+              • Shower to have:
+              <br />
+              • Full-height tile surround.
+              <br />
+              • Fixed-mount chrome shower head, single lever control handle, and
+              spout.
+              <br />
+              • Frameless glass shower enclosure with pre-formed base.
+              <br />
+              • Acrylic deep soaker tub to have:
+              <br />
+              • Full-height tile surround.
+              <br />
+              • Fixed-mount chrome shower head, single lever control handle, and
+              spout.
+              <br />• Shower rod
+            </Tabs.Panel>
+          </Tabs>
         </Grid.Col>
       </Grid>
     </Card.Section>

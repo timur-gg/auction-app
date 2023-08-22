@@ -14,6 +14,7 @@ import {
   AspectRatio,
   Center,
   Tooltip,
+  Modal,
 } from "@mantine/core";
 import {
   IconBedFilled,
@@ -25,6 +26,7 @@ import {
 } from "@tabler/icons-react";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
+import { useDisclosure } from "@mantine/hooks";
 var mapImg = require("../../img/map.png");
 
 const useStyles = createStyles((theme) => ({
@@ -146,11 +148,23 @@ export function AuctionProfileCard(props: ProfileCardProps) {
     </Grid.Col>
   ));
 
+  const [
+    galleryModalOpened,
+    { open: openGalleryModal, close: closeGalleryModal },
+  ] = useDisclosure(false);
+
   const Images = auction.images.map((image: any) => (
-    <Carousel.Slide key={image.id}>
+    <Carousel.Slide key={image.id} onClick={openGalleryModal}>
       <AspectRatio ratio={16 / 10} mx="auto">
         <Image src={image} alt="Image1" width="100%" />
       </AspectRatio>
+    </Carousel.Slide>
+  ));
+
+  const ImagesModal = auction.images.map((image: any) => (
+    <Carousel.Slide key={image.id}>
+      <Image src={image} alt="Image1" width={"100%"} height={440} />
+      {/* <Image src={image} alt="Image1" width="100%" height="300px" /> */}
     </Carousel.Slide>
   ));
 
@@ -168,6 +182,11 @@ export function AuctionProfileCard(props: ProfileCardProps) {
 
   return (
     <div className="AuctionProfileCard">
+      <Modal opened={galleryModalOpened} onClose={closeGalleryModal} size="xl">
+        <Carousel slideSize="100%" slideGap="xs" align="start" loop>
+          {ImagesModal}
+        </Carousel>
+      </Modal>
       <Card.Section className={classes.section}>
         <Grid>
           <Grid.Col {...(cardSize === "full" ? { sm: 12, md: 5 } : { xs: 12 })}>

@@ -318,7 +318,7 @@ export function AuctionUpcoming(props: any) {
         {step !== 1 && <AuctionProfileCard auction={auction} cardSize="mini" />}
       </Card>
 
-      {step < 3 && <Space h={10} />}
+      <Space h={10} />
 
       <Grid justify="center">
         {step === 3 && (

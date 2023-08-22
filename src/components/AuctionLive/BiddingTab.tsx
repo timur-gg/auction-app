@@ -65,7 +65,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const unitMockdata = [
-  { label: "unit", icon: IconHash, sz: 2 },
+  { label: "unit", icon: IconHash, sz: 1.5 },
   { label: "bedroom", icon: IconBedFilled, sz: 1 },
   { label: "facing", icon: IconSunHigh, sz: 1 },
 

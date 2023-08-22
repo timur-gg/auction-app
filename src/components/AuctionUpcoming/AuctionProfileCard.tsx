@@ -11,8 +11,6 @@ import {
   Space,
   Flex,
   rem,
-  Container,
-  TextInput,
   AspectRatio,
   Center,
   Tooltip,
@@ -170,108 +168,98 @@ export function AuctionProfileCard(props: ProfileCardProps) {
 
   return (
     <div className="AuctionProfileCard">
-      <Card
-        withBorder
-        radius="md"
-        className={classes.card}
-        maw={1200}
-        mx="auto"
-      >
-        <Card.Section className={classes.section}>
-          <Grid>
-            <Grid.Col
-              {...(cardSize === "full" ? { sm: 12, md: 5 } : { xs: 12 })}
-            >
-              <Grid>
-                <Grid.Col
-                  {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 7 })}
+      <Card.Section className={classes.section}>
+        <Grid>
+          <Grid.Col {...(cardSize === "full" ? { sm: 12, md: 5 } : { xs: 12 })}>
+            <Grid>
+              <Grid.Col
+                {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 7 })}
+              >
+                <Flex
+                  {...(cardSize === "full"
+                    ? { direction: "column" }
+                    : { direction: "row", gap: "xl" })}
                 >
-                  <Flex
-                    {...(cardSize === "full"
-                      ? { direction: "column" }
-                      : { direction: "row", gap: "xl" })}
-                  >
-                    <Stack align="flex-start" spacing={-2}>
-                      <Group>
-                        <Badge
-                          bg={badgeColorMap[auction.status]}
-                          size="lg"
-                          variant="filled"
-                          className={classes.statusBadge}
-                        >
-                          {auction.status}
-                        </Badge>
-
-                        <Badge
-                          // bg={badgeColorMap[auction.status]}
-                          size="lg"
-                          // variant="filled"
-                          color="orange"
-                          className={classes.statusBadge}
-                        >
-                          {auction.auctionDate}
-                        </Badge>
-                      </Group>
-                      <Text fw={700}>Project #{auction.lot}</Text>
-                      <Text fw={500}>{auction.name}</Text>
-                      <Text fz="xs" c="dimmed">
-                        {auction.builder}
-                      </Text>
-                    </Stack>
-                    <Space h={10} />
-                    <Text
-                      {...(cardSize === "mini" ? { maw: 350 } : {})}
-                      fz="xs"
-                      // c="dimmed"
-                      // className={classes.label}
-                      align="left"
-                      m={"auto"}
-                    >
-                      Allure Condos is a new condo development located at 250
-                      King Street East, Toronto, ON. This project is bringing a
-                      modern collection of 509 condo units in a high-rise
-                      mixed-use building of 43 storeys. The estimated completion
-                      date for occupancy of this property is 2027.
-                    </Text>
-                  </Flex>
-                </Grid.Col>
-                <Grid.Col
-                  {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 5 })}
-                >
-                  <Group position="apart" mt="md">
-                    <Stack spacing={6} mb={-5} align="flex-start">
-                      <Text
-                        fz="sm"
-                        c="dimmed"
-                        className={classes.label}
-                        align="left"
+                  <Stack align="flex-start" spacing={-2}>
+                    <Group>
+                      <Badge
+                        bg={badgeColorMap[auction.status]}
+                        size="lg"
+                        variant="filled"
+                        className={classes.statusBadge}
                       >
-                        building details
-                      </Text>
+                        {auction.status}
+                      </Badge>
 
-                      <Grid>{features}</Grid>
-                    </Stack>
-                  </Group>
-                </Grid.Col>
-              </Grid>
-            </Grid.Col>
-
-            {cardSize === "full" && (
-              <Grid.Col sm={12} md={7}>
-                <Carousel
-                  slideSize="90%"
-                  height={310}
-                  slideGap="sm"
-                  align="start"
-                  loop
-                >
-                  {Images}
-                </Carousel>
+                      <Badge
+                        // bg={badgeColorMap[auction.status]}
+                        size="lg"
+                        // variant="filled"
+                        color="orange"
+                        className={classes.statusBadge}
+                      >
+                        {auction.auctionDate}
+                      </Badge>
+                    </Group>
+                    <Text fw={700}>Project #{auction.lot}</Text>
+                    <Text fw={500}>{auction.name}</Text>
+                    <Text fz="xs" c="dimmed">
+                      {auction.builder}
+                    </Text>
+                  </Stack>
+                  <Space h={10} />
+                  <Text
+                    {...(cardSize === "mini" ? { maw: 350 } : {})}
+                    fz="sm"
+                    // c="dimmed"
+                    // className={classes.label}
+                    align="left"
+                    m={"auto"}
+                  >
+                    Allure Condos is a new condo development located at 250 King
+                    Street East, Toronto, ON. This project is bringing a modern
+                    collection of 509 condo units in a high-rise mixed-use
+                    building of 43 storeys. The estimated completion date for
+                    occupancy of this property is 2027.
+                  </Text>
+                </Flex>
               </Grid.Col>
-            )}
-          </Grid>
-        </Card.Section>
-      </Card>
+              <Grid.Col
+                {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 5 })}
+              >
+                <Group position="apart" mt="md">
+                  <Stack spacing={6} mb={-5} align="flex-start">
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
+                      building details
+                    </Text>
+
+                    <Grid>{features}</Grid>
+                  </Stack>
+                </Group>
+              </Grid.Col>
+            </Grid>
+          </Grid.Col>
+
+          {cardSize === "full" && (
+            <Grid.Col sm={12} md={7}>
+              <Carousel
+                slideSize="90%"
+                height={310}
+                slideGap="sm"
+                align="start"
+                loop
+              >
+                {Images}
+              </Carousel>
+            </Grid.Col>
+          )}
+        </Grid>
+      </Card.Section>
     </div>
   );
 }

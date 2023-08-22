@@ -13,15 +13,15 @@ import {
   Table,
   Badge,
 } from "@mantine/core";
-import ShowCounter from "./ShowCounter";
-import AuctionProfileCardVert from "./AuctionProfileCardVert";
+import ShowCounter from "../AuctionLive/ShowCounter";
+import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert";
 import {
   IconCalendarEvent,
   IconMoneybag,
   IconClock,
 } from "@tabler/icons-react";
 import { lots as lotsData } from "../../data.js";
-import { BiddingTab } from "./BiddingTab";
+import { BiddingTab } from "../AuctionLive/BiddingTab";
 
 const useStyles = createStyles((theme) => ({
   card: {

@@ -336,7 +336,7 @@ export function AuctionUpcoming(props: any) {
       <Space h={10} />
 
       <Grid justify="center">
-        {step === 3 && (
+        {step >= 3 && (
           <Grid.Col xs={10} sm={3}>
             <AuctionProfileCardVert auction={auction} />
           </Grid.Col>
@@ -477,7 +477,7 @@ export function AuctionUpcoming(props: any) {
             </Card>
           </Grid.Col>
         )}
-        {step === 3 && (
+        {step >= 3 && (
           <Grid.Col xs={10} sm={9}>
             <Card
               withBorder
@@ -526,48 +526,67 @@ export function AuctionUpcoming(props: any) {
               </Grid>
 
               <Space h={15} />
-              <Container p={15} maw={700}>
-                <Title order={4}>Auction Rules</Title>
-                <Space h={20} />
+              {step === 3 && (
+                <>
+                  <Container p={15} maw={700}>
+                    <Title order={4}>Auction Rules</Title>
+                    <Space h={20} />
 
-                <List
-                  type="ordered"
-                  spacing="xs"
-                  size="sm"
-                  ta="left"
-                  icon={
-                    <ThemeIcon color="teal" size={30} radius="xl">
-                      <IconCircleCheck size="1.5rem" />
-                    </ThemeIcon>
-                  }
-                >
-                  {conditionText}
-                </List>
-                <Space h={30} />
-              </Container>
+                    <List
+                      type="ordered"
+                      spacing="xs"
+                      size="sm"
+                      ta="left"
+                      icon={
+                        <ThemeIcon color="teal" size={30} radius="xl">
+                          <IconCircleCheck size="1.5rem" />
+                        </ThemeIcon>
+                      }
+                    >
+                      {conditionText}
+                    </List>
+                    <Space h={30} />
+                  </Container>
 
-              <Center>
-                <Group spacing={40}>
-                  <Button
-                    variant="light"
-                    color="blue"
-                    mr={"10rem"}
-                    onClick={() => setStep(2)}
-                  >
-                    ← Back
-                  </Button>
-                  <Checkbox size="md" label="I agree to the auction rules" />
-                  <Button
-                    // variant="dark"
-                    color="green"
-                    mr={"auto"}
-                    // onClick={openModal}
-                    onClick={() => setStep(3)}
-                  >
-                    Confirm & Sign Up
-                  </Button>
-                </Group>
-              </Center>
+                  <Center>
+                    <Group spacing={40}>
+                      <Button
+                        variant="light"
+                        color="blue"
+                        mr={"10rem"}
+                        onClick={() => setStep(2)}
+                      >
+                        ← Back
+                      </Button>
+                      <Checkbox
+                        size="md"
+                        label="I agree to the auction rules"
+                      />
+                      <Button
+                        // variant="dark"
+                        color="green"
+                        mr={"auto"}
+                        // onClick={openModal}
+                        onClick={() => setStep(4)}
+                      >
+                        Confirm & Sign Up
+                      </Button>
+                    </Group>
+                  </Center>
+                </>
+              )}
+              {step === 4 && (
+                <Container p={15} maw={700}>
+                  <Title order={4}>Auction Registration</Title>
+
+                  <Space h={20} />
+                  <Text fw={500} size="xl">
+                    Your registration is confirmed!
+                  </Text>
+
+                  <Space h={20} />
+                </Container>
+              )}
             </Card>
           </Grid.Col>
         )}

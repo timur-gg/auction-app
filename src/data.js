@@ -3,15 +3,12 @@ module.exports = {
     {
       id: "1",
       images: [
-        "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
         "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
         "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
         "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
       ],
       price: { 0: 550, 1: 650, 2: 750, 3: 800, 4: 1100 },
-
       minPrice: 550,
-
       name: "The Condominimums",
       address: "50 Richmond W",
       bedroom: "0-3",
@@ -28,15 +25,16 @@ module.exports = {
       lots: [1, 2],
       lotsAuctioned: [1, 2],
       bathroom: "1-3",
+      cooling: "Central Air",
+      heating: "Forced Air, Gas",
     },
     {
       id: "2",
       images: [
         "https://cache08.housesigma.com/file/pix-exclusive/HSE03040/9ca2c_8b275.jpg?594560a1",
         "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
-        "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
-        "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
-        "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
+        "https://ucf338e57d81f74c1074fc770ffc.previews.dropboxusercontent.com/p/pdf_img/ACCAe5mRtabrwoWElgLFDJjv5s1dTA_2o2yzXyz2v7F1JFB_z7tigRIDaUFTYU-OjN4LHDuq2gbwbL_Jfjw_OJpJPc5e-ItgksT4-I7ZLcRzPHelfyGY3zH92N0uuHFx-P-nN2sisGFtWma7ueosMuWKMdliK1jWBxKs9SOfAa4RRXFwlHMvh-1BHP5QwNmcc8X4bLaEo2tVfRP8x4OyOhsRsCSlzroXRru6gGBkmG40_H_D870I4uAUedxnus_ujHXbNcJqJrpZ_sQnHzGOB2tVwuXJz8eZST0CT0Kbqc_Y-c9rvcMR907HOAP6Dw1LKFD98p50PRiA9G8NLGPYG8YbSjiOJnbC9fIubaQ1hjMpNRsJ1ArjGCKk7Nae9gtKB8oUsx3e36kpDDtebXpBUZaXdofv3HsLyhwiN-S8KWLo7m80K8DCi258D7olDJhxk4SmftxFFGDspp9muqLZlkluCO4kS78UkKc9z0tEX7rTEZPUlDK34L0n7dECnJyNgG63z9ACyW91uFRvKrLJB00x/p.png?page=11",
+        "https://ucf338e57d81f74c1074fc770ffc.previews.dropboxusercontent.com/p/pdf_img/ACCAe5mRtabrwoWElgLFDJjv5s1dTA_2o2yzXyz2v7F1JFB_z7tigRIDaUFTYU-OjN4LHDuq2gbwbL_Jfjw_OJpJPc5e-ItgksT4-I7ZLcRzPHelfyGY3zH92N0uuHFx-P-nN2sisGFtWma7ueosMuWKMdliK1jWBxKs9SOfAa4RRXFwlHMvh-1BHP5QwNmcc8X4bLaEo2tVfRP8x4OyOhsRsCSlzroXRru6gGBkmG40_H_D870I4uAUedxnus_ujHXbNcJqJrpZ_sQnHzGOB2tVwuXJz8eZST0CT0Kbqc_Y-c9rvcMR907HOAP6Dw1LKFD98p50PRiA9G8NLGPYG8YbSjiOJnbC9fIubaQ1hjMpNRsJ1ArjGCKk7Nae9gtKB8oUsx3e36kpDDtebXpBUZaXdofv3HsLyhwiN-S8KWLo7m80K8DCi258D7olDJhxk4SmftxFFGDspp9muqLZlkluCO4kS78UkKc9z0tEX7rTEZPUlDK34L0n7dECnJyNgG63z9ACyW91uFRvKrLJB00x/p.png?page=12",
       ],
 
       price: { 1: 600, 2: 700, 3: 800, 4: 1200 },
@@ -57,6 +55,9 @@ module.exports = {
       bathroom: "1-4",
       lots: [1, 2],
       lotsAuctioned: [1],
+      amenities: ["Swimming pool", "Sauna", "BBQ"],
+      cooling: "Central Air",
+      heating: "Forced Air, Gas",
     },
 
     {
@@ -87,6 +88,9 @@ module.exports = {
       bathroom: "1-3",
       lots: [4, 5, 6],
       lotsAuctioned: [4, 5],
+      amenities: ["Swimming pool", "Sauna", "BBQ"],
+      cooling: "Central Air",
+      heating: "Forced Air, Gas",
     },
     {
       id: "4",
@@ -115,6 +119,9 @@ module.exports = {
       lots: [3],
       lotsAuctioned: [3],
       bathroom: "1-2",
+      amenities: ["Swimming pool", "Sauna", "BBQ"],
+      cooling: "Central Air",
+      heating: "Forced Air, Gas",
     },
     {
       id: "5",
@@ -150,6 +157,7 @@ module.exports = {
       bathroom: "1-3",
       lots: [4, 5],
       lotsAuctioned: [4],
+      amenities: ["Swimming pool", "Sauna", "BBQ"],
     },
     {
       id: "7",
@@ -177,6 +185,7 @@ module.exports = {
       lot: 8349,
       duration: 24,
       bathroom: "1-4",
+      amenities: ["Swimming pool", "Sauna", "BBQ"],
     },
   ],
   lots: [

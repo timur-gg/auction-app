@@ -11,6 +11,7 @@ import {
   rem,
   Tooltip,
 } from "@mantine/core";
+import { useHover } from "@mantine/hooks";
 import {
   IconBedFilled,
   IconRuler,
@@ -24,6 +25,7 @@ import {
   IconLock,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 var mapImg = require("../../img/map.png");
 
@@ -124,6 +126,7 @@ const mockdata = [
 
 type CardProps = {
   [key: string]: any;
+  id: string;
   image: string;
   price: number;
   name: string;
@@ -161,8 +164,27 @@ export function AuctionCard(props: CardProps) {
     </Tooltip>
   ));
 
+  const navigate = useNavigate();
+
+  const { hovered, ref } = useHover();
+
+  const hoverStyle = {
+    background: "#F5F5F5",
+    border: "1.2px solid #E0E0E0",
+    cursor: "pointer",
+  };
+
   return (
-    <Card withBorder radius="md" className={classes.card}>
+    <Card
+      ref={ref}
+      withBorder
+      radius="md"
+      className={classes.card}
+      onClick={() => navigate(`/auction/${props.id}`)}
+      style={{
+        ...(hovered ? hoverStyle : null),
+      }}
+    >
       <Card.Section>
         <Image src={props.image} alt="Tesla Model S" height={250} />
         <IconStar

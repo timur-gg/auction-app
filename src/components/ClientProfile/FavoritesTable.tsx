@@ -2,7 +2,7 @@ import { Badge, Group, ActionIcon } from "@mantine/core";
 import { IconBed, IconBath, IconRuler, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import { Link } from "react-router-dom";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function FavoritesTable(props: any) {
   const { favorites, deleteFave } = props;

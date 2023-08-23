@@ -160,11 +160,12 @@ export function BiddingTab(props: any) {
         centered
       >
         <Space h={15} />
-        <Text ta="center" size="xl" fw={400}>
+        <Text ta="left" size="lg" fw={500}>
           Are you sure that you want to exit the auction for this lot?
         </Text>
-        <Text ta="center" size="xl" fw={400}>
-          You will not have an option to participate in this auction again.
+        <Space h={15} />
+        <Text ta="left" size="lg" fw={500}>
+          You will not have the option to participate in this auction again.
         </Text>
         <Space h={25} />
         <Group>
@@ -250,7 +251,7 @@ export function BiddingTab(props: any) {
           <Grid align="center" justify="center">
             <Grid.Col span={12}>
               <Grid>
-                <Grid.Col span={6}>
+                <Grid.Col xs={12} lg={6}>
                   <Space h={10} />
                   {currentPlace === 1 ? (
                     <Text fz="md" c="dimmed" fw={500}>
@@ -264,7 +265,7 @@ export function BiddingTab(props: any) {
                   <Space h={10} />
                   <ShowCounter days={-1} hours={-1} minutes={5} seconds={10} />
                 </Grid.Col>
-                <Grid.Col span={6}>
+                <Grid.Col xs={12} lg={6}>
                   <Group position="center">
                     <Stack spacing="3" align="left">
                       <Group>

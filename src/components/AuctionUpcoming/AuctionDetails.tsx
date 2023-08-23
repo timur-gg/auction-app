@@ -168,127 +168,125 @@ export function AuctionDetails(props: any) {
             <Tabs.Panel value="ceil" pt="15px" ta="left">
               • Approximately 9 ft. ceiling heights in principal rooms, defined
               as the Living Room and Dining Room.
-              <br />
+              <Space h={10} />
               • Approximately 9 ft. ceiling heights at upper level of two-storey
               walkouts. Where bulkheads or dropped ceilings are required. The
               height of the ceiling will be less than 9 ft. All measurements are
               calculated from the finished concrete slab floor to the underside
               of the concrete slab or finished ceiling above.
-              <br />
+              <Space h={10} />
               • Approximately 10 ft. ceiling heights in principal rooms, defined
               as the Living Room and Dining Room for suites on Levels 2 and 3.
               Where bulkheads or dropped ceilings are required, the height of
               the ceiling will be less than 10 ft. All measurements are
               calculated from the finished concrete slab floor to the underside
               of the concrete slab or finished ceiling above.
-              <br />
+              <Space h={10} />
               • Smooth ceilings throughout.
-              <br />
+              <Space h={10} />
               • Porcelain tile floor and baseboard in Bathroom(s).
-              <br />
+              <Space h={10} />
               • Ceramic tile floor and baseboard in Laundry Closet.
-              <br />
+              <Space h={10} />
               • Laminate flooring in all other areas.
-              <br />
+              <Space h={10} />
               • Semi-gloss, off-white latex paint in Bathroom(s), Laundry
               Closet, and on all trim.
-              <br />
-              • Flat, off-white latex paint on all other walls and ceilings.
-              <br />
-              <br />
+              <Space h={10} />• Flat, off-white latex paint on all other walls
+              and ceilings.
             </Tabs.Panel>
             <Tabs.Panel value="doors" pt="15px" ta="left">
               • Entry door to be solid core, with door viewer.
-              <br />
+              <Space h={10} />
               • Interior swing doors to be hollow-core, flat panel.
-              <br />
+              <Space h={10} />
               • Closet sliding door(s) to be framed and mirrored (as per
               Schedule A, if applicable).
-              <br />
+              <Space h={10} />
               • Internal Bedroom to have clear glass partition and/or clear
               glass sliding door (as per Schedule A, if applicable).
-              <br />
+              <Space h={10} />
               • Dark bronze lever hardware on entry door and brushed chrome
               lever hardware interior swing doors.
-              <br />
+              <Space h={10} />
               • Privacy lock on all Bathroom doors.
-              <br />
+              <Space h={10} />
               • 4” baseboards in all areas where laminate or vinyl flooring is
               located.
-              <br />
+              <Space h={10} />
               • 2” casings throughout.
-              <br />• Stairs in two-storey walkouts with stained treads to
-              coordinate with laminate floors, with white painted risers. Black
-              metal pickets with stained handrail to coordinate with laminate
-              floors (as per Schedule A, if applicable).
+              <Space h={10} />• Stairs in two-storey walkouts with stained
+              treads to coordinate with laminate floors, with white painted
+              risers. Black metal pickets with stained handrail to coordinate
+              with laminate floors (as per Schedule A, if applicable).
             </Tabs.Panel>
             <Tabs.Panel value="kitchen" pt="15px" ta="left">
               • Custom-designed cabinetry with soft-close hardware.
-              <br />
+              <Space h={10} />
               • Quartz countertop.
-              <br />
+              <Space h={10} />
               • Islands with dining accommodations (as per Schedule A, if
               applicable).
-              <br />
+              <Space h={10} />
               • Single bowl, stainless steel, undermount sink.
-              <br />
+              <Space h={10} />
               • Single lever, chrome faucet.
-              <br />• Ceramic tile backsplash.
+              <Space h={10} />• Ceramic tile backsplash.
             </Tabs.Panel>
             <Tabs.Panel value="appliances" pt="15px" ta="left">
               • Studio, one-bedroom, one-bedroom + den, two- bedroom, and
               two-bedroom + den units to receive:
-              <br />
+              <Space h={10} />
               • 24” stainless steel refrigerator.
-              <br />
+              <Space h={10} />
               • 24” cooktop and wall oven with over-the-range microwave.
-              <br />
+              <Space h={10} />
               • 24” panelized dishwasher.
-              <br />
+              <Space h={10} />
               • 24” stacked, front-load washer and ventless heat pump dryer.
-              <br />
+              <Space h={10} />
               • Three-bedroom and two-storey walkouts to receive:
-              <br />
+              <Space h={10} />
               • 30” stainless steel refrigerator.
-              <br />
+              <Space h={10} />
               • 30” cooktop and wall oven with over-the-range microwave.
-              <br />
+              <Space h={10} />
               • 24” panelized dishwasher.
-              <br />• 27” stacked, front-load washer and ventless heat pump
-              dryer.
+              <Space h={10} />• 27” stacked, front-load washer and ventless heat
+              pump dryer.
             </Tabs.Panel>
             <Tabs.Panel value="bathroom" pt="15px" ta="left">
               • Custom-designed vanity cabinetry with soft-close hardware.
-              <br />
+              <Space h={10} />
               • Surface-mounted, frameless mirror.
-              <br />
+              <Space h={10} />
               • Off-white quartz countertop with single edge profile.
-              <br />
+              <Space h={10} />
               • Single bowl, white porcelain, undermount sink.
-              <br />
+              <Space h={10} />
               • Single lever, chrome faucet.
-              <br />
+              <Space h={10} />
               • Low consumption toilet.
-              <br />
+              <Space h={10} />
               • Chrome accessories (towel bar or ring, toilet paper holder, robe
               hook).
-              <br />
+              <Space h={10} />
               • Shower to have:
-              <br />
+              <Space h={10} />
               • Full-height tile surround.
-              <br />
+              <Space h={10} />
               • Fixed-mount chrome shower head, single lever control handle, and
               spout.
-              <br />
+              <Space h={10} />
               • Frameless glass shower enclosure with pre-formed base.
-              <br />
+              <Space h={10} />
               • Acrylic deep soaker tub to have:
-              <br />
+              <Space h={10} />
               • Full-height tile surround.
-              <br />
+              <Space h={10} />
               • Fixed-mount chrome shower head, single lever control handle, and
               spout.
-              <br />• Shower rod
+              <Space h={10} />• Shower rod
             </Tabs.Panel>
           </Tabs>
         </Grid.Col>

@@ -168,6 +168,7 @@ const Inventory = () => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
   const [size, setSizeRange] = useState<[number, number]>([0, 100]);
   const [bedroom, setBedroom] = useState<number>(-1);
+  const [bathroom, setBathroom] = useState<number>(-1);
   const [deposit, setDeposit] = useState<string>("");
   const [sortBy, setSort] = useState<string>("price");
   const [builder, setBuilder] = useState<string>("");
@@ -255,6 +256,7 @@ const Inventory = () => {
     <Grid.Col md={6} lg={4} key={auction.id}>
       <AuctionCard
         // status={auction.status}
+        id={auction.id}
         image={auction.images[0]}
         size={auction.size}
         // size={bedroom >= 0 ? auction.size[bedroom] : auction.minSize}
@@ -265,7 +267,6 @@ const Inventory = () => {
         builder={auction.builder}
         completionDate={auction.completionDate}
         auctionDate={auction.auctionDate}
-        id={auction.id}
         deposit={auction.deposit}
         bathroom={auction.bathroom}
         parking={auction.parking}
@@ -490,8 +491,9 @@ const Inventory = () => {
                       { label: "3+", value: "3" },
                     ]}
                     onChange={(value) => {
-                      setBedroom(parseInt(value));
-                      addFilter("bathroom");
+                      console.log("111111334243r4");
+                      // setBathroom(parseInt(value));
+                      // addFilter("bathroom");
                     }}
                     // classNames={classes}
                   />

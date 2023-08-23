@@ -202,131 +202,136 @@ export function AuctionUpcoming(props: any) {
 
   return (
     <Container className="Auction" maw={1200}>
-      <Card
-        withBorder
-        radius="md"
-        className={classes.card}
-        maw={1200}
-        mx="auto"
-        pt="0"
-      >
-        {step === 1 && (
-          <Tabs defaultValue="gallery" pt="15px">
-            <Tabs.List>
-              <Tabs.Tab fz="large" px="xl" fw={500} value="gallery">
-                Overview
-              </Tabs.Tab>
-              <Tabs.Tab
-                fz="large"
-                px="xl"
-                fw={500}
-                value="messages"
-                // icon={<IconMessageCircle size="0.8rem" />}
-              >
-                Details
-              </Tabs.Tab>
-              <Tabs.Tab
-                fw={500}
-                px="xl"
-                value="settings"
-                fz="large"
-                // icon={<IconSettings size="0.8rem" />}
-              >
-                Deposit / Incentives
-              </Tabs.Tab>
-            </Tabs.List>
+      {step < 3 && (
+        <Card
+          withBorder
+          radius="md"
+          className={classes.card}
+          maw={1200}
+          mx="auto"
+          pt="0"
+        >
+          {step === 1 && (
+            <Tabs defaultValue="gallery" pt="15px">
+              <Tabs.List>
+                <Tabs.Tab fz="large" px="xl" fw={500} value="gallery">
+                  Overview
+                </Tabs.Tab>
+                <Tabs.Tab
+                  fz="large"
+                  px="xl"
+                  fw={500}
+                  value="messages"
+                  // icon={<IconMessageCircle size="0.8rem" />}
+                >
+                  Details
+                </Tabs.Tab>
+                <Tabs.Tab
+                  fw={500}
+                  px="xl"
+                  value="settings"
+                  fz="large"
+                  // icon={<IconSettings size="0.8rem" />}
+                >
+                  Deposit / Incentives
+                </Tabs.Tab>
+              </Tabs.List>
 
-            <Tabs.Panel value="gallery" pt="0">
-              {step < 3 && (
-                <AuctionProfileCard
-                  auction={auction}
-                  {...(step === 1
-                    ? { cardSize: "full" }
-                    : { cardSize: "mini" })}
-                />
-              )}
-            </Tabs.Panel>
+              <Tabs.Panel value="gallery" pt="0">
+                {step < 3 && (
+                  <AuctionProfileCard
+                    auction={auction}
+                    {...(step === 1
+                      ? { cardSize: "full" }
+                      : { cardSize: "mini" })}
+                  />
+                )}
+              </Tabs.Panel>
 
-            <Tabs.Panel value="messages" pt="0">
-              <AuctionDetails auction={auction} />
-            </Tabs.Panel>
+              <Tabs.Panel value="messages" pt="0">
+                <AuctionDetails auction={auction} />
+              </Tabs.Panel>
 
-            <Tabs.Panel value="settings" pt="lg" ta="left" p="2rem">
-              <Grid>
-                <Grid.Col span={6}>
-                  <Text
-                    fz="sm"
-                    c="dimmed"
-                    className={classes.label}
-                    align="left"
-                  >
-                    Deposit structure
-                  </Text>
-                  <Text>
+              <Tabs.Panel value="settings" pt="lg" ta="left" p="2rem">
+                <Grid>
+                  <Grid.Col span={6}>
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
+                      Deposit structure
+                    </Text>
+                    <Text>
+                      <List>
+                        <List.Item>
+                          5% Deposit structure on podium and standard suites
+                        </List.Item>
+                        <List.Item>
+                          $10,000 on - Signing Balance to 5% in 30 Days 15% on
+                          Occupancy
+                        </List.Item>
+                        <List.Item>
+                          10% - extended deposit structure on penthouse suites
+                        </List.Item>
+                        <List.Item>$10,000 on signing</List.Item>
+                        <List.Item>
+                          Balance to 5% in 30 days 2.5% in 180 days 2.5% in 365
+                          days 5% on Occupancy
+                        </List.Item>
+                      </List>
+                    </Text>
+                    <Space h={20} />
+                    <Text size="xs">
+                      * Certain terms and conditions may apply. Assignment Right
+                      is subject to an additional $1,000.00 plus HST for
+                      Vendor’s solicitor fees and processing fees and subject to
+                      conditions at Vendor’s sole discretion. See Sales Rep for
+                      details.
+                    </Text>
+                  </Grid.Col>
+
+                  <Grid.Col span={6}>
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
+                      Incentives
+                    </Text>
                     <List>
                       <List.Item>
-                        5% Deposit structure on podium and standard suites
+                        <Title order={5}>
+                          Special incentive program for your free assignment
+                        </Title>
+                      </List.Item>
+                      <List.Item>Regular Assignment Fee of $10,000</List.Item>
+                      <List.Item>
+                        Permission to lease during occupancy* capped development
+                        charges
                       </List.Item>
                       <List.Item>
-                        $10,000 on - Signing Balance to 5% in 30 Days 15% on
-                        Occupancy
+                        $12,500 plus hst for 1 bedroom+den and smaller
                       </List.Item>
                       <List.Item>
-                        10% - extended deposit structure on penthouse suites
-                      </List.Item>
-                      <List.Item>$10,000 on signing</List.Item>
-                      <List.Item>
-                        Balance to 5% in 30 days 2.5% in 180 days 2.5% in 365
-                        days 5% on Occupancy
+                        $18,000 plus hst for 2 bedroom and larger limited time
+                        Offer!
                       </List.Item>
                     </List>
-                  </Text>
-                  <Space h={20} />
-                  <Text size="xs">
-                    * Certain terms and conditions may apply. Assignment Right
-                    is subject to an additional $1,000.00 plus HST for Vendor’s
-                    solicitor fees and processing fees and subject to conditions
-                    at Vendor’s sole discretion. See Sales Rep for details.
-                  </Text>
-                </Grid.Col>
+                  </Grid.Col>
+                </Grid>
 
-                <Grid.Col span={6}>
-                  <Text
-                    fz="sm"
-                    c="dimmed"
-                    className={classes.label}
-                    align="left"
-                  >
-                    Incentives
-                  </Text>
-                  <List>
-                    <List.Item>
-                      <Title order={5}>
-                        Special incentive program for your free assignment
-                      </Title>
-                    </List.Item>
-                    <List.Item>Regular Assignment Fee of $10,000</List.Item>
-                    <List.Item>
-                      Permission to lease during occupancy* capped development
-                      charges
-                    </List.Item>
-                    <List.Item>
-                      $12,500 plus hst for 1 bedroom+den and smaller
-                    </List.Item>
-                    <List.Item>
-                      $18,000 plus hst for 2 bedroom and larger limited time
-                      Offer!
-                    </List.Item>
-                  </List>
-                </Grid.Col>
-              </Grid>
-
-              <Space h={30} />
-            </Tabs.Panel>
-          </Tabs>
-        )}
-        {step !== 1 && <AuctionProfileCard auction={auction} cardSize="mini" />}
-      </Card>
+                <Space h={30} />
+              </Tabs.Panel>
+            </Tabs>
+          )}
+          {step === 2 && (
+            <AuctionProfileCard auction={auction} cardSize="mini" />
+          )}
+        </Card>
+      )}
 
       <Space h={10} />
 

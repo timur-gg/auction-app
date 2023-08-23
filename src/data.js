@@ -32,9 +32,12 @@ module.exports = {
       id: "2",
       images: [
         "https://cache08.housesigma.com/file/pix-exclusive/HSE03040/9ca2c_8b275.jpg?594560a1",
-        "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
-        "https://ucf338e57d81f74c1074fc770ffc.previews.dropboxusercontent.com/p/pdf_img/ACCAe5mRtabrwoWElgLFDJjv5s1dTA_2o2yzXyz2v7F1JFB_z7tigRIDaUFTYU-OjN4LHDuq2gbwbL_Jfjw_OJpJPc5e-ItgksT4-I7ZLcRzPHelfyGY3zH92N0uuHFx-P-nN2sisGFtWma7ueosMuWKMdliK1jWBxKs9SOfAa4RRXFwlHMvh-1BHP5QwNmcc8X4bLaEo2tVfRP8x4OyOhsRsCSlzroXRru6gGBkmG40_H_D870I4uAUedxnus_ujHXbNcJqJrpZ_sQnHzGOB2tVwuXJz8eZST0CT0Kbqc_Y-c9rvcMR907HOAP6Dw1LKFD98p50PRiA9G8NLGPYG8YbSjiOJnbC9fIubaQ1hjMpNRsJ1ArjGCKk7Nae9gtKB8oUsx3e36kpDDtebXpBUZaXdofv3HsLyhwiN-S8KWLo7m80K8DCi258D7olDJhxk4SmftxFFGDspp9muqLZlkluCO4kS78UkKc9z0tEX7rTEZPUlDK34L0n7dECnJyNgG63z9ACyW91uFRvKrLJB00x/p.png?page=11",
-        "https://ucf338e57d81f74c1074fc770ffc.previews.dropboxusercontent.com/p/pdf_img/ACCAe5mRtabrwoWElgLFDJjv5s1dTA_2o2yzXyz2v7F1JFB_z7tigRIDaUFTYU-OjN4LHDuq2gbwbL_Jfjw_OJpJPc5e-ItgksT4-I7ZLcRzPHelfyGY3zH92N0uuHFx-P-nN2sisGFtWma7ueosMuWKMdliK1jWBxKs9SOfAa4RRXFwlHMvh-1BHP5QwNmcc8X4bLaEo2tVfRP8x4OyOhsRsCSlzroXRru6gGBkmG40_H_D870I4uAUedxnus_ujHXbNcJqJrpZ_sQnHzGOB2tVwuXJz8eZST0CT0Kbqc_Y-c9rvcMR907HOAP6Dw1LKFD98p50PRiA9G8NLGPYG8YbSjiOJnbC9fIubaQ1hjMpNRsJ1ArjGCKk7Nae9gtKB8oUsx3e36kpDDtebXpBUZaXdofv3HsLyhwiN-S8KWLo7m80K8DCi258D7olDJhxk4SmftxFFGDspp9muqLZlkluCO4kS78UkKc9z0tEX7rTEZPUlDK34L0n7dECnJyNgG63z9ACyW91uFRvKrLJB00x/p.png?page=12",
+        require("./assets/pic1.png"),
+        require("./assets/pic2.png"),
+        require("./assets/pic3.png"),
+        require("./assets/pic4.jpg"),
+        require("./assets/pic5.jpg"),
+        require("./assets/pic6.jpg"),
       ],
 
       price: { 1: 600, 2: 700, 3: 800, 4: 1200 },

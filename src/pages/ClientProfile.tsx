@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useRef } from "react";
 import ExampleDoc from "../assets/terms_conditions.pdf";
 
+import { auctionData, lots } from "../data.js";
+
 import {
   Box,
   Stack,
@@ -19,6 +21,7 @@ import {
   Paper,
   ThemeIcon,
   Avatar,
+  ActionIcon,
 } from "@mantine/core";
 
 import {
@@ -28,7 +31,8 @@ import {
   IconStar,
   IconPencil,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import FavoritesTable from "../components/ClientProfile/FavoritesTable";
+import AuctionsTable from "../components/ClientProfile/AuctionsTable";
 
 const useStyles = createStyles((theme) => ({
   icon: {
@@ -52,98 +56,105 @@ const UserData = {
     "https://images.unsplash.com/photo-1612833609249-5e9c9b9b0b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXR5JTIwY2FyZCUyMGF1dGhvcml0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
 };
 
-const auctions = [
-  {
-    name: "King West Towers",
-    builder: "Developers Inc",
-    address: "100 Spadina",
-    position: 2,
-    status: "Live",
-    bid: "570k",
-  },
-  {
-    bid: "1m",
-    name: "Condo 223",
-    address: "35 Bathurst",
-    builder: "Developers Inc",
-    position: 10,
-    status: "Passed",
-  },
-];
+const auctionIds = ["1", "2", "4", "3"];
+let auctions = auctionData.filter((a) => auctionIds.includes(a.id));
 
-const favourites = [
+let favorites = [
   {
+    id: 1,
     name: "King West Towers",
     builder: "Developers Inc",
     address: "100 Spadina",
     status: "Live",
     bid: "570k",
     auctionDate: "Sep 10 2023",
+    bedroom: 1,
+    bathroom: 1,
+    size: "550sqft",
+    auction: 3,
+    unit: 2290,
   },
   {
-    bid: "1m",
+    id: 2,
+    name: "King West Towers",
+    builder: "Developers Inc",
+    address: "100 Spadina",
+    status: "Live",
+    bid: "570k",
+    auctionDate: "Sep 10 2023",
+    bedroom: 1,
+    bathroom: 1,
+    size: "570sqft",
+    auction: 3,
+    unit: 2294,
+  },
+  {
+    id: 3,
+    bid: "660k",
     name: "Condo 223",
     address: "35 Bathurst",
     builder: "Developers Inc",
     status: "Sep 10 2023",
+    bedroom: "1+1",
+    size: "600sqft",
+    unit: 2234,
+    bathroom: 1,
+    auction: 2,
   },
   {
-    bid: "1m",
-    name: "Condo 229",
-    address: "35 Queen",
+    id: 4,
+    bid: "660k",
+    name: "Condo 223",
+    address: "35 Bathurst",
     builder: "Developers Inc",
-    status: "Passed",
+    status: "Sep 10 2023",
+    bedroom: "1+1",
+    size: "600sqft",
+    unit: 2236,
+    bathroom: 1,
+    auction: 2,
   },
+  // {
+  //   id: 5,
+  //   bid: "1m",
+  //   name: "Condo 229",
+  //   address: "35 Queen",
+  //   builder: "Developers Inc",
+  //   status: "Passed",
+  //   bedroom: "1+1",
+  //   bathroom: 2,
+  //   size: "620sqft",
+  //   auction: 7,
+  //   unit: 6675,
+  // },
 ];
 
 export default function ClientProfile() {
   const { classes } = useStyles();
 
-  const auctionRows = auctions.map((element) => (
-    <tr key={element.name}>
-      <td>{element.name}</td>
-      <td>{element.builder}</td>
-      <td>{element.address}</td>
-      <td>{element.bid}</td>
-      <td>{element.position}</td>
+  const [removedFaveRows, setRemovedFaveRows] = useState<Number[]>([]);
+  const [removedAuctionRows, setRemovedAuctionRows] = useState<String[]>([]);
 
-      <td>
-        {element.status === "Live" ? (
-          <Badge color="green" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : element.status === "Passed" ? (
-          <Badge color="red" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : (
-          element.status
-        )}
-      </td>
-    </tr>
-  ));
+  const deleteFave = (lot: any) => {
+    setRemovedFaveRows([...removedFaveRows, lot.id]);
+    console.info("deleteFave", lot);
+  };
 
-  const favouritesRows = favourites.map((element) => (
-    <tr key={element.name}>
-      <td>{element.name}</td>
-      <td>{element.builder}</td>
-      <td>{element.address}</td>
-      <td>{element.bid}</td>
-      <td>
-        {element.status === "Live" ? (
-          <Badge color="green" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : element.status === "Passed" ? (
-          <Badge color="red" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : (
-          element.status
-        )}
-      </td>
-    </tr>
-  ));
+  const quitAuction = (lot: any) => {
+    setRemovedAuctionRows([...removedAuctionRows, lot.id]);
+    console.info("deleteFave", lot);
+  };
+
+  favorites = favorites.filter((fave) => !removedFaveRows.includes(fave.id));
+  auctions = auctions.filter((a: any) => !removedAuctionRows.includes(a.id));
+
+  console.log(favorites);
+
+  const statusOrder = ["Live Auction", "upcoming", "passed"];
+
+  auctions = auctions.sort(
+    (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status)
+  );
 
   return (
     <Container size="md">
@@ -306,6 +317,7 @@ export default function ClientProfile() {
             </Grid>
           </Paper>
         </Grid.Col>
+
         <Grid.Col xs={12} md={12}>
           <Paper
             withBorder
@@ -318,7 +330,6 @@ export default function ClientProfile() {
           >
             <Group noWrap align="left">
               <ThemeIcon>
-                {" "}
                 <IconGavel stroke={1.5} />{" "}
               </ThemeIcon>
 
@@ -326,19 +337,7 @@ export default function ClientProfile() {
                 My Auctions
               </Title>
             </Group>
-            <Table style={{ textAlign: "left" }}>
-              <thead>
-                <tr>
-                  <th>Building</th>
-                  <th>Builder</th>
-                  <th>Address</th>
-                  <th>My bid</th>
-                  <th>My Position</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>{auctionRows}</tbody>
-            </Table>
+            <AuctionsTable auctions={auctions} removeAuction={quitAuction} />
           </Paper>
         </Grid.Col>
 
@@ -358,21 +357,10 @@ export default function ClientProfile() {
                 <IconStar stroke={1.5} />{" "}
               </ThemeIcon>
               <Title order={4} align="left">
-                Favourites
+                Favorites
               </Title>
             </Group>
-            <Table style={{ textAlign: "left" }}>
-              <thead>
-                <tr>
-                  <th>Building</th>
-                  <th>Builder</th>
-                  <th>Address</th>
-                  <th>Current bid</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>{favouritesRows}</tbody>
-            </Table>
+            <FavoritesTable favorites={favorites} deleteFave={deleteFave} />
           </Paper>
         </Grid.Col>
       </Grid>

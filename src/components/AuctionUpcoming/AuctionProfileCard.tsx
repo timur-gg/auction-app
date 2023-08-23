@@ -24,7 +24,7 @@ import {
   IconCar,
   IconLock,
 } from "@tabler/icons-react";
-import { Carousel } from "@mantine/carousel";
+import { Carousel, useAnimationOffsetEffect } from "@mantine/carousel";
 import React from "react";
 import { useDisclosure } from "@mantine/hooks";
 var mapImg = require("../../img/map.png");
@@ -163,8 +163,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
 
   const ImagesModal = auction.images.map((image: any) => (
     <Carousel.Slide key={image.id}>
-      <Image src={image} alt="Image1" width={"100%"} height={440} />
-      {/* <Image src={image} alt="Image1" width="100%" height="300px" /> */}
+      <Image src={image} alt="Image1" width="100%" height={440} />
     </Carousel.Slide>
   ));
 
@@ -182,11 +181,24 @@ export function AuctionProfileCard(props: ProfileCardProps) {
 
   return (
     <div className="AuctionProfileCard">
-      <Modal opened={galleryModalOpened} onClose={closeGalleryModal} size="xl">
-        <Carousel slideSize="100%" slideGap="xs" align="start" loop>
-          {ImagesModal}
-        </Carousel>
-      </Modal>
+      {galleryModalOpened && (
+        <Modal
+          opened={galleryModalOpened}
+          onClose={closeGalleryModal}
+          size="xl"
+        >
+          <Carousel
+            slideSize="95%"
+            slideGap="sm"
+            align="center"
+            loop
+            withIndicators
+          >
+            {ImagesModal}
+          </Carousel>
+        </Modal>
+      )}
+
       <Card.Section className={classes.section}>
         <Grid>
           <Grid.Col {...(cardSize === "full" ? { sm: 12, md: 5 } : { xs: 12 })}>

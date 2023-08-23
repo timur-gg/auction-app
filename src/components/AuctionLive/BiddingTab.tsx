@@ -172,9 +172,9 @@ export function BiddingTab(props: any) {
         </Group>
 
         <Space h={30} />
-        <Group spacing={30} ml={110}>
-          <Button radius="sm">
-            <IconDoorExit color="red" size="1.05rem" stroke={1.5} />
+        <Group spacing={30} ml={130}>
+          <Button radius="sm" color="red">
+            <IconDoorExit size="1.05rem" stroke={1.5} />
             <Space w={10} />
             Quit Auction
           </Button>

@@ -19,6 +19,7 @@ import {
   ThemeIcon,
   Center,
   Tabs,
+  Table,
 } from "@mantine/core";
 import AuctionProfileCard from "./AuctionProfileCard";
 import AuctionConfirmation from "./AuctionConfirmation";
@@ -36,8 +37,8 @@ import {
   IconClock,
   IconMoneybag,
   IconStar,
-  IconMessageCircle,
-  IconPhoto,
+  IconBed,
+  IconRuler,
   IconSettings,
 } from "@tabler/icons-react";
 import { MRT_RowSelectionState } from "mantine-react-table";
@@ -147,6 +148,15 @@ export function AuctionUpcoming(props: any) {
     <Text size="sm" key={key}>
       Unit {lots[parseInt(key)].unit} - {lots[parseInt(key)].bedroom} bedroom{" "}
     </Text>
+  ));
+
+  const selectedUnitRows = Object.keys(rowSelection).map((key: string) => (
+    <tr key={lots[parseInt(key)].id}>
+      <td>{lots[parseInt(key)].unit}</td>
+      <td>{lots[parseInt(key)].bedroom}</td>
+      <td>{lots[parseInt(key)].size}sqft</td>
+      <td>{lots[parseInt(key)].registeredTotal}</td>
+    </tr>
   ));
 
   const conditionText = text.auctionRules.map((rule) => (
@@ -403,7 +413,25 @@ export function AuctionUpcoming(props: any) {
                 )}
 
                 {selectedUnits.length > 0 && (
-                  <Stack spacing={4}>{selectedUnits}</Stack>
+                  // <Stack spacing={4}>{selectedUnits}</Stack>
+
+                  <Table style={{ textAlign: "left" }}>
+                    <thead>
+                      <tr>
+                        <th>Unit</th>
+                        <th>
+                          <IconBed size="1.2rem" />
+                        </th>
+                        <th>
+                          <IconRuler size="1.2rem" />
+                        </th>
+                        <th style={{ maxWidth: "105px" }}>
+                          Registered Participants
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>{selectedUnitRows}</tbody>
+                  </Table>
                 )}
 
                 <Space h={10} />
@@ -412,7 +440,6 @@ export function AuctionUpcoming(props: any) {
                     // variant="dark"
                     color="green"
                     mr={"auto"}
-                    // onClick={openModal}
                     onClick={signUpAction}
                   >
                     <IconWriting size="1.2rem" />

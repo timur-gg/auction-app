@@ -26,6 +26,7 @@ module.exports = {
       duration: 48,
       lot: 5552,
       lots: [1, 2],
+      lotsAuctioned: [1, 2],
       bathroom: "1-3",
     },
     {
@@ -54,6 +55,8 @@ module.exports = {
       lot: 8349,
       duration: 24,
       bathroom: "1-4",
+      lots: [1, 2],
+      lotsAuctioned: [1],
     },
 
     {
@@ -83,6 +86,7 @@ module.exports = {
       duration: 24,
       bathroom: "1-3",
       lots: [4, 5, 6],
+      lotsAuctioned: [4, 5],
     },
     {
       id: "4",
@@ -109,6 +113,7 @@ module.exports = {
       duration: 24,
       lot: 108,
       lots: [3],
+      lotsAuctioned: [3],
       bathroom: "1-2",
     },
     {
@@ -144,6 +149,34 @@ module.exports = {
       duration: 24,
       bathroom: "1-3",
       lots: [4, 5],
+      lotsAuctioned: [4],
+    },
+    {
+      id: "7",
+      images: [
+        "https://cache08.housesigma.com/file/pix-exclusive/HSE03040/9ca2c_8b275.jpg?594560a1",
+        "https://www.easyprecon.com/wp-content/uploads/2022/12/2022_09_06_01_54_27_centricity_aerial-1066x600.webp",
+        "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_10_241_church_street_4-1066x600.webp",
+        "https://cache15.housesigma.com/file/pix-exclusive/HSE03041/33bfa_5ea6c.jpg?e224ad04",
+        "https://www.easyprecon.com/wp-content/uploads/2022/12/2021_12_21_09_55_18_241_church_street_5-872x600.webp",
+      ],
+
+      price: { 1: 600, 2: 700, 3: 800, 4: 1200 },
+      minPrice: 600,
+      name: "Condo 229",
+      address: "35 Bathurst",
+      bedroom: "1-4",
+      size: "590-1400",
+      builder: "Developers Inc",
+      completionDate: "June 2026",
+      auctionDate: "1 Oct 2023",
+      status: "passed",
+      parking: "Yes",
+      locker: "Yes",
+      deposit: "10/5/5",
+      lot: 8349,
+      duration: 24,
+      bathroom: "1-4",
     },
   ],
   lots: [
@@ -159,6 +192,7 @@ module.exports = {
       locker: 1,
       bathroom: 1,
       facing: "N",
+      registeredTotal: 20,
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
@@ -173,6 +207,7 @@ module.exports = {
       locker: 0,
       bid: 575,
       bathroom: 1,
+      registeredTotal: 25,
       facing: "S",
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
@@ -189,6 +224,7 @@ module.exports = {
       bid: 650,
       bathroom: 1,
       place: 1,
+      registeredTotal: 15,
       facing: "E",
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
@@ -207,6 +243,7 @@ module.exports = {
       bid: 800,
       totalBids: 7,
       position: 1,
+      registeredTotal: 11,
       facing: "W",
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
@@ -226,6 +263,7 @@ module.exports = {
       bid: 1000,
       position: 3,
       facing: "N",
+      registeredTotal: 9,
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
@@ -243,6 +281,7 @@ module.exports = {
       soldPrice: 1400,
       bid: 1250,
       position: 6,
+      registeredTotal: 34,
       facing: "S",
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",

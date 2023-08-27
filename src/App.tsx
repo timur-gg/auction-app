@@ -11,6 +11,7 @@ import React from "react";
 import Signup from "./pages/Signup";
 import ClientProfile from "./pages/ClientProfile";
 import BuilderProfile from "./pages/BuilderProfile";
+import Project from "./pages/Project";
 
 const Main = () => {
   return (
@@ -20,6 +21,7 @@ const Main = () => {
       <Route path="/" element={<Inventory />}></Route>
       <Route path="/inventory" element={<Inventory />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>
+      <Route path="/project/:id" element={<Project />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/client_profile" element={<ClientProfile />}></Route>
       <Route path="/builder_profile" element={<BuilderProfile />}></Route>

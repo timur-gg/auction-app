@@ -133,7 +133,7 @@ type CardProps = {
   address: string;
   bedroom: number;
   size: number;
-  // status: string,
+  status: string;
   // project: string,
   builder: string;
   completionDate: string;
@@ -232,7 +232,7 @@ export function AuctionCard(props: CardProps) {
       </Card.Section>
 
       <Card.Section className={classes.section}>
-        <Group spacing={30}>
+        <Group spacing={20}>
           <div>
             <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
               ${props.price}k
@@ -246,11 +246,34 @@ export function AuctionCard(props: CardProps) {
             </Text>
           </div>
 
-          <Link to={`/auction/${props.id}`} style={{ marginLeft: "auto" }}>
-            <Button radius="xl" style={{ flex: 1 }}>
+          <Group ml="auto">
+            {props.status === "upcoming" && (
+              <Button
+                radius="md"
+                size="xs"
+                bg="#F57F17"
+                style={{ flex: 1, fontSize: "14px" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/project/${props.id}`);
+                }}
+              >
+                Select Units
+              </Button>
+            )}
+
+            <Button
+              size="xs"
+              radius="md"
+              style={{ flex: 1, fontSize: "14px" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/auction/${props.id}`);
+              }}
+            >
               Go to Auction
             </Button>
-          </Link>
+          </Group>
         </Group>
       </Card.Section>
     </Card>

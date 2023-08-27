@@ -1,31 +1,12 @@
 import React from "react";
-import AuctionProfileCard from "../components/AuctionUpcoming/AuctionProfileCard";
-import ShowCounter from "../components/AuctionLive/ShowCounter";
-
-import PricePlot from "../components/AuctionLive/PricePlot";
-
 import { useState, useRef } from "react";
 import data from "../data.js";
 
-import {
-  Card,
-  Stack,
-  Text,
-  Group,
-  Button,
-  Grid,
-  Space,
-  rem,
-  createStyles,
-  Center,
-  Container,
-  Paper,
-} from "@mantine/core";
+import { rem, createStyles, Container } from "@mantine/core";
 import { useParams } from "react-router";
 import { AuctionUpcoming } from "../components/AuctionUpcoming/AuctionUpcoming";
 import { AuctionLive } from "../components/AuctionLive/AuctionLive";
 import { AuctionPassed } from "../components/AuctionPassed/AuctionPassed";
-import { AuctionNotStarted } from "../components/AuctionUpcoming/AuctionNotStarted";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -55,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Auction = () => {
+const Project = () => {
   const { id } = useParams();
   const { classes } = useStyles();
 
@@ -66,7 +47,7 @@ const Auction = () => {
   return (
     <Container className="Auction" maw={1500}>
       {auction.status === "upcoming" && (
-        <AuctionNotStarted auction={auction} step={auctionStep} />
+        <AuctionUpcoming auction={auction} step={auctionStep} />
       )}
 
       {auction.status === "Live Auction" && (
@@ -80,4 +61,4 @@ const Auction = () => {
   );
 };
 
-export default Auction;
+export default Project;

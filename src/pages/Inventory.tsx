@@ -255,7 +255,7 @@ const Inventory = () => {
   const AuctionList = sortedAuctions.map((auction) => (
     <Grid.Col md={6} lg={4} key={auction.id}>
       <AuctionCard
-        // status={auction.status}
+        status={auction.status}
         id={auction.id}
         image={auction.images[0]}
         size={auction.size}

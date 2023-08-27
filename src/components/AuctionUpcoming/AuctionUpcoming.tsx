@@ -47,6 +47,7 @@ import text from "../../text.js";
 
 import { useDisclosure } from "@mantine/hooks";
 import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert";
+import { Carousel } from "@mantine/carousel";
 // import mapImg from;
 
 var mapImg = require("../../img/map.png");
@@ -197,6 +198,12 @@ export function AuctionUpcoming(props: any) {
     }
   }
 
+  const ImagesModal = auction.images.map((image: any) => (
+    <Carousel.Slide key={image.id}>
+      <Image src={image} alt="Image1" width="100%" height={440} />
+    </Carousel.Slide>
+  ));
+
   const [modalOpened, { open: openModal, close: closeModal }] =
     useDisclosure(false);
 
@@ -235,6 +242,15 @@ export function AuctionUpcoming(props: any) {
                 >
                   Deposit / Incentives
                 </Tabs.Tab>
+                <Tabs.Tab
+                  fw={500}
+                  px="xl"
+                  value="plans"
+                  fz="large"
+                  // icon={<IconSettings size="0.8rem" />}
+                >
+                  Floor Plans
+                </Tabs.Tab>
               </Tabs.List>
 
               <Tabs.Panel value="gallery" pt="0">
@@ -250,6 +266,20 @@ export function AuctionUpcoming(props: any) {
 
               <Tabs.Panel value="messages" pt="0">
                 <AuctionDetails auction={auction} />
+              </Tabs.Panel>
+
+              <Tabs.Panel value="plans" pt="lg" ta="left" p="2rem">
+                <Carousel
+                  maw={850}
+                  mah={350}
+                  mx="auto"
+                  slideSize="95%"
+                  slideGap="sm"
+                  align="center"
+                  withIndicators
+                >
+                  {ImagesModal}
+                </Carousel>
               </Tabs.Panel>
 
               <Tabs.Panel value="settings" pt="lg" ta="left" p="2rem">

@@ -112,9 +112,17 @@ const mockdata = [
 //   auction.size <= floor[1],
 // };
 
+const floorPlans = [
+  require("../../assets/floorPlan1.png"),
+  require("../../assets/floorPlan2.png"),
+  require("../../assets/floorPlan3.png"),
+  require("../../assets/floorPlan4.png"),
+];
+
 export function AuctionUpcoming(props: any) {
   const { classes } = useStyles();
   const [step, setStep] = useState(1);
+  const [plansGalleryOpen, setPlansGalleryOpen] = useState(false);
 
   const auction = props.auction;
 
@@ -198,9 +206,9 @@ export function AuctionUpcoming(props: any) {
     }
   }
 
-  const ImagesModal = auction.images.map((image: any) => (
-    <Carousel.Slide key={image.id}>
-      <Image src={image} alt="Image1" width="100%" height={440} />
+  const ImagesModal = floorPlans.map((image: any) => (
+    <Carousel.Slide key={1}>
+      <Image src={image} alt="Image1" width="100%" height={340} />
     </Carousel.Slide>
   ));
 
@@ -247,6 +255,7 @@ export function AuctionUpcoming(props: any) {
                   px="xl"
                   value="plans"
                   fz="large"
+                  onClick={() => setPlansGalleryOpen(true)}
                   // icon={<IconSettings size="0.8rem" />}
                 >
                   Floor Plans
@@ -269,17 +278,20 @@ export function AuctionUpcoming(props: any) {
               </Tabs.Panel>
 
               <Tabs.Panel value="plans" pt="lg" ta="left" p="2rem">
-                <Carousel
-                  maw={850}
-                  mah={350}
-                  mx="auto"
-                  slideSize="95%"
-                  slideGap="sm"
-                  align="center"
-                  withIndicators
-                >
-                  {ImagesModal}
-                </Carousel>
+                {plansGalleryOpen && (
+                  <Carousel
+                    maw={750}
+                    mah={350}
+                    mx="auto"
+                    slideSize="95%"
+                    slideGap="sm"
+                    align="center"
+                    withIndicators
+                    loop
+                  >
+                    {ImagesModal}
+                  </Carousel>
+                )}
               </Tabs.Panel>
 
               <Tabs.Panel value="settings" pt="lg" ta="left" p="2rem">

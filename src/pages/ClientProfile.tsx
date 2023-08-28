@@ -355,7 +355,7 @@ export default function ClientProfile() {
                 <IconStar stroke={1.5} />{" "}
               </ThemeIcon>
               <Title order={4} align="left">
-                Favorites
+                Saved Lots
               </Title>
             </Group>
             <FavoritesTable favorites={favorites} deleteFave={deleteFave} />

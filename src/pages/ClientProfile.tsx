@@ -20,6 +20,8 @@ import {
   ThemeIcon,
   Avatar,
   ActionIcon,
+  Tabs,
+  Space,
 } from "@mantine/core";
 
 import {
@@ -31,6 +33,7 @@ import {
 } from "@tabler/icons-react";
 import FavoritesTable from "../components/ClientProfile/FavoritesTable";
 import AuctionsTable from "../components/ClientProfile/AuctionsTable";
+import ProjectsTable from "../components/ClientProfile/ProjectsTable";
 
 const useStyles = createStyles((theme) => ({
   icon: {
@@ -54,7 +57,7 @@ const UserData = {
     "https://images.unsplash.com/photo-1612833609249-5e9c9b9b0b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXR5JTIwY2FyZCUyMGF1dGhvcml0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
 };
 
-const auctionIds = ["1", "2", "4", "3"];
+const auctionIds = ["1", "2", "3"];
 let auctions = auctionData.filter((a) => auctionIds.includes(a.id));
 
 let favorites = [
@@ -131,10 +134,19 @@ export default function ClientProfile() {
   const { classes } = useStyles();
 
   const [removedFaveRows, setRemovedFaveRows] = useState<Number[]>([]);
+  const [removedFaveProjectRows, setRemovedFaveProjectRows] = useState<
+    Number[]
+  >([]);
+
   const [removedAuctionRows, setRemovedAuctionRows] = useState<String[]>([]);
 
   const deleteFave = (lot: any) => {
     setRemovedFaveRows([...removedFaveRows, lot.id]);
+    console.info("deleteFave", lot);
+  };
+
+  const deleteFaveProject = (lot: any) => {
+    setRemovedFaveProjectRows([...removedFaveProjectRows, lot.id]);
     console.info("deleteFave", lot);
   };
 
@@ -145,6 +157,9 @@ export default function ClientProfile() {
 
   favorites = favorites.filter((fave) => !removedFaveRows.includes(fave.id));
   auctions = auctions.filter((a: any) => !removedAuctionRows.includes(a.id));
+  let projects = auctions.filter(
+    (a: any) => !removedFaveProjectRows.includes(a.id)
+  );
 
   console.log(favorites);
 
@@ -316,7 +331,7 @@ export default function ClientProfile() {
           </Paper>
         </Grid.Col>
 
-        <Grid.Col xs={12} md={12}>
+        <Grid.Col xs={12} md={12} pt="0px">
           <Paper
             withBorder
             shadow="md"
@@ -339,7 +354,7 @@ export default function ClientProfile() {
           </Paper>
         </Grid.Col>
 
-        <Grid.Col xs={12} md={12}>
+        <Grid.Col xs={12} md={12} pt="0px">
           <Paper
             withBorder
             shadow="md"
@@ -349,16 +364,43 @@ export default function ClientProfile() {
             radius="md"
             style={{ height: "100%" }}
           >
-            <Group noWrap align="left">
-              <ThemeIcon color="gold">
-                {" "}
-                <IconStar stroke={1.5} />{" "}
-              </ThemeIcon>
-              <Title order={4} align="left">
-                Saved Lots
-              </Title>
-            </Group>
-            <FavoritesTable favorites={favorites} deleteFave={deleteFave} />
+            <Tabs
+              defaultValue="projects"
+              color="yellow"
+              // variant="outline"
+              // pl="20px"
+            >
+              <Group noWrap align="left">
+                <Group>
+                  <ThemeIcon color="gold">
+                    <IconStar stroke={1.5} />
+                  </ThemeIcon>
+                  <Title order={4} align="left">
+                    Favourites
+                  </Title>
+                </Group>
+                <Tabs.List pt={0} ml="20px">
+                  <Tabs.Tab fz="md" px="xl" pt="10px" fw={400} value="projects">
+                    Projects
+                  </Tabs.Tab>
+                  <Tabs.Tab fz="md" px="xl" pt="10px" fw={400} value="lots">
+                    Saved Lots
+                  </Tabs.Tab>
+                </Tabs.List>
+              </Group>
+
+              <Space h={15} />
+
+              <Tabs.Panel value="projects">
+                <ProjectsTable
+                  auctions={projects}
+                  deleteFave={deleteFaveProject}
+                />
+              </Tabs.Panel>
+              <Tabs.Panel value="lots">
+                <FavoritesTable favorites={favorites} deleteFave={deleteFave} />
+              </Tabs.Panel>
+            </Tabs>
           </Paper>
         </Grid.Col>
       </Grid>

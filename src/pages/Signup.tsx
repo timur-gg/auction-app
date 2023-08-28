@@ -21,6 +21,7 @@ import SignupStep4Realtor from "../components/signup/SignupStep4Realtor";
 import SignupStep4Builder from "../components/signup/SignupStep4Builder";
 
 import SignupStep5 from "../components/signup/SignupStep5";
+import SignupStep6 from "../components/signup/SignupStep6";
 
 export default function Signup() {
   const [step, setStep] = useState(1);
@@ -76,8 +77,9 @@ export default function Signup() {
           {step === 5 && role === "realtor" && <SignupStep4Realtor />}
           {step === 5 && role === "builder" && <SignupStep4Builder />}
           {step === 5 && role === "buyer" && <SignupStep5 />}
-          {step === 6 && <Title order={3}>Subscription Info</Title>}
-          {step === 7 && (
+          {step === 6 && role === "buyer" && <SignupStep6 />}
+          {step === 7 && <Title order={3}>Subscription Info</Title>}
+          {step === 8 && (
             <>
               <Space h={10} />
               <Title order={4}>Thank you for signing up!</Title>
@@ -120,7 +122,7 @@ export default function Signup() {
                 Go Back
               </Button>
             )}
-            {step >= 5 && step < 7 ? (
+            {step >= 5 && step < 8 ? (
               <Button
                 onClick={() => setStep((prev) => prev + 1)}
                 color="customPurple.2"
@@ -135,7 +137,7 @@ export default function Signup() {
               >
                 {step === 5 ? "Agree & Proceed" : "Confirm"}
               </Button>
-            ) : step === 7 ? (
+            ) : step === 8 ? (
               <Center mx="auto">
                 <Link to={"/inventory"}>
                   <Button

@@ -27,6 +27,10 @@ export default function Signup() {
   const [role, setRole] = useState("buyer");
   const theme = useMantineTheme();
 
+  if (step === 3 && (role === "builder" || role === "realtor")) {
+    setStep(4);
+  }
+
   if (step === 4 && (role === "builder" || role === "realtor")) {
     setStep(5);
   }

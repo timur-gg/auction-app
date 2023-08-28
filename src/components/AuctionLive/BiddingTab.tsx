@@ -113,7 +113,7 @@ export function BiddingTab(props: any) {
 
   const half = props.half || false;
 
-  const [tempValue, setTempValue] = useState<number | 0>(lot.bid * 1000 * 1.03);
+  const [tempValue, setTempValue] = useState<number | 0>(lot.bid * 1000);
   const [value, setValue] = useState<number | "">(0);
 
   const [status, setStatus] = useState("live");
@@ -143,6 +143,11 @@ export function BiddingTab(props: any) {
     closeConfirmModal();
   };
 
+  console.log(tempValue, lot.bid * 1000, tempValue === lot.bid * 1000);
+
+  let valueChanged = tempValue !== lot.bid * 1000;
+  let increment = lot.bid * 1000 * 0.03;
+
   return (
     <>
       <Modal
@@ -161,6 +166,13 @@ export function BiddingTab(props: any) {
         </Group>
         <Group>
           <Text>Bid amount:</Text> <Text fw={700}>{tempValue || lot.bid}</Text>
+          <Group spacing={2}>
+            {"("}
+            <Text fw={700} color="green" mx={0}>
+              +{increment}
+            </Text>
+            {")"}
+          </Group>
         </Group>
 
         <Space h={30} />
@@ -387,21 +399,35 @@ export function BiddingTab(props: any) {
                   You bid will be live for <b>15 minutes</b>
                 </Text>
 
-                <Stack align="center">
+                <Stack align="center" spacing={5}>
+                  {valueChanged ? (
+                    <>
+                      <Text color="green" fw={700} fz={17}>
+                        + {lot.bid * 1000 * 0.03}
+                      </Text>
+                    </>
+                  ) : (
+                    <Space h={26.64} />
+                  )}
+
                   <BidSelector
                     value={tempValue}
                     setValue={setTempValue}
                     className={classes.bidSelector}
                     lot={lot}
+                    step={lot.bid * 1000 * 0.03}
+                    incrementActive={!valueChanged}
+                    decrementActive={valueChanged}
                   />
-                  <Group spacing={30} ml={130}>
-                    <Button radius="xl" onClick={openConfirmModal}>
+                  <Space h={10} />
+                  <Group spacing={30} ml={135}>
+                    <Button radius="lg" onClick={openConfirmModal}>
                       Place Your Bid
                     </Button>
                     <Button
                       size="xs"
                       color="red"
-                      radius="xl"
+                      radius="lg"
                       onClick={openQuitModal}
                     >
                       Quit Auction

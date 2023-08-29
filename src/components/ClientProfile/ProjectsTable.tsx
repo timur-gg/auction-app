@@ -56,6 +56,7 @@ export default function ProjectsTable(props: any) {
           accessor: "actions",
           title: <></>,
           textAlignment: "right",
+          width: 20,
           render: (lot) => (
             <Group spacing={4} position="right" noWrap>
               <ActionIcon

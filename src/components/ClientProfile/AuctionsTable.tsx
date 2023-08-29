@@ -7,7 +7,12 @@ import {
   Group,
   ActionIcon,
 } from "@mantine/core";
-import { IconDoorExit, IconRuler, IconTrash } from "@tabler/icons-react";
+import {
+  IconSquareRoundedX,
+  IconCircleX,
+  IconEdit,
+  IconHomeCancel,
+} from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import { Link } from "react-router-dom";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -32,11 +37,9 @@ export default function AuctionsTable(props: any) {
       <Modal
         opened={quitModalOpened}
         onClose={closeQuitModal}
-        title="Bid Confirmation"
+        title=""
         centered
       >
-        <Space h={15} />
-
         {removedAuction?.status === "Live Auction" ? (
           <>
             <Text ta="center" size="md" fw={400}>
@@ -77,7 +80,7 @@ export default function AuctionsTable(props: any) {
                 closeQuitModal();
               }}
             >
-              <IconDoorExit size="1.05rem" stroke={1.5} />
+              <IconCircleX size="1.05rem" stroke={1.5} />
               <Space w={10} />
               Quit Auction
             </Button>
@@ -90,7 +93,7 @@ export default function AuctionsTable(props: any) {
                 closeQuitModal();
               }}
             >
-              <IconDoorExit size="1.05rem" stroke={1.5} />
+              <IconHomeCancel size="1.6rem" stroke={1.5} />
               <Space w={10} />
               Remove Registration
             </Button>
@@ -100,6 +103,7 @@ export default function AuctionsTable(props: any) {
             Cancel
           </Button>
         </Group>
+        <Space h={10} />
       </Modal>
 
       <DataTable
@@ -135,11 +139,21 @@ export default function AuctionsTable(props: any) {
           },
           {
             accessor: "actions",
+            width: 50,
             title: <></>,
             textAlignment: "right",
             render: (lot) =>
-              lot.status !== "passed" && (
-                <Group spacing={4} position="right" noWrap>
+              lot.status === "upcoming" && (
+                <Group spacing={2} position="right" noWrap>
+                  <ActionIcon
+                    color="gray"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/choose_units/${lot.id}`);
+                    }}
+                  >
+                    <IconEdit size={22} />
+                  </ActionIcon>
                   <ActionIcon
                     color="gray"
                     onClick={(e) => {
@@ -148,7 +162,8 @@ export default function AuctionsTable(props: any) {
                       setRemovedAuction(lot);
                     }}
                   >
-                    <IconDoorExit size={16} />
+                    {/* <IconSquareRoundedX size={22} /> */}
+                    <IconHomeCancel size={22} />
                   </ActionIcon>
                 </Group>
               ),

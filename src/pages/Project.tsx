@@ -36,7 +36,8 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Project = () => {
+const Project = (props: any) => {
+  const registered = props.registered || false;
   const { id } = useParams();
   const { classes } = useStyles();
 
@@ -47,7 +48,11 @@ const Project = () => {
   return (
     <Container className="Auction" maw={1500}>
       {auction.status === "upcoming" && (
-        <AuctionUpcoming auction={auction} step={auctionStep} />
+        <AuctionUpcoming
+          auction={auction}
+          step={auctionStep}
+          registered={registered}
+        />
       )}
 
       {auction.status === "Live Auction" && (

@@ -253,7 +253,7 @@ const Inventory = () => {
   );
 
   const AuctionList = sortedAuctions.map((auction) => (
-    <Grid.Col md={6} lg={4} key={auction.id}>
+    <Grid.Col sm={6} lg={4} key={auction.id}>
       <AuctionCard
         status={auction.status}
         id={auction.id}
@@ -420,32 +420,6 @@ const Inventory = () => {
           <Accordion.Control>More Filters</Accordion.Control>
           <Accordion.Panel>
             <Grid gutter={50}>
-              {/* <Grid.Col xs={6} sm={4} md={3} lg={2.5}>
-                <Space h="md" />
-                <Text>Size (sqft)</Text>
-                <RangeSlider
-                  size="lg"
-                  radius="md"
-                  scale={(v) => (v + 20) * 12.5}
-                  step={4}
-                  name="size"
-                  marks={[
-                    { value: 0, label: "250" },
-                    { value: 20, label: "500" },
-                    { value: 40, label: "750" },
-                    { value: 60, label: "1000" },
-                    { value: 80, label: "1250" },
-                    { value: 100, label: "1500+" },
-                  ]}
-                  value={size}
-                  onChange={(value) => {
-                    setSize(value);
-                    addFilter("size");
-                  }}
-                />
-                <Space h="lg" />
-              </Grid.Col> */}
-
               <Grid.Col xs={3} lg={2}>
                 <Select
                   searchable

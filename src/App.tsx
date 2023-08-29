@@ -22,6 +22,7 @@ const Main = () => {
       <Route path="/inventory" element={<Inventory />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>
       <Route path="/project/:id" element={<Project />}></Route>
+      <Route path="/choose_units/:id" element={<Project registered />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/client_profile" element={<ClientProfile />}></Route>
       <Route path="/builder_profile" element={<BuilderProfile />}></Route>

@@ -48,6 +48,8 @@ export default function FavoritesTable(props: any) {
         {
           accessor: "actions",
           title: <></>,
+          width: 20,
+
           textAlignment: "right",
           render: (lot) => (
             <Group spacing={4} position="right" noWrap>

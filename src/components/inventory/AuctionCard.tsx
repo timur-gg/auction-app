@@ -10,6 +10,7 @@ import {
   Button,
   rem,
   Tooltip,
+  Space,
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import {
@@ -26,6 +27,7 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { notifications } from "@mantine/notifications";
 
 var mapImg = require("../../img/map.png");
 
@@ -63,10 +65,28 @@ const useStyles = createStyles((theme) => ({
 
   favButton: {
     position: "absolute",
-    top: "2%",
-    left: "2%",
+    top: "1.5%",
+    left: "1.5%",
     transform: "translate(-2%, -2%)",
     cursor: "pointer",
+    visibility: "hidden",
+
+    "&:hover": {
+      visibility: "visible",
+      backgroundColor: "transparent",
+      border: "2px solid #FFCA28",
+    },
+  },
+
+  favIcon: {
+    visibility: "visible",
+    "&:hover": {
+      fill: "#FDD835",
+    },
+  },
+
+  favTag: {
+    visibility: "visible",
   },
 
   icon: {
@@ -174,6 +194,16 @@ export function AuctionCard(props: CardProps) {
     cursor: "pointer",
   };
 
+  const addToFavorites = (e: any) => {
+    e.stopPropagation();
+    notifications.show({
+      autoClose: 1500,
+      title: "Saved!",
+      color: "yellow",
+      message: "Project is saved in Favorites",
+    });
+  };
+
   return (
     <Card
       ref={ref}
@@ -187,12 +217,23 @@ export function AuctionCard(props: CardProps) {
     >
       <Card.Section>
         <Image src={props.image} alt="Tesla Model S" height={250} />
-        <IconStar
+
+        <Button
           className={classes.favButton}
-          color="Gold"
-          size={30}
-          stroke={1.5}
-        />
+          size="md"
+          pl={10}
+          onClick={addToFavorites}
+        >
+          <IconStar
+            className={classes.favIcon}
+            color="Gold"
+            size={35}
+            stroke={1.5}
+            style={{ visibility: "visible" }}
+          />
+          <Space w={10} />
+          Add to Favorites
+        </Button>
       </Card.Section>
 
       <Group position="apart" mt="md">

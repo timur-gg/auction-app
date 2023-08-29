@@ -121,10 +121,16 @@ const floorPlans = [
 
 export function AuctionUpcoming(props: any) {
   const { classes } = useStyles();
-  const [step, setStep] = useState(1);
+
   const [plansGalleryOpen, setPlansGalleryOpen] = useState(false);
 
   const auction = props.auction;
+  const registered = props.registered || false;
+  const pickedUnits = props.pickedUnits || ["2012", "1510"];
+
+  console.log(props);
+
+  const [step, setStep] = useState(registered ? 2 : 1);
 
   const auctionFeatures = mockdata.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>
@@ -149,9 +155,28 @@ export function AuctionUpcoming(props: any) {
     </Grid.Col>
   ));
 
+  console.log(registered);
+
+  const pickedUnitsSelection: { [key: number]: any } = {};
+
+  if (registered) {
+    pickedUnits.forEach((num: String) => {
+      lots.forEach((lot, i) => {
+        if (lot.unit === num) {
+          console.log(num, i);
+          pickedUnitsSelection[i] = true;
+        }
+      });
+    });
+  }
+
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
 
-  console.log(rowSelection);
+  if (registered && Object.keys(rowSelection).length === 0) {
+    setRowSelection(pickedUnitsSelection);
+  }
+
+  console.log(pickedUnitsSelection, rowSelection);
 
   const selectedUnits = Object.keys(rowSelection).map((key: string) => (
     <Text size="sm" key={key}>
@@ -194,7 +219,7 @@ export function AuctionUpcoming(props: any) {
         autoClose: 1500,
         title: "Saved!",
         color: "yellow",
-        message: "Lots saved to Favorites",
+        message: "Lots are saved to Favorites",
       });
     } else {
       notifications.show({
@@ -491,7 +516,8 @@ export function AuctionUpcoming(props: any) {
                   >
                     <IconWriting size="1.2rem" />
                     <Space w={7} />
-                    Sign Up for Auction
+
+                    {registered ? "Confirm Change" : "Sign Up for Auction"}
                   </Button>
                   {selectedUnits.length > 0 && (
                     <Button

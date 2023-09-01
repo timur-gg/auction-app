@@ -38,6 +38,7 @@ export default function ProjectsTable(props: any) {
 
         {
           accessor: "status",
+          title: "Auction Date",
           render: (lot) =>
             lot.status === "Live Auction" ? (
               <Badge color="green" size="md" variant="filled">

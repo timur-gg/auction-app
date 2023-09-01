@@ -29,6 +29,7 @@ import { LotPreviewTable } from "./LotPreviewTable";
 import { useState } from "react";
 import { LotSelectionTable } from "./LotSelectionTable";
 import { notifications } from "@mantine/notifications";
+import { useNavigate } from "react-router-dom";
 
 import {
   IconWriting,
@@ -39,7 +40,7 @@ import {
   IconStar,
   IconBed,
   IconRuler,
-  IconSettings,
+  IconHomeCancel,
 } from "@tabler/icons-react";
 import { MRT_RowSelectionState } from "mantine-react-table";
 import { lots } from "../../data.js";
@@ -128,6 +129,8 @@ export function AuctionUpcoming(props: any) {
   const registered = props.registered || false;
   const pickedUnits = props.pickedUnits || ["2012", "1510"];
 
+  const navigate = useNavigate();
+
   console.log(props);
 
   const [step, setStep] = useState(registered ? 2 : 1);
@@ -206,7 +209,7 @@ export function AuctionUpcoming(props: any) {
       setStep(3);
     } else {
       notifications.show({
-        autoClose: 1500,
+        autoClose: 3000,
         title: "Lots not selected",
         color: "red",
         message: "Please select 1 to 2 lots from the table",
@@ -216,14 +219,14 @@ export function AuctionUpcoming(props: any) {
   function saveLotsAction() {
     if (Object.keys(rowSelection).length) {
       notifications.show({
-        autoClose: 1500,
+        autoClose: 3000,
         title: "Saved!",
         color: "yellow",
         message: "Lots are saved to Favorites",
       });
     } else {
       notifications.show({
-        autoClose: 1500,
+        autoClose: 3000,
         title: "Lots not selected",
         color: "red",
         message: "Please select 1 to 2 lots from the table",
@@ -238,6 +241,9 @@ export function AuctionUpcoming(props: any) {
   ));
 
   const [modalOpened, { open: openModal, close: closeModal }] =
+    useDisclosure(false);
+
+  const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] =
     useDisclosure(false);
 
   return (
@@ -506,6 +512,53 @@ export function AuctionUpcoming(props: any) {
                   </Table>
                 )}
 
+                <Modal
+                  opened={quitModalOpened}
+                  onClose={closeQuitModal}
+                  title=""
+                  centered
+                >
+                  <Text ta="center" size="md" fw={400}>
+                    Are you sure that you want to remove your registration for
+                    the auction?
+                  </Text>
+
+                  <Space h={25} />
+                  <Group>
+                    <Text>Project:</Text> <Text fw={700}>King West Towers</Text>
+                  </Group>
+                  <Group>
+                    <Text>Lot #:</Text> <Text fw={700}>20212</Text>
+                  </Group>
+                  <Space h={30} />
+                  <Group spacing={30} ml={80}>
+                    <Button
+                      radius="sm"
+                      color="red"
+                      onClick={() => {
+                        // closeQuitModal();
+                        notifications.show({
+                          autoClose: 4000,
+                          title: "Auction Registration Removed",
+                          color: "red",
+                          message:
+                            "You registration for this auction is removed",
+                        });
+                        navigate(`/client_profile`);
+                      }}
+                    >
+                      <IconHomeCancel size="1.6rem" stroke={1.5} />
+                      <Space w={10} />
+                      Remove Registration
+                    </Button>
+
+                    <Button size="xs" radius="sm" onClick={closeQuitModal}>
+                      Cancel
+                    </Button>
+                  </Group>
+                  <Space h={10} />
+                </Modal>
+
                 <Space h={10} />
                 <Group spacing={10}>
                   <Button
@@ -519,7 +572,7 @@ export function AuctionUpcoming(props: any) {
 
                     {registered ? "Confirm Change" : "Sign Up for Auction"}
                   </Button>
-                  {selectedUnits.length > 0 && (
+                  {!registered && selectedUnits.length > 0 && (
                     <Button
                       // variant="dark"
                       color="yellow"
@@ -532,12 +585,25 @@ export function AuctionUpcoming(props: any) {
                       Save
                     </Button>
                   )}
+                  {registered && (
+                    <Button
+                      // variant="dark"
+                      color="red"
+                      mr={"auto"}
+                      // onClick={openModal}
+                      onClick={openQuitModal}
+                    >
+                      <IconHomeCancel size="1.2rem" />
+                      <Space w={7} />
+                      Remove Registration
+                    </Button>
+                  )}
                 </Group>
 
                 <Modal
                   opened={modalOpened}
                   onClose={closeModal}
-                  title="AuctionRegister"
+                  title="Auction Registration"
                 >
                   <AuctionConfirmation />
                 </Modal>

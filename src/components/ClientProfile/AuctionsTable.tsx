@@ -117,14 +117,15 @@ export default function AuctionsTable(props: any) {
           {
             accessor: "unit",
             title: "Units",
-            render: (a) =>
+            render: (a: any) =>
               a.lotsAuctioned
                 ?.map((l: number) => lots.find((i) => i.id === l)?.unit)
                 .join(", ") || [],
           },
           {
             accessor: "status",
-            render: (lot) =>
+            title: "Auction Date",
+            render: (lot: any) =>
               lot.status === "Live Auction" ? (
                 <Badge color="green" size="md" variant="filled">
                   {lot.status}
@@ -142,7 +143,7 @@ export default function AuctionsTable(props: any) {
             width: 50,
             title: <></>,
             textAlignment: "right",
-            render: (lot) =>
+            render: (lot: any) =>
               lot.status === "upcoming" && (
                 <Group spacing={2} position="right" noWrap>
                   <ActionIcon

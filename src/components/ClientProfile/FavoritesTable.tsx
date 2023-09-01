@@ -32,6 +32,7 @@ export default function FavoritesTable(props: any) {
         { accessor: "bid", title: "$" },
         {
           accessor: "status",
+          title: "Auction Date",
           render: (lot) =>
             lot.status === "Live" ? (
               <Badge color="green" size="md" variant="filled">

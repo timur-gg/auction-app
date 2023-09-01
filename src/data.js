@@ -27,6 +27,8 @@ module.exports = {
       bathroom: "1-3",
       cooling: "Central Air",
       heating: "Forced Air, Gas",
+      lat: 43.651524,
+      lng: -79.38124517,
     },
     {
       id: "2",
@@ -61,6 +63,8 @@ module.exports = {
       amenities: ["Swimming pool", "Sauna", "BBQ"],
       cooling: "Central Air",
       heating: "Forced Air, Gas",
+      lat: 43.6422979165,
+      lng: -79.40176974,
     },
 
     {
@@ -94,6 +98,8 @@ module.exports = {
       amenities: ["Swimming pool", "Sauna", "BBQ"],
       cooling: "Central Air",
       heating: "Forced Air, Gas",
+      lat: 43.6465558,
+      lng: -79.3957,
     },
     {
       id: "4",
@@ -125,6 +131,8 @@ module.exports = {
       amenities: ["Swimming pool", "Sauna", "BBQ"],
       cooling: "Central Air",
       heating: "Forced Air, Gas",
+      lat: 43.6480930309735,
+      lng: -79.399667,
     },
     {
       id: "5",
@@ -161,6 +169,8 @@ module.exports = {
       lots: [4, 5],
       lotsAuctioned: [4],
       amenities: ["Swimming pool", "Sauna", "BBQ"],
+      lat: 51.545,
+      lng: -0.124,
     },
     {
       id: "7",
@@ -189,6 +199,8 @@ module.exports = {
       duration: 24,
       bathroom: "1-4",
       amenities: ["Swimming pool", "Sauna", "BBQ"],
+      lat: 51.545,
+      lng: -0.134,
     },
   ],
   lots: [

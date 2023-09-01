@@ -10,8 +10,9 @@ import {
   createStyles,
   rem,
   Center,
-  Table,
   Badge,
+  Button,
+  Modal,
 } from "@mantine/core";
 import ShowCounter from "../AuctionLive/ShowCounter";
 import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert";
@@ -19,9 +20,14 @@ import {
   IconCalendarEvent,
   IconMoneybag,
   IconClock,
+  IconHomeCancel,
 } from "@tabler/icons-react";
 import { lots as lotsData } from "../../data.js";
 import { BiddingTab } from "../AuctionLive/BiddingTab";
+import { notifications } from "@mantine/notifications";
+import { useDisclosure } from "@mantine/hooks";
+import { close } from "inspector";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -68,12 +74,11 @@ export function AuctionNotStarted(props: any) {
   const { classes } = useStyles();
 
   const auction = props.auction;
-
-  console.log(auction);
-
   const lots = auction.lots.map((lotId: number) =>
     lotsData.find((id) => id.id === lotId)
   );
+
+  const navigate = useNavigate();
 
   const auctionFeatures = auctionMockdata.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>
@@ -113,59 +118,138 @@ export function AuctionNotStarted(props: any) {
     </tr>
   ));
 
-  return (
-    <Grid justify="center" className="Auction" maw={1500}>
-      <Grid.Col xs={10} md={2}>
-        <AuctionProfileCardVert auction={auction} />
-      </Grid.Col>
+  const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] =
+    useDisclosure(false);
 
-      <Grid.Col xs={10} md={9}>
-        <Card
-          withBorder
-          radius="md"
-          className={classes.card}
-          // maw={900}
-          p={20}
-          mx="auto"
-        >
-          <Grid>
-            <Grid.Col xs={12} md={6}>
-              <Stack spacing={6} mb={-5} align="flex-start" p={0}>
-                <Text fz="lg" c="dimmed" className={classes.label} align="left">
-                  Auction details
-                </Text>
-                <Grid w={"100%"}>{auctionFeatures}</Grid>
-              </Stack>
-            </Grid.Col>
-            <Grid.Col xs={12} md={6}>
-              {/* <Stack spacing={6} mb={-5} align="flex-start" p={0}>
+  return (
+    <>
+      <Modal
+        opened={quitModalOpened}
+        onClose={closeQuitModal}
+        title=""
+        centered
+      >
+        <Text ta="center" size="md" fw={400}>
+          Are you sure that you want to remove your registration for the
+          auction?
+        </Text>
+
+        <Space h={25} />
+        <Group>
+          <Text>Project:</Text> <Text fw={700}>King West Towers</Text>
+        </Group>
+        <Group>
+          <Text>Lot #:</Text> <Text fw={700}>20212</Text>
+        </Group>
+        <Space h={30} />
+        <Group spacing={30} ml={80}>
+          <Button
+            radius="sm"
+            color="red"
+            onClick={() => {
+              notifications.show({
+                autoClose: 4000,
+                title: "Auction Registration Removed",
+                color: "red",
+                message: "You registration for this auction is removed",
+              });
+              closeQuitModal();
+              // navigate(`/client_profile`);
+            }}
+          >
+            <IconHomeCancel size="1.6rem" stroke={1.5} />
+            <Space w={10} />
+            Remove Registration
+          </Button>
+
+          <Button size="xs" radius="sm" onClick={closeQuitModal}>
+            Cancel
+          </Button>
+        </Group>
+        <Space h={10} />
+      </Modal>
+
+      <Grid justify="center" className="Auction" maw={1500}>
+        <Grid.Col xs={10} md={2}>
+          <AuctionProfileCardVert auction={auction} />
+        </Grid.Col>
+
+        <Grid.Col xs={10} md={9}>
+          <Card
+            withBorder
+            radius="md"
+            className={classes.card}
+            // maw={900}
+            p={20}
+            mx="auto"
+          >
+            <Grid>
+              <Grid.Col xs={12} md={6}>
+                <Stack spacing={6} mb={-5} align="flex-start" p={0}>
+                  <Text
+                    fz="lg"
+                    c="dimmed"
+                    className={classes.label}
+                    align="left"
+                  >
+                    Auction details
+                  </Text>
+                  <Grid w={"100%"}>{auctionFeatures}</Grid>
+                </Stack>
+              </Grid.Col>
+              <Grid.Col xs={12} md={6}>
+                {/* <Stack spacing={6} mb={-5} align="flex-start" p={0}>
                   <Text fz="sm" c="dimmed" className={classes.label} align="left">
                     Duration
                   </Text>
   
                   <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
                 </Stack> */}
-            </Grid.Col>
-          </Grid>
-          <Space h={50} />
+              </Grid.Col>
+            </Grid>
+            <Space h={50} />
 
-          <Text fw={400} fz={"lg"}>
-            Auction has not started yet!
-          </Text>
-          <Space h={30} />
+            <Text fw={400} fz={"lg"}>
+              Auction has not started yet!
+            </Text>
+            <Space h={30} />
 
-          <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
-          <Space h={30} />
-        </Card>
+            <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
+            <Space h={40} />
+            <Center>
+              <Group mx="auto">
+                <Button
+                  // variant="dark"
+                  color="yellow"
+                  onClick={() => navigate(`/choose_units/${auction.id}`)}
+                >
+                  <IconHomeCancel size="1.2rem" />
+                  <Space w={7} />
+                  Select Units
+                </Button>
+                <Button
+                  // variant="dark"
+                  color="red"
+                  onClick={openQuitModal}
+                >
+                  <IconHomeCancel size="1.2rem" />
+                  <Space w={7} />
+                  Remove Registration
+                </Button>
+              </Group>
+            </Center>
+            <Space h={30} />
+          </Card>
 
-        {/* <Grid justify="center">
+          {/* <Grid justify="center">
             {lots.map((lot: any) => (
               <Grid.Col {...(lots.length > 1 ? { md: 6 } : { md: 10 })}>
                 <BiddingTab lot={lot} half={lots.length > 1} />
               </Grid.Col>
             ))}
           </Grid> */}
-      </Grid.Col>
-    </Grid>
+        </Grid.Col>
+      </Grid>
+    </>
   );
 }

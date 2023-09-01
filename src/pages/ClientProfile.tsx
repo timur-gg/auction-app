@@ -15,11 +15,9 @@ import {
   Container,
   Title,
   createStyles,
-  Table,
   Paper,
   ThemeIcon,
   Avatar,
-  ActionIcon,
   Tabs,
   Space,
 } from "@mantine/core";

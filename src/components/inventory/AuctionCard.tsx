@@ -19,7 +19,6 @@ import {
   IconCalendarEvent,
   IconStar,
   IconMoneybag,
-  IconStarFilled,
   IconAddressBook,
   IconBath,
   IconCar,
@@ -35,6 +34,7 @@ const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    border: "0.0625rem solid #dee2e6",
   },
 
   imageSection: {
@@ -73,8 +73,8 @@ const useStyles = createStyles((theme) => ({
 
     "&:hover": {
       visibility: "visible",
-      backgroundColor: "transparent",
-      border: "2px solid #FFCA28",
+      backgroundColor: "rgba(0, 0, 0, 0.4)",
+      border: "1px solid #FFCA28",
     },
   },
 
@@ -101,6 +101,14 @@ const useStyles = createStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  selectUnitsButton: {
+    flex: 1,
+    fontSize: "14px",
+    backgroundColor: "#F9A825",
+    "&:hover": { backgroundColor: "#FF8F00" },
+  },
+
+  selected: { border: "3px solid #1E88E5" },
 }));
 
 const mockdata = [
@@ -160,6 +168,7 @@ type CardProps = {
   auctionDate: string;
   deposit: string;
   bedroomFilter: number;
+  selected: boolean;
 };
 
 export function AuctionCard(props: CardProps) {
@@ -190,7 +199,6 @@ export function AuctionCard(props: CardProps) {
 
   const hoverStyle = {
     background: "#F5F5F5",
-    border: "1.2px solid #E0E0E0",
     cursor: "pointer",
   };
 
@@ -207,13 +215,12 @@ export function AuctionCard(props: CardProps) {
   return (
     <Card
       ref={ref}
-      withBorder
       radius="md"
-      className={classes.card}
       onClick={() => navigate(`/auction/${props.id}`)}
       style={{
         ...(hovered ? hoverStyle : null),
       }}
+      className={classes.card + " " + (props.selected ? classes.selected : "")}
     >
       <Card.Section>
         <Image src={props.image} alt="Tesla Model S" height={250} />
@@ -222,6 +229,7 @@ export function AuctionCard(props: CardProps) {
           className={classes.favButton}
           size="md"
           pl={10}
+          fw={400}
           onClick={addToFavorites}
         >
           <IconStar
@@ -292,8 +300,7 @@ export function AuctionCard(props: CardProps) {
               <Button
                 radius="md"
                 size="xs"
-                bg="#F57F17"
-                style={{ flex: 1, fontSize: "14px" }}
+                className={classes.selectUnitsButton}
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/project/${props.id}`);

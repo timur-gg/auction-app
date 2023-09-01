@@ -18,6 +18,11 @@ import {
   Stack,
   Menu,
   Checkbox,
+  Box,
+  ScrollArea,
+  Group,
+  Switch,
+  useMantineTheme,
 } from "@mantine/core";
 
 import { DatePickerInput } from "@mantine/dates";
@@ -29,7 +34,12 @@ import {
   IconCoin,
   IconCalendar,
   IconRuler,
+  IconFlagSearch,
+  IconLayoutGrid,
+  IconMap,
 } from "@tabler/icons-react";
+
+import GoogleMapReact from "google-map-react";
 
 import AuctionCard from "../components/inventory/AuctionCard";
 import PriceFilter from "../components/inventory/PriceFilter";
@@ -91,6 +101,31 @@ const useStyles = createStyles((theme) => ({
     border: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[3]
     }`,
+  },
+
+  pin2: {
+    // position: "absolute",
+    // top: '40%';
+    // left: '50%';
+    // margin-left: 115px;
+
+    borderRadius: "50%",
+    border: "8px solid #fff",
+    width: "8px",
+    height: "8px",
+    backgroundColor: "red",
+  },
+
+  "pin2::after": {
+    position: "absolute",
+    content: "",
+    width: "0px",
+    height: "0px",
+    bottom: "-30px",
+    left: "-6px",
+    border: "10px solid transparent",
+    borderTop: "17px solid #fff",
+    backgroundColor: "red",
   },
 }));
 
@@ -173,6 +208,7 @@ const Inventory = () => {
   const [sortBy, setSort] = useState<string>("price");
   const [builder, setBuilder] = useState<string>("");
   const [status, setStatus] = useState<string>("All");
+  const [selectedAuction, setSelectedAuction] = useState<number>(-1);
 
   const [filters, setFilter] = useState<string[]>(["All"]);
 
@@ -181,6 +217,8 @@ const Inventory = () => {
       setFilter([...filters.filter((f) => f !== "All"), filter]);
     }
   };
+
+  const [mapViewChecked, setMapViewChecked] = useState(false);
 
   function filterPrice(
     prices: { [key: number]: number },
@@ -252,7 +290,15 @@ const Inventory = () => {
     b[sortBy] > a[sortBy] ? -1 : 1
   );
 
-  const AuctionList = sortedAuctions.map((auction) => (
+  const sortedAuctionsSelected = [
+    ...sortedAuctions.filter((a) => a.id === selectedAuction.toString()),
+    ...sortedAuctions.filter((a) => a.id !== selectedAuction.toString()),
+  ];
+
+  console.log(sortedAuctionsSelected);
+
+  console.log(selectedAuction.toString() == "1");
+  const AuctionList = sortedAuctionsSelected.map((auction) => (
     <Grid.Col sm={6} lg={4} key={auction.id}>
       <AuctionCard
         status={auction.status}
@@ -272,6 +318,7 @@ const Inventory = () => {
         parking={auction.parking}
         locker={auction.locker}
         bedroomFilter={bedroom}
+        selected={selectedAuction.toString() === auction.id}
       />
     </Grid.Col>
   ));
@@ -280,6 +327,57 @@ const Inventory = () => {
     console.log(sortBy);
     setSort(sortBy);
   }
+
+  const points = [
+    { id: 1, title: "Round Pond", lat: 51.506, lng: -0.184 },
+    { id: 2, title: "The Long Water", lat: 51.508, lng: -0.175 },
+    { id: 3, title: "The Serpentine", lat: 51.505, lng: -0.164 },
+  ];
+
+  const distanceToMouse = (pt: any, mousePos: any): number => {
+    if (pt && mousePos) {
+      // return distance between the marker and mouse pointer
+      return Math.sqrt(
+        (pt.x - mousePos.x) * (pt.x - mousePos.x) +
+          (pt.y - mousePos.y) * (pt.y - mousePos.y)
+      );
+    } else return 0;
+  };
+
+  const handleClick = (e: any, id: string) => {
+    console.log(`You clicked on ${id}`);
+
+    setSelectedAuction(parseInt(id));
+  };
+
+  const Marker = ({ text, id, selected }: any) => {
+    return (
+      <div
+        style={{
+          width: "35px",
+          height: "50px",
+        }}
+        // className={"pin2"}
+        onClick={(e) => handleClick(e, id)}
+      >
+        {/* <span className="circleText" title={id}>
+          {text}
+        </span> */}
+        <img
+          style={{
+            width: "100%",
+            height: "100%",
+            filter: selected ? "contrast(150%)" : "",
+          }}
+          src={require("../assets/pin.png")}
+          alt="logo"
+        />
+      </div>
+    );
+  };
+
+  console.log(selectedAuction);
+  const theme = useMantineTheme();
 
   return (
     <div className="Inventory">
@@ -417,7 +515,38 @@ const Inventory = () => {
       <Space h="md" />
       <Accordion chevronPosition="left" defaultValue="">
         <Accordion.Item value="customization">
-          <Accordion.Control>More Filters</Accordion.Control>
+          <Group position="apart" pb="10px">
+            <Accordion.Control style={{ width: "50%" }}>
+              More Filters
+            </Accordion.Control>
+            <div>
+              <Switch
+                mr={20}
+                radius="md"
+                size="xl"
+                color="white"
+                onLabel={
+                  <IconLayoutGrid
+                    size="1rem"
+                    stroke={2.5}
+                    color={theme.colors.gray[0]}
+                  />
+                }
+                offLabel={
+                  <IconMap
+                    size="1rem"
+                    stroke={2.5}
+                    color={theme.colors.blue[7]}
+                  />
+                }
+                checked={mapViewChecked}
+                onChange={(event) => {
+                  setSelectedAuction(-1);
+                  setMapViewChecked(event.currentTarget.checked);
+                }}
+              />
+            </div>
+          </Group>
           <Accordion.Panel>
             <Grid gutter={50}>
               <Grid.Col xs={3} lg={2}>
@@ -499,9 +628,78 @@ const Inventory = () => {
       </Accordion>
       <Space h="md" />
 
-      <Container size="xl">
-        <Grid>{AuctionList}</Grid>
-      </Container>
+      <Grid>
+        <Grid.Col {...(mapViewChecked ? { xs: 9 } : { xs: 0 })}>
+          <Box w="100%" h="90vh" hidden={!mapViewChecked}>
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                // remove the key if you want to fork
+                key: "AIzaSyB-iyAn3z8aIS8iMxHZaUwg8IWCkY_2Vh8",
+                language: "en",
+                region: "US",
+              }}
+              defaultCenter={{ lat: 43.6428525, lng: -79.3959449 }}
+              defaultZoom={15}
+              distanceToMouse={distanceToMouse}
+            >
+              {sortedAuctionsSelected.map(({ lat, lng, id, address }) => {
+                return (
+                  <Marker
+                    key={id}
+                    lat={lat}
+                    lng={lng}
+                    text={id}
+                    id={id}
+                    icon={require("../assets/pin.png")}
+                    selected={selectedAuction.toString() === id}
+                  />
+                );
+              })}
+            </GoogleMapReact>
+          </Box>
+        </Grid.Col>
+        <Grid.Col {...(!mapViewChecked ? { xs: 12 } : { xs: 3 })}>
+          <ScrollArea
+            w="100%"
+            h="90vh"
+            type="always"
+            scrollbarSize={15}
+            // onScrollPositionChange={onScrollPositionChange}
+          >
+            <Grid>
+              {sortedAuctionsSelected.map((auction) => (
+                <Grid.Col
+                  {...(mapViewChecked ? { xs: 12 } : { sm: 6, lg: 4 })}
+                  key={auction.id}
+                >
+                  <AuctionCard
+                    status={auction.status}
+                    id={auction.id}
+                    image={auction.images[0]}
+                    size={auction.size}
+                    // size={bedroom >= 0 ? auction.size[bedroom] : auction.minSize}
+                    price={
+                      bedroom >= 0 ? auction.price[bedroom] : auction.minPrice
+                    }
+                    name={auction.name}
+                    address={auction.address}
+                    bedroom={auction.bedroom}
+                    builder={auction.builder}
+                    completionDate={auction.completionDate}
+                    auctionDate={auction.auctionDate}
+                    deposit={auction.deposit}
+                    bathroom={auction.bathroom}
+                    parking={auction.parking}
+                    locker={auction.locker}
+                    bedroomFilter={bedroom}
+                    selected={selectedAuction.toString() === auction.id}
+                  />
+                </Grid.Col>
+              ))}
+            </Grid>
+          </ScrollArea>
+        </Grid.Col>
+      </Grid>
     </div>
   );
 };

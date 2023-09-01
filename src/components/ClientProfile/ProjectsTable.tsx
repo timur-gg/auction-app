@@ -10,7 +10,8 @@ export default function ProjectsTable(props: any) {
   const navigate = useNavigate();
 
   const rowClick = (lot: any) => {
-    navigate(`/project/${lot.auction}`);
+    console.log(lot.id);
+    navigate(`/project/${lot.id}`);
   };
   return (
     <DataTable

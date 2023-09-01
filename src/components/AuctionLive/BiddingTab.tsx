@@ -91,7 +91,7 @@ const unitMockdata = [
   { label: "bedroom", icon: IconBedFilled, sz: 1 },
   { label: "facing", icon: IconSunHigh, sz: 1 },
 
-  { label: "size", icon: IconRuler, unit: "sqft", sz: 1.6666 },
+  { label: "size", icon: IconRuler, unit: "sqft", sz: 1.666 },
   { label: "parking", icon: IconCar, sz: 1 },
   { label: "locker", icon: IconLock, sz: 1 },
   { label: "bathroom", icon: IconBath, sz: 1 },
@@ -129,7 +129,7 @@ export function BiddingTab(props: any) {
   const unitFeatures = unitMockdata.map((feature) => (
     <Grid.Col
       xs={3}
-      {...(!half ? { lg: feature.sz } : { lg: 2.5 })}
+      {...(!half ? { lg: feature.sz } : { lg: 2.66 })}
       py={5}
       key={feature.label}
     >
@@ -324,9 +324,14 @@ export function BiddingTab(props: any) {
         {status === "finished" && (
           <Card.Section className={classes.section}>
             <Space h={10} />
-            <Title order={4}>
-              You are the winner of the lot #{lot.unit}! <br />
-              Congratulations!
+            <Title order={4} h={55}>
+              {lot.place === 1
+                ? `You are the winner of the lot #${lot.unit}!` +
+                  "\r\n" +
+                  "Congratulations!"
+                : lot.place === 2
+                ? "You finished on 2nd place!"
+                : ""}
             </Title>
             <Space h={15} />
             <Text>

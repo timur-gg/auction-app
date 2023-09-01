@@ -19,12 +19,14 @@ import SignupStep3 from "../components/signup/SignupStep3";
 import SignupStep4 from "../components/signup/SignupStep4";
 import SignupStep4Realtor from "../components/signup/SignupStep4Realtor";
 import SignupStep4Builder from "../components/signup/SignupStep4Builder";
+import SignupStep5Builder from "../components/signup/SignupStep5Builder";
 
 import SignupStep5 from "../components/signup/SignupStep5";
 import SignupStep6 from "../components/signup/SignupStep6";
 
 export default function Signup() {
   const [step, setStep] = useState(1);
+
   const [role, setRole] = useState("buyer");
   const theme = useMantineTheme();
 
@@ -35,6 +37,12 @@ export default function Signup() {
   if (step === 4 && (role === "builder" || role === "realtor")) {
     setStep(5);
   }
+
+  if (step === 7 && role === "realtor") {
+    setStep(8);
+  }
+
+  console.log(step);
 
   return (
     <Container maw={800} miw={420} my={5}>
@@ -77,13 +85,22 @@ export default function Signup() {
           {step === 5 && role === "realtor" && <SignupStep4Realtor />}
           {step === 5 && role === "builder" && <SignupStep4Builder />}
           {step === 5 && role === "buyer" && <SignupStep5 />}
-          {step === 6 && role === "buyer" && <SignupStep6 />}
-          {step === 7 && <Title order={3}>Subscription Info</Title>}
+
+          {step === 6 && role === "builder" && <SignupStep5Builder />}
+          {step === 6 && role !== "builder" && <SignupStep6 />}
+
+          {step === 7 && role === "builder" && <SignupStep6 />}
+          {step === 7 && role !== "builder" && (
+            <Title order={3}>Subscription Info</Title>
+          )}
           {step === 8 && (
             <>
               <Space h={10} />
               <Title order={4}>Thank you for signing up!</Title>
-              <Title order={4}>Your subscription is now active!</Title>
+
+              {role === "buyer" && (
+                <Title order={4}>Your subscription is now active!</Title>
+              )}
             </>
           )}
           {step === 1 && (
@@ -107,7 +124,9 @@ export default function Signup() {
           <Group position="apart" spacing="xl" align="right">
             {step > 1 && step < 7 && (
               <Button
-                onClick={() => setStep((prev) => prev - 1)}
+                onClick={() => {
+                  setStep((prev) => prev - 1);
+                }}
                 styles={(theme) => ({
                   root: {
                     border: "none",
@@ -139,22 +158,44 @@ export default function Signup() {
               </Button>
             ) : step === 8 ? (
               <Center mx="auto">
-                <Link to={"/inventory"}>
-                  <Button
-                    onClick={() => setStep((prev) => prev + 1)}
-                    color="customPurple.2"
-                    mx="auto"
-                    styles={{
-                      root: {
-                        "&:hover": {
-                          opacity: "50%",
+                <Group>
+                  <Link to={"/inventory"}>
+                    <Button
+                      onClick={() => {
+                        setStep((prev) => prev + 1);
+                      }}
+                      color="customPurple.2"
+                      mx="auto"
+                      styles={{
+                        root: {
+                          "&:hover": {
+                            opacity: "50%",
+                          },
                         },
-                      },
-                    }}
-                  >
-                    See the auctions
-                  </Button>
-                </Link>
+                      }}
+                    >
+                      See the auctions
+                    </Button>
+                  </Link>
+                  <Space w={10} />
+
+                  {role === "builder" && (
+                    <Button
+                      // onClick={() => setStep((prev) => prev + 1)}
+                      color="green"
+                      mx="auto"
+                      styles={{
+                        root: {
+                          "&:hover": {
+                            opacity: "50%",
+                          },
+                        },
+                      }}
+                    >
+                      + Create Auction
+                    </Button>
+                  )}
+                </Group>
               </Center>
             ) : (
               <Button

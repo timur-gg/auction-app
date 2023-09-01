@@ -56,7 +56,10 @@ const UserData = {
 };
 
 const auctionIds = ["1", "2", "3"];
+const projectIds = ["1", "2", "7"];
+
 let auctions = auctionData.filter((a) => auctionIds.includes(a.id));
+let projects = auctionData.filter((a) => projectIds.includes(a.id));
 
 let favorites = [
   {
@@ -96,7 +99,7 @@ let favorites = [
     status: "Sep 10 2023",
     bedroom: "1+1",
     size: "600sqft",
-    unit: 2234,
+    unit: 2021,
     bathroom: 1,
     auction: 2,
   },
@@ -155,7 +158,8 @@ export default function ClientProfile() {
 
   favorites = favorites.filter((fave) => !removedFaveRows.includes(fave.id));
   auctions = auctions.filter((a: any) => !removedAuctionRows.includes(a.id));
-  let projects = auctions.filter(
+
+  projects = projects.filter(
     (a: any) => !removedFaveProjectRows.includes(a.id)
   );
 

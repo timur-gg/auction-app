@@ -70,17 +70,6 @@ const lots = [
   },
   {
     id: 3,
-    bedroom: 1,
-    floor: "10-20",
-    price: "600-750k",
-    size: "500-700",
-    units: "25",
-    plan: <></>,
-    planLink:
-      "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
-  },
-  {
-    id: 4,
     bedroom: "1+1",
     floor: "1-20",
     price: "620-780k",
@@ -91,7 +80,7 @@ const lots = [
       "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
   },
   {
-    id: 5,
+    id: 4,
     bedroom: 2,
     floor: "10-30",
     price: "700-900k",
@@ -102,7 +91,7 @@ const lots = [
       "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
   },
   {
-    id: 4,
+    id: 5,
     bedroom: "2+1",
     floor: "1-20",
     price: "750-950k",

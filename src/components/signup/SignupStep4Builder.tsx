@@ -21,7 +21,7 @@ const SignupStep4Builder = () => {
 
   return (
     <Container miw={500}>
-      <Title order={3}>Construction Company Info</Title>
+      {/* <Title order={3}>Construction Company Info</Title>
       <Space h={20} />
 
       <Grid gutter={50}>
@@ -36,6 +36,34 @@ const SignupStep4Builder = () => {
               placeholder="Name"
             />
             <TextInput w={250} label="Company E-mail" placeholder="E-mail" />
+          </Stack>
+        </Grid.Col>
+      </Grid> */}
+      <Title order={3}>Construction Company Sign Up</Title>
+      <Space h={20} />
+
+      <Text fw={500} fz={15}>
+        You should receive a unique sign up code
+      </Text>
+
+      <Grid gutter={50}>
+        <Grid.Col md={12}>
+          <Stack align="center" ta="left">
+            <Space h={20} />
+            <TextInput
+              w={250}
+              label="Please enter the sign up code below"
+              placeholder="Unique Code"
+            />
+
+            {/* <TextInput w={250} label="Business Number" placeholder="#" /> */}
+            {/* <TextInput w={250} label="Phone Number" placeholder="#" /> */}
+            {/* <TextInput
+              w={250}
+              label="Responsible Person Name"
+              placeholder="Name"
+            /> */}
+            {/* <TextInput w={250} label="Company E-mail" placeholder="E-mail" /> */}
           </Stack>
         </Grid.Col>
       </Grid>

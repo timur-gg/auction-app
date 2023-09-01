@@ -30,17 +30,13 @@ const SignupStep4Realtor = () => {
       <Grid gutter={50}>
         <Grid.Col md={12}>
           <Stack align="center" ta="left">
-            <TextInput
-              w={250}
-              label="Real Estate Agency"
-              placeholder="Agency"
-            />
+            <TextInput w={250} label="Broker" placeholder="Agency" />
             <TextInput w={250} label="License Number" placeholder="#" />
           </Stack>
         </Grid.Col>
       </Grid>
       <Space h={30} />
-      <Text size="lg" inline mt={10}>
+      {/* <Text size="lg" inline mt={10}>
         Please upload a photo of your business card
       </Text>
       <Space h={20} />
@@ -88,7 +84,7 @@ const SignupStep4Realtor = () => {
             </Text>
           </div>
         </Group>
-      </Dropzone>
+      </Dropzone> */}
     </Container>
   );
 };

@@ -9,8 +9,10 @@ export default function FavoritesTable(props: any) {
   const navigate = useNavigate();
 
   const rowClick = (lot: any) => {
-    navigate(`/auction/${lot.auction}`);
+    navigate(`/project/${lot.auction}`);
   };
+
+  console.log(favorites);
   return (
     <DataTable
       highlightOnHover

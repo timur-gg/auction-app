@@ -217,6 +217,7 @@ module.exports = {
       bathroom: 1,
       facing: "N",
       registeredTotal: 20,
+      timeLeft: 15000,
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
@@ -233,6 +234,7 @@ module.exports = {
       bathroom: 1,
       registeredTotal: 25,
       facing: "S",
+      timeLeft: 135000,
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },

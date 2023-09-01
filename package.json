@@ -30,6 +30,7 @@
     "mantine-datatable": "^2.9.12",
     "mantine-react-table": "^1.2.0",
     "react": "^18.2.0",
+    "react-countdown": "^2.3.5",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "^5.0.1",

@@ -24,11 +24,13 @@ import {
   Center,
   Modal,
   Title,
+  NumberInputHandlers,
 } from "@mantine/core";
 import PricePlot from "./PricePlot";
 import { BidSelector } from "./BidSelector";
 import ShowCounter from "./ShowCounter";
 import { useDisclosure } from "@mantine/hooks";
+import Countdown from "react-countdown";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -105,8 +107,6 @@ export function BiddingTab(props: any) {
   const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] =
     useDisclosure(false);
 
-  console.log(props);
-
   const lot = props.lot;
 
   const currentPlace = lot.place || 2;
@@ -117,6 +117,10 @@ export function BiddingTab(props: any) {
   const [value, setValue] = useState<number | "">(0);
 
   const [status, setStatus] = useState("live");
+  const [betTime, setBetTime] = useState(-1);
+  const [remainingTime, setRemainingTime] = useState(lot.timeLeft);
+
+  console.log(remainingTime);
 
   console.info(lot);
 
@@ -140,6 +144,7 @@ export function BiddingTab(props: any) {
 
   const makeBid = () => {
     setValue(tempValue);
+    setRemainingTime(30000);
     closeConfirmModal();
   };
 
@@ -147,6 +152,29 @@ export function BiddingTab(props: any) {
 
   let valueChanged = tempValue !== lot.bid * 1000;
   let increment = lot.bid * 1000 * 0.03;
+
+  type countdownProps = {
+    [key: string]: any;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    completed: boolean;
+  };
+
+  // Renderer callback with condition
+  // const renderer = ({ hours, minutes, seconds, completed }: countdownProps) => {
+  //   if (completed) {
+  //     // Render a complete state
+  //     return <Completionist />;
+  //   } else {
+  //     // Render a countdown
+  //     return (
+  //       <span>
+  //         {hours}:{minutes}:{seconds}
+  //       </span>
+  //     );
+  //   }
+  // };
 
   return (
     <>
@@ -343,11 +371,13 @@ export function BiddingTab(props: any) {
                       </Text>
                     )}
                     <Space h={10} />
-                    <ShowCounter
-                      days={-1}
-                      hours={-1}
-                      minutes={5}
-                      seconds={10}
+                    <Countdown
+                      date={Date.now() + remainingTime}
+                      renderer={ShowCounter}
+                      onComplete={() => setStatus("finished")}
+                      onTick={({ total }) => {
+                        setRemainingTime(total);
+                      }}
                     />
                   </Grid.Col>
                   <Grid.Col xs={12} lg={6}>

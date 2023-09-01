@@ -629,7 +629,7 @@ const Inventory = () => {
       <Space h="md" />
 
       <Grid>
-        <Grid.Col {...(mapViewChecked ? { xs: 9 } : { xs: 0 })}>
+        <Grid.Col {...(mapViewChecked ? { xs: 8, md: 9 } : { xs: 0 })}>
           <Box w="100%" h="90vh" hidden={!mapViewChecked}>
             <GoogleMapReact
               bootstrapURLKeys={{
@@ -658,7 +658,7 @@ const Inventory = () => {
             </GoogleMapReact>
           </Box>
         </Grid.Col>
-        <Grid.Col {...(!mapViewChecked ? { xs: 12 } : { xs: 3 })}>
+        <Grid.Col {...(!mapViewChecked ? { xs: 12 } : { xs: 4, md: 3 })}>
           <ScrollArea
             w="100%"
             h="90vh"

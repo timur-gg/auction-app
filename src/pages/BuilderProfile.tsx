@@ -333,9 +333,11 @@ export default function BuilderProfile() {
       <Space h={20} />
 
       <Container ta="left" px="10">
-        <Button color="green" mx="0">
-          Create Auction +
-        </Button>
+        <Link to="/create_auction">
+          <Button color="green" mx="0">
+            Create Auction +
+          </Button>
+        </Link>
       </Container>
 
       <Space h={10} />

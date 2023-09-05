@@ -11,8 +11,6 @@ import {
   Group,
   useMantineTheme,
 } from "@mantine/core";
-import { Dropzone } from "@mantine/dropzone";
-import { IconUpload, IconX, IconFile } from "@tabler/icons-react";
 import { useRef } from "react";
 
 const SignupStep4Builder = () => {

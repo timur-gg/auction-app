@@ -12,6 +12,7 @@ import Signup from "./pages/Signup";
 import ClientProfile from "./pages/ClientProfile";
 import BuilderProfile from "./pages/BuilderProfile";
 import Project from "./pages/Project";
+import CreateAuction from "./pages/CreateAuction";
 
 const Main = () => {
   return (
@@ -20,6 +21,7 @@ const Main = () => {
       {/* The Switch decides which component to show based on the current URL.*/}
       <Route path="/" element={<Inventory />}></Route>
       <Route path="/inventory" element={<Inventory />}></Route>
+      <Route path="/create_auction" element={<CreateAuction />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>
       <Route path="/project/:id" element={<Project />}></Route>
       <Route path="/choose_units/:id" element={<Project registered />}></Route>

@@ -11,13 +11,9 @@ import {
   Group,
   useMantineTheme,
 } from "@mantine/core";
-import { Dropzone } from "@mantine/dropzone";
-import { IconUpload, IconX, IconFile } from "@tabler/icons-react";
-import { useRef } from "react";
 
 const SignupStep5Builder = () => {
   const theme = useMantineTheme();
-  const openRef = useRef<() => void>(null);
 
   return (
     <Container miw={500}>

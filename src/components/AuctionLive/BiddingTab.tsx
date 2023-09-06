@@ -330,7 +330,9 @@ export function BiddingTab(props: any) {
                   "\r\n" +
                   "Congratulations!"
                 : lot.place === 2
-                ? "You finished on 2nd place!"
+                ? "You finished on 2nd place!" +
+                  "\r\n" +
+                  "You can become the winner of the auction if the winner resigns"
                 : ""}
             </Title>
             <Space h={15} />

@@ -120,7 +120,7 @@ export default function CreateAuction() {
                   mx="auto"
                   label="Project Title"
                   placeholder="Project"
-                  {...form.getInputProps("username")}
+                  // {...form.getInputProps("username")}
                 />
               </Grid.Col>
               <Grid.Col md={6}>
@@ -129,7 +129,7 @@ export default function CreateAuction() {
                   mx="auto"
                   label="Address"
                   placeholder="Address"
-                  {...form.getInputProps("username")}
+                  // {...form.getInputProps("username")}
                 />
               </Grid.Col>
               <Grid.Col md={6}>
@@ -138,7 +138,7 @@ export default function CreateAuction() {
                   maw={300}
                   label="Project Description"
                   placeholder="Description"
-                  {...form.getInputProps("username")}
+                  // {...form.getInputProps("username")}
                 />
               </Grid.Col>
               <Grid.Col md={6}>
@@ -203,7 +203,7 @@ export default function CreateAuction() {
               <Grid.Col md={6}>
                 <TimeInput mx="auto" ta="left" maw={200} label="Start time" />
               </Grid.Col>
-              <Grid.Col md={6}>
+              {/* <Grid.Col md={6}>
                 <NumberInput
                   mx="auto"
                   ta="left"
@@ -211,10 +211,9 @@ export default function CreateAuction() {
                   label="Auction duration"
                   description="hours"
                   placeholder="duration, hours"
-                  max={10}
                   min={0}
                 />
-              </Grid.Col>
+              </Grid.Col> */}
             </Grid>
 
             {/* Auction duration */}

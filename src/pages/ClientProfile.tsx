@@ -386,7 +386,7 @@ export default function ClientProfile() {
                     Projects
                   </Tabs.Tab>
                   <Tabs.Tab fz="md" px="xl" pt="10px" fw={400} value="lots">
-                    Saved Lots
+                    Units
                   </Tabs.Tab>
                 </Tabs.List>
               </Group>

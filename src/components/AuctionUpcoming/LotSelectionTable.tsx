@@ -8,13 +8,15 @@ import {
   rem,
   useMantineTheme,
   Group,
+  Box,
   UnstyledButton,
   Modal,
   Button,
+  ActionIcon,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { IconArrowLeft, IconZoomInArea } from "@tabler/icons-react";
+import { IconArrowLeft, IconZoomInArea, IconStar } from "@tabler/icons-react";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -86,6 +88,8 @@ export function LotSelectionTable(props: LotSelectionProps) {
   const [size, setSizeRange] = useState<[number, number]>([0, 100]);
   const [floorRange, setFloorRange] = useState<[number, number]>([0, 100]);
 
+  const [faves, setFaves] = useState<number[]>([]);
+
   const [filters, setFilter] = useState<string[]>(["All"]);
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -119,48 +123,58 @@ export function LotSelectionTable(props: LotSelectionProps) {
         {
           accessorKey: "unit",
           header: "unit #",
-          minSize: 100, //min size enforced during resizing
+          minSize: 80, //min size enforced during resizing
+          maxSize: 180,
           size: 80,
         },
         {
           accessorKey: "floor",
           header: "Floor",
-          minSize: 100, //min size enforced during resizing
+          minSize: 70, //min size enforced during resizing
+          maxSize: 180,
           size: 80,
         },
         {
           accessorKey: "facing",
           header: "Facing",
-          minSize: 100, //min size enforced during resizing
+          minSize: 70, //min size enforced during resizing
+          maxSize: 180,
           size: 80,
         },
 
         {
           accessorKey: "bedroom",
           header: "Bedrooms",
-          minSize: 100, //min size enforced during resizing
-          maxSize: 200,
+          minSize: 70, //min size enforced during resizing
+          maxSize: 180,
           size: 80,
         },
         {
           accessorKey: "price",
           header: "Price",
-          minSize: 100, //min size enforced during resizing
-          maxSize: 200,
+          minSize: 70, //min size enforced during resizing
+          maxSize: 180,
           size: 80,
         },
         {
           accessorKey: "size",
           header: "Size (sqft)",
-          minSize: 100, //min size enforced during resizing
-          maxSize: 200,
+          minSize: 70, //min size enforced during resizing
+          maxSize: 180,
           size: 80,
         },
         {
           accessorKey: "plan",
           header: "Floor Plan",
-          minSize: 100, //min size enforced during resizing
-          maxSize: 200,
+          minSize: 50, //min size enforced during resizing
+          maxSize: 180,
+          size: 80,
+        },
+        {
+          accessorKey: "fav",
+          header: "",
+          minSize: 50, //min size enforced during resizing
+          maxSize: 180,
           size: 80,
         },
       ] as MRT_ColumnDef<any>[],
@@ -181,6 +195,29 @@ export function LotSelectionTable(props: LotSelectionProps) {
     lot.plan = (
       <UnstyledButton onClick={() => openModal(lot.planLink)}>
         <IconZoomInArea color="grey" />
+      </UnstyledButton>
+    );
+  });
+
+  console.log(faves);
+
+  lots.forEach((lot) => {
+    lot.fav = (
+      <UnstyledButton
+        onClick={() => {
+          if (faves.includes(lot.id)) {
+            setFaves(faves.filter((f) => f !== lot.id));
+          } else {
+            setFaves([...faves, lot.id]);
+          }
+        }}
+      >
+        <IconStar
+          color="gold"
+          {...(faves.includes(lot.id)
+            ? { style: { fill: "gold" } }
+            : { style: { fill: "white" } })}
+        />
       </UnstyledButton>
     );
   });
@@ -279,6 +316,12 @@ export function LotSelectionTable(props: LotSelectionProps) {
         </Grid.Col>
       </Grid>
     ),
+    // enableRowActions: true,
+    // renderRowActions: ({ row }) => (
+    //   <ActionIcon onClick={() => console.info("Delete")}>
+    //     <IconStar />
+    //   </ActionIcon>
+    // ),
   });
 
   // const rows = lots.map((element) => (

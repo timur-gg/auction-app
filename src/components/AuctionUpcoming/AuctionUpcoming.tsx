@@ -572,7 +572,7 @@ export function AuctionUpcoming(props: any) {
 
                     {registered ? "Confirm Change" : "Sign Up for Auction"}
                   </Button>
-                  {!registered && selectedUnits.length > 0 && (
+                  {/* {!registered && selectedUnits.length > 0 && (
                     <Button
                       // variant="dark"
                       color="yellow"
@@ -584,7 +584,7 @@ export function AuctionUpcoming(props: any) {
                       <Space w={7} />
                       Save
                     </Button>
-                  )}
+                  )} */}
                   {registered && (
                     <Button
                       // variant="dark"

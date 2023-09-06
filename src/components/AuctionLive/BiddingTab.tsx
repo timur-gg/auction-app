@@ -151,7 +151,7 @@ export function BiddingTab(props: any) {
   console.log(tempValue, lot.bid * 1000, tempValue === lot.bid * 1000);
 
   let valueChanged = tempValue !== lot.bid * 1000;
-  let increment = lot.bid * 1000 * 0.03;
+  let increment = lot.bid * 1000 * 0.01;
 
   type countdownProps = {
     [key: string]: any;
@@ -353,9 +353,20 @@ export function BiddingTab(props: any) {
                 Winning bid
               </Text>
               <Text fz="lg" fw={700}>
-                ${(value || lot.bid * 1000).toLocaleString()}
+                ${(value || (lot.price + 100) * 1000).toLocaleString()}
               </Text>
             </Group>
+
+            {lot.place !== 1 && (
+              <Group>
+                <Text fz="md" c="dimmed" fw={500}>
+                  Your bid
+                </Text>
+                <Text fz="lg" fw={700}>
+                  ${(lot.bid * 1000).toLocaleString()}
+                </Text>
+              </Group>
+            )}
           </Card.Section>
         )}
 
@@ -372,7 +383,8 @@ export function BiddingTab(props: any) {
                       </Text>
                     ) : (
                       <Text fz="md" c="dimmed" fw={500}>
-                        Winning bid
+                        Winning bid: $
+                        {(value || (lot.price + 100) * 1000).toLocaleString()}
                       </Text>
                     )}
                     <Space h={10} />
@@ -428,7 +440,7 @@ export function BiddingTab(props: any) {
 
               <Grid.Col span={12}>
                 <Text size={"sm"} mb={4}>
-                  You can raise your bid in 3% increments
+                  You can raise your bid in 1% increments
                 </Text>
                 <Text size={"sm"} mb={10}>
                   You bid will be live for <b>15 minutes</b>
@@ -438,7 +450,7 @@ export function BiddingTab(props: any) {
                   {valueChanged ? (
                     <>
                       <Text color="green" fw={700} fz={17}>
-                        + {lot.bid * 1000 * 0.03}
+                        + {lot.bid * 1000 * 0.01}
                       </Text>
                     </>
                   ) : (
@@ -450,7 +462,7 @@ export function BiddingTab(props: any) {
                     setValue={setTempValue}
                     className={classes.bidSelector}
                     lot={lot}
-                    step={lot.bid * 1000 * 0.03}
+                    step={lot.bid * 1000 * 0.01}
                     incrementActive={!valueChanged}
                     decrementActive={valueChanged}
                   />

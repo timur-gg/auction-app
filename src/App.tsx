@@ -10,6 +10,8 @@ import HeaderSimple from "./components/Header";
 import React from "react";
 import Signup from "./pages/Signup";
 import Landing from "./pages/Landing";
+import FAQ from "./pages/Landing";
+
 import ClientProfile from "./pages/ClientProfile";
 import BuilderProfile from "./pages/BuilderProfile";
 import Project from "./pages/Project";
@@ -44,6 +46,7 @@ function App(): React.JSX.Element {
             <HeaderSimple
               links={[
                 { link: "/inventory", label: "Inventory" },
+                { link: "/#faq", label: "FAQ" },
                 { link: "/auction/1", label: "Auction" },
                 { link: "/signup", label: "Signup" },
                 { link: "/client_profile", label: "Client Profile" },

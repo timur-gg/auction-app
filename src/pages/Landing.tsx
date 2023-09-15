@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Accordion,
   Container,
@@ -18,8 +18,7 @@ import {
   Stack,
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-
-import { DatePickerInput } from "@mantine/dates";
+import { Route, useLocation } from "react-router-dom";
 import { createStyles, RangeSlider, rem } from "@mantine/core";
 import {
   IconSearch,
@@ -31,6 +30,7 @@ import {
 } from "@tabler/icons-react";
 import { auctionData } from "../data";
 import AuctionCard from "../components/inventory/AuctionCard";
+import { GetInTouchSimple } from "../components/inventory/GetInTouchSimple";
 
 const sampleIds = ["1", "2", "3", "4"];
 
@@ -85,6 +85,25 @@ const placeholder =
 export default function Landing() {
   const navigate = useNavigate();
   const { classes } = useStyles();
+
+  const { pathname, hash, key } = useLocation();
+
+  useEffect(() => {
+    // if not a hash link, scroll to top
+    if (hash === "") {
+      window.scrollTo(0, 0);
+    }
+    // else scroll to id
+    else {
+      setTimeout(() => {
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView();
+        }
+      }, 0);
+    }
+  }, [pathname, hash, key]); // do this on route change
 
   return (
     <>
@@ -152,7 +171,7 @@ export default function Landing() {
       <Space h={10} />
       <Paper withBorder shadow="md" w="100%" p={15} py={25} radius="sm">
         <Title ta="left" order={2} color="#212121">
-          Why Us
+          Why Choose TorontoPreCon?
         </Title>
         <Space h={40} />
 
@@ -261,6 +280,7 @@ export default function Landing() {
       </Paper>
       <Space h={10} />
       <Paper
+        id="faq"
         withBorder
         shadow="md"
         w="100%"
@@ -270,8 +290,8 @@ export default function Landing() {
         radius="sm"
         className={classes.faq}
       >
-        <Title ta="left" order={2} color="#212121">
-          FAQ
+        <Title ta="left" order={2} color="#FAFAFA">
+          About Our System
         </Title>
         <Space h={40} />
         <Accordion
@@ -322,6 +342,25 @@ export default function Landing() {
             <Accordion.Panel>{placeholder}</Accordion.Panel>
           </Accordion.Item>
         </Accordion>
+      </Paper>
+      <Space h={10} />
+      <Paper
+        id="contact"
+        withBorder
+        shadow="md"
+        w="100%"
+        p={15}
+        pt={25}
+        pb={35}
+        radius="sm"
+      >
+        <Title fw={800} ta="left" order={2} color="#212121">
+          Contact Us
+        </Title>
+        <Space h={40} />
+        <Container>
+          <GetInTouchSimple />
+        </Container>
       </Paper>
     </>
   );

@@ -30,6 +30,7 @@ import { useState } from "react";
 import { LotSelectionTable } from "./LotSelectionTable";
 import { notifications } from "@mantine/notifications";
 import { useNavigate } from "react-router-dom";
+import GoogleMapReact from "google-map-react";
 
 import {
   IconWriting,
@@ -87,6 +88,16 @@ const useStyles = createStyles((theme) => ({
         : theme.colors.gray[5],
   },
 }));
+
+const distanceToMouse = (pt: any, mousePos: any): number => {
+  if (pt && mousePos) {
+    // return distance between the marker and mouse pointer
+    return Math.sqrt(
+      (pt.x - mousePos.x) * (pt.x - mousePos.x) +
+        (pt.y - mousePos.y) * (pt.y - mousePos.y)
+    );
+  } else return 0;
+};
 
 const mockdata = [
   { label: "auctionDate", icon: IconCalendarEvent, desc: "Auction Date" },
@@ -233,6 +244,32 @@ export function AuctionUpcoming(props: any) {
       });
     }
   }
+
+  const Marker = ({ text, id, selected }: any) => {
+    return (
+      <div
+        style={{
+          width: "35px",
+          height: "50px",
+        }}
+        // className={"pin2"}
+        // onClick={(e) => handleClick(e, id)}
+      >
+        {/* <span className="circleText" title={id}>
+          {text}
+        </span> */}
+        <img
+          style={{
+            width: "100%",
+            height: "100%",
+            filter: selected ? "contrast(150%)" : "",
+          }}
+          src={require("../../assets/pin.png")}
+          alt="logo"
+        />
+      </div>
+    );
+  };
 
   const ImagesModal = floorPlans.map((image: any) => (
     <Carousel.Slide key={1}>
@@ -728,14 +765,37 @@ export function AuctionUpcoming(props: any) {
         {step === 1 && (
           <Grid.Col md={3.5}>
             <Card
+              hidden={step != 1}
               withBorder
               p={15}
               radius="md"
               className={classes.card}
               maw={1000}
               mx="auto"
+              h="400px"
             >
-              <Image src={mapImg} />
+              {/* <Image src={mapImg} /> */}
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  // remove the key if you want to fork
+                  key: "AIzaSyB-iyAn3z8aIS8iMxHZaUwg8IWCkY_2Vh8",
+                  language: "en",
+                  region: "US",
+                }}
+                defaultCenter={{ lat: auction.lat, lng: auction.lng }}
+                defaultZoom={15}
+                distanceToMouse={distanceToMouse}
+              >
+                <Marker
+                  key={auction.id}
+                  lat={auction.lat}
+                  lng={auction.lng}
+                  text={auction.id}
+                  id={auction.id}
+                  icon={require("../../assets/pin.png")}
+                  // selected={selectedAuction.toString() === id}
+                />
+              </GoogleMapReact>
             </Card>
           </Grid.Col>
         )}

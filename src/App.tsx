@@ -9,6 +9,7 @@ import Auction from "./pages/Auction";
 import HeaderSimple from "./components/Header";
 import React from "react";
 import Signup from "./pages/Signup";
+import Landing from "./pages/Landing";
 import ClientProfile from "./pages/ClientProfile";
 import BuilderProfile from "./pages/BuilderProfile";
 import Project from "./pages/Project";
@@ -19,7 +20,7 @@ const Main = () => {
     <Routes>
       {" "}
       {/* The Switch decides which component to show based on the current URL.*/}
-      <Route path="/" element={<Inventory />}></Route>
+      <Route path="/" element={<Landing />}></Route>
       <Route path="/inventory" element={<Inventory />}></Route>
       <Route path="/create_auction" element={<CreateAuction />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>
@@ -28,6 +29,7 @@ const Main = () => {
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/client_profile" element={<ClientProfile />}></Route>
       <Route path="/builder_profile" element={<BuilderProfile />}></Route>
+      <Route path="/client_profile" element={<ClientProfile />}></Route>
     </Routes>
   );
 };

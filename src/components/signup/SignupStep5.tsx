@@ -26,9 +26,9 @@ const SignupStep5 = () => {
   return (
     <Container maw={800} miw={300}>
       <Stack align="center" ta="left">
-        <Title order={2} ta="center">
+        {/* <Title order={2} ta="center">
           Auction Rules
-        </Title>
+        </Title> */}
 
         <List
           type="ordered"
@@ -44,7 +44,7 @@ const SignupStep5 = () => {
           {conditionText}
         </List>
         <Space />
-        <Checkbox size="md" label="I agree to the auction rules" />
+        {/* <Checkbox size="md" label="I agree to the auction rules" /> */}
       </Stack>
     </Container>
   );

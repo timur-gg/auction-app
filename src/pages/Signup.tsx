@@ -38,7 +38,7 @@ export default function Signup() {
     setStep(5);
   }
 
-  if (step === 7 && role === "realtor") {
+  if (step === 7 && (role === "realtor" || role === "buyer")) {
     setStep(8);
   }
 
@@ -79,28 +79,29 @@ export default function Signup() {
           radius="md"
         >
           {step === 1 && <SignupStep1 />}
-          {step === 2 && <SignupStep2 />}
+          {step === 2 && role !== "builder" && <SignupStep2 />}
+          {step === 2 && role === "builder" && <SignupStep4Builder />}
           {step === 3 && <SignupStep3 />}
           {step === 4 && role === "buyer" && <SignupStep4 />}
           {step === 5 && role === "realtor" && <SignupStep4Realtor />}
-          {step === 5 && role === "builder" && <SignupStep4Builder />}
-          {step === 5 && role === "buyer" && <SignupStep5 />}
+          {step === 5 && role === "builder" && <SignupStep2 />}
+          {step === 5 && role === "buyer" && <SignupStep6 />}
 
           {step === 6 && role === "builder" && <SignupStep5Builder />}
-          {step === 6 && role !== "builder" && <SignupStep6 />}
-
-          {step === 7 && role === "builder" && <SignupStep6 />}
-          {step === 7 && role !== "builder" && (
+          {step === 6 && role === "realtor" && <SignupStep6 />}
+          {step === 6 && role === "buyer" && (
             <Title order={3}>Subscription Info</Title>
           )}
+
+          {step === 7 && role === "builder" && <SignupStep6 />}
+
           {step === 8 && (
             <>
               <Space h={10} />
-              <Title order={4}>Thank you for signing up!</Title>
+              <Title order={2}>Thank you for signing up!</Title>
+              <Space h={20} />
 
-              {role === "buyer" && (
-                <Title order={4}>Your subscription is now active!</Title>
-              )}
+              {role === "buyer" && <SignupStep5 />}
             </>
           )}
           {step === 1 && (

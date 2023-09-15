@@ -146,8 +146,11 @@ export function AuctionDetails(props: any) {
           </Stack>
         </Grid.Col>
         <Grid.Col xs={10} sm={9}>
-          <Tabs defaultValue="ceil" mt="-10px">
+          <Tabs defaultValue="amenities" mt="-10px">
             <Tabs.List>
+              <Tabs.Tab fz="sm" px="sm" fw={400} value="amenities">
+                Amenities
+              </Tabs.Tab>
               <Tabs.Tab fz="sm" px="sm" fw={400} value="ceil">
                 Ceilings / Floors / Paint
               </Tabs.Tab>
@@ -164,6 +167,37 @@ export function AuctionDetails(props: any) {
                 Bathrooms
               </Tabs.Tab>
             </Tabs.List>
+
+            <Tabs.Panel value="amenities" pt="15px" ta="left">
+              • Approximately 9 ft. ceiling heights in principal rooms, defined
+              as the Living Room and Dining Room.
+              <Space h={10} />
+              • Approximately 9 ft. ceiling heights at upper level of two-storey
+              walkouts. Where bulkheads or dropped ceilings are required. The
+              height of the ceiling will be less than 9 ft. All measurements are
+              calculated from the finished concrete slab floor to the underside
+              of the concrete slab or finished ceiling above.
+              <Space h={10} />
+              • Approximately 10 ft. ceiling heights in principal rooms, defined
+              as the Living Room and Dining Room for suites on Levels 2 and 3.
+              Where bulkheads or dropped ceilings are required, the height of
+              the ceiling will be less than 10 ft. All measurements are
+              calculated from the finished concrete slab floor to the underside
+              of the concrete slab or finished ceiling above.
+              <Space h={10} />
+              • Smooth ceilings throughout.
+              <Space h={10} />
+              • Porcelain tile floor and baseboard in Bathroom(s).
+              <Space h={10} />
+              • Ceramic tile floor and baseboard in Laundry Closet.
+              <Space h={10} />
+              • Laminate flooring in all other areas.
+              <Space h={10} />
+              • Semi-gloss, off-white latex paint in Bathroom(s), Laundry
+              Closet, and on all trim.
+              <Space h={10} />• Flat, off-white latex paint on all other walls
+              and ceilings.
+            </Tabs.Panel>
 
             <Tabs.Panel value="ceil" pt="15px" ta="left">
               • Approximately 9 ft. ceiling heights in principal rooms, defined

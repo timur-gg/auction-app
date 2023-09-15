@@ -167,8 +167,8 @@ type CardProps = {
   completionDate: string;
   auctionDate: string;
   deposit: string;
-  bedroomFilter: number;
-  selected: boolean;
+  bedroomFilter?: number;
+  selected?: boolean;
 };
 
 export function AuctionCard(props: CardProps) {
@@ -287,8 +287,8 @@ export function AuctionCard(props: CardProps) {
               ${props.price}k
             </Text>
             <Text fz="sm" c="dimmed" fw={500} sx={{ lineHeight: 1 }} mt={3}>
-              {props.bedroomFilter >= 0
-                ? props.bedroomFilter === 0
+              {props.bedroomFilter || 0 >= 0
+                ? props.bedroomFilter || 0 === 0
                   ? "studios starting from"
                   : `${props.bedroomFilter} bedroom starting from`
                 : "starting price"}

@@ -38,7 +38,6 @@ import {
   IconCircleCheck,
   IconClock,
   IconMoneybag,
-  IconStar,
   IconBed,
   IconRuler,
   IconHomeCancel,

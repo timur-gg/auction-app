@@ -16,7 +16,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { IconArrowLeft, IconZoomInArea, IconStar } from "@tabler/icons-react";
+import { IconArrowLeft, IconZoomInArea } from "@tabler/icons-react";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -28,7 +28,7 @@ import {
 
 import PriceFilter from "../inventory/PriceFilter";
 import SizeFilter from "../inventory/SizeFilter";
-import FloorFilter from "./FloorFilter";
+import FloorFilter from "../AuctionUpcoming/FloorFilter";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -78,17 +78,13 @@ type LotSelectionProps = {
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Function | any;
   lots: any[];
-  backButtonAction?: Function;
   // setFloor: Function;
 };
 
-export function LotSelectionTable(props: LotSelectionProps) {
+export function UnitTableEdit(props: LotSelectionProps) {
   const [bedroom, setBedroom] = useState<number>(-1);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
   const [size, setSizeRange] = useState<[number, number]>([0, 100]);
   const [floorRange, setFloorRange] = useState<[number, number]>([0, 100]);
-
-  const [faves, setFaves] = useState<number[]>([]);
 
   const [filters, setFilter] = useState<string[]>(["All"]);
   const [opened, { open, close }] = useDisclosure(false);
@@ -103,10 +99,6 @@ export function LotSelectionTable(props: LotSelectionProps) {
 
   const FILTER_MAP: { [char: string]: any } = {
     All: () => true,
-    priceRange: (lot: any) =>
-      lot.price >= (priceRange[0] + 20) * 12.5 &&
-      lot.price <= (priceRange[1] + 20) * 12.5,
-
     size: (lot: any) =>
       lot.size >= (size[0] + 20) * 12.5 && lot.size <= (size[1] + 20) * 12.5,
     floor: (lot: any) =>
@@ -170,19 +162,12 @@ export function LotSelectionTable(props: LotSelectionProps) {
           maxSize: 180,
           size: 80,
         },
-        {
-          accessorKey: "fav",
-          header: "",
-          minSize: 50, //min size enforced during resizing
-          maxSize: 180,
-          size: 80,
-        },
       ] as MRT_ColumnDef<any>[],
     []
   );
   const { classes } = useStyles();
 
-  const { rowSelection, setRowSelection, lots, backButtonAction } = props;
+  const { rowSelection, setRowSelection, lots } = props;
 
   useEffect(() => {
     //do something when the row selection changes...
@@ -199,39 +184,10 @@ export function LotSelectionTable(props: LotSelectionProps) {
     );
   });
 
-  console.log(faves);
-
-  lots.forEach((lot) => {
-    lot.fav = (
-      <UnstyledButton
-        onClick={() => {
-          if (faves.includes(lot.id)) {
-            setFaves(faves.filter((f) => f !== lot.id));
-          } else {
-            setFaves([...faves, lot.id]);
-          }
-        }}
-      >
-        <IconStar
-          color="gold"
-          {...(faves.includes(lot.id)
-            ? { style: { fill: "gold" } }
-            : { style: { fill: "white" } })}
-        />
-      </UnstyledButton>
-    );
-  });
-
   var filteredLots: any = lots;
   filters.forEach((f) => {
     filteredLots = filteredLots.filter(FILTER_MAP[f]);
   });
-
-  const backClick = () => {
-    if (backButtonAction) {
-      backButtonAction();
-    }
-  };
 
   const openModal = (image: string) => {
     modalImage = image;
@@ -270,19 +226,7 @@ export function LotSelectionTable(props: LotSelectionProps) {
 
     renderTopToolbarCustomActions: ({ table }) => (
       <Grid style={{ width: "100%" }} p={7}>
-        {backButtonAction && (
-          <Grid.Col xs={6} sm={0.5} md={0.9} my="auto" ta="left">
-            <UnstyledButton onClick={backClick}>
-              <IconArrowLeft
-                size="1.5rem"
-                stroke={2}
-                className={classes.icon}
-              />
-            </UnstyledButton>
-          </Grid.Col>
-        )}
-
-        <Grid.Col xs={6} sm={5} lg={2.9}>
+        <Grid.Col xs={6} sm={5} lg={3}>
           <SegmentedControl
             color="blue"
             radius="sm"
@@ -302,24 +246,21 @@ export function LotSelectionTable(props: LotSelectionProps) {
             }}
           />
         </Grid.Col>
-        {backButtonAction && (
-          <Grid.Col xs={6} sm={3} lg={2.7}>
-            <PriceFilter
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
-              addFilter={addFilter}
-            />
-          </Grid.Col>
-        )}
-
-        <Grid.Col xs={6} sm={3.5} lg={2.7}>
+        {/* <Grid.Col xs={6} sm={3} lg={2}>
+          <PriceFilter
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            addFilter={addFilter}
+          />
+        </Grid.Col> */}
+        <Grid.Col xs={6} sm={3.5} lg={2}>
           <SizeFilter
             size={size}
             setSizeRange={setSizeRange}
             addFilter={addFilter}
           />
         </Grid.Col>
-        <Grid.Col xs={6} sm={3.5} lg={2.7}>
+        <Grid.Col xs={6} sm={3.5} lg={2}>
           <FloorFilter
             floor={floorRange}
             setFloor={setFloorRange}
@@ -335,24 +276,6 @@ export function LotSelectionTable(props: LotSelectionProps) {
     //   </ActionIcon>
     // ),
   });
-
-  // const rows = lots.map((element) => (
-  //   <tr key={element.id}>
-  //     <td>{element.unit}</td>
-  //     <td>{element.floor}</td>
-  //     <td>{element.facing}</td>
-  //     <td>{element.bedroom}</td>
-  //     <td>{element.floor}</td>
-  //     <td>${element.price}</td>
-  //     <td>{element.size}sqft</td>
-  //     <td>
-  //       <a>
-  //         {element.plan}
-  //         <IconZoomInArea color="blue" />
-  //       </a>
-  //     </td>
-  //   </tr>
-  // ));
 
   return (
     <>

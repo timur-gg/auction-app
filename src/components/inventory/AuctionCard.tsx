@@ -24,7 +24,6 @@ import {
   IconCar,
   IconLock,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 
@@ -159,8 +158,8 @@ type CardProps = {
   price: number;
   name: string;
   address: string;
-  bedroom: number;
-  size: number;
+  bedroom: string;
+  size: string;
   status: string;
   // project: string,
   builder: string;

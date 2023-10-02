@@ -157,16 +157,6 @@ export function SliderMarks() {
   );
 }
 
-const projectOptions = [
-  { value: "a", label: "The Condos on King" },
-  { value: "b", label: "House on Spadina" },
-];
-
-// const builderOptions = [
-//   { value: "1", label: "Builders Inc" },
-//   { value: "2", label: "Construction Corp" },
-// ];
-
 const builders = auctionData.map((a) => a.builder);
 
 const builderOptions = [...new Set(builders)].map((b) => ({
@@ -260,12 +250,6 @@ const Inventory = () => {
       auction.size >= (size[0] + 20) * 12.5 &&
       auction.size <= (size[1] + 20) * 12.5,
     bedroom: (auction: any) => {
-      console.log(
-        auction.bedroom,
-        parseInt(auction.bedroom.slice(0)),
-        parseInt(auction.bedroom.slice(-1)),
-        bedroom
-      );
       if (bedroom === -1) return true;
       else
         return (
@@ -295,7 +279,7 @@ const Inventory = () => {
     ...sortedAuctions.filter((a) => a.id !== selectedAuction.toString()),
   ];
 
-  console.log(sortedAuctionsSelected);
+  sortedAuctionsSelected.forEach((auction) => console.log(auction));
 
   console.log(selectedAuction.toString() == "1");
   const AuctionList = sortedAuctionsSelected.map((auction) => (
@@ -327,12 +311,6 @@ const Inventory = () => {
     console.log(sortBy);
     setSort(sortBy);
   }
-
-  const points = [
-    { id: 1, title: "Round Pond", lat: 51.506, lng: -0.184 },
-    { id: 2, title: "The Long Water", lat: 51.508, lng: -0.175 },
-    { id: 3, title: "The Serpentine", lat: 51.505, lng: -0.164 },
-  ];
 
   const distanceToMouse = (pt: any, mousePos: any): number => {
     if (pt && mousePos) {

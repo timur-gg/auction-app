@@ -16,6 +16,7 @@ import ClientProfile from "./pages/ClientProfile";
 import BuilderProfile from "./pages/BuilderProfile";
 import Project from "./pages/Project";
 import CreateAuction from "./pages/CreateAuction";
+import ConfirmProject from "./pages/ConfirmProject";
 
 const Main = () => {
   return (
@@ -32,6 +33,7 @@ const Main = () => {
       <Route path="/client_profile" element={<ClientProfile />}></Route>
       <Route path="/builder_profile" element={<BuilderProfile />}></Route>
       <Route path="/client_profile" element={<ClientProfile />}></Route>
+      <Route path="/edit_project/:id" element={<ConfirmProject />}></Route>
     </Routes>
   );
 };

@@ -3,16 +3,11 @@ import {
   Image,
   Stack,
   Text,
-  Badge,
   createStyles,
   Group,
-  Button,
   Grid,
   Space,
-  Flex,
   rem,
-  AspectRatio,
-  Center,
   Tooltip,
   Tabs,
 } from "@mantine/core";
@@ -27,7 +22,6 @@ import {
   IconBuildingCircus,
   IconPropeller,
 } from "@tabler/icons-react";
-import { Carousel } from "@mantine/carousel";
 import React from "react";
 var mapImg = require("../../img/map.png");
 
@@ -99,12 +93,6 @@ const mockdata = [
   { label: "heating", icon: IconTemperature, desc: "Heating" },
   { label: "cooling", icon: IconPropeller, desc: "Cooling" },
 ];
-
-const badgeColorMap: { [key: string]: any } = {
-  "Live Auction": "green",
-  upcoming: "#7CB342",
-  passed: "orange",
-};
 
 export function AuctionDetails(props: any) {
   const { classes } = useStyles();

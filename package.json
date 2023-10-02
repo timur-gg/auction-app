@@ -37,6 +37,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "^5.0.1",
+    "react-upload-gallery": "^0.4.1",
     "react-vis": "^1.12.1",
     "ts-node": "^10.9.1",
     "web-vitals": "^3.4.0"

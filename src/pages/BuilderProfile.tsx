@@ -1,10 +1,18 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import ExampleDoc from "../assets/terms_conditions.pdf";
-import { Widget } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
 import { Chat } from "../components/Chat";
 import { useDisclosure } from "@mantine/hooks";
+
+import { ref } from "firebase/database";
+import {
+  useDatabaseSnapshot,
+  useDatabaseUpdateMutation,
+} from "@react-query-firebase/database";
+import { database } from "../db/firebase";
+
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -72,38 +80,6 @@ const UserData = {
     "https://images.unsplash.com/photo-1612833609249-5e9c9b9b0b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXR5JTIwY2FyZCUyMGF1dGhvcml0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
 };
 
-const auctions = [
-  {
-    name: "King West Towers",
-    builder: "Developers Inc",
-    address: "100 Spadina",
-    registered: 60,
-    bidders: 42,
-    status: "Live",
-    bid: "570k",
-    lots: 10,
-  },
-  {
-    bid: "1m",
-    name: "Condo 223",
-    address: "35 Bathurst",
-    builder: "Developers Inc",
-    registered: 100,
-    bidders: 90,
-    status: "Finished",
-    lots: 20,
-  },
-  {
-    bid: "1m",
-    name: "Condo 2290",
-    address: "35 Bathurst",
-    builder: "Developers Inc",
-    status: "Upcoming",
-    registered: 59,
-    lots: 20,
-  },
-];
-
 const favourites = [
   {
     name: "King West Towers",
@@ -112,6 +88,7 @@ const favourites = [
     status: "Live",
     bid: "570k",
     auctionDate: "Sep 10 2023",
+    sold: 10,
   },
 
   {
@@ -120,23 +97,104 @@ const favourites = [
     address: "35 Queen",
     builder: "Developers Inc",
     status: "Passed",
+    sold: 30,
   },
 ];
 
 export default function BuilderProfile() {
   const { classes } = useStyles();
+  const [loadedAuctions, setLoadedAuctions] = useState<any>([]);
 
-  const auctionRows = auctions.map((element) => (
+  const navigate = useNavigate();
+
+  const rowClick = (id: string, status: string) => {
+    console.log(id);
+
+    if (status === "upcoming") {
+      navigate(`/project/${id}`);
+    }
+
+    if (
+      status === "Pending Confirmation" ||
+      status === "In Review" ||
+      status === "Ready for Auction"
+    ) {
+      navigate(`/edit_project/${id}`);
+    }
+  };
+
+  const favouritesRows = favourites.map((element) => (
     <tr key={element.name} className={classes.tableRow}>
+      <td>{element.name}</td>
+      <td>{element.builder}</td>
+      <td>{element.address}</td>
+      <td>{element.sold}</td>
+      {/* <td>
+        {element.status === "Live" ? (
+          <Badge color="green" size="md" variant="filled">
+            {element.status}
+          </Badge>
+        ) : element.status === "Passed" ? (
+          <Badge color="red" size="md" variant="filled">
+            {element.status}
+          </Badge>
+        ) : (
+          element.status
+        )}
+      </td> */}
+    </tr>
+  ));
+
+  const [openedChat, { toggle: toggleChat, close: closeChat }] =
+    useDisclosure(false);
+
+  const dbRef = ref(database, "projects");
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     setLoadedAuctions(loadedAuctions);
+
+  //     return () => {}; // This will be called when the screen is unfocused.
+  //     // I don't think you need that but I included it anyway
+  //   }, [])
+  // );
+
+  useDatabaseSnapshot(
+    ["projects"],
+    dbRef,
+    { subscribe: true },
+    {
+      onSuccess(snapshot: any) {
+        const loaded = snapshot.val();
+
+        console.log(Object.keys(loaded));
+        setLoadedAuctions(
+          Object.keys(loaded).map((id: string) => ({ ...loaded[id], id: id }))
+        );
+      },
+      onError(error: any) {
+        console.log(error);
+      },
+    }
+  );
+
+  console.log(loadedAuctions);
+
+  const auctionRows = loadedAuctions.map((element: any) => (
+    <tr
+      key={element.name}
+      className={classes.tableRow}
+      onClick={() => rowClick(element.id, element.status)}
+    >
       <td>{element.name}</td>
       <td>{element.builder}</td>
       <td>{element.address}</td>
       <td>{element.lots}</td>
       <td>{element.registered}</td>
-      <td>{element.bidders}</td>
+      {/* <td>{element.bidders}</td> */}
 
       <td>
-        {element.status === "Live" ? (
+        {element.status === "Live" || element.status === "Ready for Auction" ? (
           <Badge color="green" size="md" variant="filled">
             {element.status}
           </Badge>
@@ -148,8 +206,16 @@ export default function BuilderProfile() {
           <Badge color="orange" size="md" variant="filled">
             {element.status}
           </Badge>
+        ) : element.status === "Pending Confirmation" ? (
+          <Badge color="yellow.6" size="md" variant="filled">
+            {element.status}
+          </Badge>
         ) : element.status === "Upcoming" ? (
-          <Badge color="yellow" size="md" variant="filled">
+          <Badge color="teal" size="md" variant="filled">
+            {element.status}
+          </Badge>
+        ) : element.status === "In Review" ? (
+          <Badge color="blue.5" size="md" variant="filled">
             {element.status}
           </Badge>
         ) : (
@@ -158,31 +224,6 @@ export default function BuilderProfile() {
       </td>
     </tr>
   ));
-
-  const favouritesRows = favourites.map((element) => (
-    <tr key={element.name} className={classes.tableRow}>
-      <td>{element.name}</td>
-      <td>{element.builder}</td>
-      <td>{element.address}</td>
-      <td>{element.bid}</td>
-      <td>
-        {element.status === "Live" ? (
-          <Badge color="green" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : element.status === "Passed" ? (
-          <Badge color="red" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : (
-          element.status
-        )}
-      </td>
-    </tr>
-  ));
-
-  const [openedChat, { toggle: toggleChat, close: closeChat }] =
-    useDisclosure(false);
 
   return (
     <>
@@ -403,7 +444,7 @@ export default function BuilderProfile() {
             </ThemeIcon>
 
             <Title order={4} align="left">
-              Current Auctions
+              My Auctions
             </Title>
           </Group>
           <Table style={{ textAlign: "left" }}>
@@ -414,7 +455,7 @@ export default function BuilderProfile() {
                 <th>Address</th>
                 <th>Lots</th>
                 <th>Registered</th>
-                <th>Bidders</th>
+                {/* <th>Bidders</th> */}
                 <th>Status</th>
               </tr>
             </thead>
@@ -446,8 +487,8 @@ export default function BuilderProfile() {
                 <th>Building</th>
                 <th>Builder</th>
                 <th>Address</th>
-                <th>Current bid</th>
-                <th>Status</th>
+                {/* <th>Current bid</th> */}
+                <th>Units sold</th>
               </tr>
             </thead>
             <tbody>{favouritesRows}</tbody>

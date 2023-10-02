@@ -1,49 +1,43 @@
 import React from "react";
 import { useState, useRef } from "react";
-import ExampleDoc from "../assets/terms_conditions.pdf";
 import { useForm } from "@mantine/form";
 
 import {
-  Box,
-  Stack,
   Text,
   Group,
-  Badge,
   Button,
   Container,
-  Title,
   Textarea,
-  NumberInput,
   Paper,
-  ThemeIcon,
-  Avatar,
   Stepper,
   TextInput,
-  Code,
-  Tabs,
+  Stack,
   Space,
-  ActionIcon,
   Grid,
+  SegmentedControl,
+  Select,
 } from "@mantine/core";
-import { DatePickerInput, TimeInput } from "@mantine/dates";
+import { DatePickerInput, TimeInput, YearPickerInput } from "@mantine/dates";
 
-import {
-  IconPhoneCall,
-  IconAt,
-  IconGavel,
-  IconTrash,
-  IconX,
-  IconArchive,
-  IconPencil,
-  IconPlus,
-} from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import FileDrop from "../components/signup/FileDrop";
 import DetailedDescripion from "../components/CreateAuction/DetailedDescription";
 import AddUnit from "../components/CreateAuction/AddUnit";
+import { ref } from "firebase/database";
+import { database } from "../db/firebase";
+
+import {
+  useDatabaseSnapshot,
+  useDatabaseSetMutation,
+  useDatabaseUpdateMutation,
+} from "@react-query-firebase/database";
+import { IconCalendarEvent } from "@tabler/icons-react";
 
 export default function CreateAuction() {
   const [active, setActive] = useState(0);
+
+  const [unitUploadOption, setUnitUploadOption] = useState("excel");
+  const [detailsUploadOption, setDetailsUploadOption] = useState("manual");
 
   const [auctionDateValue, setAuctionValue] = useState<Date>(new Date());
 
@@ -51,6 +45,11 @@ export default function CreateAuction() {
     new Date()
   );
   const [completionValue, setCompletionValue] = useState<Date>(new Date());
+  const [projectTitle, setProjectTitle] = useState("");
+
+  const [address, setAddress] = useState("");
+
+  const [projectId, setProjectId] = useState(0);
 
   const form = useForm({
     initialValues: {
@@ -101,6 +100,39 @@ export default function CreateAuction() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
+  const dbRef = ref(database, "projects");
+  const mutation = useDatabaseUpdateMutation(dbRef);
+
+  const loadedProjectId = useDatabaseSnapshot(
+    ["projects"],
+    dbRef,
+    { subscribe: true },
+    {
+      onSuccess(snapshot: any) {
+        const projects = snapshot.val();
+        setProjectId(Object.keys(projects).length + 100);
+      },
+      onError(error: any) {
+        console.log(error);
+      },
+    }
+  );
+
+  const submitAuction = () => {
+    if (projectId > 0) {
+      mutation.mutate({
+        [projectId]: {
+          name: projectTitle,
+          address: address,
+          constructionStart: constructionStartValue,
+          completionDate: completionValue,
+          status: "In Review",
+          builder: "Construciton Inc",
+        },
+      });
+    }
+  };
+
   return (
     <Container size="md">
       <Paper
@@ -120,6 +152,10 @@ export default function CreateAuction() {
                   mx="auto"
                   label="Project Title"
                   placeholder="Project"
+                  value={projectTitle}
+                  onChange={(event) =>
+                    setProjectTitle(event.currentTarget.value)
+                  }
                   // {...form.getInputProps("username")}
                 />
               </Grid.Col>
@@ -129,6 +165,8 @@ export default function CreateAuction() {
                   mx="auto"
                   label="Address"
                   placeholder="Address"
+                  value={address}
+                  onChange={(event) => setAddress(event.currentTarget.value)}
                   // {...form.getInputProps("username")}
                 />
               </Grid.Col>
@@ -142,17 +180,76 @@ export default function CreateAuction() {
                 />
               </Grid.Col>
               <Grid.Col md={6}>
-                <DatePickerInput
+                <Stack mx="auto" maw={300}>
+                  <Text fw={500} size="sm">
+                    Construction Start Date
+                  </Text>
+
+                  <Group spacing="1">
+                    <IconCalendarEvent size="1.05rem" stroke={1.5} />
+                    <Space w={10} />
+
+                    <Select
+                      maw={120}
+                      // defaultValue={auction["completionDate"].substring(
+                      //   0,
+                      //   auction["completionDate"].length - 5
+                      // )}
+                      placeholder="Season"
+                      data={["Fall", "Winter", "Spring", "Summer"]}
+                    />
+                    <Space w={10} />
+
+                    <YearPickerInput
+                      placeholder="Year"
+                      // value={completionValue}
+                      // onChange={setCompletionValue}
+                    />
+                  </Group>
+                </Stack>
+
+                {/* <DatePickerInput
                   maw={300}
                   // type="range"
                   label="Construction Start Date"
                   placeholder="Pick dates range"
                   value={constructionStartValue}
+                  // onChange={(event) =>
+                  //   setConstructionStartValue(event?.currentTarget?.value)
+                  // }
                   // onChange={setConstructionStartValue}
                   mx="auto"
-                />
+                /> */}
               </Grid.Col>
               <Grid.Col md={6}>
+                <Stack mx="auto" maw={300}>
+                  <Text fw={500} size="sm">
+                    Completion Date
+                  </Text>
+
+                  <Group spacing="1">
+                    <IconCalendarEvent size="1.05rem" stroke={1.5} />
+                    <Space w={10} />
+
+                    <Select
+                      maw={120}
+                      // defaultValue={auction["completionDate"].substring(
+                      //   0,
+                      //   auction["completionDate"].length - 5
+                      // )}
+                      placeholder="Season"
+                      data={["Fall", "Winter", "Spring", "Summer"]}
+                    />
+                    <Space w={10} />
+
+                    <YearPickerInput
+                      placeholder="Year"
+                      // value={completionValue}
+                      // onChange={setCompletionValue}
+                    />
+                  </Group>
+                </Stack>
+                {/* 
                 <DatePickerInput
                   maw={300}
                   // type="range"
@@ -161,7 +258,7 @@ export default function CreateAuction() {
                   value={completionValue}
                   // onChange={setCompletionValue}
                   mx="auto"
-                />
+                /> */}
               </Grid.Col>
 
               <Grid.Col xs={9} md={6} px={80}>
@@ -176,9 +273,32 @@ export default function CreateAuction() {
 
           <Stepper.Step label="Project Details" description="Details">
             {/* Detailed Info */}
-            <Space h={40} />
+            <Space h={20} />
 
-            <DetailedDescripion />
+            <SegmentedControl
+              color="blue"
+              value={detailsUploadOption}
+              onChange={setDetailsUploadOption}
+              data={[
+                { label: "Add Manually", value: "manual" },
+                { label: "Upload Excel", value: "excel" },
+              ]}
+            />
+            <Space h={40} />
+            {detailsUploadOption === "excel" ? (
+              <>
+                <Space h={20} />
+                <Container maw={600}>
+                  <Text fz="1.2rem" fw={500} color="#212529">
+                    Upload Details Table
+                  </Text>
+                  <Space h={20} />
+                  <FileDrop />
+                </Container>
+              </>
+            ) : (
+              <DetailedDescripion />
+            )}
           </Stepper.Step>
 
           <Stepper.Step
@@ -200,9 +320,9 @@ export default function CreateAuction() {
                   maw={200}
                 />
               </Grid.Col>
-              <Grid.Col md={6}>
+              {/* <Grid.Col md={6}>
                 <TimeInput mx="auto" ta="left" maw={200} label="Start time" />
-              </Grid.Col>
+              </Grid.Col> */}
               {/* <Grid.Col md={6}>
                 <NumberInput
                   mx="auto"
@@ -221,26 +341,48 @@ export default function CreateAuction() {
 
           <Stepper.Step label="Auctioned Units" description="Social media">
             <Space h={20} />
-            <AddUnit />
+
+            <SegmentedControl
+              color="blue"
+              value={unitUploadOption}
+              onChange={setUnitUploadOption}
+              data={[
+                { label: "Upload Excel", value: "excel" },
+                { label: "Add Manually", value: "manual" },
+              ]}
+            />
+
+            {unitUploadOption === "excel" ? (
+              <>
+                <Space h={40} />
+                <Container maw={600}>
+                  <Text fz="1.2rem" fw={500} color="#212529">
+                    Upload Units Table
+                  </Text>
+                  <Space h={5} />
+                  <FileDrop />
+                </Container>
+              </>
+            ) : (
+              <AddUnit />
+            )}
           </Stepper.Step>
 
           <Stepper.Completed>
             <Space h={20} />
-            <Text fz={17}>Your auction is created!</Text>
+            <Text fz={17}>Your auction is submitted for review!</Text>
             <Space h={20} />
 
             <Group position="center">
-              <Link to="/project/2">
-                <Button color="blue" onClick={nextStep}>
-                  Go to Project
-                </Button>
-              </Link>
-              <Space w={20} />
+              <a href="/builder_profile">
+                <Button color="blue">Go to My Profile</Button>
+              </a>
+              {/* <Space w={20} />
               <Link to="/auction/1">
                 <Button color="blue" onClick={nextStep}>
                   Go to Auction
-                </Button>
-              </Link>
+                </Button> */}
+              {/* </Link> */}
             </Group>
             {/* <Code block mt="xl">
               {JSON.stringify(form.values, null, 2)}
@@ -249,15 +391,21 @@ export default function CreateAuction() {
         </Stepper>
 
         <Group position="right" mt="xl">
-          {active !== 0 && (
+          {active > 0 && active < 4 && (
             <Button variant="default" onClick={prevStep}>
               Back
             </Button>
           )}
-          {active !== 3 && <Button onClick={nextStep}>Next step</Button>}
+          {active < 3 && <Button onClick={nextStep}>Next step</Button>}
 
           {active === 3 && (
-            <Button color="green" onClick={nextStep}>
+            <Button
+              color="green"
+              onClick={() => {
+                nextStep();
+                submitAuction();
+              }}
+            >
               Complete
             </Button>
           )}

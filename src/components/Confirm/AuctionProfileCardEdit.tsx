@@ -297,19 +297,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                             0,
                             auction["completionDate"].length - 5
                           )}
-                          data={[
-                            "January",
-                            "February",
-                            "March",
-                            "May",
-                            "June",
-                            "July",
-                            "August",
-                            "September",
-                            "October",
-                            "November",
-                            "December",
-                          ]}
+                          data={["Fall", "Winter", "Spring", "Summer"]}
                         />
                         <Space w={10} />
 

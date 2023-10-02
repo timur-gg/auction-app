@@ -74,7 +74,7 @@ export function AuctionNotStarted(props: any) {
   const { classes } = useStyles();
 
   const auction = props.auction;
-  const lots = auction.lots.map((lotId: number) =>
+  const lots = auction.lots?.map((lotId: number) =>
     lotsData.find((id) => id.id === lotId)
   );
 

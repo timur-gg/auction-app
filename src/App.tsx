@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { MantineProvider, AppShell, Header } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 import Inventory from "./pages/Inventory";
 import Auction from "./pages/Auction";
@@ -17,6 +18,8 @@ import BuilderProfile from "./pages/BuilderProfile";
 import Project from "./pages/Project";
 import CreateAuction from "./pages/CreateAuction";
 import ConfirmProject from "./pages/ConfirmProject";
+
+const queryClient = new QueryClient();
 
 const Main = () => {
   return (
@@ -40,38 +43,40 @@ const Main = () => {
 
 function App(): React.JSX.Element {
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <AppShell
-        padding="md"
-        header={
-          <Header height={60} p="xs">
-            <HeaderSimple
-              links={[
-                { link: "/inventory", label: "Inventory" },
-                { link: "/#faq", label: "FAQ" },
-                { link: "/auction/1", label: "Auction" },
-                { link: "/signup", label: "Signup" },
-                { link: "/client_profile", label: "Client Profile" },
-                { link: "/builder_profile", label: "Builder Profile" },
-              ]}
-            />
-          </Header>
-        }
-        styles={(theme) => ({
-          main: {
-            backgroundColor:
-              theme.colorScheme === "dark"
-                ? theme.colors.dark[8]
-                : theme.colors.gray[0],
-          },
-        })}
-      >
-        <div className="App">
-          <Main />
-        </div>
-      </AppShell>
-      <Notifications />
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <AppShell
+          padding="md"
+          header={
+            <Header height={60} p="xs">
+              <HeaderSimple
+                links={[
+                  { link: "/inventory", label: "Inventory" },
+                  { link: "/#faq", label: "FAQ" },
+                  { link: "/auction/1", label: "Auction" },
+                  { link: "/signup", label: "Signup" },
+                  { link: "/client_profile", label: "Client Profile" },
+                  { link: "/builder_profile", label: "Builder Profile" },
+                ]}
+              />
+            </Header>
+          }
+          styles={(theme) => ({
+            main: {
+              backgroundColor:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[8]
+                  : theme.colors.gray[0],
+            },
+          })}
+        >
+          <div className="App">
+            <Main />
+          </div>
+        </AppShell>
+        <Notifications />
+      </MantineProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -79,19 +79,18 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-    <Link
+    <a
       key={link.label}
-      to={link.link}
+      href={link.link}
       className={cx(classes.link, {
         [classes.linkActive]: active === link.link,
       })}
       onClick={(event) => {
-        // event.preventDefault();
         setActive(link.link);
       }}
     >
       {link.label}
-    </Link>
+    </a>
   ));
   const burgerItems = links.map((link) => (
     <Menu.Item key={link.label}>
@@ -113,14 +112,16 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   return (
     <Header height={60} mb={120}>
       <Container className={classes.header}>
-        <Center inline>
-          <ThemeIcon>
-            {" "}
-            <IconGavel size={28} />{" "}
-          </ThemeIcon>
-          <Space w={5} />
-          <Text fw={700}>Toronto PreCon Auctions</Text>
-        </Center>
+        <Link to="/" style={{ color: "black" }}>
+          <Center inline>
+            <ThemeIcon>
+              {" "}
+              <IconGavel size={28} />{" "}
+            </ThemeIcon>
+            <Space w={5} />
+            <Text fw={700}>Toronto PreCon Auctions</Text>
+          </Center>
+        </Link>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

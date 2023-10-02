@@ -16,6 +16,14 @@ import {
   Image,
   Container,
 } from "@mantine/core";
+import { ref } from "firebase/database";
+import { database } from "../db/firebase";
+
+import {
+  useDatabaseSnapshot,
+  useDatabaseUpdateMutation,
+} from "@react-query-firebase/database";
+
 import { IconCheck, IconFileDatabase, IconPencil } from "@tabler/icons-react";
 import AuctionProfileCardEdit from "../components/Confirm/AuctionProfileCardEdit";
 import data from "../data.js";
@@ -72,6 +80,7 @@ export default function ConfirmProject(props: any) {
 
   const [editAction, setEditAction] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
 
   const auction =
     data.auctionData.find((x) => x.id === id) || data.auctionData[0];
@@ -104,7 +113,7 @@ export default function ConfirmProject(props: any) {
   useEffect(() => {
     const allTabsConfirmed = tabs.every((tab) => confirmedTabs.includes(tab));
 
-    if (allTabsConfirmed) {
+    if (allTabsConfirmed && submitStatus !== "Ready for Auction") {
       setActiveTab("final");
     }
   }, [confirmedTabs]);
@@ -119,6 +128,42 @@ export default function ConfirmProject(props: any) {
       const nextTab = (tabs.indexOf(tab) + 1) % tabs.length;
       setActiveTab(tabs[nextTab]);
     }
+  };
+
+  const dbRef = ref(database, `projects/${id}`);
+  const mutation = useDatabaseUpdateMutation(dbRef);
+
+  useDatabaseSnapshot(
+    [`projects/${id}`],
+    dbRef,
+    { subscribe: true },
+    {
+      onSuccess(snapshot: any) {
+        const proj = snapshot.val();
+
+        console.log(proj.status);
+        setSubmitStatus(proj.status);
+
+        if (
+          proj.status === "Ready for Auction" ||
+          proj.status === "In Review"
+        ) {
+          setSubmitted(true);
+          setConfirmedTabs(tabs);
+          setActiveTab("overview");
+        }
+      },
+      onError(error: any) {
+        console.log(error);
+      },
+    }
+  );
+
+  const submitAuction = () => {
+    console.log("submitting");
+    mutation.mutate({
+      status: "Ready for Auction",
+    });
   };
 
   return (
@@ -240,7 +285,7 @@ export default function ConfirmProject(props: any) {
             Project Card
           </Tabs.Tab>
 
-          {allTabsConfirmed && (
+          {allTabsConfirmed && submitStatus !== "Ready for Auction" && (
             <Tabs.Tab
               fw={500}
               px="xl"
@@ -387,7 +432,10 @@ export default function ConfirmProject(props: any) {
               <Button
                 size="lg"
                 color="green"
-                onClick={() => setSubmitted(true)}
+                onClick={() => {
+                  submitAuction();
+                  setSubmitted(true);
+                }}
               >
                 Submit Project
                 <Space w={10} />
@@ -395,9 +443,16 @@ export default function ConfirmProject(props: any) {
               </Button>
             </>
           ) : (
-            <Text size="lg" fw="500">
-              Project is submitted for review!
-            </Text>
+            <>
+              {" "}
+              <Text size="lg" fw="500">
+                Project is submitted for review!
+              </Text>
+              <Space h={30} />
+              <a href="/builder_profile">
+                <Button color="blue">Go to My Profile</Button>
+              </a>
+            </>
           )}
         </Tabs.Panel>
         <Space h={30} />

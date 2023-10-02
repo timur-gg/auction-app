@@ -285,7 +285,7 @@ export default function ConfirmProject(props: any) {
             Project Card
           </Tabs.Tab>
 
-          {allTabsConfirmed && submitStatus !== "Ready for Auction" && (
+          {allTabsConfirmed && (
             <Tabs.Tab
               fw={500}
               px="xl"
@@ -297,7 +297,9 @@ export default function ConfirmProject(props: any) {
               //   onClick={() => setPlansGalleryOpen(true)}
               bg="#DCEDC8"
             >
-              Submit
+              {submitStatus === "Ready for Auction"
+                ? "Ready for Auction"
+                : "Submit"}
             </Tabs.Tab>
           )}
         </Tabs.List>
@@ -444,10 +446,15 @@ export default function ConfirmProject(props: any) {
             </>
           ) : (
             <>
-              {" "}
-              <Text size="lg" fw="500">
-                Project is submitted for review!
-              </Text>
+              {submitStatus === "Ready for Auction" ? (
+                <Text size="lg" fw="500">
+                  Your project is ready for the upcoming auction!
+                </Text>
+              ) : (
+                <Text size="lg" fw="500">
+                  Project is submitted for review!
+                </Text>
+              )}
               <Space h={30} />
               <a href="/builder_profile">
                 <Button color="blue">Go to My Profile</Button>

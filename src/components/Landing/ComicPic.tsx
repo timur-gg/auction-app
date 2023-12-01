@@ -39,14 +39,15 @@ const ComicPic = (ind: any) => {
             top: "-2%",
             height: "auto",
             backgroundColor: "#fafafa",
-            borderRadius: "4px",
+            borderRadius: "3px",
+            border: "2px black solid",
             color: "black",
-            fontSize: "18px",
+            fontSize: "17px",
             fontWeight: 400,
             maxWidth: "400px",
             textAlign: "left",
-            padding: "5px 20px",
-            fontFamily: "Roboto",
+            padding: "5px 15px",
+            fontFamily: "Comic Book",
           }}
         >
           {textLabels[ind.ind]}

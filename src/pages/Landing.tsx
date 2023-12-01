@@ -123,8 +123,7 @@ export default function Landing() {
           backgroundRepeat: "no-repeat",
           // backgroundImage: bgImg,
           // background: "rgb(148,204,221)",
-          background:
-            "linear-gradient(0deg, rgba(248,244,221,1) 46%, rgba(148,204,221,1)  62%)",
+          background: "linear-gradient(0deg, #FAF3D8 46%, #558DAB  62%)",
         }}
         withBorder
         shadow="sm"

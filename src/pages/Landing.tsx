@@ -7,11 +7,13 @@ import {
   Grid,
   Group,
   Paper,
+  Badge,
   Space,
   TextInput,
   Title,
   ThemeIcon,
   Button,
+  Image,
   Center,
   Box,
   Text,
@@ -31,6 +33,7 @@ import {
 import { auctionData } from "../data";
 import AuctionCard from "../components/inventory/AuctionCard";
 import { GetInTouchSimple } from "../components/inventory/GetInTouchSimple";
+import ComicPic from "../components/Landing/ComicPic";
 
 const sampleIds = ["1", "2", "3", "4"];
 
@@ -41,6 +44,13 @@ interface auctionType {
 const auctionSamples: auctionType[] = auctionData.filter((a) =>
   sampleIds.includes(a.id)
 );
+
+var Row1 = [
+  require("../assets/1B/1B.png"),
+  require("../assets/1B/1B.png"),
+  require("../assets/1B/1B.png"),
+  require("../assets/1B/1B.png"),
+];
 
 const useStyles = createStyles((theme) => ({
   icon: {
@@ -107,6 +117,58 @@ export default function Landing() {
 
   return (
     <>
+      <Paper
+        style={{
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          // backgroundImage: bgImg,
+          // background: "rgb(148,204,221)",
+          background:
+            "linear-gradient(0deg, rgba(248,244,221,1) 46%, rgba(148,204,221,1)  62%)",
+        }}
+        withBorder
+        shadow="sm"
+        w="100%"
+        // h={400}
+        p={25}
+        pt={30}
+        radius="xs"
+        bg="#B4DDE9"
+      >
+        <Center>
+          <Grid maw={1700}>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={0} />
+            </Grid.Col>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={1} />
+            </Grid.Col>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={2} />
+            </Grid.Col>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={3} />
+            </Grid.Col>
+          </Grid>
+        </Center>
+        <Space h={80} />
+        <Center>
+          <Grid maw={1700}>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={4} />
+            </Grid.Col>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={5} />
+            </Grid.Col>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={6} />
+            </Grid.Col>
+            <Grid.Col xs={4} sm={3} p={25}>
+              <ComicPic ind={7} />
+            </Grid.Col>
+          </Grid>
+        </Center>
+      </Paper>
       <Paper
         style={{
           backgroundSize: "cover",

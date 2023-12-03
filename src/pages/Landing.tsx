@@ -123,50 +123,20 @@ export default function Landing() {
           backgroundRepeat: "no-repeat",
           // backgroundImage: bgImg,
           // background: "rgb(148,204,221)",
-          background: "linear-gradient(0deg, #FAF3D8 46%, #558DAB  62%)",
         }}
         withBorder
         shadow="sm"
-        w="100%"
-        // h={400}
-        p={25}
-        pt={30}
+        // w="100%"
+        h="auto"
+        // p={25}
+        // pt={30}
         radius="xs"
         bg="#B4DDE9"
       >
-        <Center>
-          <Grid maw={1700}>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={0} />
-            </Grid.Col>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={1} />
-            </Grid.Col>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={2} />
-            </Grid.Col>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={3} />
-            </Grid.Col>
-          </Grid>
-        </Center>
-        <Space h={80} />
-        <Center>
-          <Grid maw={1700}>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={4} />
-            </Grid.Col>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={5} />
-            </Grid.Col>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={6} />
-            </Grid.Col>
-            <Grid.Col xs={4} sm={3} p={25}>
-              <ComicPic ind={7} />
-            </Grid.Col>
-          </Grid>
-        </Center>
+        <ComicPic ind={0} />
+        {/* <Center>
+          <ComicPic ind={0} />
+        </Center> */}
       </Paper>
       <Paper
         style={{

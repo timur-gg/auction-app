@@ -1,59 +1,156 @@
 import React from "react";
+import Autoplay from "embla-carousel-autoplay";
+import { Carousel } from "@mantine/carousel";
+import { useRef } from "react";
+import { Badge, Space, Box, Grid, Image } from "@mantine/core";
 
-import { Badge, Box, Image } from "@mantine/core";
-
-var Row2 = [
-  require("../../assets/1A/1A.png"),
-  require("../../assets/2A/2A.png"),
-  require("../../assets/3A/3A.png"),
-  require("../../assets/4A/4A.png"),
-  require("../../assets/1B/1B.png"),
-  require("../../assets/2B/2B.png"),
-  require("../../assets/3B/3B.png"),
-  require("../../assets/4B/4B.png"),
-];
-
-var textLabels = [
-  "Hours in lines in front of a sales office",
-  "You spend a lot of time and sometimes you make a mistake",
-  "",
-  "Sometiemes the price includes hidden fees",
-  "...Or just go to our website ",
-  "Plenty of good options and no pressure to make a right decision ",
-  "It’s an auction. So there is a fixed starting price for everyone",
-  "It's such a good deal!",
+var Slides = [
+  {
+    img: require("../../assets/1A/1A.png"),
+    txt: "Hours in lines in front of a sales office",
+  },
+  {
+    img: require("../../assets/1B/1B.png"),
+    txt: "...Or just go to our website ",
+  },
+  {
+    img: require("../../assets/2A/2A.png"),
+    txt: "You spend a lot of time and sometimes you make a mistake",
+  },
+  {
+    img: require("../../assets/2B/2B.png"),
+    txt: "Plenty of good options and no pressure to make a right decision ",
+  },
+  { img: require("../../assets/3A/3A.png"), txt: "" },
+  {
+    img: require("../../assets/3B/3B.png"),
+    txt: "It’s an auction. So there is a fixed starting price for everyone",
+  },
+  {
+    img: require("../../assets/4A/4A.png"),
+    txt: "Sometiemes the price includes hidden fees",
+  },
+  { img: require("../../assets/4B/4B.png"), txt: "It's such a great deal!" },
 ];
 
 const ComicPic = (ind: any) => {
-  console.log(textLabels[ind.ind].length > 0, textLabels[ind.ind].length);
+  const [width, setWidth] = React.useState(window.innerWidth);
+  const breakpoint1 = 1000;
+  const breakpoint = 760;
+  const midSize = width > breakpoint && width < breakpoint1;
+  React.useEffect(() => {
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+  }, []);
+  const autoplay = useRef(Autoplay({ delay: 3500 }));
 
   return (
-    <div style={{ position: "relative" }}>
-      <Image radius="sm" src={Row2[ind.ind]} />
-
-      {textLabels[ind.ind].length > 0 && (
-        <div
-          style={{
-            position: "absolute",
-            left: "-4%",
-            top: "-2%",
-            height: "auto",
-            backgroundColor: "#fafafa",
-            borderRadius: "3px",
-            border: "2px black solid",
-            color: "black",
-            fontSize: "17px",
-            fontWeight: 400,
-            maxWidth: "400px",
-            textAlign: "left",
-            padding: "5px 15px",
-            fontFamily: "Comic Book",
-          }}
-        >
-          {textLabels[ind.ind]}
-        </div>
-      )}
-    </div>
+    <Carousel
+      p={25}
+      py={55}
+      withIndicators
+      height="auto"
+      slideSize="100%"
+      slideGap="sm"
+      align="center"
+      loop
+      plugins={[autoplay.current]}
+      onMouseEnter={autoplay.current.stop}
+      onMouseLeave={autoplay.current.reset}
+      style={{
+        background:
+          width > breakpoint
+            ? "linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)"
+            : "linear-gradient(0deg, #558DAB 46%,  #FAF3D8 54%)",
+      }}
+    >
+      {[0, 2, 4, 6].map((i) => (
+        <Carousel.Slide>
+          <Grid justify="space-around" align="stretch">
+            <Grid.Col sm={4}>
+              <Box
+                pt="25px"
+                style={{
+                  position: "relative",
+                }}
+              >
+                {midSize && <Space h={20} />}
+                <Image
+                  mah={500}
+                  maw={500}
+                  radius="sm"
+                  src={Slides[i].img}
+                  m="auto"
+                />
+                {Slides[i].txt.length > 0 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: width > breakpoint ? "-5%" : "0%",
+                      top: "0%",
+                      height: "auto",
+                      backgroundColor: "#fafafa",
+                      borderRadius: "3px",
+                      border: "2px black solid",
+                      color: "black",
+                      fontSize: midSize ? "15px" : "18px",
+                      fontWeight: 500,
+                      maxWidth: "400px",
+                      textAlign: "left",
+                      padding: "5px 15px",
+                      // fontFamily: "Comic Book",
+                      fontFamily: "Raleway, Roboto",
+                      zIndex: "1000 !important",
+                    }}
+                  >
+                    {Slides[i].txt}
+                  </div>
+                )}
+              </Box>
+            </Grid.Col>
+            {width < breakpoint && <Space h={100} />}
+            <Grid.Col sm={4} pt={width < breakpoint ? "100px" : "8px"}>
+              <Box
+                pt="25px"
+                style={{
+                  position: "relative",
+                }}
+              >
+                {midSize && <Space h={20} />}
+                <Image
+                  mah={500}
+                  maw={500}
+                  radius="sm"
+                  src={Slides[i + 1].img}
+                  m="auto"
+                />
+                {Slides[i + 1].txt.length > 0 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: width > breakpoint ? "-5%" : "0%",
+                      top: "0%",
+                      height: "auto",
+                      backgroundColor: "#fafafa",
+                      borderRadius: "3px",
+                      border: "2px black solid",
+                      color: "black",
+                      fontSize: midSize ? "15px" : "18px",
+                      fontWeight: 500,
+                      maxWidth: "400px",
+                      textAlign: "left",
+                      padding: "5px 15px",
+                      fontFamily: "Raleway",
+                    }}
+                  >
+                    {Slides[i + 1].txt}
+                  </div>
+                )}
+              </Box>
+            </Grid.Col>
+          </Grid>
+        </Carousel.Slide>
+      ))}
+    </Carousel>
   );
 };
 

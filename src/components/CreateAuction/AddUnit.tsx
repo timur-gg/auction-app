@@ -204,14 +204,14 @@ export default function AddUnit(props: any) {
                     label="Starting Price"
                     defaultValue={100000}
                     parser={(value: string) => value.replace(/\$\s?|(,*)/g, "")}
-                    formatter={(value: string) =>
-                      !Number.isNaN(parseFloat(value))
-                        ? `$ ${value}`.replace(
-                            /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                            ","
-                          )
-                        : "$ "
-                    }
+                    // formatter={(value: string) =>
+                    //   !Number.isNaN(parseFloat(value))
+                    //     ? `$ ${value}`.replace(
+                    //         /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+                    //         ","
+                    //       )
+                    //     : "$ "
+                    // }
                   />
                 </Grid.Col>
 

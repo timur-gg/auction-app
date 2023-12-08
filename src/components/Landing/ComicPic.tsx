@@ -3,6 +3,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Carousel } from "@mantine/carousel";
 import { useRef } from "react";
 import { Badge, Space, Box, Grid, Image } from "@mantine/core";
+import "typeface-roboto";
 
 var Slides = [
   {
@@ -139,7 +140,7 @@ const ComicPic = (ind: any) => {
                       maxWidth: "400px",
                       textAlign: "left",
                       padding: "5px 15px",
-                      fontFamily: "Raleway",
+                      fontFamily: "Raleway, Roboto",
                     }}
                   >
                     {Slides[i + 1].txt}

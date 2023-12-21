@@ -121,29 +121,6 @@ export default function Landing() {
         style={{
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          // backgroundImage: bgImg,
-          // background: "rgb(148,204,221)",
-        }}
-        withBorder
-        shadow="sm"
-        // w="100%"
-        h="auto"
-        // p={25}
-        // pt={30}
-        radius="xs"
-        bg="#B4DDE9"
-      >
-        <ComicPic ind={0} />
-        {/* <Center>
-          <ComicPic ind={0} />
-        </Center> */}
-      </Paper>
-      <Space h={10} />
-
-      <Paper
-        style={{
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
           backgroundImage: bgImg,
         }}
         withBorder
@@ -170,7 +147,30 @@ export default function Landing() {
           </Group>
         </Center>
       </Paper>
+      <Space h={17} />
+      <Paper
+        style={{
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          // backgroundImage: bgImg,
+          // background: "rgb(148,204,221)",
+        }}
+        withBorder
+        shadow="sm"
+        // w="100%"
+        h="auto"
+        // p={25}
+        // pt={30}
+        radius="xs"
+        bg="#B4DDE9"
+      >
+        <ComicPic ind={0} />
+        {/* <Center>
+          <ComicPic ind={0} />
+        </Center> */}
+      </Paper>
       <Space h={10} />
+
       <Paper withBorder shadow="md" w="100%" p={15} radius="xs">
         <Space h={10} />
         <Title ta="left" order={2} color="#212121">

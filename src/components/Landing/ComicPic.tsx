@@ -52,19 +52,22 @@ const ComicPic = (ind: any) => {
           background:
             width > breakpoint
               ? "linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)"
-              : "linear-gradient(0deg, #558DAB 46%,  #FAF3D8 54%)",
+              : "#558DAB",
         }}
       >
-        <Grid.Col xs={6} pt={30}>
+        <Grid.Col xs={12} sm={6} pt={30}>
           <Title order={2} color="#EEEEEE">
             The Old Way
           </Title>
         </Grid.Col>
-        <Grid.Col xs={6} pt={30}>
-          <Title order={2} color="#546E7A">
-            Our Way
-          </Title>
-        </Grid.Col>
+
+        {width > breakpoint && (
+          <Grid.Col sm={6} pt={30}>
+            <Title order={2} color="#546E7A">
+              Our Way
+            </Title>
+          </Grid.Col>
+        )}
       </Grid>
 
       <Carousel
@@ -83,7 +86,7 @@ const ComicPic = (ind: any) => {
           background:
             width > breakpoint
               ? "linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)"
-              : "linear-gradient(0deg, #558DAB 46%,  #FAF3D8 54%)",
+              : "linear-gradient(0deg, #FAF3D8 46%,  #558DAB 54%)",
         }}
       >
         {[0, 2, 4, 6].map((i) => (
@@ -130,8 +133,15 @@ const ComicPic = (ind: any) => {
                   )}
                 </Box>
               </Grid.Col>
-              {width < breakpoint && <Space h={100} />}
+              {width < breakpoint && <Space h={50} />}
+
               <Grid.Col sm={4} pt={width < breakpoint ? "100px" : "8px"}>
+                {width < breakpoint && (
+                  <Title order={2} color="#546E7A" pt={50} pb={40}>
+                    Our Way
+                  </Title>
+                )}
+
                 <Box
                   pt="25px"
                   style={{

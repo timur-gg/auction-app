@@ -138,6 +138,8 @@ export default function Landing() {
           <ComicPic ind={0} />
         </Center> */}
       </Paper>
+      <Space h={10} />
+
       <Paper
         style={{
           backgroundSize: "cover",

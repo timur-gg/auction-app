@@ -119,7 +119,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
               <IconGavel size={28} />{" "}
             </ThemeIcon>
             <Space w={5} />
-            <Text fw={700}>Toronto PreCon Auctions</Text>
+            <Text fw={700}>Real Xchange</Text>
           </Center>
         </Link>
         <Group spacing={5} className={classes.links}>

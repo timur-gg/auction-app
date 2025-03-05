@@ -11,7 +11,7 @@ import {
   Checkbox,
   ScrollArea,
 } from "@mantine/core";
-import text from "../../text.js";
+import {text} from "../../text.js";
 
 const SignupStep6 = () => {
   const conditionText = text.auctionRules.map((rule) => (

@@ -5,7 +5,7 @@ import { Text, Group, Title } from "@mantine/core";
 type DateTimeDisplayProps = {
   value: number;
   type: string;
-  isDanger: Boolean;
+  isDanger: boolean;
 };
 
 type ShowCounterProps = {
@@ -62,13 +62,11 @@ const ShowCounter = ({
           </>
         )}
         {seconds >= 0 && (
-          <>
-            <DateTimeDisplay
+          <DateTimeDisplay
               value={seconds}
               type={"s"}
               isDanger={minutes <= 1}
             />
-          </>
         )}
       </Group>
     );

@@ -45,7 +45,7 @@ const auctionSamples: auctionType[] = auctionData.filter((a) =>
   sampleIds.includes(a.id)
 );
 
-var Row1 = [
+const Row1 = [
   require("../assets/1B/1B.png"),
   require("../assets/1B/1B.png"),
   require("../assets/1B/1B.png"),

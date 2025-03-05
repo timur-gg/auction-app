@@ -222,7 +222,7 @@ export function LotSelectionTable(props: LotSelectionProps) {
     );
   });
 
-  var filteredLots: any = lots;
+  let filteredLots: any = lots;
   filters.forEach((f) => {
     filteredLots = filteredLots.filter(FILTER_MAP[f]);
   });

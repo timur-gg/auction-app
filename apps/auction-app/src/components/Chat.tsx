@@ -25,7 +25,7 @@ const ExtendedInput = (props: any) => {
   );
 };
 
-let messages = {};
+const messages = {};
 
 // const addMessage() => {
 

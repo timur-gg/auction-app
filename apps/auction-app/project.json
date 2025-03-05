@@ -10,7 +10,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/auction-app",
-        "index": "apps/auction-app/public/indexx.html",
+        "index": "apps/auction-app/public/index.html",
         "main": "apps/auction-app/src/index.tsx",
         "tsConfig": "apps/auction-app/tsconfig.json",
         "assets": ["apps/auction-app/src/assets"]

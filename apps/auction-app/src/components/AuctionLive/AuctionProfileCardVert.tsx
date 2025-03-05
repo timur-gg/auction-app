@@ -22,7 +22,7 @@ import {
   IconLock,
 } from "@tabler/icons-react";
 import React from "react";
-var mapImg = require("../../img/map.png");
+const mapImg = require("../../img/map.png");
 
 const useStyles = createStyles((theme) => ({
   card: {

@@ -26,7 +26,7 @@ import {
 
 import { IconCheck, IconFileDatabase, IconPencil } from "@tabler/icons-react";
 import AuctionProfileCardEdit from "../components/Confirm/AuctionProfileCardEdit.js";
-import data from "../data.js";
+import {data} from "../data.js";
 import { useParams } from "react-router-dom";
 import AuctionProfileCard from "../components/AuctionUpcoming/AuctionProfileCard.js";
 import AuctionDetails from "../components/AuctionUpcoming/AuctionDetails.js";

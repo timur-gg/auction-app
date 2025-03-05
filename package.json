@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npx nx build auction-app && npx nx serve auction-app  --open",
+    "auction-targets": "npx nx show project auction-app --web",
     "start-landing": "npx nx build auction-app && npx nx serve auction-app  --open"
   },
   "private": true,

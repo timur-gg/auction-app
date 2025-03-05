@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
-import data from "../data.js";
+import {data} from "../data.js";
 
 import { rem, createStyles, Container } from "@mantine/core";
 import { useParams } from "react-router";

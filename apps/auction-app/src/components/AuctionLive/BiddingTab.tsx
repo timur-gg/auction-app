@@ -150,8 +150,8 @@ export function BiddingTab(props: any) {
 
   console.log(tempValue, lot.bid * 1000, tempValue === lot.bid * 1000);
 
-  let valueChanged = tempValue !== lot.bid * 1000;
-  let increment = lot.bid * 1000 * 0.01;
+  const valueChanged = tempValue !== lot.bid * 1000;
+  const increment = lot.bid * 1000 * 0.01;
 
   type countdownProps = {
     [key: string]: any;
@@ -450,11 +450,9 @@ export function BiddingTab(props: any) {
 
                 <Stack align="center" spacing={5}>
                   {valueChanged ? (
-                    <>
-                      <Text color="green" fw={700} fz={17}>
+                    <Text color="green" fw={700} fz={17}>
                         + {lot.bid * 1000 * 0.01}
                       </Text>
-                    </>
                   ) : (
                     <Space h={26.64} />
                   )}

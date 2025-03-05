@@ -217,16 +217,16 @@ const Inventory = () => {
   ) {
     console.info(prices, priceRange, bedroomFilter);
     if (bedroomFilter > 0) {
-      let bedroomPrice = prices[bedroomFilter];
+      const bedroomPrice = prices[bedroomFilter];
       return (
         bedroomPrice >= (priceRange[0] + 20) * 12.5 &&
         bedroomPrice <= (priceRange[1] + 20) * 12.5
       );
     } else {
-      let priceValues = Object.values(prices);
+      const priceValues = Object.values(prices);
 
       for (let i = 0; i < priceValues.length; i++) {
-        let pv = priceValues[i];
+        const pv = priceValues[i];
         console.log(pv);
         if (
           pv >= (priceRange[0] + 20) * 12.5 &&
@@ -265,7 +265,7 @@ const Inventory = () => {
     // Completed: (auction) => auction.completed,
   };
 
-  var filteredAuctions: auctionType[] = auctionData;
+  let filteredAuctions: auctionType[] = auctionData;
   filters.forEach((f) => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });

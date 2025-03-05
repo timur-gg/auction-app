@@ -21,13 +21,13 @@ import {
   Tabs,
   Table,
 } from "@mantine/core";
-import AuctionProfileCard from "./AuctionProfileCard";
-import AuctionConfirmation from "./AuctionConfirmation";
-import AuctionDetails from "./AuctionDetails";
+import AuctionProfileCard from "./AuctionProfileCard.js";
+import AuctionConfirmation from "./AuctionConfirmation.js";
+import AuctionDetails from "./AuctionDetails.js";
 
-import { LotPreviewTable } from "./LotPreviewTable";
+import { LotPreviewTable } from "./LotPreviewTable.js";
 import { useState } from "react";
-import { LotSelectionTable } from "./LotSelectionTable";
+import { LotSelectionTable } from "./LotSelectionTable.js";
 import { notifications } from "@mantine/notifications";
 import { useNavigate } from "react-router-dom";
 import GoogleMapReact from "google-map-react";
@@ -47,7 +47,7 @@ import { lots } from "../../data.js";
 import text from "../../text.js";
 
 import { useDisclosure } from "@mantine/hooks";
-import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert";
+import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
 import { Carousel } from "@mantine/carousel";
 // import mapImg from;
 

@@ -1,11 +1,7 @@
-import React from "react";
-import AuctionProfileCard from "../components/AuctionUpcoming/AuctionProfileCard";
-import ShowCounter from "../components/AuctionLive/ShowCounter";
-
-import PricePlot from "../components/AuctionLive/PricePlot";
+ 
 
 import { useState, useRef } from "react";
-import data from "../data.js";
+import {data} from "../data";
 
 import {
   Card,
@@ -22,10 +18,9 @@ import {
   Paper,
 } from "@mantine/core";
 import { useParams } from "react-router";
-import { AuctionUpcoming } from "../components/AuctionUpcoming/AuctionUpcoming";
-import { AuctionLive } from "../components/AuctionLive/AuctionLive";
-import { AuctionPassed } from "../components/AuctionPassed/AuctionPassed";
-import { AuctionNotStarted } from "../components/AuctionUpcoming/AuctionNotStarted";
+import { AuctionLive } from "../components/AuctionLive/AuctionLive.js";
+import { AuctionPassed } from "../components/AuctionPassed/AuctionPassed.js";
+import { AuctionNotStarted } from "../components/AuctionUpcoming/AuctionNotStarted.js";
 
 const useStyles = createStyles((theme) => ({
   card: {

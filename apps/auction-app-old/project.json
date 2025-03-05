@@ -1,7 +1,7 @@
 {
-  "name": "auction-app",
+  "name": "auction-app-old",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/auction-app/src",
+  "sourceRoot": "apps/auction-app-old/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -10,8 +10,8 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/auction-app",
-        "index": "apps/auction-app/public/indexx.html",
-        "main": "apps/auction-app/src/index.tsx",
+        "index": "apps/auction-app-old/public/indexx.html",
+        "main": "apps/auction-app/src/main.tsx",
         "tsConfig": "apps/auction-app/tsconfig.json",
         "assets": ["apps/auction-app/src/assets"]
       }
@@ -19,7 +19,7 @@
     "serve": {
       "executor": "@nx/vite:dev-server",
       "options": {
-        "buildTarget": "auction-app:build"
+        "buildTarget": "auction-app-old:build"
       }
     }
   }

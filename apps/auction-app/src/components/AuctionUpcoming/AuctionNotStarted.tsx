@@ -14,8 +14,8 @@ import {
   Button,
   Modal,
 } from "@mantine/core";
-import ShowCounter from "../AuctionLive/ShowCounter";
-import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert";
+import ShowCounter from "../AuctionLive/ShowCounter.js";
+import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
 import {
   IconCalendarEvent,
   IconMoneybag,
@@ -23,7 +23,7 @@ import {
   IconHomeCancel,
 } from "@tabler/icons-react";
 import { lots as lotsData } from "../../data.js";
-import { BiddingTab } from "../AuctionLive/BiddingTab";
+import { BiddingTab } from "../AuctionLive/BiddingTab.js";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
 import { close } from "inspector";

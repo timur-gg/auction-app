@@ -13,11 +13,11 @@ import {
 export default function Example(props) {
   return (
     <XYPlot width={400} height={200}>
-      <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
-      <VerticalGridLines />
+     <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
+       {/* <VerticalGridLines />
       <HorizontalGridLines />
-      <XAxis tickFormat={v => Number.isInteger(v) ? `${v} bid`: ''}/>
-      <YAxis tickFormat={v => `${v}k`}/>
+      <XAxis tickFormat={v => Number.isInteger(v) ? `${v} bid`: 'bid'}/>
+      <YAxis tickFormat={v => `${v}k`}/>*/} 
       <LineMarkSeries
         className="linemark-series-example"
         style={{
@@ -31,7 +31,7 @@ export default function Example(props) {
         className="linemark-series-example-2"
         curve={'curveMonotoneX'}
         data={[{x: 1, y: 11}, {x: 1.5, y: 29}, {x: 3, y: 7}]}
-      /> */}
+      />  */} 
     </XYPlot>
   );
 }

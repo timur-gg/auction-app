@@ -15,7 +15,7 @@ import {
   IconMoneybag,
   IconClock,
 } from "@tabler/icons-react";
-import { lots as lotsData } from "../../data.js";
+import { ILot, lots as lotsData } from "../../data.js";
 import { BiddingTab } from "./BiddingTab.js";
 
 const useStyles = createStyles((theme) => ({
@@ -117,8 +117,8 @@ export function AuctionLive(props: any) {
         <Space h={10} />
 
         <Grid justify="center">
-          {lots.map((lot: any) => (
-            <Grid.Col {...(lots.length > 1 ? { md: 6 } : { md: 10 })}>
+          {lots.map((lot: ILot, inx: number) => (
+            <Grid.Col key={inx} {...(lots.length > 1 ? { md: 6 } : { md: 10 })}>
               <BiddingTab lot={lot} half={lots.length > 1} />
             </Grid.Col>
           ))}

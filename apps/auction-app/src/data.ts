@@ -246,7 +246,7 @@ export const auctionData = [
       lng: -0.134,
     },
   ]
-  export const lots=[
+  export const lots: ILot[]=[
     {
       id: 1,
       bedroom: 0,
@@ -297,6 +297,8 @@ export const auctionData = [
       place: 1,
       registeredTotal: 15,
       facing: "E",
+      timeLeft: 135000,
+
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
@@ -316,6 +318,8 @@ export const auctionData = [
       position: 1,
       registeredTotal: 11,
       facing: "W",
+      timeLeft: 135000,
+
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
@@ -334,6 +338,8 @@ export const auctionData = [
       bid: 1000,
       position: 3,
       facing: "N",
+      timeLeft: 135000,
+
       registeredTotal: 9,
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
@@ -352,6 +358,8 @@ export const auctionData = [
       soldPrice: 1400,
       bid: 1250,
       position: 6,
+      timeLeft: 135000,
+
       registeredTotal: 34,
       facing: "S",
       planLink:
@@ -362,3 +370,28 @@ export const auctionData = [
 
 
   export const data= {auctionData, lots}
+
+
+
+
+
+ export interface ILot {
+    id: number;
+    floor: number;
+     totalBids?: number;
+    position?: number;
+    soldPrice?: number;
+    registeredTotal: number;
+    planLink: string;
+     unit: number | string;
+    bedroom: number;
+    facing: string;
+    size: number;
+    parking: number;
+    locker: number;
+    bathroom: number;
+    bid: number;
+    price: number;
+    timeLeft: number;
+    place?: number;
+  }

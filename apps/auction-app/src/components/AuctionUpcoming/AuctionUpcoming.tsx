@@ -51,7 +51,13 @@ import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
 import { Carousel } from "@mantine/carousel";
 // import mapImg from;
 
-const mapImg = require("../../img/map.png");
+import mapImg from "../../img/map.png";
+
+import floorPlan1 from "../../assets/floorPlan1.png";
+import floorPlan2 from "../../assets/floorPlan2.png";
+import floorPlan3 from "../../assets/floorPlan3.png";
+import floorPlan4 from "../../assets/floorPlan4.png";
+import pinAsset from "../../assets/pin.png"
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -124,10 +130,10 @@ const mockdata = [
 // };
 
 const floorPlans = [
-  require("../../assets/floorPlan1.png"),
-  require("../../assets/floorPlan2.png"),
-  require("../../assets/floorPlan3.png"),
-  require("../../assets/floorPlan4.png"),
+  floorPlan1,
+  floorPlan2,
+  floorPlan3,
+  floorPlan4,
 ];
 
 export function AuctionUpcoming(props: any) {
@@ -263,7 +269,7 @@ export function AuctionUpcoming(props: any) {
             height: "100%",
             filter: selected ? "contrast(150%)" : "",
           }}
-          src={require("../../assets/pin.png")}
+          src={pinAsset}
           alt="logo"
         />
       </div>
@@ -791,7 +797,7 @@ export function AuctionUpcoming(props: any) {
                   lng={auction.lng}
                   text={auction.id}
                   id={auction.id}
-                  icon={require("../../assets/pin.png")}
+                  icon={pinAsset}
                   // selected={selectedAuction.toString() === id}
                 />
               </GoogleMapReact>

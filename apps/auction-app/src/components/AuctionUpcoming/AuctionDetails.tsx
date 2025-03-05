@@ -23,7 +23,8 @@ import {
   IconPropeller,
 } from "@tabler/icons-react";
 import React from "react";
-const mapImg = require("../../img/map.png");
+import mapImg from "../../img/map.png";
+
 
 const useStyles = createStyles((theme) => ({
   card: {

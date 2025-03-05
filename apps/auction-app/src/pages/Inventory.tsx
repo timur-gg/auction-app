@@ -46,6 +46,7 @@ import PriceFilter from "../components/inventory/PriceFilter";
 import SizeFilter from "../components/inventory/SizeFilter";
 
 import { auctionData } from "../data";
+import pinAsset from "../assets/pin.png"
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
@@ -347,7 +348,7 @@ const Inventory = () => {
             height: "100%",
             filter: selected ? "contrast(150%)" : "",
           }}
-          src={require("../assets/pin.png")}
+          src={pinAsset}
           alt="logo"
         />
       </div>
@@ -628,7 +629,7 @@ const Inventory = () => {
                     lng={lng}
                     text={id}
                     id={id}
-                    icon={require("../assets/pin.png")}
+                    icon={pinAsset}
                     selected={selectedAuction.toString() === id}
                   />
                 );

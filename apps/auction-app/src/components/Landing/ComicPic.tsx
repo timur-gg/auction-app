@@ -4,34 +4,42 @@ import { Carousel } from "@mantine/carousel";
 import { useRef } from "react";
 import { Badge, Space, Box, Grid, Image, Title } from "@mantine/core";
 import "typeface-roboto";
+import comic1 from "../../assets/1B/1B.png";
+import comic2 from "../../assets/1A/1A.png";
+import comic3 from "../../assets/2A/2A.png";
+import comic4 from "../../assets/2B/2B.png";
+import comic5 from "../../assets/3A/3A.png";
+import comic6 from "../../assets/3B/3B.png";
+import comic7 from "../../assets/4A/4A.png";
+import comic8 from "../../assets/4B/4B.png";
 
 const Slides = [
   {
-    img: require("../../assets/1A/1A.png"),
+    img: comic1,
     txt: "Hours in lines in front of a sales office",
   },
   {
-    img: require("../../assets/1B/1B.png"),
+    img: comic2,
     txt: "...Or just go to our website ",
   },
   {
-    img: require("../../assets/2A/2A.png"),
+    img: comic3,
     txt: "You spend a lot of time and sometimes you make a mistake",
   },
   {
-    img: require("../../assets/2B/2B.png"),
+    img: comic4,
     txt: "Plenty of good options and no pressure to make a right decision ",
   },
-  { img: require("../../assets/3A/3A.png"), txt: "" },
+  { img: comic5, txt: "" },
   {
-    img: require("../../assets/3B/3B.png"),
+    img: comic6,
     txt: "It’s an auction. So there is a fixed starting price for everyone",
   },
   {
-    img: require("../../assets/4A/4A.png"),
+    img: comic7,
     txt: "Sometiemes the price includes hidden fees",
   },
-  { img: require("../../assets/4B/4B.png"), txt: "It's such a great deal!" },
+  { img: comic8, txt: "It's such a great deal!" },
 ];
 
 const ComicPic = (ind: any) => {

@@ -34,6 +34,10 @@ import { auctionData } from "../data";
 import AuctionCard from "../components/inventory/AuctionCard";
 import { GetInTouchSimple } from "../components/inventory/GetInTouchSimple";
 import ComicPic from "../components/Landing/ComicPic";
+import img1 from "../assets/1B/1B.png";
+import img2 from "../assets/1B/1B.png";
+import img3 from "../assets/1B/1B.png";
+import img4 from "../assets/1B/1B.png";
 
 const sampleIds = ["1", "2", "3", "4"];
 
@@ -46,10 +50,10 @@ const auctionSamples: auctionType[] = auctionData.filter((a) =>
 );
 
 const Row1 = [
-  require("../assets/1B/1B.png"),
-  require("../assets/1B/1B.png"),
-  require("../assets/1B/1B.png"),
-  require("../assets/1B/1B.png"),
+  img1,
+  img2,
+  img3,
+  img4,
 ];
 
 const useStyles = createStyles((theme) => ({

@@ -13,7 +13,14 @@
         "index": "apps/auction-app/public/index.html",
         "main": "apps/auction-app/src/index.tsx",
         "tsConfig": "apps/auction-app/tsconfig.json",
-        "assets": ["apps/auction-app/src/assets"]
+        "assets":  [
+          "apps/auction-app/src/assets",
+          {
+            "input": "apps/auction-app/src/assets",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ]
       }
     },
     "serve": {

@@ -27,7 +27,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 
-const mapImg = require("../../img/map.png");
+import mapImg from "../../img/map.png";
+
 
 const useStyles = createStyles((theme) => ({
   card: {

@@ -4,9 +4,9 @@ import data from "../data.js";
 
 import { rem, createStyles, Container } from "@mantine/core";
 import { useParams } from "react-router";
-import { AuctionUpcoming } from "../components/AuctionUpcoming/AuctionUpcoming";
-import { AuctionLive } from "../components/AuctionLive/AuctionLive";
-import { AuctionPassed } from "../components/AuctionPassed/AuctionPassed";
+import { AuctionUpcoming } from "../components/AuctionUpcoming/AuctionUpcoming.js";
+import { AuctionLive } from "../components/AuctionLive/AuctionLive.js";
+import { AuctionPassed } from "../components/AuctionPassed/AuctionPassed.js";
 
 const useStyles = createStyles((theme) => ({
   card: {

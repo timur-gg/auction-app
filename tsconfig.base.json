@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -15,8 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@auction-app/app-state": ["app-state/src/index.ts"],
-      "@auction-app/ui-components": ["libs/ui-components/src/index.ts"]
+      "@auction-app/app-state": ["libs/app-state/src/index.ts"],
+      "@auction-app/ui-components": ["libs/ui-components/src/index.ts"],
+      "@mocks/*": ["apps/auction-app/src/mocks/*"]
     }
   },
   "include": ["./src/"],

@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "paths": {
-      "@mocks/*": ["src/mocks/*"], // Ensure this matches the alias defined for Vite
-      "@styles/*": ["src/styles/*"] // Ensure this matches the alias defined for Vite
-    },
     "jsx": "react-jsx",
     "allowJs": false,
     "esModuleInterop": false,
@@ -21,5 +17,5 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "extends": "../tsconfig.base.json"
+  "extends": "../../tsconfig.base.json"
 }

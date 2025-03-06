@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Badge, Space, Box, Grid, Image, Title } from "@mantine/core";
 import "typeface-roboto";
 
-const Slides = [
+var Slides = [
   {
     img: require("../../assets/1A/1A.png"),
     txt: "Hours in lines in front of a sales office",

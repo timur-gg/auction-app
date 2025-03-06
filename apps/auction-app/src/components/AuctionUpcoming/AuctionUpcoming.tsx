@@ -44,14 +44,14 @@ import {
 } from "@tabler/icons-react";
 import { MRT_RowSelectionState } from "mantine-react-table";
 import { lots } from "../../data.js";
-import {text} from "../../text.js";
+import text from "../../text.js";
 
 import { useDisclosure } from "@mantine/hooks";
 import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
 import { Carousel } from "@mantine/carousel";
 // import mapImg from;
 
-const mapImg = require("../../img/map.png");
+var mapImg = require("../../img/map.png");
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -173,7 +173,7 @@ export function AuctionUpcoming(props: any) {
   const pickedUnitsSelection: { [key: number]: any } = {};
 
   if (registered) {
-    pickedUnits.forEach((num: string) => {
+    pickedUnits.forEach((num: String) => {
       lots.forEach((lot, i) => {
         if (lot.unit === num) {
           console.log(num, i);

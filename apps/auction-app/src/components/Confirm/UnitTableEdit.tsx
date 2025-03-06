@@ -184,7 +184,7 @@ export function UnitTableEdit(props: LotSelectionProps) {
     );
   });
 
-  let filteredLots: any = lots;
+  var filteredLots: any = lots;
   filters.forEach((f) => {
     filteredLots = filteredLots.filter(FILTER_MAP[f]);
   });

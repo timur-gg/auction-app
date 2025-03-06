@@ -134,12 +134,12 @@ let favorites = [
 export default function ClientProfile() {
   const { classes } = useStyles();
 
-  const [removedFaveRows, setRemovedFaveRows] = useState<number[]>([]);
+  const [removedFaveRows, setRemovedFaveRows] = useState<Number[]>([]);
   const [removedFaveProjectRows, setRemovedFaveProjectRows] = useState<
-    number[]
+    Number[]
   >([]);
 
-  const [removedAuctionRows, setRemovedAuctionRows] = useState<string[]>([]);
+  const [removedAuctionRows, setRemovedAuctionRows] = useState<String[]>([]);
 
   const deleteFave = (lot: any) => {
     setRemovedFaveRows([...removedFaveRows, lot.id]);
@@ -223,7 +223,7 @@ export default function ClientProfile() {
                     href={ExampleDoc}
                     download="MyExampleDoc"
                     target="_blank"
-                    style={{ textDecoration: "none" }} rel="noreferrer"
+                    style={{ textDecoration: "none" }}
                   >
                     <Text color="blue">Terms and Conditions</Text>
                   </a>

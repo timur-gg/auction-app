@@ -1,4 +1,4 @@
-export const text = {
+module.exports = {
   auctionRules: [
     {
       title: "Registration",

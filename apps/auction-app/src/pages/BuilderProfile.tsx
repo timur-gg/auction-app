@@ -307,7 +307,7 @@ export default function BuilderProfile() {
                       href={ExampleDoc}
                       download="MyExampleDoc"
                       target="_blank"
-                      style={{ textDecoration: "none" }} rel="noreferrer"
+                      style={{ textDecoration: "none" }}
                     >
                       <Text color="blue">Terms and Conditions</Text>
                     </a>

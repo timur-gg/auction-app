@@ -13,7 +13,7 @@ import AuctionProfileCardVert from "./AuctionProfileCardVert.js";
 import { ILot, lots as lotsData } from "../../data.js";
 import { BiddingTab } from "./BiddingTab.js";
 import {auctionLiveStyle} from "../../syles/theme";
-import {auctionMockdata} from "@mocks/auction.ts";
+import { auctionMockdata } from "@mocks/auction";
 
 
 const useStyles = createStyles((theme) => (
@@ -21,10 +21,8 @@ const useStyles = createStyles((theme) => (
 ));
 
 
-export function AuctionLive(props: any) {
+export function AuctionLive({auction}:{auction:any}) {
   const { classes } = useStyles();
-
-  const auction = props.auction;
 
   const lots = auction.lots.map((lotId: number) =>
     lotsData.find((id) => id.id === lotId)

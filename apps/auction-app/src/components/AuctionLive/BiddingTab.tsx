@@ -100,7 +100,7 @@ const unitMockdata = [
 
 
 
-export function BiddingTab( lot: ILot, half:boolean = false ) {
+export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
   const { classes } = useStyles();
 
   const [

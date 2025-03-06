@@ -31,7 +31,6 @@ import { BidSelector } from "./BidSelector";
 import ShowCounter from "./ShowCounter";
 import { useDisclosure } from "@mantine/hooks";
 import Countdown from "react-countdown";
-import { ILot } from "../../data";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -98,12 +97,7 @@ const unitMockdata = [
   { label: "bathroom", icon: IconBath, sz: 1 },
 ];
 
-interface BiddingTabProps {
-  lot: ILot;
-  half?: boolean;
-}
-
-export function BiddingTab( lot: ILot, half:boolean = false ) {
+export function BiddingTab(props: any) {
   const { classes } = useStyles();
 
   const [
@@ -113,7 +107,11 @@ export function BiddingTab( lot: ILot, half:boolean = false ) {
   const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] =
     useDisclosure(false);
 
+  const lot = props.lot;
+
   const currentPlace = lot.place || 2;
+
+  const half = props.half || false;
 
   const [tempValue, setTempValue] = useState<number | 0>(lot.bid * 1000);
   const [value, setValue] = useState<number | "">(0);
@@ -138,7 +136,7 @@ export function BiddingTab( lot: ILot, half:boolean = false ) {
       <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
-          {(lot as any)[feature.label] + (feature.unit ? feature.unit : "")}
+          {lot[feature.label] + (feature.unit ? feature.unit : "")}
         </Text>
       </Group>
     </Grid.Col>
@@ -279,7 +277,7 @@ export function BiddingTab( lot: ILot, half:boolean = false ) {
         </Card.Section>
 
         {status === "live" && (
-          <Card.Section className={classes.section}  >
+          <Card.Section className={classes.section} pb={0}>
             <Grid align="center" justify="center">
               <Grid.Col span="auto">
                 <Grid>
@@ -318,8 +316,7 @@ export function BiddingTab( lot: ILot, half:boolean = false ) {
                 <Center>
                   <PricePlot />
                 </Center>
-              </Grid.Col> 
-               
+              </Grid.Col>
             </Grid>
           </Card.Section>
         )}

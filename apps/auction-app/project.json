@@ -19,11 +19,6 @@
             "input": "apps/auction-app/src/assets",
             "glob": "**/*",
             "output": "assets"
-          },
-          {
-            "input": "node_modules/typeface-roboto/files",
-            "glob": "**/*",
-            "output": "assets/fonts"
           }
         ]
       }

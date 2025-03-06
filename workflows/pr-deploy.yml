@@ -1,0 +1,30 @@
+name: PR Deploy Check
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build affected apps
+        run: npx nx affected --target=build --base=origin/master --head=HEAD
+
+      - name: Deploy affected apps
+        run: npx nx affected --target=deploy --base=origin/master --head=HEAD
+

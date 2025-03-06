@@ -10,10 +10,6 @@ export default defineConfig({
   server: {
     port: 4200,
     host: 'localhost',
-    watch: {
-      usePolling:true,
-      ignored: ['**/node_modules/**', '**/dist/**']
-    }
   },
   preview: {
     port: 4300,

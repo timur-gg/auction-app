@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npx npx nx serve auction-app --verbose --open",
-    "build": "npx npx nx build auction-app --verbose --open",
+    "start": "npx nx build auction-app && npx nx serve auction-app  --open",
     "auction-targets": "npx nx show project auction-app --web",
     "start-landing": "npx nx build auction-app && npx nx serve auction-app  --open"
   },

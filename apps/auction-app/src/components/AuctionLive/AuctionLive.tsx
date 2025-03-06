@@ -10,11 +10,6 @@ import {
 } from "@mantine/core";
 import ShowCounter from "./ShowCounter.js";
 import AuctionProfileCardVert from "./AuctionProfileCardVert.js";
-import {
-  IconCalendarEvent,
-  IconMoneybag,
-  IconClock,
-} from "@tabler/icons-react";
 import { ILot, lots as lotsData } from "../../data.js";
 import { BiddingTab } from "./BiddingTab.js";
 import {auctionLiveStyle} from "../../syles/theme";

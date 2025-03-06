@@ -14,8 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@auction-app/app-state": ["app-state/src/index.ts"],
+      "@auction-app/ui-components": ["libs/ui-components/src/index.ts"]
+    }
   },
-  "include": [  "./src/"],
+  "include": ["./src/"],
   "exclude": ["node_modules", "tmp"]
 }

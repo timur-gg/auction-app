@@ -1,0 +1,10 @@
+.rug .rug-handle .rug-handle-info .rug-handle-drop-text {
+    font-size: 16px; }
+
+    .rug .rug-handle svg.rug-handle-icon {
+        width: 30px; }
+
+        .rug .rug-handle {
+            height: 180px;}
+
+            .rug .rug-handle .rug-handle-info span {font-size: 12px;padding:5px;}

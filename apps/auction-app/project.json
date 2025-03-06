@@ -1,0 +1,38 @@
+{
+  "name": "auction-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/auction-app/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/auction-app",
+        "index": "apps/auction-app/public/index.html",
+        "main": "apps/auction-app/src/index.tsx",
+        "tsConfig": "apps/auction-app/tsconfig.json",
+        "assets":  [
+          "apps/auction-app/src/assets",
+          {
+            "input": "apps/auction-app/src/assets",
+            "glob": "**/*",
+            "output": "assets"
+          },
+          {
+            "input": "node_modules/typeface-roboto/files",
+            "glob": "**/*",
+            "output": "assets/fonts"
+          }
+        ]
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "buildTarget": "auction-app:build"
+      }
+    }
+  }
+}

@@ -27,8 +27,7 @@ import {
 import { Carousel, useAnimationOffsetEffect } from "@mantine/carousel";
 import React from "react";
 import { useDisclosure } from "@mantine/hooks";
-import mapImg from "../../img/map.png";
-
+const mapImg = require("../../img/map.png");
 
 const useStyles = createStyles((theme) => ({
   card: {

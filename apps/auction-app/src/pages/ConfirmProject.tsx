@@ -40,10 +40,6 @@ import RUG from "react-upload-gallery";
 import "../components/Confirm/rug_style.css";
 import AuctionCard from "../components/inventory/AuctionCard.js";
 
-import floorPlan1 from "../assets/floorPlan1.png";
-import floorPlan2 from "../assets/floorPlan2.png";
-import floorPlan3 from "../assets/floorPlan3.png";
-import floorPlan4 from "../assets/floorPlan4.png";
 const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor:
@@ -70,11 +66,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const floorPlans = [
-floorPlan1,
-floorPlan2,
-floorPlan3,
-floorPlan4,
-
+  require("../assets/floorPlan1.png"),
+  require("../assets/floorPlan2.png"),
+  require("../assets/floorPlan3.png"),
+  require("../assets/floorPlan4.png"),
 ];
 
 const tabs = ["overview", "details", "units", "plans", "card"];

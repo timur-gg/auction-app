@@ -1,0 +1,25 @@
+{
+    "name": "auction-app-2",
+    "root": "temp/auction-app",
+    "sourceRoot": "temp/auction-app/src",
+    "projectType": "application",
+    "targets": {
+      "build": {
+        "executor": "@nrwl/web:build",
+        "outputs": ["{options.outputPath}"],
+        "options": {
+          "outputPath": "dist/temp/auction-app",
+          "index": "temp/auction-app/public/index.html",
+          "main": "temp/auction-app/src/index.tsx",
+          "tsConfig": "temp/auction-app/tsconfig.json",
+          "assets": ["temp/auction-app/src/assets"]
+        }
+      },
+      "serve": {
+        "executor": "@nrwl/web:dev-server",
+        "options": {
+          "buildTarget": "auction-app:build"
+        }
+      }
+    }
+  }

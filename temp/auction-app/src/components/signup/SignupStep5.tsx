@@ -12,7 +12,7 @@ import {
   Title,
   Checkbox,
 } from "@mantine/core";
-import Countdown from "./Countdown.js";
+import Countdown from "./Countdown";
 import text from "../../text.js";
 import { IconCircleCheck } from "@tabler/icons-react";
 

@@ -17,7 +17,7 @@ import {
   Container,
 } from "@mantine/core";
 import { ref } from "firebase/database";
-import { database } from "../db/firebase.js";
+import { database } from "../db/firebase";
 
 import {
   useDatabaseSnapshot,
@@ -25,20 +25,20 @@ import {
 } from "@react-query-firebase/database";
 
 import { IconCheck, IconFileDatabase, IconPencil } from "@tabler/icons-react";
-import AuctionProfileCardEdit from "../components/Confirm/AuctionProfileCardEdit.js";
+import AuctionProfileCardEdit from "../components/Confirm/AuctionProfileCardEdit";
 import data from "../data.js";
 import { useParams } from "react-router-dom";
-import AuctionProfileCard from "../components/AuctionUpcoming/AuctionProfileCard.js";
-import AuctionDetails from "../components/AuctionUpcoming/AuctionDetails.js";
-import AuctionDetailsEdit from "../components/Confirm/AuctionDetailsEdit.js";
-import { LotSelectionTable } from "../components/AuctionUpcoming/LotSelectionTable.js";
-import { UnitTableEdit } from "../components/Confirm/UnitTableEdit.js";
+import AuctionProfileCard from "../components/AuctionUpcoming/AuctionProfileCard";
+import AuctionDetails from "../components/AuctionUpcoming/AuctionDetails";
+import AuctionDetailsEdit from "../components/Confirm/AuctionDetailsEdit";
+import { LotSelectionTable } from "../components/AuctionUpcoming/LotSelectionTable";
+import { UnitTableEdit } from "../components/Confirm/UnitTableEdit";
 import { lots } from "../data.js";
-import FileDrop from "../components/signup/FileDrop.js";
+import FileDrop from "../components/signup/FileDrop";
 import { Carousel } from "@mantine/carousel";
 import RUG from "react-upload-gallery";
 import "../components/Confirm/rug_style.css";
-import AuctionCard from "../components/inventory/AuctionCard.js";
+import AuctionCard from "../components/inventory/AuctionCard";
 
 const useStyles = createStyles((theme) => ({
   card: {

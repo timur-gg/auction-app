@@ -29,9 +29,9 @@ import {
   IconStar,
   IconPencil,
 } from "@tabler/icons-react";
-import FavoritesTable from "../components/ClientProfile/FavoritesTable.js";
-import AuctionsTable from "../components/ClientProfile/AuctionsTable.js";
-import ProjectsTable from "../components/ClientProfile/ProjectsTable.js";
+import FavoritesTable from "../components/ClientProfile/FavoritesTable";
+import AuctionsTable from "../components/ClientProfile/AuctionsTable";
+import ProjectsTable from "../components/ClientProfile/ProjectsTable";
 
 const useStyles = createStyles((theme) => ({
   icon: {

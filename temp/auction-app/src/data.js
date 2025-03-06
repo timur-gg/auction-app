@@ -1,4 +1,5 @@
-export const auctionData = [
+module.exports = {
+  auctionData: [
     {
       id: "1",
       images: [
@@ -237,8 +238,8 @@ export const auctionData = [
       lat: 51.545,
       lng: -0.134,
     },
-  ]
-  export const lots=[
+  ],
+  lots: [
     {
       id: 1,
       bedroom: 0,
@@ -349,8 +350,5 @@ export const auctionData = [
       planLink:
         "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg",
     },
-  ]
-
-
-
-  export const data= {auctionData, lots}
+  ],
+};

@@ -98,10 +98,7 @@ const unitMockdata = [
   { label: "bathroom", icon: IconBath, sz: 1 },
 ];
 
-interface BiddingTabProps {
-  lot: ILot;
-  half?: boolean;
-}
+
 
 export function BiddingTab( lot: ILot, half:boolean = false ) {
   const { classes } = useStyles();
@@ -318,8 +315,8 @@ export function BiddingTab( lot: ILot, half:boolean = false ) {
                 <Center>
                   <PricePlot />
                 </Center>
-              </Grid.Col> 
-               
+              </Grid.Col>
+
             </Grid>
           </Card.Section>
         )}

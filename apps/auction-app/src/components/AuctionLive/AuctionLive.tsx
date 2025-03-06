@@ -6,7 +6,7 @@ import {
   Stack,
   Text,
   createStyles,
-  rem,
+  rem, MantineTheme,
 } from "@mantine/core";
 import ShowCounter from "./ShowCounter.js";
 import AuctionProfileCardVert from "./AuctionProfileCardVert.js";
@@ -17,47 +17,14 @@ import {
 } from "@tabler/icons-react";
 import { ILot, lots as lotsData } from "../../data.js";
 import { BiddingTab } from "./BiddingTab.js";
+import {auctionLiveStyle} from "../../syles/theme";
+import {auctionMockdata} from "@mocks/auction.ts";
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
 
-  section: {
-    padding: theme.spacing.md,
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
+const useStyles = createStyles((theme) => (
+  auctionLiveStyle(theme)
+));
 
-const auctionMockdata = [
-  { label: "auctionDate", icon: IconCalendarEvent },
-  { label: "deposit", icon: IconMoneybag },
-  { label: "duration", icon: IconClock, unit: "hrs" },
-];
 
 export function AuctionLive(props: any) {
   const { classes } = useStyles();

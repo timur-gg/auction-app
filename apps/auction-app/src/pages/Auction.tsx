@@ -1,54 +1,19 @@
- 
-
 import { useState, useRef } from "react";
 import {data} from "../data";
 
 import {
-  Card,
-  Stack,
-  Text,
-  Group,
-  Button,
-  Grid,
-  Space,
-  rem,
   createStyles,
-  Center,
   Container,
-  Paper,
-} from "@mantine/core";
+} from '@mantine/core';
 import { useParams } from "react-router";
 import { AuctionLive } from "../components/AuctionLive/AuctionLive.js";
 import { AuctionPassed } from "../components/AuctionPassed/AuctionPassed.js";
 import { AuctionNotStarted } from "../components/AuctionUpcoming/AuctionNotStarted.js";
+import { inventoryAuctionStyle } from '../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme ) =>
+  inventoryAuctionStyle(theme)
+);
 
 const Auction = () => {
   const { id } = useParams();

@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useState, useRef } from "react";
 import {
   Autocomplete,
@@ -22,9 +21,8 @@ import {
   ScrollArea,
   Group,
   Switch,
-  useMantineTheme,
-} from "@mantine/core";
-
+  useMantineTheme, MantineTheme
+} from '@mantine/core';
 import { DatePickerInput } from "@mantine/dates";
 import { createStyles, RangeSlider, rem } from "@mantine/core";
 import {
@@ -47,6 +45,7 @@ import SizeFilter from "../components/inventory/SizeFilter";
 
 import { auctionData } from "../data";
 import pinAsset from "../assets/pin.png"
+import { inventoryStyle } from '../styles/theme.ts';
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
@@ -85,50 +84,9 @@ export function AutocompleteLoading() {
   );
 }
 
-const useStyles = createStyles((theme) => ({
-  mark: {
-    display: "none",
-  },
-
-  markWrapper: {
-    marginTop: rem(12),
-  },
-
-  thumb: {
-    width: rem(16),
-    height: rem(28),
-    backgroundColor: theme.white,
-    color: theme.colors.gray[5],
-    border: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[3]
-    }`,
-  },
-
-  pin2: {
-    // position: "absolute",
-    // top: '40%';
-    // left: '50%';
-    // margin-left: 115px;
-
-    borderRadius: "50%",
-    border: "8px solid #fff",
-    width: "8px",
-    height: "8px",
-    backgroundColor: "red",
-  },
-
-  "pin2::after": {
-    position: "absolute",
-    content: "",
-    width: "0px",
-    height: "0px",
-    bottom: "-30px",
-    left: "-6px",
-    border: "10px solid transparent",
-    borderTop: "17px solid #fff",
-    backgroundColor: "red",
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme) =>
+  inventoryStyle(theme)
+);
 
 const point = (
   <IconPoint size={10} style={{ marginTop: rem(6) }} stroke={1.5} />

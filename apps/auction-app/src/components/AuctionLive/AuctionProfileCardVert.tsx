@@ -23,42 +23,15 @@ import {
 } from "@tabler/icons-react";
 import React from "react";
 import mapImg from "../../img/map.png";
+import { auctionLiveStyle } from '../../styles/theme.ts';
+import auctionProfileCardVert from './AuctionProfileCardVert.tsx';
+import {auctionProfileCardVertStyle} from "../../styles/theme";
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
+const useStyles = createStyles((theme) => (
+  auctionProfileCardVertStyle(theme)
+));
 
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  statusBadge: {
-    marginBottom: theme.spacing.md,
-  },
-
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const mockdata = [
+const featureGrid = [
   {
     label: "completionDate",
     icon: IconCalendarEvent,
@@ -119,7 +92,7 @@ export function AuctionProfileCardVert(props: ProfileCardProps) {
   const { classes } = useStyles();
   const auction: AuctionType = props.auction;
 
-  const features = mockdata.map((feature) => (
+  const features = featureGrid.map((feature) => (
     <Grid.Col xs={10} py={5} key={feature.label}>
       <Tooltip
         multiline

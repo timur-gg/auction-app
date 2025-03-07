@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useState, useRef, useEffect } from "react";
 import {
   Accordion,
@@ -7,18 +6,15 @@ import {
   Grid,
   Group,
   Paper,
-  Badge,
   Space,
   TextInput,
   Title,
   ThemeIcon,
   Button,
-  Image,
   Center,
-  Box,
   Text,
-  Stack,
-} from "@mantine/core";
+  Stack, MantineTheme
+} from '@mantine/core';
 import { useNavigate } from "react-router-dom";
 import { Route, useLocation } from "react-router-dom";
 import { createStyles, RangeSlider, rem } from "@mantine/core";
@@ -38,6 +34,7 @@ import img1 from "../assets/1B/1B.png";
 import img2 from "../assets/1B/1B.png";
 import img3 from "../assets/1B/1B.png";
 import img4 from "../assets/1B/1B.png";
+import { landingStyle } from '../styles/theme.ts';
 
 const sampleIds = ["1", "2", "3", "4"];
 
@@ -56,37 +53,9 @@ const Row1 = [
   img4,
 ];
 
-const useStyles = createStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing.md,
-    backgroundImage: `linear-gradient(135deg, ${
-      theme.colors[theme.primaryColor][4]
-    } 0%, ${theme.colors[theme.primaryColor][6]} 100%)`,
-    backgroundColor: "transparent",
-  },
-  item: {
-    backgroundColor: theme.white,
-    borderBottom: 0,
-    borderRadius: theme.radius.md,
-    boxShadow: theme.shadows.lg,
-    overflow: "hidden",
-  },
-
-  gradient: {
-    backgroundImage: `radial-gradient(${
-      theme.colors[theme.primaryColor][6]
-    } 0%, ${theme.colors[theme.primaryColor][5]} 100%)`,
-  },
-
-  faq: {
-    backgroundImage:
-      // `linear-gradient(135deg, #64B5F6 0%,  #BBDEFB 100%)`,
-
-      `radial-gradient(${theme.colors[theme.primaryColor][6]} 0%, ${
-        theme.colors[theme.primaryColor][4]
-      } 100%)`,
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme ) =>
+  landingStyle(theme)
+);
 
 // "url(https://images.unsplash.com/photo-1559869824-929df9dab35e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2639&q=80)",
 

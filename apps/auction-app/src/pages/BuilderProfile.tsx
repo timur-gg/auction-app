@@ -8,11 +8,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { ref } from "firebase/database";
 import {
   useDatabaseSnapshot,
-  useDatabaseUpdateMutation,
 } from "@react-query-firebase/database";
 import { database } from "../db/firebase";
-
 import { useNavigate } from "react-router-dom";
+import { builderFavoritesData, builderUserData as UserData } from '@mocks/auction.tsx';
 
 import {
   Box,
@@ -43,63 +42,11 @@ import {
   IconMessage,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import { builderStyle } from '../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  icon: {
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[3]
-        : theme.colors.gray[5],
-  },
-
-  name: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-  },
-  tableRow: {
-    "&:hover": {
-      background: "#efefef",
-      cursor: "pointer",
-    },
-  },
-
-  chatButton: {
-    position: "fixed",
-    right: "2%",
-    bottom: "2%",
-    padding: "10px",
-    height: "auto",
-  },
-}));
-
-const UserData = {
-  title: "Mr",
-  name: "John Doe",
-  email: "johndoe@hotmail.com",
-  phone: "+16474722634",
-  avatar:
-    "https://images.unsplash.com/photo-1612833609249-5e9c9b9b0b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXR5JTIwY2FyZCUyMGF1dGhvcml0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-};
-
-const favourites = [
-  {
-    name: "King West Towers",
-    builder: "Developers Inc",
-    address: "100 Spadina",
-    status: "Live",
-    bid: "570k",
-    auctionDate: "Sep 10 2023",
-    sold: 10,
-  },
-
-  {
-    bid: "1m",
-    name: "Condo 229",
-    address: "35 Queen",
-    builder: "Developers Inc",
-    status: "Passed",
-    sold: 30,
-  },
-];
+const useStyles = createStyles((theme: MantineTheme ) =>
+  builderStyle(theme)
+);
 
 export default function BuilderProfile() {
   const { classes } = useStyles();
@@ -123,7 +70,7 @@ export default function BuilderProfile() {
     }
   };
 
-  const favouritesRows = favourites.map((element) => (
+  const favouritesRows = builderFavoritesData.map((element) => (
     <tr key={element.name} className={classes.tableRow}>
       <td>{element.name}</td>
       <td>{element.builder}</td>

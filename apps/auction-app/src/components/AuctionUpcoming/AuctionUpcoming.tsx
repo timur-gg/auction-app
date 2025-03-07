@@ -19,8 +19,8 @@ import {
   ThemeIcon,
   Center,
   Tabs,
-  Table,
-} from "@mantine/core";
+  Table, MantineTheme
+} from '@mantine/core';
 import AuctionProfileCard from "./AuctionProfileCard.js";
 import AuctionConfirmation from "./AuctionConfirmation.js";
 import AuctionDetails from "./AuctionDetails.js";
@@ -49,50 +49,16 @@ import {text} from "../../text.js";
 import { useDisclosure } from "@mantine/hooks";
 import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
 import { Carousel } from "@mantine/carousel";
-// import mapImg from;
-
-import mapImg from "../../img/map.png";
-
 import floorPlan1 from "../../assets/floorPlan1.png";
 import floorPlan2 from "../../assets/floorPlan2.png";
 import floorPlan3 from "../../assets/floorPlan3.png";
 import floorPlan4 from "../../assets/floorPlan4.png";
 import pinAsset from "../../assets/pin.png"
+import { auctionUpcomingStyle } from '../../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme ) =>
+  auctionUpcomingStyle(theme)
+);
 
 const distanceToMouse = (pt: any, mousePos: any): number => {
   if (pt && mousePos) {

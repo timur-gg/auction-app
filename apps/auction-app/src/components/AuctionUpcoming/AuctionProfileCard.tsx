@@ -6,16 +6,13 @@ import {
   Badge,
   createStyles,
   Group,
-  Button,
   Grid,
   Space,
   Flex,
-  rem,
   AspectRatio,
-  Center,
   Tooltip,
-  Modal,
-} from "@mantine/core";
+  Modal, MantineTheme
+} from '@mantine/core';
 import {
   IconBedFilled,
   IconRuler,
@@ -24,57 +21,17 @@ import {
   IconCar,
   IconLock,
 } from "@tabler/icons-react";
-import { Carousel, useAnimationOffsetEffect } from "@mantine/carousel";
+import { Carousel } from "@mantine/carousel";
 import React from "react";
 import { useDisclosure } from "@mantine/hooks";
 import mapImg from "../../img/map.png";
+import { auctionProfileCardStyle } from '../../styles/theme.ts';
 
+const useStyles = createStyles((theme: MantineTheme ) =>
+  auctionProfileCardStyle(theme)
+);
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-
-  imageSection: {
-    padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  statusBadge: {
-    marginBottom: theme.spacing.md,
-  },
-
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const mockdata = [
+const featureGrid = [
   {
     label: "completionDate",
     icon: IconCalendarEvent,
@@ -126,7 +83,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
   const auction = props.auction;
   const cardSize = props.cardSize || "full";
 
-  const features = mockdata.map((feature) => (
+  const features = featureGrid.map((feature) => (
     <Grid.Col xs={6} md={4} py={5} key={feature.label}>
       <Tooltip
         key={feature.label}

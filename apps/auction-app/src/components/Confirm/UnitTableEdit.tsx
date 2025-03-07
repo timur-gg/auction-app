@@ -12,8 +12,8 @@ import {
   UnstyledButton,
   Modal,
   Button,
-  ActionIcon,
-} from "@mantine/core";
+  ActionIcon, MantineTheme
+} from '@mantine/core';
 import { useDisclosure } from "@mantine/hooks";
 
 import { IconArrowLeft, IconZoomInArea } from "@tabler/icons-react";
@@ -25,54 +25,13 @@ import {
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
 } from "mantine-react-table";
-
-import PriceFilter from "../inventory/PriceFilter";
 import SizeFilter from "../inventory/SizeFilter";
 import FloorFilter from "../AuctionUpcoming/FloorFilter";
+import { unitTableEditStyle } from '../../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-  thumb: {
-    width: rem(16),
-    height: rem(28),
-    backgroundColor: theme.white,
-    color: theme.colors.gray[5],
-    border: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[3]
-    }`,
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme ) =>
+  unitTableEditStyle(theme)
+);
 
 type LotSelectionProps = {
   rowSelection: MRT_RowSelectionState;

@@ -10,8 +10,8 @@ import {
   Button,
   rem,
   Tooltip,
-  Space,
-} from "@mantine/core";
+  Space, MantineTheme
+} from '@mantine/core';
 import { useHover } from "@mantine/hooks";
 import {
   IconBedFilled,
@@ -28,88 +28,11 @@ import { useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 
 import mapImg from "../../img/map.png";
+import { auctionCardStyle } from '../../styles/theme.ts';
 
-
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    border: "0.0625rem solid #dee2e6",
-  },
-
-  imageSection: {
-    padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-
-  favButton: {
-    position: "absolute",
-    top: "1.5%",
-    left: "1.5%",
-    transform: "translate(-2%, -2%)",
-    cursor: "pointer",
-    visibility: "hidden",
-
-    "&:hover": {
-      visibility: "visible",
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-      border: "1px solid #FFCA28",
-    },
-  },
-
-  favIcon: {
-    visibility: "visible",
-    "&:hover": {
-      fill: "#FDD835",
-    },
-  },
-
-  favTag: {
-    visibility: "visible",
-  },
-
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-  tooltip: {
-    "&:hover": {
-      cursor: "pointer",
-    },
-  },
-  selectUnitsButton: {
-    flex: 1,
-    fontSize: "14px",
-    backgroundColor: "#F9A825",
-    "&:hover": { backgroundColor: "#FF8F00" },
-  },
-
-  selected: { border: "3px solid #1E88E5" },
-}));
+const useStyles = createStyles((theme: MantineTheme ) =>
+  auctionCardStyle(theme)
+);
 
 const mockdata = [
   {

@@ -1,78 +1,38 @@
 import {
   SegmentedControl,
-  Space,
   Grid,
-  Text,
   Image,
   createStyles,
   rem,
   useMantineTheme,
-  Group,
-  Box,
   UnstyledButton,
   Modal,
-  Button,
-  ActionIcon,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+  MantineTheme,
+} from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
-import { IconArrowLeft, IconZoomInArea, IconStar } from "@tabler/icons-react";
+import {
+  IconArrowLeft,
+  IconZoomInArea,
+  IconStar,
+} from '@tabler/icons-react';
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 import {
   MantineReactTable,
   useMantineReactTable,
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
-} from "mantine-react-table";
+} from 'mantine-react-table';
 
-import PriceFilter from "../inventory/PriceFilter";
-import SizeFilter from "../inventory/SizeFilter";
-import FloorFilter from "./FloorFilter";
+import PriceFilter from '../inventory/PriceFilter';
+import SizeFilter from '../inventory/SizeFilter';
+import FloorFilter from './FloorFilter';
+import { lotSelectionStyle } from '../../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-  thumb: {
-    width: rem(16),
-    height: rem(28),
-    backgroundColor: theme.white,
-    color: theme.colors.gray[5],
-    border: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[3]
-    }`,
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme) =>
+  lotSelectionStyle(theme)
+);
 
 type LotSelectionProps = {
   rowSelection: MRT_RowSelectionState;
@@ -82,22 +42,33 @@ type LotSelectionProps = {
   // setFloor: Function;
 };
 
-export function LotSelectionTable(props: LotSelectionProps) {
+export function LotSelectionTable(
+  props: LotSelectionProps
+) {
   const [bedroom, setBedroom] = useState<number>(-1);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
-  const [size, setSizeRange] = useState<[number, number]>([0, 100]);
-  const [floorRange, setFloorRange] = useState<[number, number]>([0, 100]);
+  const [priceRange, setPriceRange] = useState<
+    [number, number]
+  >([0, 100]);
+  const [size, setSizeRange] = useState<[number, number]>([
+    0, 100,
+  ]);
+  const [floorRange, setFloorRange] = useState<
+    [number, number]
+  >([0, 100]);
 
   const [faves, setFaves] = useState<number[]>([]);
 
-  const [filters, setFilter] = useState<string[]>(["All"]);
+  const [filters, setFilter] = useState<string[]>(['All']);
   const [opened, { open, close }] = useDisclosure(false);
 
-  let modalImage = "";
+  let modalImage = '';
 
   const addFilter = (filter: string) => {
     if (!filters.includes(filter)) {
-      setFilter([...filters.filter((f) => f !== "All"), filter]);
+      setFilter([
+        ...filters.filter((f) => f !== 'All'),
+        filter,
+      ]);
     }
   };
 
@@ -108,9 +79,11 @@ export function LotSelectionTable(props: LotSelectionProps) {
       lot.price <= (priceRange[1] + 20) * 12.5,
 
     size: (lot: any) =>
-      lot.size >= (size[0] + 20) * 12.5 && lot.size <= (size[1] + 20) * 12.5,
+      lot.size >= (size[0] + 20) * 12.5 &&
+      lot.size <= (size[1] + 20) * 12.5,
     floor: (lot: any) =>
-      lot.floor >= floorRange[0] / 2 && lot.floor <= floorRange[1] / 2,
+      lot.floor >= floorRange[0] / 2 &&
+      lot.floor <= floorRange[1] / 2,
     bedroom: (lot: any) => {
       if (bedroom === -1) return true;
       else return lot.bedroom === bedroom;
@@ -121,58 +94,58 @@ export function LotSelectionTable(props: LotSelectionProps) {
     () =>
       [
         {
-          accessorKey: "unit",
-          header: "unit #",
+          accessorKey: 'unit',
+          header: 'unit #',
           minSize: 80, //min size enforced during resizing
           maxSize: 180,
           size: 80,
         },
         {
-          accessorKey: "floor",
-          header: "Floor",
+          accessorKey: 'floor',
+          header: 'Floor',
           minSize: 70, //min size enforced during resizing
           maxSize: 180,
           size: 80,
         },
         {
-          accessorKey: "facing",
-          header: "Facing",
+          accessorKey: 'facing',
+          header: 'Facing',
           minSize: 70, //min size enforced during resizing
           maxSize: 180,
           size: 80,
         },
 
         {
-          accessorKey: "bedroom",
-          header: "Bedrooms",
+          accessorKey: 'bedroom',
+          header: 'Bedrooms',
           minSize: 70, //min size enforced during resizing
           maxSize: 180,
           size: 80,
         },
         {
-          accessorKey: "price",
-          header: "Price",
+          accessorKey: 'price',
+          header: 'Price',
           minSize: 70, //min size enforced during resizing
           maxSize: 180,
           size: 80,
         },
         {
-          accessorKey: "size",
-          header: "Size (sqft)",
+          accessorKey: 'size',
+          header: 'Size (sqft)',
           minSize: 70, //min size enforced during resizing
           maxSize: 180,
           size: 80,
         },
         {
-          accessorKey: "plan",
-          header: "Floor Plan",
+          accessorKey: 'plan',
+          header: 'Floor Plan',
           minSize: 50, //min size enforced during resizing
           maxSize: 180,
           size: 80,
         },
         {
-          accessorKey: "fav",
-          header: "",
+          accessorKey: 'fav',
+          header: '',
           minSize: 50, //min size enforced during resizing
           maxSize: 180,
           size: 80,
@@ -182,7 +155,12 @@ export function LotSelectionTable(props: LotSelectionProps) {
   );
   const { classes } = useStyles();
 
-  const { rowSelection, setRowSelection, lots, backButtonAction } = props;
+  const {
+    rowSelection,
+    setRowSelection,
+    lots,
+    backButtonAction,
+  } = props;
 
   useEffect(() => {
     //do something when the row selection changes...
@@ -193,7 +171,9 @@ export function LotSelectionTable(props: LotSelectionProps) {
 
   lots.forEach((lot) => {
     lot.plan = (
-      <UnstyledButton onClick={() => openModal(lot.planLink)}>
+      <UnstyledButton
+        onClick={() => openModal(lot.planLink)}
+      >
         <IconZoomInArea color="grey" />
       </UnstyledButton>
     );
@@ -215,8 +195,8 @@ export function LotSelectionTable(props: LotSelectionProps) {
         <IconStar
           color="gold"
           {...(faves.includes(lot.id)
-            ? { style: { fill: "gold" } }
-            : { style: { fill: "white" } })}
+            ? { style: { fill: 'gold' } }
+            : { style: { fill: 'white' } })}
         />
       </UnstyledButton>
     );
@@ -242,7 +222,7 @@ export function LotSelectionTable(props: LotSelectionProps) {
   const table = useMantineReactTable({
     columns,
     data: filteredLots,
-    positionToolbarAlertBanner: "none",
+    positionToolbarAlertBanner: 'none',
     enableRowSelection: (row) =>
       Object.keys(rowSelection).includes(row.id) ||
       Object.keys(rowSelection).length < 2,
@@ -265,13 +245,19 @@ export function LotSelectionTable(props: LotSelectionProps) {
     mantineTableProps: {
       withColumnBorders: false,
       withBorder: false,
-      style: { textAlign: "left" },
+      style: { textAlign: 'left' },
     },
 
     renderTopToolbarCustomActions: ({ table }) => (
-      <Grid style={{ width: "100%" }} p={7}>
+      <Grid style={{ width: '100%' }} p={7}>
         {backButtonAction && (
-          <Grid.Col xs={6} sm={0.5} md={0.9} my="auto" ta="left">
+          <Grid.Col
+            xs={6}
+            sm={0.5}
+            md={0.9}
+            my="auto"
+            ta="left"
+          >
             <UnstyledButton onClick={backClick}>
               <IconArrowLeft
                 size="1.5rem"
@@ -290,15 +276,15 @@ export function LotSelectionTable(props: LotSelectionProps) {
             transitionTimingFunction="linear"
             size="sm"
             data={[
-              { label: "All", value: "-1" },
-              { label: "0", value: "0" },
-              { label: "1", value: "1" },
-              { label: "2", value: "2" },
-              { label: "3+", value: "3" },
+              { label: 'All', value: '-1' },
+              { label: '0', value: '0' },
+              { label: '1', value: '1' },
+              { label: '2', value: '2' },
+              { label: '3+', value: '3' },
             ]}
             onChange={(value) => {
               setBedroom(parseInt(value));
-              addFilter("bedroom");
+              addFilter('bedroom');
             }}
           />
         </Grid.Col>
@@ -362,7 +348,7 @@ export function LotSelectionTable(props: LotSelectionProps) {
           mx="auto"
           radius="md"
           src={
-            "https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg"
+            'https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg'
           }
           alt="Random image"
         />

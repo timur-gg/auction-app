@@ -1,15 +1,11 @@
 import {
-  Container,
   Card,
   Grid,
-  Paper,
   Space,
   Group,
   Stack,
   Text,
   createStyles,
-  rem,
-  Center,
   Table,
   Badge,
 } from "@mantine/core";
@@ -21,42 +17,13 @@ import {
   IconClock,
 } from "@tabler/icons-react";
 import { lots as lotsData } from "../../data.js";
-import { BiddingTab } from "../AuctionLive/BiddingTab.js";
+import { auctionPassedStyle } from '../../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
 
-  section: {
-    padding: theme.spacing.md,
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
+const useStyles = createStyles((theme) => (
+  auctionPassedStyle(theme)
+));
+
 
 const auctionMockdata = [
   { label: "auctionDate", icon: IconCalendarEvent },

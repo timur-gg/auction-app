@@ -1,8 +1,6 @@
 import {
-  Container,
   Card,
   Grid,
-  Paper,
   Space,
   Group,
   Stack,
@@ -12,8 +10,8 @@ import {
   Center,
   Badge,
   Button,
-  Modal,
-} from "@mantine/core";
+  Modal, MantineTheme
+} from '@mantine/core';
 import ShowCounter from "../AuctionLive/ShowCounter.js";
 import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
 import {
@@ -23,46 +21,14 @@ import {
   IconHomeCancel,
 } from "@tabler/icons-react";
 import { lots as lotsData } from "../../data.js";
-import { BiddingTab } from "../AuctionLive/BiddingTab.js";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
-import { close } from "inspector";
 import { useNavigate } from "react-router-dom";
+import { auctionNotStartedStyle } from '../../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme ) =>
+  auctionNotStartedStyle(theme)
+);
 
 const auctionMockdata = [
   { label: "auctionDate", icon: IconCalendarEvent },
@@ -202,7 +168,7 @@ export function AuctionNotStarted(props: any) {
                   <Text fz="sm" c="dimmed" className={classes.label} align="left">
                     Duration
                   </Text>
-  
+
                   <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
                 </Stack> */}
               </Grid.Col>

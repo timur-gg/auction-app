@@ -15,8 +15,8 @@ import {
   Modal,
   Textarea,
   TextInput,
-  Select,
-} from "@mantine/core";
+  Select, MantineTheme
+} from '@mantine/core';
 import {
   IconBedFilled,
   IconRuler,
@@ -33,52 +33,13 @@ import { YearPickerInput } from "@mantine/dates";
 import RUG from "react-upload-gallery";
 import "react-upload-gallery/dist/style.css";
 import "./rug_style.css";
+import { auctionsProfileCardEditStyle } from '../../styles/theme.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
+const useStyles = createStyles((theme: MantineTheme ) =>
+  auctionsProfileCardEditStyle(theme)
+);
 
-  imageSection: {
-    padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  statusBadge: {
-    marginBottom: theme.spacing.md,
-  },
-
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const mockdata = [
+const featureGrid = [
   // {
   //   label: "completionDate",
   //   icon: IconCalendarEvent,
@@ -136,7 +97,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
     source: link,
   }));
 
-  const features = mockdata.map((feature) => (
+  const features = featureGrid.map((feature) => (
     <Grid.Col xs={6} py={5} key={feature.label}>
       <Tooltip
         key={feature.label}

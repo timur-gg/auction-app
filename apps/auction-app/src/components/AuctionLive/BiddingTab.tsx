@@ -32,62 +32,13 @@ import ShowCounter from "./ShowCounter";
 import { useDisclosure } from "@mantine/hooks";
 import Countdown from "react-countdown";
 import { ILot } from "../../data";
+import {biddingTabStyle} from "../../styles/theme";
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    border: "0.0625rem solid #dee2e6",
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
+const useStyles = createStyles((theme) => (
+  biddingTabStyle(theme)
+));
 
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-
-  cardWinning: {
-    border: "2px solid #64DD17",
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-
-  // sectionWinning: {
-  //   padding: theme.spacing.md,
-  //   backgroundColor: "#fafafa",
-  //   border: "2px solid #8BC34A",
-  //   // borderTop: `${rem(1)} solid ${
-  //   //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-  //   // }`,
-  // },
-
-  bidButton: {
-    marginTop: rem(30),
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const unitMockdata = [
+const unitFeatureGrid = [
   { label: "unit", icon: IconHash, sz: 1.5 },
   { label: "bedroom", icon: IconBedFilled, sz: 1 },
   { label: "facing", icon: IconSunHigh, sz: 1 },
@@ -97,8 +48,6 @@ const unitMockdata = [
   { label: "locker", icon: IconLock, sz: 1 },
   { label: "bathroom", icon: IconBath, sz: 1 },
 ];
-
-
 
 export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
   const { classes } = useStyles();
@@ -125,7 +74,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
 
   console.log(lot.bid);
 
-  const unitFeatures = unitMockdata.map((feature) => (
+  const unitFeatures = unitFeatureGrid.map((feature) => (
     <Grid.Col
       xs={3}
       {...(!half ? { lg: feature.sz } : { lg: 2.66 })}

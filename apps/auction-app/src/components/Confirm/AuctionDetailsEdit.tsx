@@ -10,68 +10,21 @@ import {
   rem,
   Tooltip,
   Tabs,
-  Textarea,
-} from "@mantine/core";
+  Textarea, MantineTheme
+} from '@mantine/core';
 import {
-  IconBedFilled,
-  IconRuler,
-  IconCalendarEvent,
-  IconAddressBook,
-  IconCar,
-  IconLock,
   IconTemperature,
   IconBuildingCircus,
   IconPropeller,
 } from "@tabler/icons-react";
 import React from "react";
-import mapImg from "../../img/map.png";
+import { auctionsDetailsEditStyle } from '../../styles/theme.ts';
 
+const useStyles = createStyles((theme: MantineTheme ) =>
+  auctionsDetailsEditStyle(theme)
+);
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-
-  imageSection: {
-    padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  statusBadge: {
-    marginBottom: theme.spacing.md,
-  },
-
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const mockdata = [
+const featureGrid = [
   //   {
   //     label: "completionDate",
   //     icon: IconCalendarEvent,
@@ -100,7 +53,7 @@ export function AuctionDetails(props: any) {
   const { classes } = useStyles();
   const auction = props.auction;
 
-  const features = mockdata.map((feature) => (
+  const features = featureGrid.map((feature) => (
     <Grid.Col xs={6} sm={12} py={5} key={feature.label}>
       <Tooltip
         key={feature.label}
@@ -160,7 +113,7 @@ export function AuctionDetails(props: any) {
               <Textarea autosize minRows={6}>
                 {`• Approximately 9 ft. ceiling heights in principal rooms, defined as the Living Room and Dining Room.
 • Approximately 9 ft. ceiling heights at upper level of two-storey walkouts. Where bulkheads or dropped ceilings are required. The height of the ceiling will be less than 9 ft. All measurements are calculated from the finished concrete slab floor to the underside of the concrete slab or finished ceiling above.
-• Approximately 10 ft. ceiling heights in principal rooms, defined as the Living Room and Dining Room for suites on Levels 2 and 3. Where bulkheads or dropped ceilings are required, the height of the ceiling will be less than 10 ft. 
+• Approximately 10 ft. ceiling heights in principal rooms, defined as the Living Room and Dining Room for suites on Levels 2 and 3. Where bulkheads or dropped ceilings are required, the height of the ceiling will be less than 10 ft.
 • Smooth ceilings throughout.
 • Porcelain tile floor and baseboard in Bathroom(s).
 • Ceramic tile floor and baseboard in Laundry Closet.

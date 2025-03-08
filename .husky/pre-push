@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo "Formatting Staged..."
+npm run prettier
+
 echo "Running ESLint before push..."
 npm run lint-app
 RESULT=$?

@@ -25,7 +25,7 @@ import { notifications } from '@mantine/notifications';
 import { useDisclosure } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
 import { auctionNotStartedStyle } from '../../styles/theme.ts';
-import { IAuction, ILot } from '../../types.ts';
+import { IAuction, ILot } from '@auction-app/at-models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

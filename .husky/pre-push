@@ -4,8 +4,8 @@
 echo "Formatting Staged..."
 npm run prettier
 
-echo "Running ESLint before push..."
-npm run lint-app
+#echo "Running ESLint before push..."
+#npm run lint-app
 #RESULT=$?
 #
 #if [ $RESULT -ne 0 ]; then

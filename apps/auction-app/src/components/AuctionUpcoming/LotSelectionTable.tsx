@@ -3,19 +3,15 @@ import {
   Grid,
   Image,
   createStyles,
-  rem,
   useMantineTheme,
   UnstyledButton,
   Modal,
   MantineTheme,
+  CSSObject,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import {
-  IconArrowLeft,
-  IconZoomInArea,
-  IconStar,
-} from '@tabler/icons-react';
+import { IconArrowLeft, IconZoomInArea, IconStar } from '@tabler/icons-react';
 
 import { useEffect, useMemo, useState } from 'react';
 import {
@@ -29,32 +25,29 @@ import PriceFilter from '../inventory/PriceFilter';
 import SizeFilter from '../inventory/SizeFilter';
 import FloorFilter from './FloorFilter';
 import { lotSelectionStyle } from '../../styles/theme.ts';
+import { ILot } from '../../types.ts';
 
-const useStyles = createStyles((theme: MantineTheme) =>
-  lotSelectionStyle(theme)
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> => lotSelectionStyle(theme) as Record<string, CSSObject>
 );
 
 type LotSelectionProps = {
   rowSelection: MRT_RowSelectionState;
-  setRowSelection: Function | any;
-  lots: any[];
-  backButtonAction?: Function;
-  // setFloor: Function;
+  setRowSelection: React.Dispatch<React.SetStateAction<MRT_RowSelectionState>>;
+  backButtonAction?: () => void;
+  lots: ILot[];
 };
 
-export function LotSelectionTable(
-  props: LotSelectionProps
-) {
+export function LotSelectionTable({
+  rowSelection,
+  setRowSelection,
+  lots,
+  backButtonAction,
+}: LotSelectionProps) {
   const [bedroom, setBedroom] = useState<number>(-1);
-  const [priceRange, setPriceRange] = useState<
-    [number, number]
-  >([0, 100]);
-  const [size, setSizeRange] = useState<[number, number]>([
-    0, 100,
-  ]);
-  const [floorRange, setFloorRange] = useState<
-    [number, number]
-  >([0, 100]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
+  const [size, setSizeRange] = useState<[number, number]>([0, 100]);
+  const [floorRange, setFloorRange] = useState<[number, number]>([0, 100]);
 
   const [faves, setFaves] = useState<number[]>([]);
 
@@ -65,30 +58,23 @@ export function LotSelectionTable(
 
   const addFilter = (filter: string) => {
     if (!filters.includes(filter)) {
-      setFilter([
-        ...filters.filter((f) => f !== 'All'),
-        filter,
-      ]);
+      setFilter([...filters.filter((f) => f !== 'All'), filter]);
     }
   };
 
-  const FILTER_MAP: { [char: string]: any } = {
+  const FILTER_MAP: Record<string, (lot: ILot) => boolean> = {
     All: () => true,
-    priceRange: (lot: any) =>
-      lot.price >= (priceRange[0] + 20) * 12.5 &&
-      lot.price <= (priceRange[1] + 20) * 12.5,
-
-    size: (lot: any) =>
-      lot.size >= (size[0] + 20) * 12.5 &&
-      lot.size <= (size[1] + 20) * 12.5,
-    floor: (lot: any) =>
-      lot.floor >= floorRange[0] / 2 &&
-      lot.floor <= floorRange[1] / 2,
-    bedroom: (lot: any) => {
+    priceRange: (lot: ILot) =>
+      (lot.floor ?? 0) >= (priceRange[0] + 20) * 12.5 &&
+      (lot.floor ?? 0) <= (priceRange[1] + 20) * 12.5,
+    size: (lot: ILot) => Number(lot.size) >= (size[0] + 20) * 12.5 && Number(lot.size) <= (size[1] + 20) * 12.5,
+    floor: (lot: ILot) =>
+      (lot.floor ?? 0) >= floorRange[0] / 2 && (lot.floor ?? 0) <= floorRange[1] / 2,
+    bedroom: (lot: ILot) => {
       if (bedroom === -1) return true;
-      else return lot.bedroom === bedroom;
+      return lot.bedroom === bedroom;
     },
-  };
+  } as const;
 
   const columns = useMemo(
     () =>
@@ -150,30 +136,19 @@ export function LotSelectionTable(
           maxSize: 180,
           size: 80,
         },
-      ] as MRT_ColumnDef<any>[],
+      ] as MRT_ColumnDef<ILot>[],
     []
   );
   const { classes } = useStyles();
-
-  const {
-    rowSelection,
-    setRowSelection,
-    lots,
-    backButtonAction,
-  } = props;
 
   useEffect(() => {
     //do something when the row selection changes...
     console.info({ rowSelection });
   }, [rowSelection]);
 
-  const { colorScheme } = useMantineTheme();
-
-  lots.forEach((lot) => {
+  lots.forEach((lot: ILot) => {
     lot.plan = (
-      <UnstyledButton
-        onClick={() => openModal(lot.planLink)}
-      >
+      <UnstyledButton onClick={() => openModal(lot.planLink ?? '')}>
         <IconZoomInArea color="grey" />
       </UnstyledButton>
     );
@@ -194,15 +169,13 @@ export function LotSelectionTable(
       >
         <IconStar
           color="gold"
-          {...(faves.includes(lot.id)
-            ? { style: { fill: 'gold' } }
-            : { style: { fill: 'white' } })}
+          {...(faves.includes(lot.id) ? { style: { fill: 'gold' } } : { style: { fill: 'white' } })}
         />
       </UnstyledButton>
     );
   });
 
-  let filteredLots: any = lots;
+  let filteredLots: ILot[] = [...lots];
   filters.forEach((f) => {
     filteredLots = filteredLots.filter(FILTER_MAP[f]);
   });
@@ -224,8 +197,7 @@ export function LotSelectionTable(
     data: filteredLots,
     positionToolbarAlertBanner: 'none',
     enableRowSelection: (row) =>
-      Object.keys(rowSelection).includes(row.id) ||
-      Object.keys(rowSelection).length < 2,
+      Object.keys(rowSelection).includes(row.id) || Object.keys(rowSelection).length < 2,
     enablePagination: false,
     enableColumnActions: false,
     enableSorting: false,
@@ -239,7 +211,7 @@ export function LotSelectionTable(
     enableDensityToggle: false,
     enableColumnFilters: false,
     enableTopToolbar: true,
-    getRowId: (row: any) => row.userId,
+    getRowId: (row: ILot) => row.userId,
     onRowSelectionChange: setRowSelection,
     state: { rowSelection },
     mantineTableProps: {
@@ -251,19 +223,9 @@ export function LotSelectionTable(
     renderTopToolbarCustomActions: ({ table }) => (
       <Grid style={{ width: '100%' }} p={7}>
         {backButtonAction && (
-          <Grid.Col
-            xs={6}
-            sm={0.5}
-            md={0.9}
-            my="auto"
-            ta="left"
-          >
+          <Grid.Col xs={6} sm={0.5} md={0.9} my="auto" ta="left">
             <UnstyledButton onClick={backClick}>
-              <IconArrowLeft
-                size="1.5rem"
-                stroke={2}
-                className={classes.icon}
-              />
+              <IconArrowLeft size="1.5rem" stroke={2} className={classes.icon} />
             </UnstyledButton>
           </Grid.Col>
         )}
@@ -299,46 +261,14 @@ export function LotSelectionTable(
         )}
 
         <Grid.Col xs={6} sm={3.5} lg={2.7}>
-          <SizeFilter
-            size={size}
-            setSizeRange={setSizeRange}
-            addFilter={addFilter}
-          />
+          <SizeFilter size={size} setSizeRange={setSizeRange} addFilter={addFilter} />
         </Grid.Col>
         <Grid.Col xs={6} sm={3.5} lg={2.7}>
-          <FloorFilter
-            floor={floorRange}
-            setFloor={setFloorRange}
-            addFilter={addFilter}
-          />
+          <FloorFilter floor={floorRange} setFloor={setFloorRange} addFilter={addFilter} />
         </Grid.Col>
       </Grid>
     ),
-    // enableRowActions: true,
-    // renderRowActions: ({ row }) => (
-    //   <ActionIcon onClick={() => console.info("Delete")}>
-    //     <IconStar />
-    //   </ActionIcon>
-    // ),
   });
-
-  // const rows = lots.map((element) => (
-  //   <tr key={element.id}>
-  //     <td>{element.unit}</td>
-  //     <td>{element.floor}</td>
-  //     <td>{element.facing}</td>
-  //     <td>{element.bedroom}</td>
-  //     <td>{element.floor}</td>
-  //     <td>${element.price}</td>
-  //     <td>{element.size}sqft</td>
-  //     <td>
-  //       <a>
-  //         {element.plan}
-  //         <IconZoomInArea color="blue" />
-  //       </a>
-  //     </td>
-  //   </tr>
-  // ));
 
   return (
     <>

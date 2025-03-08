@@ -1,16 +1,13 @@
 import {
   Card,
-  Image,
   Stack,
   Text,
   createStyles,
   Group,
   Grid,
-  Space,
-  rem,
   Tooltip,
   Tabs,
-  Textarea, MantineTheme
+  Textarea, MantineTheme, CSSObject
 } from '@mantine/core';
 import {
   IconTemperature,
@@ -19,9 +16,10 @@ import {
 } from "@tabler/icons-react";
 import React from "react";
 import { auctionsDetailsEditStyle } from '../../styles/theme.ts';
+import { IAuction } from '../../types.ts';
 
-const useStyles = createStyles((theme: MantineTheme ) =>
-  auctionsDetailsEditStyle(theme)
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  auctionsDetailsEditStyle(theme) as Record<string, CSSObject>
 );
 
 const featureGrid = [
@@ -49,9 +47,8 @@ const featureGrid = [
   { label: "cooling", icon: IconPropeller, desc: "Cooling" },
 ];
 
-export function AuctionDetails(props: any) {
+export function AuctionDetails({ auction }: { auction: IAuction}) {
   const { classes } = useStyles();
-  const auction = props.auction;
 
   const features = featureGrid.map((feature) => (
     <Grid.Col xs={6} sm={12} py={5} key={feature.label}>

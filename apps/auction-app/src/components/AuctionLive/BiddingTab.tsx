@@ -8,8 +8,8 @@ import {
   IconRuler,
   IconGavel,
   IconDoorExit,
-  IconSunHigh,
-} from "@tabler/icons-react";
+  IconSunHigh, TablerIconsProps
+} from '@tabler/icons-react';
 import { useState, useRef } from "react";
 import {
   Card,
@@ -24,21 +24,21 @@ import {
   Center,
   Modal,
   Title,
-  NumberInputHandlers,
-} from "@mantine/core";
+  NumberInputHandlers, CSSObject
+} from '@mantine/core';
 import PricePlot from "./PricePlot";
 import { BidSelector } from "./BidSelector";
 import ShowCounter from "./ShowCounter";
 import { useDisclosure } from "@mantine/hooks";
 import Countdown from "react-countdown";
-import { ILot } from "../../data";
-import {biddingTabStyle} from "../../styles/theme";
+import { ILot } from "../../types";
+import { auctionNotStartedStyle, biddingTabStyle } from '../../styles/theme';
 
-const useStyles = createStyles((theme) => (
-  biddingTabStyle(theme)
-));
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  biddingTabStyle(theme) as Record<string, CSSObject>
+);
 
-const unitFeatureGrid = [
+const unitFeatureGrid: { label: string; icon: React.ElementType; sz: number; unit?: string }[] = [
   { label: "unit", icon: IconHash, sz: 1.5 },
   { label: "bedroom", icon: IconBedFilled, sz: 1 },
   { label: "facing", icon: IconSunHigh, sz: 1 },
@@ -84,7 +84,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
       <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
-          {(lot as any)[feature.label] + (feature.unit ? feature.unit : "")}
+          {lot[feature.label] + (feature.unit ? feature.unit : "")}
         </Text>
       </Group>
     </Grid.Col>
@@ -101,13 +101,13 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
   const valueChanged = tempValue !== lot.bid * 1000;
   const increment = lot.bid * 1000 * 0.01;
 
-  type countdownProps = {
-    [key: string]: any;
-    hours: number;
-    minutes: number;
-    seconds: number;
-    completed: boolean;
-  };
+  // type countdownProps = {
+  //   [key: string]: any;
+  //   hours: number;
+  //   minutes: number;
+  //   seconds: number;
+  //   completed: boolean;
+  // };
 
   // Renderer callback with condition
   // const renderer = ({ hours, minutes, seconds, completed }: countdownProps) => {

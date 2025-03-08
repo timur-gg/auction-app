@@ -1,10 +1,11 @@
 import { Popover, Button, RangeSlider, Space } from "@mantine/core";
 
-type PriceFilterProps = {
-    priceRange: [number, number];
-    setPriceRange: Function;
-    addFilter: Function;
-}
+  type PriceFilterProps =
+{
+  priceRange: [number, number];
+  setPriceRange: (value: [number, number]) => void;
+  addFilter: (filterName: string) => void;
+};
 
 export default function PriceFilter({priceRange, setPriceRange, addFilter} :PriceFilterProps) {
 

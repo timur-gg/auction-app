@@ -1,7 +1,3 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { auctionData, lots } from "../../data.js";
-
 import { IconTrash, IconX, IconPlus } from "@tabler/icons-react";
 import {
   Container,
@@ -24,7 +20,7 @@ import { notifications } from "@mantine/notifications";
 
 const unitTabs = [{ title: "New Unit", value: "new", id: 1 }];
 
-export default function AddUnit(props: any) {
+export default function AddUnit() {
   const [removedTabs, setRemovedTabs] = useState<string[]>([]);
   const [newTabs, setNewTabs] = useState<string[]>([]);
 
@@ -82,7 +78,7 @@ export default function AddUnit(props: any) {
               <Group spacing="xs">
                 <ActionIcon
                   mx="1px"
-                  onClick={(e) => setRemovedTabs([...removedTabs, tab.value])}
+                  onClick={(e: React.MouseEvent) => setRemovedTabs([...removedTabs, tab.value])}
                 >
                   <IconX size={14} />
                 </ActionIcon>
@@ -204,14 +200,6 @@ export default function AddUnit(props: any) {
                     label="Starting Price"
                     defaultValue={100000}
                     parser={(value: string) => value.replace(/\$\s?|(,*)/g, "")}
-                    // formatter={(value: string) =>
-                    //   !Number.isNaN(parseFloat(value))
-                    //     ? `$ ${value}`.replace(
-                    //         /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
-                    //         ","
-                    //       )
-                    //     : "$ "
-                    // }
                   />
                 </Grid.Col>
 

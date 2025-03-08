@@ -9,8 +9,8 @@ import {
   Space,
   rem,
   Tooltip,
-  Tabs,
-} from "@mantine/core";
+  Tabs, CSSObject
+} from '@mantine/core';
 import {
   IconBedFilled,
   IconRuler,
@@ -24,53 +24,16 @@ import {
 } from "@tabler/icons-react";
 import React from "react";
 import mapImg from "../../img/map.png";
+import { IAuction } from '../../types.ts';
+import { auctionDetailsStyle } from '../../styles/theme.ts';
 
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  auctionDetailsStyle(theme) as Record<string, CSSObject>
+);
 
-  imageSection: {
-    padding: theme.spacing.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
 
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  statusBadge: {
-    marginBottom: theme.spacing.md,
-  },
-
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const mockdata = [
+const unitFeatureGrid = [
   {
     label: "completionDate",
     icon: IconCalendarEvent,
@@ -95,11 +58,10 @@ const mockdata = [
   { label: "cooling", icon: IconPropeller, desc: "Cooling" },
 ];
 
-export function AuctionDetails(props: any) {
+export function AuctionDetails({ auction }: { auction: IAuction}) {
   const { classes } = useStyles();
-  const auction = props.auction;
 
-  const features = mockdata.map((feature) => (
+  const features = unitFeatureGrid.map((feature) => (
     <Grid.Col xs={6} sm={12} py={5} key={feature.label}>
       <Tooltip
         key={feature.label}

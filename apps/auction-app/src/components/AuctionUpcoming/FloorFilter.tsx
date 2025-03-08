@@ -2,8 +2,8 @@ import { Popover, Button, RangeSlider, Space } from "@mantine/core";
 
 type FloorFilterProps = {
   floor: [number, number];
-  setFloor: Function;
-  addFilter: Function;
+  setFloor: (value: [number, number]) => void;
+  addFilter: (filterName: string) => void;
 };
 
 export default function FloorFilter({

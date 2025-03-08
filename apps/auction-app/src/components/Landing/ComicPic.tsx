@@ -42,13 +42,13 @@ const Slides = [
   { img: comic8, txt: "It's such a great deal!" },
 ];
 
-const ComicPic = (ind: any) => {
+const ComicPic =({ ind }: { ind: number }) => {
   const [width, setWidth] = React.useState(window.innerWidth);
   const breakpoint1 = 1000;
   const breakpoint = 760;
   const midSize = width > breakpoint && width < breakpoint1;
   React.useEffect(() => {
-    window.addEventListener("resize", () => setWidth(window.innerWidth));
+    window.addEventListener('resize', () => setWidth(window.innerWidth));
   }, []);
   const autoplay = useRef(Autoplay({ delay: 3500 }));
 
@@ -58,9 +58,7 @@ const ComicPic = (ind: any) => {
         mx={0}
         style={{
           background:
-            width > breakpoint
-              ? "linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)"
-              : "#558DAB",
+            width > breakpoint ? 'linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)' : '#558DAB',
         }}
       >
         <Grid.Col xs={12} sm={6} pt={30}>
@@ -93,8 +91,8 @@ const ComicPic = (ind: any) => {
         style={{
           background:
             width > breakpoint
-              ? "linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)"
-              : "linear-gradient(0deg, #FAF3D8 46%,  #558DAB 54%)",
+              ? 'linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)'
+              : 'linear-gradient(0deg, #FAF3D8 46%,  #558DAB 54%)',
         }}
       >
         {[0, 2, 4, 6].map((i) => (
@@ -104,36 +102,30 @@ const ComicPic = (ind: any) => {
                 <Box
                   pt="25px"
                   style={{
-                    position: "relative",
+                    position: 'relative',
                   }}
                 >
                   {midSize && <Space h={20} />}
-                  <Image
-                    mah={500}
-                    maw={500}
-                    radius="sm"
-                    src={Slides[i].img}
-                    m="auto"
-                  />
+                  <Image mah={500} maw={500} radius="sm" src={Slides[i].img} m="auto" />
                   {Slides[i].txt.length > 0 && (
                     <div
                       style={{
-                        position: "absolute",
-                        left: width > breakpoint ? "-5%" : "0%",
-                        top: "0%",
-                        height: "auto",
-                        backgroundColor: "#fafafa",
-                        borderRadius: "3px",
-                        border: "2px black solid",
-                        color: "black",
-                        fontSize: midSize ? "15px" : "18px",
+                        position: 'absolute',
+                        left: width > breakpoint ? '-5%' : '0%',
+                        top: '0%',
+                        height: 'auto',
+                        backgroundColor: '#fafafa',
+                        borderRadius: '3px',
+                        border: '2px black solid',
+                        color: 'black',
+                        fontSize: midSize ? '15px' : '18px',
                         fontWeight: 500,
-                        maxWidth: "400px",
-                        textAlign: "left",
-                        padding: "5px 15px",
+                        maxWidth: '400px',
+                        textAlign: 'left',
+                        padding: '5px 15px',
                         // fontFamily: "Comic Book",
-                        fontFamily: "Raleway, Roboto",
-                        zIndex: "1000 !important",
+                        fontFamily: 'Raleway, Roboto',
+                        zIndex: '1000 !important',
                       }}
                     >
                       {Slides[i].txt}
@@ -143,7 +135,7 @@ const ComicPic = (ind: any) => {
               </Grid.Col>
               {width < breakpoint && <Space h={50} />}
 
-              <Grid.Col sm={4} pt={width < breakpoint ? "100px" : "8px"}>
+              <Grid.Col sm={4} pt={width < breakpoint ? '100px' : '8px'}>
                 {width < breakpoint && (
                   <Title order={2} color="#546E7A" pt={50} pb={40}>
                     Our Way
@@ -153,34 +145,28 @@ const ComicPic = (ind: any) => {
                 <Box
                   pt="25px"
                   style={{
-                    position: "relative",
+                    position: 'relative',
                   }}
                 >
                   {midSize && <Space h={20} />}
-                  <Image
-                    mah={500}
-                    maw={500}
-                    radius="sm"
-                    src={Slides[i + 1].img}
-                    m="auto"
-                  />
+                  <Image mah={500} maw={500} radius="sm" src={Slides[i + 1].img} m="auto" />
                   {Slides[i + 1].txt.length > 0 && (
                     <div
                       style={{
-                        position: "absolute",
-                        left: width > breakpoint ? "-5%" : "0%",
-                        top: "0%",
-                        height: "auto",
-                        backgroundColor: "#fafafa",
-                        borderRadius: "3px",
-                        border: "2px black solid",
-                        color: "black",
-                        fontSize: midSize ? "15px" : "18px",
+                        position: 'absolute',
+                        left: width > breakpoint ? '-5%' : '0%',
+                        top: '0%',
+                        height: 'auto',
+                        backgroundColor: '#fafafa',
+                        borderRadius: '3px',
+                        border: '2px black solid',
+                        color: 'black',
+                        fontSize: midSize ? '15px' : '18px',
                         fontWeight: 500,
-                        maxWidth: "400px",
-                        textAlign: "left",
-                        padding: "5px 15px",
-                        fontFamily: "Raleway, Roboto",
+                        maxWidth: '400px',
+                        textAlign: 'left',
+                        padding: '5px 15px',
+                        fontFamily: 'Raleway, Roboto',
                       }}
                     >
                       {Slides[i + 1].txt}

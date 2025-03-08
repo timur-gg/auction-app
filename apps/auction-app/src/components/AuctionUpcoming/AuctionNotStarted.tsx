@@ -6,11 +6,10 @@ import {
   Stack,
   Text,
   createStyles,
-  rem,
   Center,
   Badge,
   Button,
-  Modal, MantineTheme
+  Modal, CSSObject
 } from '@mantine/core';
 import ShowCounter from "../AuctionLive/ShowCounter.js";
 import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
@@ -20,15 +19,17 @@ import {
   IconClock,
   IconHomeCancel,
 } from "@tabler/icons-react";
-import { lots as lotsData } from "../../data.js";
+import { lotMockData as lotsData } from '@mocks/auction.tsx';
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
 import { auctionNotStartedStyle } from '../../styles/theme.ts';
+import { IAuction, ILot } from '../../types.ts';
 
-const useStyles = createStyles((theme: MantineTheme ) =>
-  auctionNotStartedStyle(theme)
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  auctionNotStartedStyle(theme) as Record<string, CSSObject>
 );
+
 
 const auctionMockdata = [
   { label: "auctionDate", icon: IconCalendarEvent },
@@ -36,13 +37,10 @@ const auctionMockdata = [
   { label: "duration", icon: IconClock, unit: "hrs" },
 ];
 
-export function AuctionNotStarted(props: any) {
+export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: number}) {
   const { classes } = useStyles();
 
-  const auction = props.auction;
-  const lots = auction.lots?.map((lotId: number) =>
-    lotsData.find((id) => id.id === lotId)
-  );
+  const lots: ILot[] = auction.lots?.flatMap(lotId => lotsData.find(id => id.id === lotId) || []) ?? [];
 
   const navigate = useNavigate();
 
@@ -57,16 +55,16 @@ export function AuctionNotStarted(props: any) {
     </Grid.Col>
   ));
 
-  const lotRows = lots.map((lot: any) => (
+  const lotRows = lots.map((lot: ILot) => (
     <tr key={lot.id}>
       <td>{lot.unit}</td>
       <td>{lot.bedroom}</td>
       <td>{lot.size}sqft</td>
       <td>${lot.price}k</td>
       <td>
-        {lot.soldPrice < 1000
-          ? `${lot.soldPrice}k`
-          : `${lot.soldPrice / 1000}m`}
+        {lot.soldPrice??0 < 1000
+          ? `${lot.soldPrice??0}k`
+          : `${lot.soldPrice??0 / 1000}m`}
       </td>
       <td>{lot.bid < 1000 ? `${lot.bid}k` : `${lot.bid / 1000}m`}</td>
       <td>{lot.totalBids}</td>

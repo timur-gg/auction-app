@@ -5,27 +5,32 @@ import {
   Group,
   Stack,
   Text,
-  createStyles, MantineTheme
+  createStyles, CSSObject
 } from '@mantine/core';
 import ShowCounter from './ShowCounter.js';
 import AuctionProfileCardVert from './AuctionProfileCardVert.js';
-import { ILot, lots as lotsData } from '../../data.js';
+import { lotMockData as lotsData } from '@mocks/auction.tsx';
+import { ILot, IAuction} from '../../types.js';
 import { BiddingTab } from './BiddingTab.js';
 import { auctionLiveStyle } from '../../styles/theme';
-import { auctionMockdata } from '@mocks/auction.tsx';
+import { IconCalendarEvent, IconClock, IconMoneybag } from '@tabler/icons-react';
 
-const useStyles = createStyles((theme: MantineTheme ) =>
-  auctionLiveStyle(theme)
+export  const featureGrid = [
+  { label: "auctionDate", icon: IconCalendarEvent },
+  { label: "deposit", icon: IconMoneybag },
+  { label: "duration", icon: IconClock, unit: "hrs" },
+];
+
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  auctionLiveStyle(theme) as Record<string, CSSObject>
 );
 
-export function AuctionLive({ auction }: { auction: any }) {
+export function AuctionLive({ auction }: { auction: IAuction, step: number}) {
   const { classes } = useStyles();
 
-  const lots = auction.lots.map((lotId: number) =>
-    lotsData.find((id) => id.id === lotId)
-  );
+  const lots: ILot[] = auction.lots?.flatMap(lotId => lotsData.find(id => id.id === lotId) || []) ?? [];
 
-  const auctionFeatures = auctionMockdata.map((feature) => (
+  const auctionFeatures = featureGrid.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>
       <Group spacing="1">
         <feature.icon

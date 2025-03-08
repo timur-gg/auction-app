@@ -1,7 +1,6 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import ExampleDoc from '../assets/terms_conditions.pdf';
-import { auctionData, lots } from '../data.js';
 import {
   Box,
   Stack,
@@ -31,7 +30,8 @@ import FavoritesTable from '../components/ClientProfile/FavoritesTable.js';
 import AuctionsTable from '../components/ClientProfile/AuctionsTable.js';
 import ProjectsTable from '../components/ClientProfile/ProjectsTable.js';
 import { clientProfileStyle } from '../styles/theme.ts';
-import { builderUserData as UserData, clientFavoritesData } from '@mocks/auction.tsx';
+import { auctionData, builderUserData as UserData, clientFavoriteLotData } from '@mocks/auction.tsx';
+import { IAuction, ILot } from '../types.ts';
 
 const useStyles = createStyles((theme: MantineTheme) =>
   clientProfileStyle(theme)
@@ -61,33 +61,32 @@ export default function ClientProfile() {
   const [removedAuctionRows, setRemovedAuctionRows] =
     useState<string[]>([]);
 
-  const deleteFave = (lot: any) => {
+  const deleteFave = (lot: ILot) => {
     setRemovedFaveRows([...removedFaveRows, lot.id]);
     console.info('deleteFave', lot);
   };
 
-  const deleteFaveProject = (lot: any) => {
+  const deleteFaveProject = (lot: IAuction) => {
     setRemovedFaveProjectRows([
       ...removedFaveProjectRows,
-      lot.id,
+      Number(lot.id),
     ]);
     console.info('deleteFave', lot);
   };
 
-  const quitAuction = (lot: any) => {
+  const quitAuction = (lot: IAuction) => {
     setRemovedAuctionRows([...removedAuctionRows, lot.id]);
     console.info('deleteFave', lot);
   };
 
-  const favorites = clientFavoritesData.filter(
+  const favorites = clientFavoriteLotData.filter(
     (fave) => !removedFaveRows.includes(fave.id)
   );
   auctions = auctions.filter(
-    (a: any) => !removedAuctionRows.includes(a.id)
+    (a: IAuction) => !removedAuctionRows.includes(a.id)
   );
-
   projects = projects.filter(
-    (a: any) => !removedFaveProjectRows.includes(a.id)
+    (a: IAuction) => !removedFaveProjectRows.includes(Number(a.id))
   );
 
   console.log(favorites);

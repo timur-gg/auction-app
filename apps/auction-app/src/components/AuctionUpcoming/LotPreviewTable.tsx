@@ -1,20 +1,16 @@
 import {
   Image,
-  createStyles,
   Table,
   Modal,
   UnstyledButton,
 } from "@mantine/core";
-import AuctionProfileCard from "./AuctionProfileCard";
-import PricePlot from "../AuctionLive/PricePlot";
 import { useDisclosure } from "@mantine/hooks";
 import { IconZoomInArea } from "@tabler/icons-react";
-import {  lotPreviewTableStyle } from '../../styles/theme.ts';
 import { lotPreviewData as lots } from '@mocks/auction.tsx';
 
-const useStyles = createStyles((theme) => (
-  lotPreviewTableStyle(theme)
-));
+// const useStyles = createStyles((theme) => (
+//   lotPreviewTableStyle(theme)
+// ));
 
 export function LotPreviewTable() {
   let modalImage = "";

@@ -9,13 +9,14 @@ import {
   Grid,
   Space,
   Flex,
-  rem,
   AspectRatio,
   Tooltip,
   Modal,
   Textarea,
   TextInput,
-  Select, MantineTheme
+  Select,
+  MantineTheme,
+  CSSObject,
 } from '@mantine/core';
 import {
   IconBedFilled,
@@ -24,19 +25,21 @@ import {
   IconAddressBook,
   IconCar,
   IconLock,
-} from "@tabler/icons-react";
-import { Carousel, useAnimationOffsetEffect } from "@mantine/carousel";
-import React from "react";
-import { useDisclosure } from "@mantine/hooks";
-import { YearPickerInput } from "@mantine/dates";
+} from '@tabler/icons-react';
+import { Carousel } from '@mantine/carousel';
+import React from 'react';
+import { useDisclosure } from '@mantine/hooks';
+import { YearPickerInput } from '@mantine/dates';
 
-import RUG from "react-upload-gallery";
-import "react-upload-gallery/dist/style.css";
-import "./rug_style.css";
+import RUG from 'react-upload-gallery';
+import 'react-upload-gallery/dist/style.css';
+import './rug_style.css';
 import { auctionsProfileCardEditStyle } from '../../styles/theme.ts';
+import { IAuction } from '../../types.ts';
 
-const useStyles = createStyles((theme: MantineTheme ) =>
-  auctionsProfileCardEditStyle(theme)
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    auctionsProfileCardEditStyle(theme) as Record<string, CSSObject>
 );
 
 const featureGrid = [
@@ -50,50 +53,35 @@ const featureGrid = [
   //   icon: IconAddressBook,
   //   desc: <Image h={200} w={300} src={mapImg} />,
   // },
-  { label: "bedroom", icon: IconBedFilled, desc: "Number of bedrooms" },
+  { label: 'bedroom', icon: IconBedFilled, desc: 'Number of bedrooms' },
   {
-    label: "size",
+    label: 'size',
     icon: IconRuler,
-    unit: "sqft",
-    desc: "Size of the property",
+    unit: 'sqft',
+    desc: 'Size of the property',
   },
-  { label: "parking", icon: IconCar, desc: "Parking spots" },
-  { label: "locker", icon: IconLock, desc: "Storage lockers" },
+  { label: 'parking', icon: IconCar, desc: 'Parking spots' },
+  { label: 'locker', icon: IconLock, desc: 'Storage lockers' },
 ];
 
-const badgeColorMap: { [key: string]: any } = {
-  "Live Auction": "green",
-  upcoming: "#7CB342",
-  passed: "orange",
+const badgeColorMap: { [key: string]: string } = {
+  'Live Auction': 'green',
+  upcoming: '#7CB342',
+  passed: 'orange',
 };
 
-type ProfileCardProps = {
-  [key: string]: any;
-  // lot: number;
-  // images: string[];
-  // price: number;
-  // name: string;
-  // address: string;
-  // bedroom: number;
-  // size: number;
-  // status: string;
-  // parking: number;
-  // builder: string;
-  // completionDate: string;
-  // locker: number;
-  auction: any;
+export function AuctionProfileCard({
+  auction,
+  cardSize = 'full',
+}: {
+  auction: IAuction;
   cardSize: string;
-  // auctionDate: Date
-};
-
-export function AuctionProfileCard(props: ProfileCardProps) {
+}) {
   const { classes } = useStyles();
-  const auction = props.auction;
-  const cardSize = props.cardSize || "full";
 
   const initialGallery = auction.images.map((link: string) => ({
-    size: "200kb",
-    name: "1",
+    size: '200kb',
+    name: '1',
     source: link,
   }));
 
@@ -103,70 +91,49 @@ export function AuctionProfileCard(props: ProfileCardProps) {
         key={feature.label}
         multiline
         p={5}
-        h={feature.label === "address" ? 256 : "auto"}
+        h={feature.label === 'address' ? 256 : 'auto'}
         // h={500}
         withArrow
-        style={{ cursor: "pointer" }}
+        style={{ cursor: 'pointer' }}
         transitionProps={{ duration: 200 }}
         label={feature.desc}
       >
         <Group spacing="1">
           <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-          <Text size="sm">
-            {auction[feature.label] + (feature.unit ? feature.unit : "")}
-          </Text>
+          <Text size="sm">{auction[feature.label] + (feature.unit ? feature.unit : '')}</Text>
         </Group>
       </Tooltip>
     </Grid.Col>
   ));
 
-  const [
-    galleryModalOpened,
-    { open: openGalleryModal, close: closeGalleryModal },
-  ] = useDisclosure(false);
+  const [galleryModalOpened, { open: openGalleryModal, close: closeGalleryModal }] =
+    useDisclosure(false);
 
-  const Images = auction.images.map((image: any) => (
-    <Carousel.Slide key={image.id} onClick={openGalleryModal}>
+  const Images = auction.images.map((image: string, ind: number) => (
+    <Carousel.Slide key={ind} onClick={openGalleryModal}>
       <AspectRatio ratio={16 / 10} mx="auto">
         <Image src={image} alt="Image1" width="100%" />
       </AspectRatio>
     </Carousel.Slide>
   ));
 
-  const ImagesModal = auction.images.map((image: any) => (
-    <Carousel.Slide key={image.id}>
+  const ImagesModal = auction.images.map((image: string, ind: number) => (
+    <Carousel.Slide key={ind}>
       <Image src={image} alt="Image1" width="100%" height={440} />
     </Carousel.Slide>
   ));
 
-  type ConditionalWrapperTypes = {
-    condition: boolean;
-    wrapper: any;
-    children: any;
+
+  const removeImage = (currentImage: string, images: string[]) => {
+    const updatedImages = images.filter((image) => image !== currentImage);
+    console.log('Updated Images:', updatedImages);
   };
 
-  const ConditionalWrapper = ({
-    condition,
-    wrapper,
-    children,
-  }: ConditionalWrapperTypes) => (condition ? wrapper(children) : children);
-
-  const removeImage = (currentImage: any, images: any) => {};
   return (
     <div className="AuctionProfileCard">
       {galleryModalOpened && (
-        <Modal
-          opened={galleryModalOpened}
-          onClose={closeGalleryModal}
-          size="xl"
-        >
-          <Carousel
-            slideSize="95%"
-            slideGap="sm"
-            align="center"
-            loop
-            withIndicators
-          >
+        <Modal opened={galleryModalOpened} onClose={closeGalleryModal} size="xl">
+          <Carousel slideSize="95%" slideGap="sm" align="center" loop withIndicators>
             {ImagesModal}
           </Carousel>
         </Modal>
@@ -174,15 +141,13 @@ export function AuctionProfileCard(props: ProfileCardProps) {
 
       <Card.Section className={classes.section}>
         <Grid>
-          <Grid.Col {...(cardSize === "full" ? { sm: 12, md: 5 } : { xs: 12 })}>
+          <Grid.Col {...(cardSize === 'full' ? { sm: 12, md: 5 } : { xs: 12 })}>
             <Grid>
-              <Grid.Col
-                {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 7 })}
-              >
+              <Grid.Col {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 7 })}>
                 <Flex
-                  {...(cardSize === "full"
-                    ? { direction: "column" }
-                    : { direction: "row", gap: "xl" })}
+                  {...(cardSize === 'full'
+                    ? { direction: 'column' }
+                    : { direction: 'row', gap: 'xl' })}
                 >
                   <Stack align="flex-start" spacing={-2}>
                     <Group>
@@ -220,7 +185,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                     fz="sm"
                     // c="dimmed"
                     // className={classes.label}
-                    m={"auto"}
+                    m={'auto'}
                     autosize
                     minRows={4}
                     defaultValue="Allure Condos is a new condo development located at 250 King
@@ -231,41 +196,29 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                   />
                 </Flex>
               </Grid.Col>
-              <Grid.Col
-                {...(cardSize === "full" ? { xs: 6, md: 12 } : { xs: 5 })}
-              >
+              <Grid.Col {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 5 })}>
                 <Group position="apart" mt="md">
                   <Stack spacing={6} mb={-5} align="flex-start">
-                    <Text
-                      fz="sm"
-                      c="dimmed"
-                      className={classes.label}
-                      align="left"
-                    >
+                    <Text fz="sm" c="dimmed" className={classes.label} align="left">
                       building details
                     </Text>
 
                     <Stack>
                       <Group spacing="1">
-                        <IconCalendarEvent
-                          size="1.05rem"
-                          className={classes.icon}
-                          stroke={1.5}
-                        />
+                        <IconCalendarEvent size="1.05rem" className={classes.icon} stroke={1.5} />
                         <Select
                           maw={120}
-                          defaultValue={auction["completionDate"].substring(
+                          defaultValue={auction['completionDate'].substring(
                             0,
-                            auction["completionDate"].length - 5
+                            auction['completionDate'].length - 5
                           )}
-                          data={["Fall", "Winter", "Spring", "Summer"]}
+                          data={['Fall', 'Winter', 'Spring', 'Summer']}
                         />
                         <Space w={10} />
-
                         <YearPickerInput
-                          placeholder={auction["completionDate"].substring(
-                            auction["completionDate"].length - 4,
-                            auction["completionDate"].length
+                          placeholder={auction['completionDate'].substring(
+                            auction['completionDate'].length - 4,
+                            auction['completionDate'].length
                           )}
                           // value={completionValue}
                           // onChange={setCompletionValue}
@@ -273,15 +226,8 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                       </Group>
 
                       <Group spacing="1">
-                        <IconAddressBook
-                          size="1.05rem"
-                          className={classes.icon}
-                          stroke={1.5}
-                        />
-                        <TextInput
-                          size="sm"
-                          defaultValue={auction["address"]}
-                        />
+                        <IconAddressBook size="1.05rem" className={classes.icon} stroke={1.5} />
+                        <TextInput size="sm" defaultValue={auction['address']} />
                       </Group>
                     </Stack>
                     <Space h={20} />
@@ -293,7 +239,7 @@ export function AuctionProfileCard(props: ProfileCardProps) {
             </Grid>
           </Grid.Col>
 
-          {cardSize === "full" && (
+          {cardSize === 'full' && (
             <Grid.Col sm={12} md={7}>
               {/* <Carousel
                 slideSize="90%"
@@ -309,16 +255,16 @@ export function AuctionProfileCard(props: ProfileCardProps) {
                 style={{ fontSize: 16 }}
                 // action="http://example.com/upload"
                 initialState={initialGallery}
-                accept={["jpg", "jpeg", "png"]}
-                onChange={(images: any) => {
+                accept={['jpg', 'jpeg', 'png']}
+                onChange={(images: string) => {
                   console.log(images);
                   // this.setState({ images }); // save current component
                 }}
-                onConfirmDelete={(currentImage: any, images: any) => {
+                onConfirmDelete={(currentImage: string, images: string[]) => {
                   removeImage(currentImage, images);
                 }}
-                onSuccess={(image: any) => {
-                  console.log("ima:ge", image);
+                onSuccess={(image: string) => {
+                  console.log('ima:ge', image);
                 }}
               />
             </Grid.Col>

@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconFile, IconX } from "@tabler/icons-react";
 
-function FileDrop(props: any) {
+function FileDrop() {
   const openRef = useRef<() => void>(null);
   const theme = useMantineTheme();
 

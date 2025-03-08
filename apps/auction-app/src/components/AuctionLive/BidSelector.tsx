@@ -1,26 +1,27 @@
-import {
-  NumberInputHandlers,
-  Group,
-  ActionIcon,
-  NumberInput,
-} from "@mantine/core";
-import { rem } from "@mantine/styles";
-import { IconCurrencyDollarCanadian } from "@tabler/icons-react";
-import { useState, useRef } from "react";
+import { NumberInputHandlers, Group, ActionIcon, NumberInput } from '@mantine/core';
+import { rem } from '@mantine/styles';
+import { IconCurrencyDollarCanadian } from '@tabler/icons-react';
+import { useRef } from 'react';
 
-export function BidSelector(props: any) {
-  const {
-    lot,
-    className,
-    value,
-    setValue,
-    step,
-    decrementActive,
-    incrementActive,
-  } = props;
-  // const [value, setValue] = useState<number | "">(props.lot.price * 1000);
+export function BidSelector({
+  lot,
+  className,
+  value,
+  setValue,
+  step,
+  decrementActive,
+  incrementActive,
+}: {
+  lot: { bid: number };
+  className?: string;
+  value: number;
+  setValue: (val: number) => void;
+  step: number;
+  decrementActive: boolean;
+  incrementActive: boolean;
+}) {
+
   const handlers = useRef<NumberInputHandlers>();
-
   return (
     <Group spacing={5} className={className}>
       <ActionIcon
@@ -35,14 +36,14 @@ export function BidSelector(props: any) {
       <NumberInput
         hideControls
         value={value}
-        onChange={(val) => setValue(val)}
+        onChange={(val: number ) => setValue(val ?? 0)}
         handlersRef={handlers}
         max={1000000}
         min={lot.bid}
         step={step}
         styles={{ input: { width: rem(150) } }}
         icon={<IconCurrencyDollarCanadian size="1rem" />}
-        style={{ pointerEvents: "none" }}
+        style={{ pointerEvents: 'none' }}
       />
 
       <ActionIcon

@@ -11,14 +11,12 @@ import {
   ThemeIcon,
   Text,
   createStyles,
-  rem,
   Image,
   Container,
-  MantineTheme,
+  CSSObject
 } from '@mantine/core';
 import { ref } from 'firebase/database';
 import { database } from '../db/firebase.js';
-
 import {
   useDatabaseSnapshot,
   useDatabaseUpdateMutation,
@@ -30,14 +28,13 @@ import {
   IconPencil,
 } from '@tabler/icons-react';
 import AuctionProfileCardEdit from '../components/Confirm/AuctionProfileCardEdit.js';
-import { data } from '../data.js';
 import { useParams } from 'react-router-dom';
 import AuctionProfileCard from '../components/AuctionUpcoming/AuctionProfileCard.js';
 import AuctionDetails from '../components/AuctionUpcoming/AuctionDetails.js';
 import AuctionDetailsEdit from '../components/Confirm/AuctionDetailsEdit.js';
 import { LotSelectionTable } from '../components/AuctionUpcoming/LotSelectionTable.js';
 import { UnitTableEdit } from '../components/Confirm/UnitTableEdit.js';
-import { lots } from '../data.js';
+import { lotMockData as lots, auctionData} from '@mocks/auction.tsx';
 import FileDrop from '../components/signup/FileDrop.js';
 import { Carousel } from '@mantine/carousel';
 import RUG from 'react-upload-gallery';
@@ -50,9 +47,10 @@ import floorPlan3 from '../assets/floorPlan3.png';
 import floorPlan4 from '../assets/floorPlan4.png';
 import { confirmProjectStyles } from '../styles/theme.ts';
 
-const useStyles = createStyles((theme: MantineTheme) =>
-  confirmProjectStyles(theme)
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  confirmProjectStyles(theme) as Record<string, CSSObject>
 );
+
 
 const floorPlans = [
   floorPlan1,
@@ -69,17 +67,19 @@ const tabs = [
   'card',
 ];
 
-export default function ConfirmProject(props: any) {
+export default function ConfirmProject() {
   const { classes } = useStyles();
   const { id } = useParams();
 
   const [editAction, setEditAction] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [activeTab, setActiveTab] = useState<string>('overview');
+  const [plansGalleryOpen, setPlansGalleryOpen] = useState(false);
 
   const auction =
-    data.auctionData.find((x) => x.id === id) ||
-    data.auctionData[0];
+    auctionData.find((x) => x.id === id) ||
+    auctionData[0];
 
   const initialPlanGallery = floorPlans.map(
     (link: string) => ({
@@ -90,20 +90,18 @@ export default function ConfirmProject(props: any) {
   );
 
   const removeImage = (
-    currentImage: any,
-    images: any
-  ) => {};
-  const [plansGalleryOpen, setPlansGalleryOpen] =
-    useState(false);
-  const [activeTab, setActiveTab] = useState<string | null>(
-    'overview'
-  );
+    currentImage: string,
+    images: { size: string; name: string; source: string }[]
+  ): { size: string; name: string; source: string }[] => {
+    return images.filter((image) => image.source !== currentImage);
+  };
+
 
   const [confirmedTabs, setConfirmedTabs] = useState<
     string[]
   >([]);
 
-  const plansImagesModal = floorPlans.map((image: any) => (
+  const plansImagesModal = floorPlans.map((image: string) => (
     <Carousel.Slide key={1}>
       <Image
         src={image}
@@ -187,14 +185,7 @@ export default function ConfirmProject(props: any) {
   };
 
   return (
-    <Card
-      withBorder
-      radius="md"
-      className={classes.card}
-      maw={1200}
-      mx="auto"
-      pt="0"
-    >
+    <Card withBorder radius="md" className={classes.card} maw={1200} mx="auto" pt="0">
       <Tabs
         defaultValue="overview"
         pt="15px"
@@ -214,11 +205,7 @@ export default function ConfirmProject(props: any) {
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={
-                  confirmedTabs.includes('overview')
-                    ? 'green'
-                    : 'gray'
-                }
+                color={confirmedTabs.includes('overview') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -238,11 +225,7 @@ export default function ConfirmProject(props: any) {
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={
-                  confirmedTabs.includes('details')
-                    ? 'green'
-                    : 'gray'
-                }
+                color={confirmedTabs.includes('details') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -262,11 +245,7 @@ export default function ConfirmProject(props: any) {
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={
-                  confirmedTabs.includes('units')
-                    ? 'green'
-                    : 'gray'
-                }
+                color={confirmedTabs.includes('units') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -287,11 +266,7 @@ export default function ConfirmProject(props: any) {
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={
-                  confirmedTabs.includes('plans')
-                    ? 'green'
-                    : 'gray'
-                }
+                color={confirmedTabs.includes('plans') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -312,11 +287,7 @@ export default function ConfirmProject(props: any) {
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={
-                  confirmedTabs.includes('card')
-                    ? 'green'
-                    : 'gray'
-                }
+                color={confirmedTabs.includes('card') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -337,9 +308,7 @@ export default function ConfirmProject(props: any) {
               //   onClick={() => setPlansGalleryOpen(true)}
               bg="#DCEDC8"
             >
-              {submitStatus === 'Ready for Auction'
-                ? 'Ready for Auction'
-                : 'Submit'}
+              {submitStatus === 'Ready for Auction' ? 'Ready for Auction' : 'Submit'}
             </Tabs.Tab>
           )}
         </Tabs.List>
@@ -347,15 +316,9 @@ export default function ConfirmProject(props: any) {
         <Space h={30} />
         <Tabs.Panel value="overview" pt="0">
           {editAction ? (
-            <AuctionProfileCardEdit
-              auction={auction}
-              cardSize="full"
-            />
+            <AuctionProfileCardEdit auction={auction} cardSize="full" />
           ) : (
-            <AuctionProfileCard
-              auction={auction}
-              cardSize="full"
-            />
+            <AuctionProfileCard auction={auction} cardSize="full" />
           )}
         </Tabs.Panel>
         <Tabs.Panel value="details" pt="0">
@@ -390,9 +353,7 @@ export default function ConfirmProject(props: any) {
                     </Button>
                   </Grid.Col>
                   <Grid.Col xs={6} md={12}>
-                    <Text size="lg">
-                      Upload new Units table
-                    </Text>
+                    <Text size="lg">Upload new Units table</Text>
                     <Space h={10} />
 
                     <FileDrop />
@@ -437,10 +398,7 @@ export default function ConfirmProject(props: any) {
                   console.log(images);
                   // this.setState({ images }); // save current component
                 }}
-                onConfirmDelete={(
-                  currentImage: any,
-                  images: any
-                ) => {
+                onConfirmDelete={(currentImage: any, images: any) => {
                   removeImage(currentImage, images);
                 }}
                 onSuccess={(image: any) => {
@@ -452,23 +410,7 @@ export default function ConfirmProject(props: any) {
         </Tabs.Panel>
         <Tabs.Panel value="card" pt="0">
           <Container maw={600}>
-            <AuctionCard
-              status={auction.status}
-              id={auction.id}
-              image={auction.images[0].toString()}
-              size={auction.size.toString()}
-              price={auction.price[0] || auction.minPrice}
-              name={auction.name}
-              address={auction.address}
-              bedroom={auction.bedroom}
-              builder={auction.builder}
-              completionDate={auction.completionDate}
-              auctionDate={auction.auctionDate}
-              deposit={auction.deposit}
-              bathroom={auction.bathroom}
-              parking={auction.parking}
-              locker={auction.locker}
-            />
+            <AuctionCard auction={auction} />
           </Container>
         </Tabs.Panel>
         <Tabs.Panel value="final" pt="0">
@@ -477,8 +419,7 @@ export default function ConfirmProject(props: any) {
           {!submitted ? (
             <>
               <Text size="lg" fw="500">
-                Do you want to confirm all the details of
-                the project?
+                Do you want to confirm all the details of the project?
               </Text>
 
               <Space h={30} />
@@ -500,8 +441,7 @@ export default function ConfirmProject(props: any) {
             <>
               {submitStatus === 'Ready for Auction' ? (
                 <Text size="lg" fw="500">
-                  Your project is ready for the upcoming
-                  auction!
+                  Your project is ready for the upcoming auction!
                 </Text>
               ) : (
                 <Text size="lg" fw="500">
@@ -510,9 +450,7 @@ export default function ConfirmProject(props: any) {
               )}
               <Space h={30} />
               <a href="/builder_profile">
-                <Button color="blue">
-                  Go to My Profile
-                </Button>
+                <Button color="blue">Go to My Profile</Button>
               </a>
             </>
           )}
@@ -521,28 +459,18 @@ export default function ConfirmProject(props: any) {
 
         {activeTab != 'final' && !submitted && (
           <Group>
-            <Button
-              size="lg"
-              onClick={() => setEditAction(true)}
-            >
+            <Button size="lg" onClick={() => setEditAction(true)}>
               Edit Overview <Space w={10} />
               <IconPencil size={20} />
             </Button>
 
-            {(editAction ||
-              (activeTab &&
-                !confirmedTabs.includes(activeTab))) && (
+            {(editAction || (activeTab && !confirmedTabs.includes(activeTab))) && (
               <Button
                 size="lg"
                 color="green"
-                onClick={() =>
-                  activeTab ? confirmAction(activeTab) : ''
-                }
+                onClick={() => (activeTab ? confirmAction(activeTab) : '')}
               >
-                Confirm{' '}
-                {activeTab &&
-                  activeTab.charAt(0).toUpperCase() +
-                    activeTab.slice(1)}
+                Confirm {activeTab && activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
                 <Space w={10} />
                 <IconCheck size={20} />
               </Button>

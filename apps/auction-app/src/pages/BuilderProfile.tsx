@@ -4,14 +4,13 @@ import ExampleDoc from "../assets/terms_conditions.pdf";
 import "react-chat-widget/lib/styles.css";
 import { Chat } from "../components/Chat";
 import { useDisclosure } from "@mantine/hooks";
-
 import { ref } from "firebase/database";
 import {
   useDatabaseSnapshot,
 } from "@react-query-firebase/database";
 import { database } from "../db/firebase";
 import { useNavigate } from "react-router-dom";
-import { builderFavoritesData, builderUserData as UserData } from '@mocks/auction.tsx';
+import { builderFavoritesData, builderUserData as UserData } from '@mocks/auction';
 
 import {
   Box,
@@ -30,8 +29,8 @@ import {
   Table,
   Paper,
   ThemeIcon,
-  Avatar,
-} from "@mantine/core";
+  Avatar, CSSObject
+} from '@mantine/core';
 
 import {
   IconPhoneCall,
@@ -43,14 +42,18 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { builderStyle } from '../styles/theme.ts';
+import { IAuction } from '../types.ts';
+import firebase from 'firebase/compat';
+import DataSnapshot = firebase.database.DataSnapshot;
 
-const useStyles = createStyles((theme: MantineTheme ) =>
-  builderStyle(theme)
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  builderStyle(theme) as Record<string, CSSObject>
 );
+
 
 export default function BuilderProfile() {
   const { classes } = useStyles();
-  const [loadedAuctions, setLoadedAuctions] = useState<any>([]);
+  const [loadedAuctions, setLoadedAuctions] = useState<IAuction[]>([]); // Fixed type to be an array
 
   const navigate = useNavigate();
 
@@ -76,19 +79,6 @@ export default function BuilderProfile() {
       <td>{element.builder}</td>
       <td>{element.address}</td>
       <td>{element.sold}</td>
-      {/* <td>
-        {element.status === "Live" ? (
-          <Badge color="green" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : element.status === "Passed" ? (
-          <Badge color="red" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : (
-          element.status
-        )}
-      </td> */}
     </tr>
   ));
 
@@ -111,15 +101,15 @@ export default function BuilderProfile() {
     dbRef,
     { subscribe: true },
     {
-      onSuccess(snapshot: any) {
-        const loaded = snapshot.val();
-
+      onSuccess(snapshot: DataSnapshot) {
+        const loaded: IAuction[] = snapshot.val();
         console.log(Object.keys(loaded));
-        setLoadedAuctions(
-          Object.keys(loaded).map((id: string) => ({ ...loaded[id], id: id }))
-        );
+        setLoadedAuctions(loaded);
+        // setLoadedAuctions(
+        //   Object.keys(loaded).map((id: string) => ({ ...loaded[id], id: id }))
+        // );
       },
-      onError(error: any) {
+      onError(error: Error) {
         console.log(error);
       },
     }
@@ -127,7 +117,7 @@ export default function BuilderProfile() {
 
   console.log(loadedAuctions);
 
-  const auctionRows = loadedAuctions.map((element: any) => (
+  const auctionRows = loadedAuctions.map((element: IAuction) => (
     <tr
       key={element.name}
       className={classes.tableRow}

@@ -1,12 +1,5 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { auctionData, lots } from "../../data.js";
-
 import {
-  IconTrash,
   IconX,
-  IconArchive,
-  IconPencil,
   IconPlus,
 } from "@tabler/icons-react";
 import {
@@ -58,7 +51,7 @@ const defaultTabs = [
     optional: true,
   },
 ];
-export default function DetailedDescripion(props: any) {
+export default function DetailedDescripion() {
   const [removedTabs, setRemovedTabs] = useState<string[]>([]);
   const [newTabs, setNewTabs] = useState<string[]>([]);
 
@@ -90,7 +83,7 @@ export default function DetailedDescripion(props: any) {
               {tab.optional && (
                 <ActionIcon
                   mx="1px"
-                  onClick={(e) => setRemovedTabs([...removedTabs, tab.value])}
+                  onClick={(e: React.MouseEvent) => setRemovedTabs([...removedTabs, tab.value])}
                 >
                   <IconX size={14} />
                 </ActionIcon>

@@ -12,7 +12,8 @@ import {
   Flex,
   rem,
   Tooltip,
-} from "@mantine/core";
+  CSSObject,
+} from '@mantine/core';
 import {
   IconBedFilled,
   IconRuler,
@@ -20,130 +21,68 @@ import {
   IconAddressBook,
   IconCar,
   IconLock,
-} from "@tabler/icons-react";
-import React from "react";
-import mapImg from "../../img/map.png";
+} from '@tabler/icons-react';
+import React from 'react';
+import mapImg from '../../img/map.png';
+import { auctionProfileCardVertStyle } from '../../styles/theme';
+import { IAuction } from '../../types.ts';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    auctionProfileCardVertStyle(theme) as Record<string, CSSObject>
+);
 
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-  statusBadge: {
-    marginBottom: theme.spacing.md,
-  },
-
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const mockdata = [
+const featureGrid = [
   {
-    label: "completionDate",
+    label: 'completionDate',
     icon: IconCalendarEvent,
-    desc: "Construction completion date",
+    desc: 'Construction completion date',
   },
   {
-    label: "address",
+    label: 'address',
     icon: IconAddressBook,
     desc: <Image h={200} w={300} src={mapImg} mb={-23} />,
   },
-  { label: "bedroom", icon: IconBedFilled, desc: "Number of bedrooms" },
+  { label: 'bedroom', icon: IconBedFilled, desc: 'Number of bedrooms' },
   {
-    label: "size",
+    label: 'size',
     icon: IconRuler,
-    unit: "sqft",
-    desc: "Size of the property",
+    unit: 'sqft',
+    desc: 'Size of the property',
   },
-  { label: "parking", icon: IconCar, desc: "Parking spots" },
-  { label: "locker", icon: IconLock, desc: "Storage lockers" },
+  { label: 'parking', icon: IconCar, desc: 'Parking spots' },
+  { label: 'locker', icon: IconLock, desc: 'Storage lockers' },
 ];
 
-type ProfileCardProps = {
-  [key: string]: any;
-  // lot: number;
-  // images: string[];
-  // price: number;
-  // name: string;
-  // address: string;
-  // bedroom: number;
-  // size: number;
-  // status: string;
-  // parking: number;
-  // builder: string;
-  // completionDate: string;
-  // locker: number;
-  auction: any;
-  // auctionDate: Date
-};
 
-type AuctionType = {
-  [key: string]: any;
-  lot: number;
-  images: string[];
-  price: number;
-  name: string;
-  address: string;
-  bedroom: number;
-  size: number;
-  status: string;
-  parking: number;
-  builder: string;
-  completionDate: string;
-  locker: number;
-  auctionDate: Date;
-};
-
-export function AuctionProfileCardVert(props: ProfileCardProps) {
+export function AuctionProfileCardVert({auction}:{auction: IAuction}) {
   const { classes } = useStyles();
-  const auction: AuctionType = props.auction;
 
-  const features = mockdata.map((feature) => (
+  const features = featureGrid.map((feature) => (
     <Grid.Col xs={10} py={5} key={feature.label}>
       <Tooltip
         multiline
         p={5}
         // h={feature.label === "address" ? 200 : "auto"}
         withArrow
-        style={{ cursor: "pointer" }}
+        style={{ cursor: 'pointer' }}
         transitionProps={{ duration: 200 }}
         label={feature.desc}
       >
         <Group spacing="1">
           <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
           <Text size="sm">
-            {auction[feature.label] + (feature.unit ? feature.unit : "")}
+            {auction[feature.label] + (feature.unit ? feature.unit : '')}
           </Text>
         </Group>
       </Tooltip>
     </Grid.Col>
   ));
 
-  const badgeColorMap: { [key: string]: any } = {
-    "Live Auction": "green",
-    upcoming: "yellow",
-    passed: "orange",
+  const badgeColorMap: { [key: string]: string } = {
+    'Live Auction': 'green',
+    upcoming: 'yellow',
+    passed: 'orange',
   };
 
   return (

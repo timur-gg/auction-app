@@ -4,15 +4,13 @@ import ExampleDoc from "../assets/terms_conditions.pdf";
 import "react-chat-widget/lib/styles.css";
 import { Chat } from "../components/Chat";
 import { useDisclosure } from "@mantine/hooks";
-
 import { ref } from "firebase/database";
 import {
   useDatabaseSnapshot,
-  useDatabaseUpdateMutation,
 } from "@react-query-firebase/database";
 import { database } from "../db/firebase";
-
 import { useNavigate } from "react-router-dom";
+import { builderFavoritesData, builderUserData as UserData } from '@mocks/auction';
 
 import {
   Box,
@@ -31,8 +29,8 @@ import {
   Table,
   Paper,
   ThemeIcon,
-  Avatar,
-} from "@mantine/core";
+  Avatar, CSSObject
+} from '@mantine/core';
 
 import {
   IconPhoneCall,
@@ -43,67 +41,19 @@ import {
   IconMessage,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import { builderStyle } from '../styles/theme.ts';
+import { IAuction } from '../types.ts';
+import firebase from 'firebase/compat';
+import DataSnapshot = firebase.database.DataSnapshot;
 
-const useStyles = createStyles((theme) => ({
-  icon: {
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[3]
-        : theme.colors.gray[5],
-  },
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  builderStyle(theme) as Record<string, CSSObject>
+);
 
-  name: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-  },
-  tableRow: {
-    "&:hover": {
-      background: "#efefef",
-      cursor: "pointer",
-    },
-  },
-
-  chatButton: {
-    position: "fixed",
-    right: "2%",
-    bottom: "2%",
-    padding: "10px",
-    height: "auto",
-  },
-}));
-
-const UserData = {
-  title: "Mr",
-  name: "John Doe",
-  email: "johndoe@hotmail.com",
-  phone: "+16474722634",
-  avatar:
-    "https://images.unsplash.com/photo-1612833609249-5e9c9b9b0b0f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXR5JTIwY2FyZCUyMGF1dGhvcml0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-};
-
-const favourites = [
-  {
-    name: "King West Towers",
-    builder: "Developers Inc",
-    address: "100 Spadina",
-    status: "Live",
-    bid: "570k",
-    auctionDate: "Sep 10 2023",
-    sold: 10,
-  },
-
-  {
-    bid: "1m",
-    name: "Condo 229",
-    address: "35 Queen",
-    builder: "Developers Inc",
-    status: "Passed",
-    sold: 30,
-  },
-];
 
 export default function BuilderProfile() {
   const { classes } = useStyles();
-  const [loadedAuctions, setLoadedAuctions] = useState<any>([]);
+  const [loadedAuctions, setLoadedAuctions] = useState<IAuction[]>([]); // Fixed type to be an array
 
   const navigate = useNavigate();
 
@@ -123,25 +73,12 @@ export default function BuilderProfile() {
     }
   };
 
-  const favouritesRows = favourites.map((element) => (
+  const favouritesRows = builderFavoritesData.map((element) => (
     <tr key={element.name} className={classes.tableRow}>
       <td>{element.name}</td>
       <td>{element.builder}</td>
       <td>{element.address}</td>
       <td>{element.sold}</td>
-      {/* <td>
-        {element.status === "Live" ? (
-          <Badge color="green" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : element.status === "Passed" ? (
-          <Badge color="red" size="md" variant="filled">
-            {element.status}
-          </Badge>
-        ) : (
-          element.status
-        )}
-      </td> */}
     </tr>
   ));
 
@@ -164,15 +101,15 @@ export default function BuilderProfile() {
     dbRef,
     { subscribe: true },
     {
-      onSuccess(snapshot: any) {
-        const loaded = snapshot.val();
-
+      onSuccess(snapshot: DataSnapshot) {
+        const loaded: IAuction[] = snapshot.val();
         console.log(Object.keys(loaded));
-        setLoadedAuctions(
-          Object.keys(loaded).map((id: string) => ({ ...loaded[id], id: id }))
-        );
+        setLoadedAuctions(loaded);
+        // setLoadedAuctions(
+        //   Object.keys(loaded).map((id: string) => ({ ...loaded[id], id: id }))
+        // );
       },
-      onError(error: any) {
+      onError(error: Error) {
         console.log(error);
       },
     }
@@ -180,7 +117,7 @@ export default function BuilderProfile() {
 
   console.log(loadedAuctions);
 
-  const auctionRows = loadedAuctions.map((element: any) => (
+  const auctionRows = loadedAuctions.map((element: IAuction) => (
     <tr
       key={element.name}
       className={classes.tableRow}

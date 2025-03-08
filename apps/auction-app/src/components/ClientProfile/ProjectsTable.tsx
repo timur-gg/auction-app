@@ -1,51 +1,48 @@
-import { Badge, Group, ActionIcon } from "@mantine/core";
-import { IconBed, IconBath, IconRuler, IconTrash } from "@tabler/icons-react";
-import { DataTable } from "mantine-datatable";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { auctionData, lots } from "../../data.js";
+import { Badge, Group, ActionIcon } from '@mantine/core';
+import { IconTrash } from '@tabler/icons-react';
+import { DataTable } from 'mantine-datatable';
+import { useNavigate } from 'react-router-dom';
+import { lotMockData as lots } from '@mocks/auction.tsx';
+import { IAuction } from '../../types.ts';
 
-export default function ProjectsTable(props: any) {
-  const { auctions, deleteFave } = props;
+export default function ProjectsTable({
+  auctions,
+  deleteFave,
+}: {
+  auctions: IAuction[];
+  deleteFave: (a: IAuction) => void;
+}) {
   const navigate = useNavigate();
 
-  const rowClick = (lot: any) => {
+  const rowClick = (lot: IAuction) => {
     console.log(lot.id);
     navigate(`/project/${lot.id}`);
   };
   return (
     <DataTable
       highlightOnHover
-      style={{ textAlign: "left" }}
-      // rowStyle={(row, id) => {
-      //   console.info(rows[id - 1]);
-
-      //   return id % 2 === 0
-      //     ? { backgroundColor: "#FA5639" }
-      //     : undefined;
-      // }}
+      style={{ textAlign: 'left' }}
       columns={[
-        { accessor: "name" },
-        { accessor: "builder" },
-        { accessor: "address" },
+        { accessor: 'name' },
+        { accessor: 'builder' },
+        { accessor: 'address' },
         {
-          accessor: "unit",
-          title: "Units",
+          accessor: 'unit',
+          title: 'Units',
           render: (a) =>
-            a.lotsAuctioned
-              ?.map((l: number) => lots.find((i) => i.id === l)?.unit)
-              .join(", ") || [],
+            a.lotsAuctioned?.map((l: number) => lots.find((i) => i.id === l)?.unit).join(', ') ||
+            [],
         },
 
         {
-          accessor: "status",
-          title: "Auction Date",
+          accessor: 'status',
+          title: 'Auction Date',
           render: (lot) =>
-            lot.status === "Live Auction" ? (
+            lot.status === 'Live Auction' ? (
               <Badge color="green" size="md" variant="filled">
                 {lot.status}
               </Badge>
-            ) : lot.status === "passed" ? (
+            ) : lot.status === 'passed' ? (
               <Badge color="red" size="md" variant="filled">
                 {lot.status}
               </Badge>
@@ -55,15 +52,15 @@ export default function ProjectsTable(props: any) {
         },
 
         {
-          accessor: "actions",
+          accessor: 'actions',
           title: <></>,
-          textAlignment: "right",
+          textAlignment: 'right',
           width: 20,
           render: (lot) => (
             <Group spacing={4} position="right" noWrap>
               <ActionIcon
                 color="red"
-                onClick={(e) => {
+                onClick={(e: React.MouseEvent) => {
                   e.stopPropagation();
                   deleteFave(lot);
                 }}

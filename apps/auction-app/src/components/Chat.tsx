@@ -8,15 +8,10 @@ import {
   MessageList,
   SendButton,
 } from "@chatscope/chat-ui-kit-react";
-
-// interface ExtentedInputProps extends MessageInputProps {
-//   as?: string | typeof MessageInput;
-// }
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.css";
 import { useRef, useState } from "react";
-// import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.css";
 
-const ExtendedInput = (props: any) => {
+const ExtendedInput = () => {
   return (
     <div>
       <span>Custom content</span>

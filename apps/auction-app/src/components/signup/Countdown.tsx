@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { render } from "react-dom";
-
 import {
     Text
   } from "@mantine/core";
 
-function Countdown(props: any) {
-  const initialSeconds = props.seconds;
+function Countdown(initialSeconds: number) {
 
   const [seconds, setSeconds] = React.useState(initialSeconds);
 

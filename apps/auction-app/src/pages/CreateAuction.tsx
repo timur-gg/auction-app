@@ -103,20 +103,20 @@ export default function CreateAuction() {
   const dbRef = ref(database, "projects");
   const mutation = useDatabaseUpdateMutation(dbRef);
 
-  const loadedProjectId = useDatabaseSnapshot(
-    ["projects"],
-    dbRef,
-    { subscribe: true },
-    {
-      onSuccess(snapshot: any) {
-        const projects = snapshot.val();
-        setProjectId(Object.keys(projects).length + 100);
-      },
-      onError(error: any) {
-        console.log(error);
-      },
-    }
-  );
+  // const loadedProjectId = useDatabaseSnapshot(
+  //   ["projects"],
+  //   dbRef,
+  //   { subscribe: true },
+  //   {
+  //     onSuccess(snapshot: any) {
+  //       const projects = snapshot.val();
+  //       setProjectId(Object.keys(projects).length + 100);
+  //     },
+  //     onError(error: any) {
+  //       console.log(error);
+  //     },
+  //   }
+  // );
 
   const submitAuction = () => {
     if (projectId > 0) {
@@ -249,7 +249,7 @@ export default function CreateAuction() {
                     />
                   </Group>
                 </Stack>
-                {/* 
+                {/*
                 <DatePickerInput
                   maw={300}
                   // type="range"

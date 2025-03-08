@@ -1,7 +1,6 @@
-import React, { FormEvent, useEffect } from "react";
-import { useState, useRef } from "react";
-import ExampleDoc from "../assets/terms_conditions.pdf";
-import "react-chat-widget/lib/styles.css";
+import React, { FormEvent, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import 'react-chat-widget/lib/styles.css';
 import {
   Button,
   Card,
@@ -12,99 +11,104 @@ import {
   ThemeIcon,
   Text,
   createStyles,
-  rem,
   Image,
   Container,
-} from "@mantine/core";
-import { ref } from "firebase/database";
-import { database } from "../db/firebase.js";
-
+  CSSObject
+} from '@mantine/core';
+import { ref } from 'firebase/database';
+import { database } from '../db/firebase.js';
 import {
   useDatabaseSnapshot,
   useDatabaseUpdateMutation,
-} from "@react-query-firebase/database";
+} from '@react-query-firebase/database';
 
-import { IconCheck, IconFileDatabase, IconPencil } from "@tabler/icons-react";
-import AuctionProfileCardEdit from "../components/Confirm/AuctionProfileCardEdit.js";
-import {data} from "../data.js";
-import { useParams } from "react-router-dom";
-import AuctionProfileCard from "../components/AuctionUpcoming/AuctionProfileCard.js";
-import AuctionDetails from "../components/AuctionUpcoming/AuctionDetails.js";
-import AuctionDetailsEdit from "../components/Confirm/AuctionDetailsEdit.js";
-import { LotSelectionTable } from "../components/AuctionUpcoming/LotSelectionTable.js";
-import { UnitTableEdit } from "../components/Confirm/UnitTableEdit.js";
-import { lots } from "../data.js";
-import FileDrop from "../components/signup/FileDrop.js";
-import { Carousel } from "@mantine/carousel";
-import RUG from "react-upload-gallery";
-import "../components/Confirm/rug_style.css";
-import AuctionCard from "../components/inventory/AuctionCard.js";
+import {
+  IconCheck,
+  IconFileDatabase,
+  IconPencil,
+} from '@tabler/icons-react';
+import AuctionProfileCardEdit from '../components/Confirm/AuctionProfileCardEdit.js';
+import { useParams } from 'react-router-dom';
+import AuctionProfileCard from '../components/AuctionUpcoming/AuctionProfileCard.js';
+import AuctionDetails from '../components/AuctionUpcoming/AuctionDetails.js';
+import AuctionDetailsEdit from '../components/Confirm/AuctionDetailsEdit.js';
+import { LotSelectionTable } from '../components/AuctionUpcoming/LotSelectionTable.js';
+import { UnitTableEdit } from '../components/Confirm/UnitTableEdit.js';
+import { lotMockData as lots, auctionData} from '@mocks/auction.tsx';
+import FileDrop from '../components/signup/FileDrop.js';
+import { Carousel } from '@mantine/carousel';
+import RUG from 'react-upload-gallery';
+import '../components/Confirm/rug_style.css';
+import AuctionCard from '../components/inventory/AuctionCard.js';
 
-import floorPlan1 from "../assets/floorPlan1.png";
-import floorPlan2 from "../assets/floorPlan2.png";
-import floorPlan3 from "../assets/floorPlan3.png";
-import floorPlan4 from "../assets/floorPlan4.png";
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
+import floorPlan1 from '../assets/floorPlan1.png';
+import floorPlan2 from '../assets/floorPlan2.png';
+import floorPlan3 from '../assets/floorPlan3.png';
+import floorPlan4 from '../assets/floorPlan4.png';
+import { confirmProjectStyles } from '../styles/theme.ts';
 
-  section: {
-    padding: theme.spacing.md,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-  },
-}));
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  confirmProjectStyles(theme) as Record<string, CSSObject>
+);
+
 
 const floorPlans = [
-floorPlan1,
-floorPlan2,
-floorPlan3,
-floorPlan4,
-
+  floorPlan1,
+  floorPlan2,
+  floorPlan3,
+  floorPlan4,
 ];
 
-const tabs = ["overview", "details", "units", "plans", "card"];
+const tabs = [
+  'overview',
+  'details',
+  'units',
+  'plans',
+  'card',
+];
 
-export default function ConfirmProject(props: any) {
+export default function ConfirmProject() {
   const { classes } = useStyles();
   const { id } = useParams();
 
   const [editAction, setEditAction] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState("");
+  const [submitStatus, setSubmitStatus] = useState('');
+  const [activeTab, setActiveTab] = useState<string>('overview');
+  const [plansGalleryOpen, setPlansGalleryOpen] = useState(false);
 
   const auction =
-    data.auctionData.find((x) => x.id === id) || data.auctionData[0];
+    auctionData.find((x) => x.id === id) ||
+    auctionData[0];
 
-  const initialPlanGallery = floorPlans.map((link: string) => ({
-    size: "200kb",
-    name: "1",
-    source: link,
-  }));
+  const initialPlanGallery = floorPlans.map(
+    (link: string) => ({
+      size: '200kb',
+      name: '1',
+      source: link,
+    })
+  );
 
-  const removeImage = (currentImage: any, images: any) => {};
-  const [plansGalleryOpen, setPlansGalleryOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<string | null>("overview");
+  const removeImage = (
+    currentImage: string,
+    images: { size: string; name: string; source: string }[]
+  ): { size: string; name: string; source: string }[] => {
+    return images.filter((image) => image.source !== currentImage);
+  };
 
-  const [confirmedTabs, setConfirmedTabs] = useState<string[]>([]);
 
-  const plansImagesModal = floorPlans.map((image: any) => (
+  const [confirmedTabs, setConfirmedTabs] = useState<
+    string[]
+  >([]);
+
+  const plansImagesModal = floorPlans.map((image: string) => (
     <Carousel.Slide key={1}>
-      <Image src={image} alt="Image1" width="100%" height={340} />
+      <Image
+        src={image}
+        alt="Image1"
+        width="100%"
+        height={340}
+      />
     </Carousel.Slide>
   ));
 
@@ -113,22 +117,31 @@ export default function ConfirmProject(props: any) {
     setActiveTab(tab);
   };
 
-  const allTabsConfirmed = tabs.every((tab) => confirmedTabs.includes(tab));
+  const allTabsConfirmed = tabs.every((tab) =>
+    confirmedTabs.includes(tab)
+  );
 
   useEffect(() => {
-    const allTabsConfirmed = tabs.every((tab) => confirmedTabs.includes(tab));
+    const allTabsConfirmed = tabs.every((tab) =>
+      confirmedTabs.includes(tab)
+    );
 
-    if (allTabsConfirmed && submitStatus !== "Ready for Auction") {
-      setActiveTab("final");
+    if (
+      allTabsConfirmed &&
+      submitStatus !== 'Ready for Auction'
+    ) {
+      setActiveTab('final');
     }
   }, [confirmedTabs]);
 
   const confirmAction = (tab: string) => {
-    console.log("CONFIRMING", tab);
+    console.log('CONFIRMING', tab);
     setEditAction(false);
     setConfirmedTabs([...confirmedTabs, tab]);
 
-    const allTabsConfirmed = tabs.every((tab) => confirmedTabs.includes(tab));
+    const allTabsConfirmed = tabs.every((tab) =>
+      confirmedTabs.includes(tab)
+    );
     if (!allTabsConfirmed) {
       const nextTab = (tabs.indexOf(tab) + 1) % tabs.length;
       setActiveTab(tabs[nextTab]);
@@ -150,12 +163,12 @@ export default function ConfirmProject(props: any) {
         setSubmitStatus(proj.status);
 
         if (
-          proj.status === "Ready for Auction" ||
-          proj.status === "In Review"
+          proj.status === 'Ready for Auction' ||
+          proj.status === 'In Review'
         ) {
           setSubmitted(true);
           setConfirmedTabs(tabs);
-          setActiveTab("overview");
+          setActiveTab('overview');
         }
       },
       onError(error: any) {
@@ -165,21 +178,14 @@ export default function ConfirmProject(props: any) {
   );
 
   const submitAuction = () => {
-    console.log("submitting");
+    console.log('submitting');
     mutation.mutate({
-      status: "Ready for Auction",
+      status: 'Ready for Auction',
     });
   };
 
   return (
-    <Card
-      withBorder
-      radius="md"
-      className={classes.card}
-      maw={1200}
-      mx="auto"
-      pt="0"
-    >
+    <Card withBorder radius="md" className={classes.card} maw={1200} mx="auto" pt="0">
       <Tabs
         defaultValue="overview"
         pt="15px"
@@ -193,13 +199,13 @@ export default function ConfirmProject(props: any) {
             fw={500}
             value="overview"
             onClick={() => {
-              onTabChange("overview");
+              onTabChange('overview');
             }}
             icon={
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={confirmedTabs.includes("overview") ? "green" : "gray"}
+                color={confirmedTabs.includes('overview') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -213,13 +219,13 @@ export default function ConfirmProject(props: any) {
             fw={500}
             value="details"
             onClick={() => {
-              onTabChange("details");
+              onTabChange('details');
             }}
             icon={
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={confirmedTabs.includes("details") ? "green" : "gray"}
+                color={confirmedTabs.includes('details') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -233,13 +239,13 @@ export default function ConfirmProject(props: any) {
             value="units"
             fz="large"
             onClick={() => {
-              onTabChange("units");
+              onTabChange('units');
             }}
             icon={
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={confirmedTabs.includes("units") ? "green" : "gray"}
+                color={confirmedTabs.includes('units') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -252,7 +258,7 @@ export default function ConfirmProject(props: any) {
             px="xl"
             value="plans"
             onClick={() => {
-              onTabChange("plans");
+              onTabChange('plans');
               setPlansGalleryOpen(true);
             }}
             fz="large"
@@ -260,7 +266,7 @@ export default function ConfirmProject(props: any) {
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={confirmedTabs.includes("plans") ? "green" : "gray"}
+                color={confirmedTabs.includes('plans') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -273,7 +279,7 @@ export default function ConfirmProject(props: any) {
             px="xl"
             value="card"
             onClick={() => {
-              onTabChange("card");
+              onTabChange('card');
             }}
             fz="large"
             //   onClick={() => setPlansGalleryOpen(true)}
@@ -281,7 +287,7 @@ export default function ConfirmProject(props: any) {
               <ThemeIcon
                 radius="xl"
                 size="xs"
-                color={confirmedTabs.includes("card") ? "green" : "gray"}
+                color={confirmedTabs.includes('card') ? 'green' : 'gray'}
               >
                 <IconCheck />
               </ThemeIcon>
@@ -296,15 +302,13 @@ export default function ConfirmProject(props: any) {
               px="xl"
               value="final"
               onClick={() => {
-                onTabChange("final");
+                onTabChange('final');
               }}
               fz="large"
               //   onClick={() => setPlansGalleryOpen(true)}
               bg="#DCEDC8"
             >
-              {submitStatus === "Ready for Auction"
-                ? "Ready for Auction"
-                : "Submit"}
+              {submitStatus === 'Ready for Auction' ? 'Ready for Auction' : 'Submit'}
             </Tabs.Tab>
           )}
         </Tabs.List>
@@ -389,7 +393,7 @@ export default function ConfirmProject(props: any) {
               <RUG
                 // action="http://example.com/upload"
                 initialState={initialPlanGallery}
-                accept={["jpg", "jpeg", "png"]}
+                accept={['jpg', 'jpeg', 'png']}
                 onChange={(images: any) => {
                   console.log(images);
                   // this.setState({ images }); // save current component
@@ -398,7 +402,7 @@ export default function ConfirmProject(props: any) {
                   removeImage(currentImage, images);
                 }}
                 onSuccess={(image: any) => {
-                  console.log("ima:ge", image);
+                  console.log('ima:ge', image);
                 }}
               />
             </Container>
@@ -406,23 +410,7 @@ export default function ConfirmProject(props: any) {
         </Tabs.Panel>
         <Tabs.Panel value="card" pt="0">
           <Container maw={600}>
-            <AuctionCard
-              status={auction.status}
-              id={auction.id}
-              image={auction.images[0].toString()}
-              size={auction.size.toString()}
-              price={auction.price[0] || auction.minPrice}
-              name={auction.name}
-              address={auction.address}
-              bedroom={auction.bedroom}
-              builder={auction.builder}
-              completionDate={auction.completionDate}
-              auctionDate={auction.auctionDate}
-              deposit={auction.deposit}
-              bathroom={auction.bathroom}
-              parking={auction.parking}
-              locker={auction.locker}
-            />
+            <AuctionCard auction={auction} />
           </Container>
         </Tabs.Panel>
         <Tabs.Panel value="final" pt="0">
@@ -451,7 +439,7 @@ export default function ConfirmProject(props: any) {
             </>
           ) : (
             <>
-              {submitStatus === "Ready for Auction" ? (
+              {submitStatus === 'Ready for Auction' ? (
                 <Text size="lg" fw="500">
                   Your project is ready for the upcoming auction!
                 </Text>
@@ -469,23 +457,20 @@ export default function ConfirmProject(props: any) {
         </Tabs.Panel>
         <Space h={30} />
 
-        {activeTab != "final" && !submitted && (
+        {activeTab != 'final' && !submitted && (
           <Group>
             <Button size="lg" onClick={() => setEditAction(true)}>
               Edit Overview <Space w={10} />
               <IconPencil size={20} />
             </Button>
 
-            {(editAction ||
-              (activeTab && !confirmedTabs.includes(activeTab))) && (
+            {(editAction || (activeTab && !confirmedTabs.includes(activeTab))) && (
               <Button
                 size="lg"
                 color="green"
-                onClick={() => (activeTab ? confirmAction(activeTab) : "")}
+                onClick={() => (activeTab ? confirmAction(activeTab) : '')}
               >
-                Confirm{" "}
-                {activeTab &&
-                  activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+                Confirm {activeTab && activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
                 <Space w={10} />
                 <IconCheck size={20} />
               </Button>

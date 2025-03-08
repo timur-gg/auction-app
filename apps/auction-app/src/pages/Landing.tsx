@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useState, useRef, useEffect } from "react";
 import {
   Accordion,
@@ -7,21 +6,18 @@ import {
   Grid,
   Group,
   Paper,
-  Badge,
   Space,
   TextInput,
   Title,
   ThemeIcon,
   Button,
-  Image,
   Center,
-  Box,
   Text,
-  Stack,
-} from "@mantine/core";
+  Stack, MantineTheme
+} from '@mantine/core';
 import { useNavigate } from "react-router-dom";
-import { Route, useLocation } from "react-router-dom";
-import { createStyles, RangeSlider, rem } from "@mantine/core";
+import { useLocation } from "react-router-dom";
+import { createStyles,  } from "@mantine/core";
 import {
   IconSearch,
   IconCoins,
@@ -30,7 +26,7 @@ import {
   IconGavel,
   IconLicense,
 } from "@tabler/icons-react";
-import { auctionData } from "../data";
+import { auctionData } from '@mocks/auction.tsx';
 import AuctionCard from "../components/inventory/AuctionCard";
 import { GetInTouchSimple } from "../components/inventory/GetInTouchSimple";
 import ComicPic from "../components/Landing/ComicPic";
@@ -38,14 +34,12 @@ import img1 from "../assets/1B/1B.png";
 import img2 from "../assets/1B/1B.png";
 import img3 from "../assets/1B/1B.png";
 import img4 from "../assets/1B/1B.png";
+import { landingStyle } from '../styles/theme.ts';
+import { IAuction } from '../types.ts';
 
 const sampleIds = ["1", "2", "3", "4"];
 
-interface auctionType {
-  [key: string]: any;
-}
-
-const auctionSamples: auctionType[] = auctionData.filter((a) =>
+const auctionSamples: IAuction[] = auctionData.filter((a) =>
   sampleIds.includes(a.id)
 );
 
@@ -56,37 +50,9 @@ const Row1 = [
   img4,
 ];
 
-const useStyles = createStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing.md,
-    backgroundImage: `linear-gradient(135deg, ${
-      theme.colors[theme.primaryColor][4]
-    } 0%, ${theme.colors[theme.primaryColor][6]} 100%)`,
-    backgroundColor: "transparent",
-  },
-  item: {
-    backgroundColor: theme.white,
-    borderBottom: 0,
-    borderRadius: theme.radius.md,
-    boxShadow: theme.shadows.lg,
-    overflow: "hidden",
-  },
-
-  gradient: {
-    backgroundImage: `radial-gradient(${
-      theme.colors[theme.primaryColor][6]
-    } 0%, ${theme.colors[theme.primaryColor][5]} 100%)`,
-  },
-
-  faq: {
-    backgroundImage:
-      // `linear-gradient(135deg, #64B5F6 0%,  #BBDEFB 100%)`,
-
-      `radial-gradient(${theme.colors[theme.primaryColor][6]} 0%, ${
-        theme.colors[theme.primaryColor][4]
-      } 100%)`,
-  },
-}));
+const useStyles = createStyles((theme: MantineTheme ) =>
+  landingStyle(theme)
+);
 
 // "url(https://images.unsplash.com/photo-1559869824-929df9dab35e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2639&q=80)",
 
@@ -123,8 +89,8 @@ export default function Landing() {
     <>
       <Paper
         style={{
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
           backgroundImage: bgImg,
         }}
         withBorder
@@ -136,15 +102,11 @@ export default function Landing() {
       >
         <Center>
           <Group mt="150px">
-            <TextInput
-              miw="400px"
-              size="xl"
-              placeholder="Search for your new condo"
-            />
+            <TextInput miw="400px" size="xl" placeholder="Search for your new condo" />
             <Button
               // style={{ backgroundColor: "#1A237E" }}
               size="xl"
-              onClick={() => navigate("/inventory")}
+              onClick={() => navigate('/inventory')}
             >
               <IconSearch stroke="0.2rem" />
             </Button>
@@ -154,8 +116,8 @@ export default function Landing() {
       <Space h={17} />
       <Paper
         style={{
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
           // backgroundImage: bgImg,
           // background: "rgb(148,204,221)",
         }}
@@ -184,23 +146,7 @@ export default function Landing() {
         <Grid>
           {auctionSamples.map((auction) => (
             <Grid.Col xs={4} sm={3}>
-              <AuctionCard
-                status={auction.status}
-                id={auction.id}
-                image={auction.images[0]}
-                size={auction.minSize}
-                price={auction.minPrice}
-                name={auction.name}
-                address={auction.address}
-                bedroom={auction.bedroom}
-                builder={auction.builder}
-                completionDate={auction.completionDate}
-                auctionDate={auction.auctionDate}
-                deposit={auction.deposit}
-                bathroom={auction.bathroom}
-                parking={auction.parking}
-                locker={auction.locker}
-              />
+              <AuctionCard auction={auction} />
             </Grid.Col>
           ))}
         </Grid>
@@ -229,8 +175,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -242,8 +188,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -255,8 +201,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -279,8 +225,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -292,8 +238,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -305,8 +251,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -373,7 +319,7 @@ export default function Landing() {
           <Accordion.Item className={classes.item} value="credit-card">
             <Accordion.Control>
               <Text fw={700} fz={18}>
-                How do I sign the purchase agreement?{" "}
+                How do I sign the purchase agreement?{' '}
               </Text>
             </Accordion.Control>
             <Accordion.Panel>{placeholder}</Accordion.Panel>
@@ -381,16 +327,7 @@ export default function Landing() {
         </Accordion>
       </Paper>
       <Space h={10} />
-      <Paper
-        id="contact"
-        withBorder
-        shadow="md"
-        w="100%"
-        p={15}
-        pt={25}
-        pb={35}
-        radius="sm"
-      >
+      <Paper id="contact" withBorder shadow="md" w="100%" p={15} pt={25} pb={35} radius="sm">
         <Title fw={800} ta="left" order={2} color="#212121">
           Contact Us
         </Title>

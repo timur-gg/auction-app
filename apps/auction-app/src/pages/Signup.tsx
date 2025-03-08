@@ -64,7 +64,7 @@ export default function Signup() {
           <Anchor<"a">
             href="#"
             size="sm"
-            onClick={(event) => event.preventDefault()}
+            onClick={(e: React.MouseEvent) => e.preventDefault()}
           >
             Sign In
           </Anchor>

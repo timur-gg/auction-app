@@ -8,30 +8,38 @@ import {
   ActionIcon,
 } from "@mantine/core";
 import {
-  IconSquareRoundedX,
   IconCircleX,
   IconEdit,
   IconHomeCancel,
 } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
-import { Link } from "react-router-dom";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { auctionData, lots } from "../../data.js";
+import { useNavigate } from "react-router-dom";
+import { lotMockData as lots } from '@mocks/auction.tsx';
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
+import { IAuction, ILot } from '../../types.ts';
 
-export default function AuctionsTable(props: any) {
-  const { auctions, removeAuction } = props;
+  export default function AuctionsTable({ auctions, removeAuction }: {
+    auctions: IAuction[],
+    removeAuction: (a: IAuction) => void
+  }) {
   const navigate = useNavigate();
+  const [removedAuction, setRemovedAuction] = useState<IAuction>();
 
-  const rowClick = (a: any) => {
+  const rowClick = (a: IAuction) => {
     navigate(`/auction/${a.id}`);
   };
+
+  const removeAuctionAction = () =>{
+    if (removedAuction) {
+      removeAuction(removedAuction);
+    }
+    closeQuitModal();
+  }
 
   const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] =
     useDisclosure(false);
 
-  const [removedAuction, setRemovedAuction] = useState<any>();
   return (
     <>
       <Modal
@@ -75,10 +83,7 @@ export default function AuctionsTable(props: any) {
             <Button
               radius="sm"
               color="red"
-              onClick={() => {
-                removeAuction(removedAuction);
-                closeQuitModal();
-              }}
+              onClick={removeAuctionAction}
             >
               <IconCircleX size="1.05rem" stroke={1.5} />
               <Space w={10} />
@@ -88,10 +93,7 @@ export default function AuctionsTable(props: any) {
             <Button
               radius="sm"
               color="red"
-              onClick={() => {
-                removeAuction(removedAuction);
-                closeQuitModal();
-              }}
+              onClick={removeAuctionAction}
             >
               <IconHomeCancel size="1.6rem" stroke={1.5} />
               <Space w={10} />
@@ -117,7 +119,7 @@ export default function AuctionsTable(props: any) {
           {
             accessor: "unit",
             title: "Units",
-            render: (a: any) =>
+            render: (a: IAuction) =>
               a.lotsAuctioned
                 ?.map((l: number) => lots.find((i) => i.id === l)?.unit)
                 .join(", ") || [],
@@ -125,17 +127,17 @@ export default function AuctionsTable(props: any) {
           {
             accessor: "status",
             title: "Auction Date",
-            render: (lot: any) =>
-              lot.status === "Live Auction" ? (
+            render: (a: IAuction) =>
+              a.status === "Live Auction" ? (
                 <Badge color="green" size="md" variant="filled">
-                  {lot.status}
+                  {a.status}
                 </Badge>
-              ) : lot.status === "passed" ? (
+              ) : a.status === "passed" ? (
                 <Badge color="red" size="md" variant="filled">
-                  {lot.status}
+                  {a.status}
                 </Badge>
               ) : (
-                lot.auctionDate
+                a.auctionDate
               ),
           },
           {
@@ -143,24 +145,24 @@ export default function AuctionsTable(props: any) {
             width: 50,
             title: <></>,
             textAlignment: "right",
-            render: (lot: any) =>
-              lot.status === "upcoming" && (
+            render: (a: IAuction) =>
+              a.status === "upcoming" && (
                 <Group spacing={2} position="right" noWrap>
                   <ActionIcon
                     color="gray"
-                    onClick={(e) => {
+                    onClick={(e: React.MouseEvent) => {
                       e.stopPropagation();
-                      navigate(`/choose_units/${lot.id}`);
+                      navigate(`/choose_units/${a.id}`);
                     }}
                   >
                     <IconEdit size={22} />
                   </ActionIcon>
                   <ActionIcon
                     color="gray"
-                    onClick={(e) => {
+                    onClick={(e: React.MouseEvent) => {
                       e.stopPropagation();
                       openQuitModal();
-                      setRemovedAuction(lot);
+                      setRemovedAuction(a);
                     }}
                   >
                     {/* <IconSquareRoundedX size={22} /> */}

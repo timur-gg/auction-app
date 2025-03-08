@@ -8,8 +8,8 @@ import {
   IconRuler,
   IconGavel,
   IconDoorExit,
-  IconSunHigh,
-} from "@tabler/icons-react";
+  IconSunHigh, TablerIconsProps
+} from '@tabler/icons-react';
 import { useState, useRef } from "react";
 import {
   Card,
@@ -24,70 +24,21 @@ import {
   Center,
   Modal,
   Title,
-  NumberInputHandlers,
-} from "@mantine/core";
+  NumberInputHandlers, CSSObject
+} from '@mantine/core';
 import PricePlot from "./PricePlot";
 import { BidSelector } from "./BidSelector";
 import ShowCounter from "./ShowCounter";
 import { useDisclosure } from "@mantine/hooks";
 import Countdown from "react-countdown";
-import { ILot } from "../../data";
+import { ILot } from "../../types";
+import { auctionNotStartedStyle, biddingTabStyle } from '../../styles/theme';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    border: "0.0625rem solid #dee2e6",
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  biddingTabStyle(theme) as Record<string, CSSObject>
+);
 
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
-
-  section: {
-    padding: theme.spacing.md,
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-
-  cardWinning: {
-    border: "2px solid #64DD17",
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-
-  // sectionWinning: {
-  //   padding: theme.spacing.md,
-  //   backgroundColor: "#fafafa",
-  //   border: "2px solid #8BC34A",
-  //   // borderTop: `${rem(1)} solid ${
-  //   //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-  //   // }`,
-  // },
-
-  bidButton: {
-    marginTop: rem(30),
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
-
-const unitMockdata = [
+const unitFeatureGrid: { label: string; icon: React.ElementType; sz: number; unit?: string }[] = [
   { label: "unit", icon: IconHash, sz: 1.5 },
   { label: "bedroom", icon: IconBedFilled, sz: 1 },
   { label: "facing", icon: IconSunHigh, sz: 1 },
@@ -97,8 +48,6 @@ const unitMockdata = [
   { label: "locker", icon: IconLock, sz: 1 },
   { label: "bathroom", icon: IconBath, sz: 1 },
 ];
-
-
 
 export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
   const { classes } = useStyles();
@@ -125,7 +74,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
 
   console.log(lot.bid);
 
-  const unitFeatures = unitMockdata.map((feature) => (
+  const unitFeatures = unitFeatureGrid.map((feature) => (
     <Grid.Col
       xs={3}
       {...(!half ? { lg: feature.sz } : { lg: 2.66 })}
@@ -135,7 +84,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
       <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
-          {(lot as any)[feature.label] + (feature.unit ? feature.unit : "")}
+          {lot[feature.label] + (feature.unit ? feature.unit : "")}
         </Text>
       </Group>
     </Grid.Col>
@@ -152,13 +101,13 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
   const valueChanged = tempValue !== lot.bid * 1000;
   const increment = lot.bid * 1000 * 0.01;
 
-  type countdownProps = {
-    [key: string]: any;
-    hours: number;
-    minutes: number;
-    seconds: number;
-    completed: boolean;
-  };
+  // type countdownProps = {
+  //   [key: string]: any;
+  //   hours: number;
+  //   minutes: number;
+  //   seconds: number;
+  //   completed: boolean;
+  // };
 
   // Renderer callback with condition
   // const renderer = ({ hours, minutes, seconds, completed }: countdownProps) => {

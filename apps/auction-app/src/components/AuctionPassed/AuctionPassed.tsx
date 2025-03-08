@@ -1,62 +1,28 @@
 import {
-  Container,
   Card,
   Grid,
-  Paper,
   Space,
   Group,
   Stack,
   Text,
   createStyles,
-  rem,
-  Center,
   Table,
-  Badge,
-} from "@mantine/core";
-import ShowCounter from "../AuctionLive/ShowCounter.js";
+  Badge, CSSObject
+} from '@mantine/core';
 import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
 import {
   IconCalendarEvent,
   IconMoneybag,
   IconClock,
 } from "@tabler/icons-react";
-import { lots as lotsData } from "../../data.js";
-import { BiddingTab } from "../AuctionLive/BiddingTab.js";
+import { lotMockData as lotsData } from '@mocks/auction';
+import { auctionPassedStyle } from '../../styles/theme';
+import { IAuction, ILot } from '../../types';
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-  },
-  bidSelector: {
-    minWidth: rem(245),
-  },
-  label: {
-    marginBottom: theme.spacing.xs,
-    lineHeight: 1,
-    fontWeight: 700,
-    fontSize: theme.fontSizes.xs,
-    letterSpacing: rem(-0.25),
-    textTransform: "uppercase",
-  },
+const useStyles = createStyles((theme): Record<string, CSSObject> =>
+  auctionPassedStyle(theme) as Record<string, CSSObject>
+);
 
-  section: {
-    padding: theme.spacing.md,
-    // borderTop: `${rem(1)} solid ${
-    //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    // }`,
-  },
-  bidButton: {
-    marginTop: rem(30),
-  },
-  icon: {
-    marginRight: rem(5),
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[2]
-        : theme.colors.gray[5],
-  },
-}));
 
 const auctionMockdata = [
   { label: "auctionDate", icon: IconCalendarEvent },
@@ -64,16 +30,9 @@ const auctionMockdata = [
   { label: "duration", icon: IconClock, unit: "hrs" },
 ];
 
-export function AuctionPassed(props: any) {
+export function AuctionPassed({ auction, step }: { auction: IAuction, step: number}) {
   const { classes } = useStyles();
-
-  const auction = props.auction;
-
-  console.log(auction);
-
-  const lots = auction.lots.map((lotId: number) =>
-    lotsData.find((id) => id.id === lotId)
-  );
+  const lots: ILot[] = auction.lots?.flatMap(lotId => lotsData.find(id => id.id === lotId) || []) ?? [];
 
   const auctionFeatures = auctionMockdata.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>
@@ -86,16 +45,16 @@ export function AuctionPassed(props: any) {
     </Grid.Col>
   ));
 
-  const lotRows = lots.map((lot: any) => (
+  const lotRows = lots.map((lot: ILot) => (
     <tr key={lot.id}>
       <td>{lot.unit}</td>
       <td>{lot.bedroom}</td>
       <td>{lot.size}sqft</td>
       <td>${lot.price}k</td>
       <td>
-        {lot.soldPrice < 1000
-          ? `${lot.soldPrice}k`
-          : `${lot.soldPrice / 1000}m`}
+        {lot.soldPrice??0 < 1000
+          ? `${lot.soldPrice??0}k`
+          : `${lot.soldPrice??0 / 1000}m`}
       </td>
       <td>{lot.bid < 1000 ? `${lot.bid}k` : `${lot.bid / 1000}m`}</td>
       <td>{lot.totalBids}</td>

@@ -1,18 +1,13 @@
-import React from "react";
-
-import { useState, useRef } from "react";
+import React from 'react';
+import { useState, useRef } from 'react';
 import {
   Autocomplete,
   Loader,
   Select,
   Grid,
-  Slider,
   Accordion,
-  Container,
   Space,
-  Popover,
   Button,
-  Center,
   SegmentedControl,
   Text,
   Stack,
@@ -23,10 +18,11 @@ import {
   Group,
   Switch,
   useMantineTheme,
-} from "@mantine/core";
-
-import { DatePickerInput } from "@mantine/dates";
-import { createStyles, RangeSlider, rem } from "@mantine/core";
+  MantineTheme,
+  CSSObject,
+} from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
+import { createStyles, RangeSlider, rem } from '@mantine/core';
 import {
   IconPoint,
   IconGripVertical,
@@ -34,23 +30,22 @@ import {
   IconCoin,
   IconCalendar,
   IconRuler,
-  IconFlagSearch,
   IconLayoutGrid,
   IconMap,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 
-import GoogleMapReact from "google-map-react";
-
-import AuctionCard from "../components/inventory/AuctionCard";
-import PriceFilter from "../components/inventory/PriceFilter";
-import SizeFilter from "../components/inventory/SizeFilter";
-
-import { auctionData } from "../data";
-import pinAsset from "../assets/pin.png"
+import GoogleMapReact from 'google-map-react';
+import AuctionCard from '../components/inventory/AuctionCard';
+import PriceFilter from '../components/inventory/PriceFilter';
+import SizeFilter from '../components/inventory/SizeFilter';
+import { auctionData } from '@mocks/auction.tsx';
+import pinAsset from '../assets/pin.png';
+import { inventoryStyle } from '../styles/theme.ts';
+import { IAuction } from '../types.ts';
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<string[]>([]);
 
@@ -59,17 +54,13 @@ export function AutocompleteLoading() {
     setValue(val);
     setData([]);
 
-    if (val.trim().length === 0 || val.includes("@")) {
+    if (val.trim().length === 0 || val.includes('@')) {
       setLoading(false);
     } else {
       setLoading(true);
       timeoutRef.current = window.setTimeout(() => {
         setLoading(false);
-        setData(
-          ["gmail.com", "outlook.com", "yahoo.com"].map(
-            (provider) => `${val}@${provider}`
-          )
-        );
+        setData(['gmail.com', 'outlook.com', 'yahoo.com'].map((provider) => `${val}@${provider}`));
       }, 1000);
     }
   };
@@ -85,54 +76,11 @@ export function AutocompleteLoading() {
   );
 }
 
-const useStyles = createStyles((theme) => ({
-  mark: {
-    display: "none",
-  },
-
-  markWrapper: {
-    marginTop: rem(12),
-  },
-
-  thumb: {
-    width: rem(16),
-    height: rem(28),
-    backgroundColor: theme.white,
-    color: theme.colors.gray[5],
-    border: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[3]
-    }`,
-  },
-
-  pin2: {
-    // position: "absolute",
-    // top: '40%';
-    // left: '50%';
-    // margin-left: 115px;
-
-    borderRadius: "50%",
-    border: "8px solid #fff",
-    width: "8px",
-    height: "8px",
-    backgroundColor: "red",
-  },
-
-  "pin2::after": {
-    position: "absolute",
-    content: "",
-    width: "0px",
-    height: "0px",
-    bottom: "-30px",
-    left: "-6px",
-    border: "10px solid transparent",
-    borderTop: "17px solid #fff",
-    backgroundColor: "red",
-  },
-}));
-
-const point = (
-  <IconPoint size={10} style={{ marginTop: rem(6) }} stroke={1.5} />
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> => inventoryStyle(theme) as Record<string, CSSObject>
 );
+
+const point = <IconPoint size={10} style={{ marginTop: rem(6) }} stroke={1.5} />;
 
 export function SliderMarks() {
   const { classes } = useStyles();
@@ -144,15 +92,15 @@ export function SliderMarks() {
       defaultValue={[30, 60]}
       thumbChildren={<IconGripVertical size="1.2rem" stroke={1.5} />}
       marks={[
-        { value: 0, label: "0" },
+        { value: 0, label: '0' },
         { value: 12.5, label: point },
-        { value: 25, label: "25" },
+        { value: 25, label: '25' },
         { value: 37.5, label: point },
-        { value: 50, label: "50" },
+        { value: 50, label: '50' },
         { value: 62.5, label: point },
-        { value: 75, label: "75" },
+        { value: 75, label: '75' },
         { value: 87.5, label: point },
-        { value: 100, label: "100" },
+        { value: 100, label: '100' },
       ]}
     />
   );
@@ -166,28 +114,23 @@ const builderOptions = [...new Set(builders)].map((b) => ({
 }));
 
 const statusOptions = [
-  { value: "Live Auction", label: "Live" },
-  { value: "upcoming", label: "Upcoming" },
-  { value: "passed", label: "Passed" },
+  { value: 'Live Auction', label: 'Live' },
+  { value: 'upcoming', label: 'Upcoming' },
+  { value: 'passed', label: 'Passed' },
 ];
 
 const depositOptions = [
-  { value: "5/5/5/5", label: "5/5/5/5" },
-  { value: "10/5/5", label: "10/5/5" },
-  { value: "10/10", label: "10/10" },
+  { value: '5/5/5/5', label: '5/5/5/5' },
+  { value: '10/5/5', label: '10/5/5' },
+  { value: '10/10', label: '10/10' },
 ];
 
 const MARKS = [
-  { value: 0, label: "0" },
-  { value: 33, label: "1" },
-  { value: 66, label: "2" },
-  { value: 99, label: "3+" },
+  { value: 0, label: '0' },
+  { value: 33, label: '1' },
+  { value: 66, label: '2' },
+  { value: 99, label: '3+' },
 ];
-
-interface auctionType {
-  // 👈 typing for the "romanNumber" object
-  [key: string]: any;
-}
 
 const Inventory = () => {
   const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
@@ -195,85 +138,68 @@ const Inventory = () => {
   const [size, setSizeRange] = useState<[number, number]>([0, 100]);
   const [bedroom, setBedroom] = useState<number>(-1);
   const [bathroom, setBathroom] = useState<number>(-1);
-  const [deposit, setDeposit] = useState<string>("");
-  const [sortBy, setSort] = useState<string>("price");
-  const [builder, setBuilder] = useState<string>("");
-  const [status, setStatus] = useState<string>("All");
+  const [deposit, setDeposit] = useState<string>('');
+  const [sortBy, setSort] = useState<string>('price');
+  const [builder, setBuilder] = useState<string>('');
+  const [status, setStatus] = useState<string>('All');
   const [selectedAuction, setSelectedAuction] = useState<number>(-1);
 
-  const [filters, setFilter] = useState<string[]>(["All"]);
+  const [filters, setFilter] = useState<string[]>(['All']);
 
   const addFilter = (filter: string) => {
     if (!filters.includes(filter)) {
-      setFilter([...filters.filter((f) => f !== "All"), filter]);
+      setFilter([...filters.filter((f) => f !== 'All'), filter]);
     }
   };
 
   const [mapViewChecked, setMapViewChecked] = useState(false);
 
   function filterPrice(
-    prices: { [key: number]: number },
+    prices: Partial<Record<number, number>>,
     priceRange: [number, number],
     bedroomFilter: number
   ) {
     console.info(prices, priceRange, bedroomFilter);
     if (bedroomFilter > 0) {
-      const bedroomPrice = prices[bedroomFilter];
+      const bedroomPrice = prices[bedroomFilter] ?? 0;
       return (
-        bedroomPrice >= (priceRange[0] + 20) * 12.5 &&
-        bedroomPrice <= (priceRange[1] + 20) * 12.5
+        bedroomPrice >= (priceRange[0] + 20) * 12.5 && bedroomPrice <= (priceRange[1] + 20) * 12.5
       );
     } else {
       const priceValues = Object.values(prices);
 
       for (let i = 0; i < priceValues.length; i++) {
-        const pv = priceValues[i];
-        console.log(pv);
-        if (
-          pv >= (priceRange[0] + 20) * 12.5 &&
-          pv <= (priceRange[1] + 20) * 12.5
-        ) {
-          console.log("FOUND");
+        const pv = priceValues[i] ?? 0;
+        if (pv >= (priceRange[0] + 20) * 12.5 && pv <= (priceRange[1] + 20) * 12.5) {
           return true;
         }
       }
-
       return false;
     }
   }
 
-  const FILTER_MAP: { [char: string]: any } = {
+  const FILTER_MAP: { [key: string]: (auction: IAuction) => boolean } = {
     All: () => true,
-    priceRange: (auction: any) =>
-      filterPrice(auction.price, priceRange, bedroom),
+    priceRange: (a: IAuction) => filterPrice(a.price, priceRange, bedroom),
 
-    size: (auction: any) =>
-      auction.size >= (size[0] + 20) * 12.5 &&
-      auction.size <= (size[1] + 20) * 12.5,
-    bedroom: (auction: any) => {
+    size: (a: IAuction) =>
+      (a.size as number) >= (size[0] + 20) * 12.5 && (a.size as number) <= (size[1] + 20) * 12.5,
+    bedroom: (a: IAuction) => {
       if (bedroom === -1) return true;
       else
-        return (
-          parseInt(auction.bedroom.slice(0)) <= bedroom &&
-          parseInt(auction.bedroom.slice(-1)) >= bedroom
-        );
+        return parseInt(a.bedroom.slice(0)) <= bedroom && parseInt(a.bedroom.slice(-1)) >= bedroom;
     },
-    deposit: (auction: any) => (deposit ? auction.deposit === deposit : true),
-    builder: (auction: any) => (builder ? auction.builder === builder : true),
-    status: (auction: any) => (status ? auction.status === status : true),
-
-    // Active: (auction, address) => !auction.completed,
-    // Completed: (auction) => auction.completed,
+    deposit: (a: IAuction) => (deposit ? a.deposit === deposit : true),
+    builder: (a: IAuction) => (builder ? a.builder === builder : true),
+    status: (a: IAuction) => (status ? a.status === status : true),
   };
 
-  let filteredAuctions: auctionType[] = auctionData;
+  let filteredAuctions: IAuction[] = auctionData;
   filters.forEach((f) => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });
 
-  const sortedAuctions = filteredAuctions.sort((a, b) =>
-    b[sortBy] > a[sortBy] ? -1 : 1
-  );
+  const sortedAuctions = filteredAuctions.sort((a, b) => (b[sortBy] > a[sortBy] ? -1 : 1));
 
   const sortedAuctionsSelected = [
     ...sortedAuctions.filter((a) => a.id === selectedAuction.toString()),
@@ -282,26 +208,12 @@ const Inventory = () => {
 
   sortedAuctionsSelected.forEach((auction) => console.log(auction));
 
-  console.log(selectedAuction.toString() == "1");
-  const AuctionList = sortedAuctionsSelected.map((auction) => (
+  console.log(selectedAuction.toString() == '1');
+  const AuctionList = sortedAuctionsSelected.map((auction: IAuction) => (
     <Grid.Col sm={6} lg={4} key={auction.id}>
       <AuctionCard
-        status={auction.status}
-        id={auction.id}
-        image={auction.images[0]}
-        size={auction.size}
-        // size={bedroom >= 0 ? auction.size[bedroom] : auction.minSize}
+        auction={auction}
         price={bedroom >= 0 ? auction.price[bedroom] : auction.minPrice}
-        name={auction.name}
-        address={auction.address}
-        bedroom={auction.bedroom}
-        builder={auction.builder}
-        completionDate={auction.completionDate}
-        auctionDate={auction.auctionDate}
-        deposit={auction.deposit}
-        bathroom={auction.bathroom}
-        parking={auction.parking}
-        locker={auction.locker}
         bedroomFilter={bedroom}
         selected={selectedAuction.toString() === auction.id}
       />
@@ -309,44 +221,40 @@ const Inventory = () => {
   ));
 
   function onSortClick(sortBy: string) {
-    console.log(sortBy);
     setSort(sortBy);
   }
 
-  const distanceToMouse = (pt: any, mousePos: any): number => {
+  const distanceToMouse = (
+    pt: { x: number; y: number }, mousePos: { x: number; y: number; }
+  ): number => {
     if (pt && mousePos) {
       // return distance between the marker and mouse pointer
       return Math.sqrt(
-        (pt.x - mousePos.x) * (pt.x - mousePos.x) +
-          (pt.y - mousePos.y) * (pt.y - mousePos.y)
+        (pt.x - mousePos.x) * (pt.x - mousePos.x) + (pt.y - mousePos.y) * (pt.y - mousePos.y)
       );
     } else return 0;
   };
-
-  const handleClick = (e: any, id: string) => {
+  const handleClick = (e: React.MouseEvent, id: string) => {
     console.log(`You clicked on ${id}`);
 
     setSelectedAuction(parseInt(id));
   };
 
-  const Marker = ({ text, id, selected }: any) => {
+  const Marker = ({ text, id, selected }: { text: string; id: string; selected: boolean }) => {
     return (
       <div
         style={{
-          width: "35px",
-          height: "50px",
+          width: '35px',
+          height: '50px',
         }}
         // className={"pin2"}
         onClick={(e) => handleClick(e, id)}
       >
-        {/* <span className="circleText" title={id}>
-          {text}
-        </span> */}
         <img
           style={{
-            width: "100%",
-            height: "100%",
-            filter: selected ? "contrast(150%)" : "",
+            width: '100%',
+            height: '100%',
+            filter: selected ? 'contrast(150%)' : '',
           }}
           src={pinAsset}
           alt="logo"
@@ -357,7 +265,6 @@ const Inventory = () => {
 
   console.log(selectedAuction);
   const theme = useMantineTheme();
-
   return (
     <div className="Inventory">
       <Grid justify="space-around">
@@ -372,25 +279,26 @@ const Inventory = () => {
             <Menu.Dropdown>
               <Menu.Item
                 icon={<IconCoin size={14} />}
-                onClick={(e) => onSortClick("price")}
+                onClick={(e: React.MouseEvent) => onSortClick('price')}
               >
                 Price
               </Menu.Item>
+              Z
               <Menu.Item
                 icon={<IconRuler size={14} />}
-                onClick={(e) => onSortClick("size")}
+                onClick={(e: React.MouseEvent) => onSortClick('size')}
               >
                 Size
               </Menu.Item>
               <Menu.Item
                 icon={<IconCalendar size={14} />}
-                onClick={(e) => onSortClick("auctionDate")}
+                onClick={(e: React.MouseEvent) => onSortClick('auctionDate')}
               >
                 Auction Date
               </Menu.Item>
               <Menu.Item
                 icon={<IconCalendar size={14} />}
-                onClick={(e) => onSortClick("completionDate")}
+                onClick={(e: React.MouseEvent) => onSortClick('completionDate')}
               >
                 Completion Date
               </Menu.Item>
@@ -410,11 +318,7 @@ const Inventory = () => {
         </Grid.Col>
         <Grid.Col xs={2.5} md={2} lg={1.5}>
           <Text>Size</Text>
-          <SizeFilter
-            size={size}
-            setSizeRange={setSizeRange}
-            addFilter={addFilter}
-          />
+          <SizeFilter size={size} setSizeRange={setSizeRange} addFilter={addFilter} />
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>
           <Stack spacing="0">
@@ -428,15 +332,15 @@ const Inventory = () => {
               transitionTimingFunction="linear"
               size="sm"
               data={[
-                { label: "All", value: "-1" },
-                { label: "0", value: "0" },
-                { label: "1", value: "1" },
-                { label: "2", value: "2" },
-                { label: "3+", value: "3" },
+                { label: 'All', value: '-1' },
+                { label: '0', value: '0' },
+                { label: '1', value: '1' },
+                { label: '2', value: '2' },
+                { label: '3+', value: '3' },
               ]}
               onChange={(value) => {
                 setBedroom(parseInt(value));
-                addFilter("bedroom");
+                addFilter('bedroom');
               }}
               // classNames={classes}
             />
@@ -462,7 +366,7 @@ const Inventory = () => {
             placeholder="Auction status"
             onChange={(value: string) => {
               setStatus(value);
-              addFilter("status");
+              addFilter('status');
             }}
           />
         </Grid.Col>
@@ -495,29 +399,15 @@ const Inventory = () => {
       <Accordion chevronPosition="left" defaultValue="">
         <Accordion.Item value="customization">
           <Group position="apart" pb="10px">
-            <Accordion.Control style={{ width: "50%" }}>
-              More Filters
-            </Accordion.Control>
+            <Accordion.Control style={{ width: '50%' }}>More Filters</Accordion.Control>
             <div>
               <Switch
                 mr={20}
                 radius="md"
                 size="xl"
                 color="white"
-                onLabel={
-                  <IconLayoutGrid
-                    size="1rem"
-                    stroke={2.5}
-                    color={theme.colors.gray[0]}
-                  />
-                }
-                offLabel={
-                  <IconMap
-                    size="1rem"
-                    stroke={2.5}
-                    color={theme.colors.blue[7]}
-                  />
-                }
+                onLabel={<IconLayoutGrid size="1rem" stroke={2.5} color={theme.colors.gray[0]} />}
+                offLabel={<IconMap size="1rem" stroke={2.5} color={theme.colors.blue[7]} />}
                 checked={mapViewChecked}
                 onChange={(event) => {
                   setSelectedAuction(-1);
@@ -537,7 +427,7 @@ const Inventory = () => {
                   placeholder="Builder"
                   onChange={(value: string) => {
                     setBuilder(value);
-                    addFilter("builder");
+                    addFilter('builder');
                   }}
                 />
               </Grid.Col>
@@ -551,7 +441,7 @@ const Inventory = () => {
                   placeholder="Deposit"
                   onChange={(value: string) => {
                     setDeposit(value);
-                    addFilter("deposit");
+                    addFilter('deposit');
                   }}
                 />
               </Grid.Col>
@@ -567,13 +457,13 @@ const Inventory = () => {
                     transitionTimingFunction="linear"
                     size="sm"
                     data={[
-                      { label: "All", value: "-1" },
-                      { label: "1", value: "1" },
-                      { label: "2", value: "2" },
-                      { label: "3+", value: "3" },
+                      { label: 'All', value: '-1' },
+                      { label: '1', value: '1' },
+                      { label: '2', value: '2' },
+                      { label: '3+', value: '3' },
                     ]}
                     onChange={(value) => {
-                      console.log("111111334243r4");
+                      console.log('111111334243r4');
                       // setBathroom(parseInt(value));
                       // addFilter("bathroom");
                     }}
@@ -613,23 +503,23 @@ const Inventory = () => {
             <GoogleMapReact
               bootstrapURLKeys={{
                 // remove the key if you want to fork
-                key: "AIzaSyB-iyAn3z8aIS8iMxHZaUwg8IWCkY_2Vh8",
-                language: "en",
-                region: "US",
+                key: 'AIzaSyB-iyAn3z8aIS8iMxHZaUwg8IWCkY_2Vh8',
+                language: 'en',
+                region: 'US',
               }}
               defaultCenter={{ lat: 43.6428525, lng: -79.3959449 }}
               defaultZoom={15}
               distanceToMouse={distanceToMouse}
             >
-              {sortedAuctionsSelected.map(({ lat, lng, id, address }) => {
+              {sortedAuctionsSelected.map(({ lat, lng, id, address }: IAuction) => {
                 return (
                   <Marker
                     key={id}
-                    lat={lat}
-                    lng={lng}
+                    // lat={lat}
+                    // lng={lng}
                     text={id}
                     id={id}
-                    icon={pinAsset}
+                    // icon={pinAsset}
                     selected={selectedAuction.toString() === id}
                   />
                 );
@@ -647,29 +537,10 @@ const Inventory = () => {
           >
             <Grid>
               {sortedAuctionsSelected.map((auction) => (
-                <Grid.Col
-                  {...(mapViewChecked ? { xs: 12 } : { sm: 6, lg: 4 })}
-                  key={auction.id}
-                >
+                <Grid.Col {...(mapViewChecked ? { xs: 12 } : { sm: 6, lg: 4 })} key={auction.id}>
                   <AuctionCard
-                    status={auction.status}
-                    id={auction.id}
-                    image={auction.images[0]}
-                    size={auction.size}
-                    // size={bedroom >= 0 ? auction.size[bedroom] : auction.minSize}
-                    price={
-                      bedroom >= 0 ? auction.price[bedroom] : auction.minPrice
-                    }
-                    name={auction.name}
-                    address={auction.address}
-                    bedroom={auction.bedroom}
-                    builder={auction.builder}
-                    completionDate={auction.completionDate}
-                    auctionDate={auction.auctionDate}
-                    deposit={auction.deposit}
-                    bathroom={auction.bathroom}
-                    parking={auction.parking}
-                    locker={auction.locker}
+                    auction={auction}
+                    price={bedroom >= 0 ? auction.price[bedroom] : auction.minPrice}
                     bedroomFilter={bedroom}
                     selected={selectedAuction.toString() === auction.id}
                   />

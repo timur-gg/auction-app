@@ -34,7 +34,7 @@ import {
   IconMap,
 } from '@tabler/icons-react';
 
-import GoogleMapReact from 'google-map-react';
+// import GoogleMapReact from 'google-map-react';
 import AuctionCard from '../components/inventory/AuctionCard';
 import PriceFilter from '../components/inventory/PriceFilter';
 import SizeFilter from '../components/inventory/SizeFilter';
@@ -406,8 +406,7 @@ const Inventory = () => {
           <DatePickerInput
             type="range"
             label="Completion date"
-            placeholder="Pick dates range"
-            value={value}
+             value={value}
             onChange={setValue}
             mx="auto"
             maw={400}
@@ -417,8 +416,7 @@ const Inventory = () => {
           <DatePickerInput
             type="range"
             label="Auction date"
-            placeholder="Pick dates range"
-            value={value}
+             value={value}
             onChange={setValue}
             mx="auto"
             maw={400}
@@ -545,33 +543,33 @@ const Inventory = () => {
       <Grid>
         <Grid.Col {...(mapViewChecked ? { xs: 8, md: 9 } : { xs: 0 })}>
           <Box w="100%" h="90vh" hidden={!mapViewChecked}>
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                // remove the key if you want to fork
-                key: 'AIzaSyB-iyAn3z8aIS8iMxHZaUwg8IWCkY_2Vh8',
-                language: 'en',
-                region: 'US',
-              }}
-              defaultCenter={{ lat: 43.6428525, lng: -79.3959449 }}
-              defaultZoom={15}
-              distanceToMouse={distanceToMouse}
-            >
-              {sortedAuctionsSelected.map(
-                ({ lat, lng, id, address }: IAuction) => {
-                  return (
-                    <Marker
-                      key={id}
-                      // lat={lat}
-                      // lng={lng}
-                      text={id}
-                      id={id}
-                      // icon={pinAsset}
-                      selected={selectedAuction.toString() === id}
-                    />
-                  );
-                },
-              )}
-            </GoogleMapReact>
+            {/*<GoogleMapReact*/}
+            {/*  bootstrapURLKeys={{*/}
+            {/*    // remove the key if you want to fork*/}
+            {/*    key: 'AIzaSyB-iyAn3z8aIS8iMxHZaUwg8IWCkY_2Vh8',*/}
+            {/*    language: 'en',*/}
+            {/*    region: 'US',*/}
+            {/*  }}*/}
+            {/*  defaultCenter={{ lat: 43.6428525, lng: -79.3959449 }}*/}
+            {/*  defaultZoom={15}*/}
+            {/*  distanceToMouse={distanceToMouse}*/}
+            {/*>*/}
+            {/*  {sortedAuctionsSelected.map(*/}
+            {/*    ({ lat, lng, id, address }: IAuction) => {*/}
+            {/*      return (*/}
+            {/*        <Marker*/}
+            {/*          key={id}*/}
+            {/*          // lat={lat}*/}
+            {/*          // lng={lng}*/}
+            {/*          text={id}*/}
+            {/*          id={id}*/}
+            {/*          // icon={pinAsset}*/}
+            {/*          selected={selectedAuction.toString() === id}*/}
+            {/*        />*/}
+            {/*      );*/}
+            {/*    },*/}
+            {/*  )}*/}
+            {/*</GoogleMapReact>*/}
           </Box>
         </Grid.Col>
         <Grid.Col {...(!mapViewChecked ? { xs: 12 } : { xs: 4, md: 3 })}>

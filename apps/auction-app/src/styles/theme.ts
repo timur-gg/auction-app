@@ -2,7 +2,6 @@
 
 import { MantineTheme } from '@mantine/core';
 import { rem } from '@mantine/core';
-// import { CSSObject } from '@emotion/react';
 
 export const auctionLiveStyle = (theme: MantineTheme) => {
   return {
@@ -36,7 +35,9 @@ export const auctionLiveStyle = (theme: MantineTheme) => {
 export const auctionProfileCardVertStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
 
     label: {
@@ -51,7 +52,7 @@ export const auctionProfileCardVertStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     statusBadge: {
@@ -60,7 +61,7 @@ export const auctionProfileCardVertStyle = (theme: MantineTheme) => {
 
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -68,7 +69,9 @@ export const auctionProfileCardVertStyle = (theme: MantineTheme) => {
 export const biddingTabStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
       border: '0.0625rem solid #dee2e6',
     },
     bidSelector: {
@@ -86,33 +89,20 @@ export const biddingTabStyle = (theme: MantineTheme) => {
 
     section: {
       padding: theme.spacing.md,
-      // borderTop: `${rem(1)} solid ${
-      //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-      // }`,
     },
 
     cardWinning: {
       border: '2px solid #64DD17',
-      // borderTop: `${rem(1)} solid ${
-      //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-      // }`,
+
     },
 
-    // sectionWinning: {
-    //   padding: theme.spacing.md,
-    //   backgroundColor: "#fafafa",
-    //   border: "2px solid #8BC34A",
-    //   // borderTop: `${rem(1)} solid ${
-    //   //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    //   // }`,
-    // },
 
     bidButton: {
       marginTop: rem(30),
     },
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -120,7 +110,9 @@ export const biddingTabStyle = (theme: MantineTheme) => {
 export const auctionPassedStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -136,16 +128,14 @@ export const auctionPassedStyle = (theme: MantineTheme) => {
 
     section: {
       padding: theme.spacing.md,
-      // borderTop: `${rem(1)} solid ${
-      //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-      // }`,
+
     },
     bidButton: {
       marginTop: rem(30),
     },
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -153,7 +143,9 @@ export const auctionPassedStyle = (theme: MantineTheme) => {
 export const auctionNotStartedStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -169,16 +161,14 @@ export const auctionNotStartedStyle = (theme: MantineTheme) => {
 
     section: {
       padding: theme.spacing.md,
-      // borderTop: `${rem(1)} solid ${
-      //   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-      // }`,
+
     },
     bidButton: {
       marginTop: rem(30),
     },
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -186,7 +176,9 @@ export const auctionNotStartedStyle = (theme: MantineTheme) => {
 export const auctionProfileCardStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
 
     imageSection: {
@@ -195,7 +187,7 @@ export const auctionProfileCardStyle = (theme: MantineTheme) => {
       alignItems: 'center',
       justifyContent: 'center',
       borderBottom: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
 
@@ -211,7 +203,7 @@ export const auctionProfileCardStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     statusBadge: {
@@ -220,7 +212,7 @@ export const auctionProfileCardStyle = (theme: MantineTheme) => {
 
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -228,7 +220,9 @@ export const auctionProfileCardStyle = (theme: MantineTheme) => {
 export const auctionUpcomingStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -245,7 +239,7 @@ export const auctionUpcomingStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     bidButton: {
@@ -253,7 +247,7 @@ export const auctionUpcomingStyle = (theme: MantineTheme) => {
     },
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -261,7 +255,9 @@ export const auctionUpcomingStyle = (theme: MantineTheme) => {
 export const lotPreviewTableStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -278,7 +274,7 @@ export const lotPreviewTableStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     bidButton: {
@@ -290,7 +286,9 @@ export const lotPreviewTableStyle = (theme: MantineTheme) => {
 export const lotSelectionStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -307,7 +305,7 @@ export const lotSelectionStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     bidButton: {
@@ -319,12 +317,12 @@ export const lotSelectionStyle = (theme: MantineTheme) => {
       backgroundColor: theme.white,
       color: theme.colors.gray[5],
       border: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -332,7 +330,9 @@ export const lotSelectionStyle = (theme: MantineTheme) => {
 export const auctionsDetailsEditStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
 
     imageSection: {
@@ -341,7 +341,7 @@ export const auctionsDetailsEditStyle = (theme: MantineTheme) => {
       alignItems: 'center',
       justifyContent: 'center',
       borderBottom: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
 
@@ -357,7 +357,7 @@ export const auctionsDetailsEditStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     statusBadge: {
@@ -366,7 +366,7 @@ export const auctionsDetailsEditStyle = (theme: MantineTheme) => {
 
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -374,7 +374,9 @@ export const auctionsDetailsEditStyle = (theme: MantineTheme) => {
 export const auctionsProfileCardEditStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
 
     imageSection: {
@@ -383,7 +385,7 @@ export const auctionsProfileCardEditStyle = (theme: MantineTheme) => {
       alignItems: 'center',
       justifyContent: 'center',
       borderBottom: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
 
@@ -399,7 +401,7 @@ export const auctionsProfileCardEditStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     statusBadge: {
@@ -408,7 +410,7 @@ export const auctionsProfileCardEditStyle = (theme: MantineTheme) => {
 
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -416,7 +418,9 @@ export const auctionsProfileCardEditStyle = (theme: MantineTheme) => {
 export const unitTableEditStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -433,7 +437,7 @@ export const unitTableEditStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     bidButton: {
@@ -445,12 +449,12 @@ export const unitTableEditStyle = (theme: MantineTheme) => {
       backgroundColor: theme.white,
       color: theme.colors.gray[5],
       border: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[3]
+      theme.colors.gray[3]
       }`,
     },
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
   };
 };
@@ -458,7 +462,9 @@ export const unitTableEditStyle = (theme: MantineTheme) => {
 export const auctionCardStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
       border: '0.0625rem solid #dee2e6',
     },
 
@@ -468,7 +474,7 @@ export const auctionCardStyle = (theme: MantineTheme) => {
       alignItems: 'center',
       justifyContent: 'center',
       borderBottom: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
 
@@ -484,7 +490,7 @@ export const auctionCardStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
 
@@ -516,7 +522,7 @@ export const auctionCardStyle = (theme: MantineTheme) => {
 
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+            color:  theme.colors.gray[5],
     },
     tooltip: {
       '&:hover': {
@@ -560,12 +566,13 @@ export const headerStyle = (theme: MantineTheme) => {
       padding: `${rem(8)} ${rem(12)}`,
       borderRadius: theme.radius.sm,
       textDecoration: 'none',
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+      color: theme.colors.gray[7],
+
       fontSize: theme.fontSizes.sm,
       fontWeight: 500,
 
       '&:hover': {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+        backgroundColor:  theme.colors.gray[0],
       },
     },
 
@@ -584,7 +591,9 @@ export const headerStyle = (theme: MantineTheme) => {
 export const inventoryAuctionStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -601,7 +610,7 @@ export const inventoryAuctionStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     bidButton: {
@@ -613,7 +622,8 @@ export const inventoryAuctionStyle = (theme: MantineTheme) => {
 export const builderStyle = (theme: MantineTheme) => {
   return {
     icon: {
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[5],
+            color: theme.colors.gray[5],
+
     },
 
     name: {
@@ -639,7 +649,8 @@ export const builderStyle = (theme: MantineTheme) => {
 export const clientProfileStyle = (theme: MantineTheme) => {
   return {
     icon: {
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[5],
+            color: theme.colors.gray[5],
+
     },
 
     name: {
@@ -651,7 +662,9 @@ export const clientProfileStyle = (theme: MantineTheme) => {
 export const confirmProjectStyles = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -668,7 +681,7 @@ export const confirmProjectStyles = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
   };
@@ -690,15 +703,11 @@ export const inventoryStyle = (theme: MantineTheme) => {
       backgroundColor: theme.white,
       color: theme.colors.gray[5],
       border: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
 
     pin2: {
-      // position: "absolute",
-      // top: '40%';
-      // left: '50%';
-      // margin-left: 115px;
 
       borderRadius: '50%',
       border: '8px solid #fff',
@@ -746,7 +755,6 @@ export const landingStyle = (theme: MantineTheme) => {
 
     faq: {
       backgroundImage:
-        // `linear-gradient(135deg, #64B5F6 0%,  #BBDEFB 100%)`,
 
         `radial-gradient(${theme.colors[theme.primaryColor][6]} 0%, ${
           theme.colors[theme.primaryColor][4]
@@ -758,7 +766,9 @@ export const landingStyle = (theme: MantineTheme) => {
 export const projectStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
     bidSelector: {
       minWidth: rem(245),
@@ -775,7 +785,7 @@ export const projectStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     bidButton: {
@@ -787,7 +797,9 @@ export const projectStyle = (theme: MantineTheme) => {
 export const auctionDetailsStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      backgroundColor: theme.colors.
+white,
+
     },
 
     imageSection: {
@@ -796,7 +808,7 @@ export const auctionDetailsStyle = (theme: MantineTheme) => {
       alignItems: 'center',
       justifyContent: 'center',
       borderBottom: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
 
@@ -812,7 +824,7 @@ export const auctionDetailsStyle = (theme: MantineTheme) => {
     section: {
       padding: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
-        theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+        theme.colors.gray[3]
       }`,
     },
     statusBadge: {
@@ -821,7 +833,7 @@ export const auctionDetailsStyle = (theme: MantineTheme) => {
 
     icon: {
       marginRight: rem(5),
-      color: theme.colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[5],
+      color:  theme.colors.gray[5],
     },
   };
 };

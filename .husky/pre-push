@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo "Running ESLint before push..."
-npm run lint
+npm run lint-app
 RESULT=$?
 
 if [ $RESULT -ne 0 ]; then

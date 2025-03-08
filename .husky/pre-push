@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Formatting Staged..."
+npm run prettier
+
+echo "Running ESLint before push..."
+npm run lint-app
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+  echo "Linting failed. Fix errors before pushing."
+  exit 1
+fi
+

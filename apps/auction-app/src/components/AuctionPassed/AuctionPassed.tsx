@@ -18,7 +18,7 @@ import {
 } from '@tabler/icons-react';
 import { lotMockData as lotsData } from '@mocks/auction';
 import { auctionPassedStyle } from '../../styles/theme';
-import { IAuction, ILot } from '../@auction-app/at-models';
+import { IAuction, ILot } from '@auction-app/at-models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

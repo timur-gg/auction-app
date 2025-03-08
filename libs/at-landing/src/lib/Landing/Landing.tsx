@@ -28,14 +28,14 @@ import {
   IconLicense,
 } from '@tabler/icons-react';
 import { auctionData } from '@mocks/auction.tsx';
-import AuctionCard from '../components/inventory/AuctionCard';
-import { GetInTouchSimple } from '../components/inventory/GetInTouchSimple';
-import ComicPic from '../components/Landing/ComicPic';
+// import AuctionCard from '../components/inventory/AuctionCard';
+// import { GetInTouchSimple } from '../components/inventory/GetInTouchSimple';
+import ComicPic from './ComicPic';
 import img1 from '../assets/1B/1B.png';
 import img2 from '../assets/1B/1B.png';
 import img3 from '../assets/1B/1B.png';
 import img4 from '../assets/1B/1B.png';
-import { landingStyle } from '../styles/theme.ts';
+import { landingStyle } from '../theme/theme.ts';
 import { IAuction } from '@auction-app/at-models';
 
 const sampleIds = ['1', '2', '3', '4'];
@@ -144,7 +144,7 @@ export default function Landing() {
         <Grid>
           {auctionSamples.map((auction) => (
             <Grid.Col xs={4} sm={3}>
-              <AuctionCard auction={auction} />
+              {/*<AuctionCard auction={auction} />*/}
             </Grid.Col>
           ))}
         </Grid>
@@ -340,7 +340,7 @@ export default function Landing() {
         </Title>
         <Space h={40} />
         <Container>
-          <GetInTouchSimple />
+          {/*<GetInTouchSimple />*/}
         </Container>
       </Paper>
     </>

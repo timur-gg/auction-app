@@ -1,12 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import ExampleDoc from "../assets/terms_conditions.pdf";
-import "react-chat-widget/lib/styles.css";
-import { Chat } from "../components/Chat";
-import { useDisclosure } from "@mantine/hooks";
+import React from 'react';
+import { useState } from 'react';
+import ExampleDoc from '../assets/terms_conditions.pdf';
+import 'react-chat-widget/lib/styles.css';
+import { Chat } from '../components/Chat';
+import { useDisclosure } from '@mantine/hooks';
 
-import { useNavigate } from "react-router-dom";
-import { builderFavoritesData, builderUserData as UserData } from '@mocks/auction';
+import { useNavigate } from 'react-router-dom';
+import {
+  builderFavoritesData,
+  builderUserData as UserData,
+} from '@mocks/auction';
 
 import {
   Box,
@@ -25,7 +28,8 @@ import {
   Table,
   Paper,
   ThemeIcon,
-  Avatar, CSSObject
+  Avatar,
+  CSSObject,
 } from '@mantine/core';
 
 import {
@@ -35,15 +39,15 @@ import {
   IconArchive,
   IconPencil,
   IconMessage,
-} from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+} from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 import { builderStyle } from '../styles/theme.ts';
 import { IAuction } from '../types.ts';
 
-const useStyles = createStyles((theme): Record<string, CSSObject> =>
-  builderStyle(theme) as Record<string, CSSObject>
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    builderStyle(theme) as Record<string, CSSObject>,
 );
-
 
 export default function BuilderProfile() {
   const { classes } = useStyles();
@@ -54,14 +58,14 @@ export default function BuilderProfile() {
   const rowClick = (id: string, status: string) => {
     console.log(id);
 
-    if (status === "upcoming") {
+    if (status === 'upcoming') {
       navigate(`/project/${id}`);
     }
 
     if (
-      status === "Pending Confirmation" ||
-      status === "In Review" ||
-      status === "Ready for Auction"
+      status === 'Pending Confirmation' ||
+      status === 'In Review' ||
+      status === 'Ready for Auction'
     ) {
       navigate(`/edit_project/${id}`);
     }
@@ -79,7 +83,6 @@ export default function BuilderProfile() {
   const [openedChat, { toggle: toggleChat, close: closeChat }] =
     useDisclosure(false);
 
-
   console.log(loadedAuctions);
 
   const auctionRows = loadedAuctions.map((element: IAuction) => (
@@ -96,27 +99,27 @@ export default function BuilderProfile() {
       {/* <td>{element.bidders}</td> */}
 
       <td>
-        {element.status === "Live" || element.status === "Ready for Auction" ? (
+        {element.status === 'Live' || element.status === 'Ready for Auction' ? (
           <Badge color="green" size="md" variant="filled">
             {element.status}
           </Badge>
-        ) : element.status === "Passed" ? (
+        ) : element.status === 'Passed' ? (
           <Badge color="red" size="md" variant="filled">
             {element.status}
           </Badge>
-        ) : element.status === "Finished" ? (
+        ) : element.status === 'Finished' ? (
           <Badge color="orange" size="md" variant="filled">
             {element.status}
           </Badge>
-        ) : element.status === "Pending Confirmation" ? (
+        ) : element.status === 'Pending Confirmation' ? (
           <Badge color="yellow.6" size="md" variant="filled">
             {element.status}
           </Badge>
-        ) : element.status === "Upcoming" ? (
+        ) : element.status === 'Upcoming' ? (
           <Badge color="teal" size="md" variant="filled">
             {element.status}
           </Badge>
-        ) : element.status === "In Review" ? (
+        ) : element.status === 'In Review' ? (
           <Badge color="blue.5" size="md" variant="filled">
             {element.status}
           </Badge>
@@ -147,10 +150,10 @@ export default function BuilderProfile() {
         px={0}
         style={{
           boxShadow:
-            "0 0.0925rem 0.3875rem rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1) 0 1.25rem 1.5625rem -0.25rem, rgba(0, 0, 0, 0.1) 0 0.725rem 0.725rem -0.3125rem",
+            '0 0.0925rem 0.3875rem rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1) 0 1.25rem 1.5625rem -0.25rem, rgba(0, 0, 0, 0.1) 0 0.725rem 0.725rem -0.3125rem',
         }}
       >
-        <Text size="sm" mb="xs" weight={500} ml={"20px"}>
+        <Text size="sm" mb="xs" weight={500} ml={'20px'}>
           {/* Subscribe to email newsletter */}
         </Text>
         <Container h="calc(100% - 2em);" px={0}>
@@ -166,7 +169,7 @@ export default function BuilderProfile() {
               shadow="md"
               p={15}
               radius="md"
-              style={{ height: "100%" }}
+              style={{ height: '100%' }}
             >
               <Grid>
                 <Grid.Col xs={12} md={8}>
@@ -204,12 +207,13 @@ export default function BuilderProfile() {
                       </Group>
                     </Stack>
                   </Group>
-                  <Box mt={10} style={{ textAlign: "left" }}>
+                  <Box mt={10} style={{ textAlign: 'left' }}>
                     <a
                       href={ExampleDoc}
                       download="MyExampleDoc"
                       target="_blank"
-                      style={{ textDecoration: "none" }} rel="noreferrer"
+                      style={{ textDecoration: 'none' }}
+                      rel="noreferrer"
                     >
                       <Text color="blue">Terms and Conditions</Text>
                     </a>
@@ -218,8 +222,8 @@ export default function BuilderProfile() {
                 <Grid.Col xs={12} md={4}>
                   <Flex justify="flex-end" align="flex-end" direction="column">
                     <Button size="4em">
-                      {" "}
-                      <IconPencil size="1.7rem" stroke={1} />{" "}
+                      {' '}
+                      <IconPencil size="1.7rem" stroke={1} />{' '}
                     </Button>
                   </Flex>
                 </Grid.Col>
@@ -233,7 +237,7 @@ export default function BuilderProfile() {
               p={15}
               pt={15}
               radius="md"
-              style={{ height: "100%" }}
+              style={{ height: '100%' }}
             >
               <Title order={4} align="left">
                 My Company
@@ -270,7 +274,7 @@ export default function BuilderProfile() {
               p={15}
               pt={15}
               radius="md"
-              style={{ height: "100%" }}
+              style={{ height: '100%' }}
             >
               <Grid>
                 <Grid.Col xs={12} md={8}>
@@ -338,7 +342,7 @@ export default function BuilderProfile() {
           pt={15}
           mt={0}
           radius="md"
-          style={{ height: "100%" }}
+          style={{ height: '100%' }}
         >
           <Group noWrap align="left">
             <ThemeIcon>
@@ -349,7 +353,7 @@ export default function BuilderProfile() {
               My Auctions
             </Title>
           </Group>
-          <Table style={{ textAlign: "left" }}>
+          <Table style={{ textAlign: 'left' }}>
             <thead>
               <tr>
                 <th>Building</th>
@@ -373,7 +377,7 @@ export default function BuilderProfile() {
           p={20}
           pt={15}
           radius="md"
-          style={{ height: "100%" }}
+          style={{ height: '100%' }}
         >
           <Group noWrap align="left">
             <ThemeIcon>
@@ -383,7 +387,7 @@ export default function BuilderProfile() {
               Archive Auctions
             </Title>
           </Group>
-          <Table style={{ textAlign: "left" }}>
+          <Table style={{ textAlign: 'left' }}>
             <thead>
               <tr>
                 <th>Building</th>

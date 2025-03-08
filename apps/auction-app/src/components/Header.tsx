@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   createStyles,
   Header,
@@ -10,16 +10,15 @@ import {
   ThemeIcon,
   Center,
   Space,
-  Menu, MantineTheme
+  Menu,
+  MantineTheme,
 } from '@mantine/core';
-import { useDisclosure } from "@mantine/hooks";
-import { Link } from "react-router-dom";
-import { IconGavel } from "@tabler/icons-react";
+import { useDisclosure } from '@mantine/hooks';
+import { Link } from 'react-router-dom';
+import { IconGavel } from '@tabler/icons-react';
 import { headerStyle } from '../styles/theme.ts';
 
-const useStyles = createStyles((theme: MantineTheme ) =>
-  headerStyle(theme)
-);
+const useStyles = createStyles((theme: MantineTheme) => headerStyle(theme));
 
 interface HeaderSimpleProps {
   links: { link: string; label: string }[];
@@ -64,11 +63,11 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   return (
     <Header height={60} mb={120}>
       <Container className={classes.header}>
-        <Link to="/" style={{ color: "black" }}>
+        <Link to="/" style={{ color: 'black' }}>
           <Center inline>
             <ThemeIcon>
-              {" "}
-              <IconGavel size={28} />{" "}
+              {' '}
+              <IconGavel size={28} />{' '}
             </ThemeIcon>
             <Space w={5} />
             <Text fw={700}>Real Xchange</Text>

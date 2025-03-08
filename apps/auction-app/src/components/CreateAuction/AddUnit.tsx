@@ -1,4 +1,4 @@
-import { IconTrash, IconX, IconPlus } from "@tabler/icons-react";
+import { IconTrash, IconX, IconPlus } from '@tabler/icons-react';
 import {
   Container,
   Stack,
@@ -13,31 +13,31 @@ import {
   Checkbox,
   SegmentedControl,
   NumberInput,
-} from "@mantine/core";
-import { useState } from "react";
-import FileDrop from "../signup/FileDrop.js";
-import { notifications } from "@mantine/notifications";
+} from '@mantine/core';
+import { useState } from 'react';
+import FileDrop from '../signup/FileDrop.js';
+import { notifications } from '@mantine/notifications';
 
-const unitTabs = [{ title: "New Unit", value: "new", id: 1 }];
+const unitTabs = [{ title: 'New Unit', value: 'new', id: 1 }];
 
 export default function AddUnit() {
   const [removedTabs, setRemovedTabs] = useState<string[]>([]);
   const [newTabs, setNewTabs] = useState<string[]>([]);
 
   const [unitNumber, setUnitNumber] = useState<{ [key: string]: string }>({
-    "1": "",
+    '1': '',
   });
 
   const addTab = () => {
-    setNewTabs([...newTabs, "newTab" + newTabs.length]);
+    setNewTabs([...newTabs, 'newTab' + newTabs.length]);
   };
 
   const saveUnit = () => {
     notifications.show({
       autoClose: 4000,
-      title: "Unit saved!",
-      color: "yellow",
-      message: "",
+      title: 'Unit saved!',
+      color: 'yellow',
+      message: '',
     });
   };
 
@@ -46,7 +46,7 @@ export default function AddUnit() {
   newTabs.forEach((t, i) => {
     if (!tabs.map((t) => t.value).includes(t)) {
       tabs.push({
-        title: "New Unit",
+        title: 'New Unit',
         value: t.toString(),
         id: Math.max(...tabs.map((t) => t.id)) + 1,
       });
@@ -78,7 +78,9 @@ export default function AddUnit() {
               <Group spacing="xs">
                 <ActionIcon
                   mx="1px"
-                  onClick={(e: React.MouseEvent) => setRemovedTabs([...removedTabs, tab.value])}
+                  onClick={(e: React.MouseEvent) =>
+                    setRemovedTabs([...removedTabs, tab.value])
+                  }
                 >
                   <IconX size={14} />
                 </ActionIcon>
@@ -95,7 +97,7 @@ export default function AddUnit() {
               </Text>
 
               <IconPlus
-                style={{ border: "2px solid #AED581", borderRadius: "50%" }}
+                style={{ border: '2px solid #AED581', borderRadius: '50%' }}
                 color="grey"
                 size="1rem"
                 stroke={2.5}
@@ -177,10 +179,10 @@ export default function AddUnit() {
                       miw={220}
                       mx="auto"
                       data={[
-                        { label: "N", value: "n" },
-                        { label: "E", value: "e" },
-                        { label: "S", value: "s" },
-                        { label: "W", value: "w" },
+                        { label: 'N', value: 'n' },
+                        { label: 'E', value: 'e' },
+                        { label: 'S', value: 's' },
+                        { label: 'W', value: 'w' },
                       ]}
                     />
                   </Stack>
@@ -199,7 +201,7 @@ export default function AddUnit() {
                     maw={220}
                     label="Starting Price"
                     defaultValue={100000}
-                    parser={(value: string) => value.replace(/\$\s?|(,*)/g, "")}
+                    parser={(value: string) => value.replace(/\$\s?|(,*)/g, '')}
                   />
                 </Grid.Col>
 

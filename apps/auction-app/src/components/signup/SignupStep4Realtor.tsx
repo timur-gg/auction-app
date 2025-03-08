@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Title,
   Text,
@@ -13,10 +13,10 @@ import {
   Grid,
   Group,
   useMantineTheme,
-} from "@mantine/core";
-import { Dropzone } from "@mantine/dropzone";
-import { IconUpload, IconX, IconFile } from "@tabler/icons-react";
-import { useRef } from "react";
+} from '@mantine/core';
+import { Dropzone } from '@mantine/dropzone';
+import { IconUpload, IconX, IconFile } from '@tabler/icons-react';
+import { useRef } from 'react';
 
 const SignupStep4Realtor = () => {
   const theme = useMantineTheme();

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Title,
   Text,
@@ -14,8 +14,8 @@ import {
   Space,
   Grid,
   Center,
-} from "@mantine/core";
-import { useState } from "react";
+} from '@mantine/core';
+import { useState } from 'react';
 
 const SignupStep4 = () => {
   const [checked, setChecked] = useState(false);
@@ -67,27 +67,27 @@ const SignupStep4 = () => {
                 p="lg"
                 sx={(theme) => ({
                   backgroundColor:
-                    theme.colorScheme === "dark"
+                    theme.colorScheme === 'dark'
                       ? theme.colors.dark[8]
                       : theme.white,
                 })}
               >
                 <Avatar
                   src={
-                    "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80"
+                    'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80'
                   }
                   size={120}
                   radius={120}
                   mx="auto"
                 />
                 <Text ta="center" fz="lg" weight={500} mt="md">
-                  {"Alex Smith"}
+                  {'Alex Smith'}
                 </Text>
                 <Text ta="center" c="dimmed" fz="sm">
-                  {"realtor@realtor.com"}
+                  {'realtor@realtor.com'}
                 </Text>
                 <Text ta="center" fz="md">
-                  {"#11234"}
+                  {'#11234'}
                 </Text>
               </Paper>
             </Grid.Col>

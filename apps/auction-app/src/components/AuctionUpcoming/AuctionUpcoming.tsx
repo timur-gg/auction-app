@@ -59,16 +59,18 @@ import { auctionUpcomingStyle } from '../../styles/theme.ts';
 import { IAuction } from '../../types.ts';
 
 const useStyles = createStyles(
-  (theme): Record<string, CSSObject> => auctionUpcomingStyle(theme) as Record<string, CSSObject>
+  (theme): Record<string, CSSObject> =>
+    auctionUpcomingStyle(theme) as Record<string, CSSObject>,
 );
 
 const distanceToMouse = (
   pt: { x: number; y: number },
-  mousePos: { x: number; y: number }
+  mousePos: { x: number; y: number },
 ): number => {
   if (pt && mousePos) {
     return Math.sqrt(
-      (pt.x - mousePos.x) * (pt.x - mousePos.x) + (pt.y - mousePos.y) * (pt.y - mousePos.y)
+      (pt.x - mousePos.x) * (pt.x - mousePos.x) +
+        (pt.y - mousePos.y) * (pt.y - mousePos.y),
     );
   } else {
     return 0;
@@ -113,7 +115,9 @@ export function AuctionUpcoming({
       >
         <Group spacing="1">
           <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-          <Text size="sm">{auction[feature.label] + (feature.unit ? feature.unit : '')}</Text>
+          <Text size="sm">
+            {auction[feature.label] + (feature.unit ? feature.unit : '')}
+          </Text>
         </Group>
       </Tooltip>
     </Grid.Col>
@@ -227,14 +231,23 @@ export function AuctionUpcoming({
     </Carousel.Slide>
   ));
 
-  const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
+  const [modalOpened, { open: openModal, close: closeModal }] =
+    useDisclosure(false);
 
-  const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] = useDisclosure(false);
+  const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] =
+    useDisclosure(false);
 
   return (
     <Container className="Auction" maw={1200}>
       {step < 3 && (
-        <Card withBorder radius="md" className={classes.card} maw={1200} mx="auto" pt="0">
+        <Card
+          withBorder
+          radius="md"
+          className={classes.card}
+          maw={1200}
+          mx="auto"
+          pt="0"
+        >
           {step === 1 && (
             <Tabs defaultValue="gallery" pt="15px">
               <Tabs.List>
@@ -275,7 +288,9 @@ export function AuctionUpcoming({
                 {step < 3 && (
                   <AuctionProfileCard
                     auction={auction}
-                    {...(step === 1 ? { cardSize: 'full' } : { cardSize: 'mini' })}
+                    {...(step === 1
+                      ? { cardSize: 'full' }
+                      : { cardSize: 'mini' })}
                   />
                 )}
               </Tabs.Panel>
@@ -304,46 +319,69 @@ export function AuctionUpcoming({
               <Tabs.Panel value="settings" pt="lg" ta="left" p="2rem">
                 <Grid>
                   <Grid.Col span={6}>
-                    <Text fz="sm" c="dimmed" className={classes.label} align="left">
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
                       Deposit structure
                     </Text>
                     <Text>
                       <List>
-                        <List.Item>5% Deposit structure on podium and standard suites</List.Item>
                         <List.Item>
-                          $10,000 on - Signing Balance to 5% in 30 Days 15% on Occupancy
+                          5% Deposit structure on podium and standard suites
                         </List.Item>
-                        <List.Item>10% - extended deposit structure on penthouse suites</List.Item>
+                        <List.Item>
+                          $10,000 on - Signing Balance to 5% in 30 Days 15% on
+                          Occupancy
+                        </List.Item>
+                        <List.Item>
+                          10% - extended deposit structure on penthouse suites
+                        </List.Item>
                         <List.Item>$10,000 on signing</List.Item>
                         <List.Item>
-                          Balance to 5% in 30 days 2.5% in 180 days 2.5% in 365 days 5% on Occupancy
+                          Balance to 5% in 30 days 2.5% in 180 days 2.5% in 365
+                          days 5% on Occupancy
                         </List.Item>
                       </List>
                     </Text>
                     <Space h={20} />
                     <Text size="xs">
-                      * Certain terms and conditions may apply. Assignment Right is subject to an
-                      additional $1,000.00 plus HST for Vendor’s solicitor fees and processing fees
-                      and subject to conditions at Vendor’s sole discretion. See Sales Rep for
+                      * Certain terms and conditions may apply. Assignment Right
+                      is subject to an additional $1,000.00 plus HST for
+                      Vendor’s solicitor fees and processing fees and subject to
+                      conditions at Vendor’s sole discretion. See Sales Rep for
                       details.
                     </Text>
                   </Grid.Col>
 
                   <Grid.Col span={6}>
-                    <Text fz="sm" c="dimmed" className={classes.label} align="left">
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
                       Incentives
                     </Text>
                     <List>
                       <List.Item>
-                        <Title order={5}>Special incentive program for your free assignment</Title>
+                        <Title order={5}>
+                          Special incentive program for your free assignment
+                        </Title>
                       </List.Item>
                       <List.Item>Regular Assignment Fee of $10,000</List.Item>
                       <List.Item>
-                        Permission to lease during occupancy* capped development charges
+                        Permission to lease during occupancy* capped development
+                        charges
                       </List.Item>
-                      <List.Item>$12,500 plus hst for 1 bedroom+den and smaller</List.Item>
                       <List.Item>
-                        $18,000 plus hst for 2 bedroom and larger limited time Offer!
+                        $12,500 plus hst for 1 bedroom+den and smaller
+                      </List.Item>
+                      <List.Item>
+                        $18,000 plus hst for 2 bedroom and larger limited time
+                        Offer!
                       </List.Item>
                     </List>
                   </Grid.Col>
@@ -353,7 +391,9 @@ export function AuctionUpcoming({
               </Tabs.Panel>
             </Tabs>
           )}
-          {step === 2 && <AuctionProfileCard auction={auction} cardSize="mini" />}
+          {step === 2 && (
+            <AuctionProfileCard auction={auction} cardSize="mini" />
+          )}
         </Card>
       )}
 
@@ -369,10 +409,22 @@ export function AuctionUpcoming({
         {step < 3 && (
           <Grid.Col {...(step === 1 ? { md: 8.5 } : { xs: 12, sm: 8 })}>
             {step === 1 && (
-              <Card withBorder p={15} radius="md" className={classes.card} maw={1200} mx="auto">
+              <Card
+                withBorder
+                p={15}
+                radius="md"
+                className={classes.card}
+                maw={1200}
+                mx="auto"
+              >
                 {step === 1 && (
                   <Flex direction="row">
-                    <Button variant="light" color="blue" mr={'auto'} onClick={() => setStep(2)}>
+                    <Button
+                      variant="light"
+                      color="blue"
+                      mr={'auto'}
+                      onClick={() => setStep(2)}
+                    >
                       Select Units →
                     </Button>
                   </Flex>
@@ -396,7 +448,14 @@ export function AuctionUpcoming({
         )}
         {step === 2 && (
           <Grid.Col xs={10} sm={4}>
-            <Card withBorder p={0} radius="md" className={classes.card} maw={1000} mx="auto">
+            <Card
+              withBorder
+              p={0}
+              radius="md"
+              className={classes.card}
+              maw={1000}
+              mx="auto"
+            >
               <Stack spacing={6} mb={-5} align="flex-start" bg="#EFEBE9" p={15}>
                 <Text fz="sm" c="dimmed" className={classes.label} align="left">
                   Auction details
@@ -418,7 +477,9 @@ export function AuctionUpcoming({
                   Selected Units
                 </Text>
 
-                {selectedUnits.length === 0 && <Text size="sm">No units selected</Text>}
+                {selectedUnits.length === 0 && (
+                  <Text size="sm">No units selected</Text>
+                )}
 
                 {selectedUnits.length > 0 && (
                   // <Stack spacing={4}>{selectedUnits}</Stack>
@@ -433,16 +494,24 @@ export function AuctionUpcoming({
                         <th>
                           <IconRuler size="1.2rem" />
                         </th>
-                        <th style={{ maxWidth: '105px' }}>Registered Participants</th>
+                        <th style={{ maxWidth: '105px' }}>
+                          Registered Participants
+                        </th>
                       </tr>
                     </thead>
                     <tbody>{selectedUnitRows}</tbody>
                   </Table>
                 )}
 
-                <Modal opened={quitModalOpened} onClose={closeQuitModal} title="" centered>
+                <Modal
+                  opened={quitModalOpened}
+                  onClose={closeQuitModal}
+                  title=""
+                  centered
+                >
                   <Text ta="center" size="md" fw={400}>
-                    Are you sure that you want to remove your registration for the auction?
+                    Are you sure that you want to remove your registration for
+                    the auction?
                   </Text>
 
                   <Space h={25} />
@@ -463,7 +532,8 @@ export function AuctionUpcoming({
                           autoClose: 4000,
                           title: 'Auction Registration Removed',
                           color: 'red',
-                          message: 'You registration for this auction is removed',
+                          message:
+                            'You registration for this auction is removed',
                         });
                         navigate(`/client_profile`);
                       }}
@@ -521,7 +591,11 @@ export function AuctionUpcoming({
                   )}
                 </Group>
 
-                <Modal opened={modalOpened} onClose={closeModal} title="Auction Registration">
+                <Modal
+                  opened={modalOpened}
+                  onClose={closeModal}
+                  title="Auction Registration"
+                >
                   <AuctionConfirmation />
                 </Modal>
               </Stack>
@@ -542,7 +616,12 @@ export function AuctionUpcoming({
               <Grid bg="#EFEBE9">
                 <Grid.Col span={6} p={0}>
                   <Stack spacing={6} align="flex-start" p={15}>
-                    <Text fz="sm" c="dimmed" className={classes.label} align="left">
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
                       Auction details
                     </Text>
                     <Grid w={'100%'} maw={400}>
@@ -552,12 +631,21 @@ export function AuctionUpcoming({
                 </Grid.Col>
                 <Grid.Col span={6} p={0}>
                   <Stack spacing={6} align="flex-start" p={15}>
-                    <Text fz="sm" c="dimmed" className={classes.label} align="left">
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
                       Selected Units
                     </Text>
-                    {selectedUnits.length === 0 && <Text size="sm">No units selected</Text>}
+                    {selectedUnits.length === 0 && (
+                      <Text size="sm">No units selected</Text>
+                    )}
 
-                    {selectedUnits.length > 0 && <Group spacing={15}>{selectedUnits}</Group>}
+                    {selectedUnits.length > 0 && (
+                      <Group spacing={15}>{selectedUnits}</Group>
+                    )}
                   </Stack>
                 </Grid.Col>
               </Grid>
@@ -587,10 +675,18 @@ export function AuctionUpcoming({
 
                   <Center>
                     <Group spacing={40}>
-                      <Button variant="light" color="blue" mr={'10rem'} onClick={() => setStep(2)}>
+                      <Button
+                        variant="light"
+                        color="blue"
+                        mr={'10rem'}
+                        onClick={() => setStep(2)}
+                      >
                         ← Back
                       </Button>
-                      <Checkbox size="md" label="I agree to the auction rules" />
+                      <Checkbox
+                        size="md"
+                        label="I agree to the auction rules"
+                      />
                       <Button
                         // variant="dark"
                         color="green"

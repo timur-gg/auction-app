@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useRef, useEffect } from "react";
+import React from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   Accordion,
   Container,
@@ -13,11 +13,12 @@ import {
   Button,
   Center,
   Text,
-  Stack, MantineTheme
+  Stack,
+  MantineTheme,
 } from '@mantine/core';
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { createStyles,  } from "@mantine/core";
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { createStyles } from '@mantine/core';
 import {
   IconSearch,
   IconCoins,
@@ -25,42 +26,35 @@ import {
   IconPlus,
   IconGavel,
   IconLicense,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 import { auctionData } from '@mocks/auction.tsx';
-import AuctionCard from "../components/inventory/AuctionCard";
-import { GetInTouchSimple } from "../components/inventory/GetInTouchSimple";
-import ComicPic from "../components/Landing/ComicPic";
-import img1 from "../assets/1B/1B.png";
-import img2 from "../assets/1B/1B.png";
-import img3 from "../assets/1B/1B.png";
-import img4 from "../assets/1B/1B.png";
+import AuctionCard from '../components/inventory/AuctionCard';
+import { GetInTouchSimple } from '../components/inventory/GetInTouchSimple';
+import ComicPic from '../components/Landing/ComicPic';
+import img1 from '../assets/1B/1B.png';
+import img2 from '../assets/1B/1B.png';
+import img3 from '../assets/1B/1B.png';
+import img4 from '../assets/1B/1B.png';
 import { landingStyle } from '../styles/theme.ts';
 import { IAuction } from '../types.ts';
 
-const sampleIds = ["1", "2", "3", "4"];
+const sampleIds = ['1', '2', '3', '4'];
 
 const auctionSamples: IAuction[] = auctionData.filter((a) =>
-  sampleIds.includes(a.id)
+  sampleIds.includes(a.id),
 );
 
-const Row1 = [
-  img1,
-  img2,
-  img3,
-  img4,
-];
+const Row1 = [img1, img2, img3, img4];
 
-const useStyles = createStyles((theme: MantineTheme ) =>
-  landingStyle(theme)
-);
+const useStyles = createStyles((theme: MantineTheme) => landingStyle(theme));
 
 // "url(https://images.unsplash.com/photo-1559869824-929df9dab35e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2639&q=80)",
 
 const bgImg =
-  "url(https://images.unsplash.com/photo-1603466182843-75f713ba06b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80)";
+  'url(https://images.unsplash.com/photo-1603466182843-75f713ba06b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80)';
 
 const placeholder =
-  "It can’t help but hear a pin drop from over half a mile away, so it lives deep in the mountains where there aren’t many people or Pokémon.It was born from sludge on the ocean floor. In a sterile environment, the germs within its body can’t multiply, and it dies.It has no eyeballs, so it can’t see. It checks its surroundings via the ultrasonic waves it emits from its mouth.";
+  'It can’t help but hear a pin drop from over half a mile away, so it lives deep in the mountains where there aren’t many people or Pokémon.It was born from sludge on the ocean floor. In a sterile environment, the germs within its body can’t multiply, and it dies.It has no eyeballs, so it can’t see. It checks its surroundings via the ultrasonic waves it emits from its mouth.';
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -70,13 +64,13 @@ export default function Landing() {
 
   useEffect(() => {
     // if not a hash link, scroll to top
-    if (hash === "") {
+    if (hash === '') {
       window.scrollTo(0, 0);
     }
     // else scroll to id
     else {
       setTimeout(() => {
-        const id = hash.replace("#", "");
+        const id = hash.replace('#', '');
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView();
@@ -102,7 +96,11 @@ export default function Landing() {
       >
         <Center>
           <Group mt="150px">
-            <TextInput miw="400px" size="xl" placeholder="Search for your new condo" />
+            <TextInput
+              miw="400px"
+              size="xl"
+              placeholder="Search for your new condo"
+            />
             <Button
               // style={{ backgroundColor: "#1A237E" }}
               size="xl"
@@ -175,8 +173,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -188,8 +186,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -201,8 +199,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -225,8 +223,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -238,8 +236,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -251,8 +249,8 @@ export default function Landing() {
                   </Grid.Col>
                   <Grid.Col xs={10}>
                     <Text fz="16px" ta="left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt.
                     </Text>
                   </Grid.Col>
                 </Grid>
@@ -327,7 +325,16 @@ export default function Landing() {
         </Accordion>
       </Paper>
       <Space h={10} />
-      <Paper id="contact" withBorder shadow="md" w="100%" p={15} pt={25} pb={35} radius="sm">
+      <Paper
+        id="contact"
+        withBorder
+        shadow="md"
+        w="100%"
+        p={15}
+        pt={25}
+        pb={35}
+        radius="sm"
+      >
         <Title fw={800} ta="left" order={2} color="#212121">
           Contact Us
         </Title>

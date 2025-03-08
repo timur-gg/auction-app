@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Anchor,
   Text,
@@ -10,21 +10,21 @@ import {
   useMantineTheme,
   Space,
   Checkbox,
-} from "@mantine/core";
+} from '@mantine/core';
 
-import { useRef } from "react";
+import { useRef } from 'react';
 
-import FileDrop from "./FileDrop";
+import FileDrop from './FileDrop';
 
 const SignupStep3 = () => {
   const openRef = useRef<() => void>(null);
   const theme = useMantineTheme();
 
-  const [subPage, setSubPage] = React.useState("proofLicense");
+  const [subPage, setSubPage] = React.useState('proofLicense');
 
   return (
     <Container miw={400}>
-      {subPage === "proofLicense" && (
+      {subPage === 'proofLicense' && (
         <>
           <Text size="lg" inline mt={10}>
             We need to confirm your identity.
@@ -34,7 +34,7 @@ const SignupStep3 = () => {
           </Text>
         </>
       )}
-      {subPage === "proofCitizenship" && (
+      {subPage === 'proofCitizenship' && (
         <Text size="lg" inline mt={10}>
           Please attach a proof of citizenship
         </Text>
@@ -58,8 +58,8 @@ const SignupStep3 = () => {
         size="sm"
         c="dimmed"
         td="underline"
-        style={{ cursor: "pointer" }}
-        onClick={() => setSubPage("proofCitizenship")}
+        style={{ cursor: 'pointer' }}
+        onClick={() => setSubPage('proofCitizenship')}
       >
         Upload a proof of citizenship
       </Text>

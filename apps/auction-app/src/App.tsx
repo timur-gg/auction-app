@@ -1,30 +1,30 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import { MantineProvider, AppShell, Header } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { MantineProvider, AppShell, Header } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 
-import Inventory from "./pages/Inventory";
-import Auction from "./pages/Auction";
+import Inventory from './pages/Inventory';
+import Auction from './pages/Auction';
 
-import HeaderSimple from "./components/Header";
-import React from "react";
-import Signup from "./pages/Signup";
-import Landing from "./pages/Landing";
-import FAQ from "./pages/Landing";
+import HeaderSimple from './components/Header';
+import React from 'react';
+import Signup from './pages/Signup';
+import Landing from './pages/Landing';
+import FAQ from './pages/Landing';
 
-import ClientProfile from "./pages/ClientProfile";
-import BuilderProfile from "./pages/BuilderProfile";
-import Project from "./pages/Project";
-import CreateAuction from "./pages/CreateAuction";
-import ConfirmProject from "./pages/ConfirmProject";
+import ClientProfile from './pages/ClientProfile';
+import BuilderProfile from './pages/BuilderProfile';
+import Project from './pages/Project';
+import CreateAuction from './pages/CreateAuction';
+import ConfirmProject from './pages/ConfirmProject';
 
 const queryClient = new QueryClient();
 
 const Main = () => {
   return (
     <Routes>
-      {" "}
+      {' '}
       {/* The Switch decides which component to show based on the current URL.*/}
       <Route path="/" element={<Landing />}></Route>
       <Route path="/inventory" element={<Inventory />}></Route>
@@ -51,12 +51,12 @@ function App(): React.JSX.Element {
             <Header height={60} p="xs">
               <HeaderSimple
                 links={[
-                  { link: "/inventory", label: "Inventory" },
-                  { link: "/#faq", label: "FAQ" },
-                  { link: "/auction/1", label: "Auction" },
-                  { link: "/signup", label: "Signup" },
-                  { link: "/client_profile", label: "Client Profile" },
-                  { link: "/builder_profile", label: "Builder Profile" },
+                  { link: '/inventory', label: 'Inventory' },
+                  { link: '/#faq', label: 'FAQ' },
+                  { link: '/auction/1', label: 'Auction' },
+                  { link: '/signup', label: 'Signup' },
+                  { link: '/client_profile', label: 'Client Profile' },
+                  { link: '/builder_profile', label: 'Builder Profile' },
                 ]}
               />
             </Header>
@@ -64,7 +64,7 @@ function App(): React.JSX.Element {
           styles={(theme) => ({
             main: {
               backgroundColor:
-                theme.colorScheme === "dark"
+                theme.colorScheme === 'dark'
                   ? theme.colors.dark[8]
                   : theme.colors.gray[0],
             },

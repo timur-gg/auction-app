@@ -13,15 +13,10 @@ import {
   createStyles,
   Image,
   Container,
-  CSSObject
+  CSSObject,
 } from '@mantine/core';
 
-
-import {
-  IconCheck,
-  IconFileDatabase,
-  IconPencil,
-} from '@tabler/icons-react';
+import { IconCheck, IconFileDatabase, IconPencil } from '@tabler/icons-react';
 import AuctionProfileCardEdit from '../components/Confirm/AuctionProfileCardEdit.js';
 import { useParams } from 'react-router-dom';
 import AuctionProfileCard from '../components/AuctionUpcoming/AuctionProfileCard.js';
@@ -29,7 +24,7 @@ import AuctionDetails from '../components/AuctionUpcoming/AuctionDetails.js';
 import AuctionDetailsEdit from '../components/Confirm/AuctionDetailsEdit.js';
 import { LotSelectionTable } from '../components/AuctionUpcoming/LotSelectionTable.js';
 import { UnitTableEdit } from '../components/Confirm/UnitTableEdit.js';
-import { lotMockData as lots, auctionData} from '@mocks/auction.tsx';
+import { lotMockData as lots, auctionData } from '@mocks/auction.tsx';
 import FileDrop from '../components/signup/FileDrop.js';
 import { Carousel } from '@mantine/carousel';
 import RUG from 'react-upload-gallery';
@@ -42,25 +37,14 @@ import floorPlan3 from '../assets/floorPlan3.png';
 import floorPlan4 from '../assets/floorPlan4.png';
 import { confirmProjectStyles } from '../styles/theme.ts';
 
-const useStyles = createStyles((theme): Record<string, CSSObject> =>
-  confirmProjectStyles(theme) as Record<string, CSSObject>
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    confirmProjectStyles(theme) as Record<string, CSSObject>,
 );
 
+const floorPlans = [floorPlan1, floorPlan2, floorPlan3, floorPlan4];
 
-const floorPlans = [
-  floorPlan1,
-  floorPlan2,
-  floorPlan3,
-  floorPlan4,
-];
-
-const tabs = [
-  'overview',
-  'details',
-  'units',
-  'plans',
-  'card',
-];
+const tabs = ['overview', 'details', 'units', 'plans', 'card'];
 
 export default function ConfirmProject() {
   const { classes } = useStyles();
@@ -72,38 +56,26 @@ export default function ConfirmProject() {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [plansGalleryOpen, setPlansGalleryOpen] = useState(false);
 
-  const auction =
-    auctionData.find((x) => x.id === id) ||
-    auctionData[0];
+  const auction = auctionData.find((x) => x.id === id) || auctionData[0];
 
-  const initialPlanGallery = floorPlans.map(
-    (link: string) => ({
-      size: '200kb',
-      name: '1',
-      source: link,
-    })
-  );
+  const initialPlanGallery = floorPlans.map((link: string) => ({
+    size: '200kb',
+    name: '1',
+    source: link,
+  }));
 
   const removeImage = (
     currentImage: string,
-    images: { size: string; name: string; source: string }[]
+    images: { size: string; name: string; source: string }[],
   ): { size: string; name: string; source: string }[] => {
     return images.filter((image) => image.source !== currentImage);
   };
 
-
-  const [confirmedTabs, setConfirmedTabs] = useState<
-    string[]
-  >([]);
+  const [confirmedTabs, setConfirmedTabs] = useState<string[]>([]);
 
   const plansImagesModal = floorPlans.map((image: string) => (
     <Carousel.Slide key={1}>
-      <Image
-        src={image}
-        alt="Image1"
-        width="100%"
-        height={340}
-      />
+      <Image src={image} alt="Image1" width="100%" height={340} />
     </Carousel.Slide>
   ));
 
@@ -112,19 +84,12 @@ export default function ConfirmProject() {
     setActiveTab(tab);
   };
 
-  const allTabsConfirmed = tabs.every((tab) =>
-    confirmedTabs.includes(tab)
-  );
+  const allTabsConfirmed = tabs.every((tab) => confirmedTabs.includes(tab));
 
   useEffect(() => {
-    const allTabsConfirmed = tabs.every((tab) =>
-      confirmedTabs.includes(tab)
-    );
+    const allTabsConfirmed = tabs.every((tab) => confirmedTabs.includes(tab));
 
-    if (
-      allTabsConfirmed &&
-      submitStatus !== 'Ready for Auction'
-    ) {
+    if (allTabsConfirmed && submitStatus !== 'Ready for Auction') {
       setActiveTab('final');
     }
   }, [confirmedTabs]);
@@ -134,24 +99,26 @@ export default function ConfirmProject() {
     setEditAction(false);
     setConfirmedTabs([...confirmedTabs, tab]);
 
-    const allTabsConfirmed = tabs.every((tab) =>
-      confirmedTabs.includes(tab)
-    );
+    const allTabsConfirmed = tabs.every((tab) => confirmedTabs.includes(tab));
     if (!allTabsConfirmed) {
       const nextTab = (tabs.indexOf(tab) + 1) % tabs.length;
       setActiveTab(tabs[nextTab]);
     }
   };
 
-
-
   const submitAuction = () => {
     console.log('submitting');
-
   };
 
   return (
-    <Card withBorder radius="md" className={classes.card} maw={1200} mx="auto" pt="0">
+    <Card
+      withBorder
+      radius="md"
+      className={classes.card}
+      maw={1200}
+      mx="auto"
+      pt="0"
+    >
       <Tabs
         defaultValue="overview"
         pt="15px"
@@ -274,7 +241,9 @@ export default function ConfirmProject() {
               //   onClick={() => setPlansGalleryOpen(true)}
               bg="#DCEDC8"
             >
-              {submitStatus === 'Ready for Auction' ? 'Ready for Auction' : 'Submit'}
+              {submitStatus === 'Ready for Auction'
+                ? 'Ready for Auction'
+                : 'Submit'}
             </Tabs.Tab>
           )}
         </Tabs.List>
@@ -430,13 +399,16 @@ export default function ConfirmProject() {
               <IconPencil size={20} />
             </Button>
 
-            {(editAction || (activeTab && !confirmedTabs.includes(activeTab))) && (
+            {(editAction ||
+              (activeTab && !confirmedTabs.includes(activeTab))) && (
               <Button
                 size="lg"
                 color="green"
                 onClick={() => (activeTab ? confirmAction(activeTab) : '')}
               >
-                Confirm {activeTab && activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+                Confirm{' '}
+                {activeTab &&
+                  activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
                 <Space w={10} />
                 <IconCheck size={20} />
               </Button>

@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {
-    Text
-  } from "@mantine/core";
+import React, { useState, useEffect } from 'react';
+import { Text } from '@mantine/core';
 
 function Countdown(initialSeconds: number) {
-
   const [seconds, setSeconds] = React.useState(initialSeconds);
 
   useEffect(() => {
@@ -38,9 +35,11 @@ function Countdown(initialSeconds: number) {
   const secs = seconds % 60;
 
   return (
-    <div style={{ width: "100%", textAlign: "center" }}>
-      <Text size='lg'>
-      {mins<1 && '0'}{mins}:{secs<10 && '0'}{secs}
+    <div style={{ width: '100%', textAlign: 'center' }}>
+      <Text size="lg">
+        {mins < 1 && '0'}
+        {mins}:{secs < 10 && '0'}
+        {secs}
       </Text>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Anchor,
   Space,
@@ -10,23 +10,21 @@ import {
   Stack,
   TextInput,
   Container,
-} from "@mantine/core";
-import Countdown from "./Countdown";
+} from '@mantine/core';
+import Countdown from './Countdown';
 
 const SignupStep2 = () => {
   return (
     <Container maw={600} miw={300}>
       <Stack align="center" ta="left">
-      <Space h={10} />
-      <Text maw={400} ta="center">
+        <Space h={10} />
+        <Text maw={400} ta="center">
           You will receive a text message containing a 6-digit code within 3
           minutes
         </Text>
         <TextInput w={250} label="Phone number" placeholder="#" required />
 
         <Space h={10} />
-
-        
 
         <Countdown seconds={60} />
 

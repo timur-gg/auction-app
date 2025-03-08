@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Anchor,
   Space,
@@ -10,8 +10,8 @@ import {
   Title,
   Checkbox,
   ScrollArea,
-} from "@mantine/core";
-import {text} from "../../text.js";
+} from '@mantine/core';
+import { text } from '../../text.js';
 
 const SignupStep6 = () => {
   const conditionText = text.auctionRules.map((rule) => (

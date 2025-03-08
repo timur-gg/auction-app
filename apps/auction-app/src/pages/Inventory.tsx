@@ -60,7 +60,11 @@ export function AutocompleteLoading() {
       setLoading(true);
       timeoutRef.current = window.setTimeout(() => {
         setLoading(false);
-        setData(['gmail.com', 'outlook.com', 'yahoo.com'].map((provider) => `${val}@${provider}`));
+        setData(
+          ['gmail.com', 'outlook.com', 'yahoo.com'].map(
+            (provider) => `${val}@${provider}`,
+          ),
+        );
       }, 1000);
     }
   };
@@ -77,10 +81,13 @@ export function AutocompleteLoading() {
 }
 
 const useStyles = createStyles(
-  (theme): Record<string, CSSObject> => inventoryStyle(theme) as Record<string, CSSObject>
+  (theme): Record<string, CSSObject> =>
+    inventoryStyle(theme) as Record<string, CSSObject>,
 );
 
-const point = <IconPoint size={10} style={{ marginTop: rem(6) }} stroke={1.5} />;
+const point = (
+  <IconPoint size={10} style={{ marginTop: rem(6) }} stroke={1.5} />
+);
 
 export function SliderMarks() {
   const { classes } = useStyles();
@@ -157,20 +164,24 @@ const Inventory = () => {
   function filterPrice(
     prices: Partial<Record<number, number>>,
     priceRange: [number, number],
-    bedroomFilter: number
+    bedroomFilter: number,
   ) {
     console.info(prices, priceRange, bedroomFilter);
     if (bedroomFilter > 0) {
       const bedroomPrice = prices[bedroomFilter] ?? 0;
       return (
-        bedroomPrice >= (priceRange[0] + 20) * 12.5 && bedroomPrice <= (priceRange[1] + 20) * 12.5
+        bedroomPrice >= (priceRange[0] + 20) * 12.5 &&
+        bedroomPrice <= (priceRange[1] + 20) * 12.5
       );
     } else {
       const priceValues = Object.values(prices);
 
       for (let i = 0; i < priceValues.length; i++) {
         const pv = priceValues[i] ?? 0;
-        if (pv >= (priceRange[0] + 20) * 12.5 && pv <= (priceRange[1] + 20) * 12.5) {
+        if (
+          pv >= (priceRange[0] + 20) * 12.5 &&
+          pv <= (priceRange[1] + 20) * 12.5
+        ) {
           return true;
         }
       }
@@ -183,11 +194,15 @@ const Inventory = () => {
     priceRange: (a: IAuction) => filterPrice(a.price, priceRange, bedroom),
 
     size: (a: IAuction) =>
-      (a.size as number) >= (size[0] + 20) * 12.5 && (a.size as number) <= (size[1] + 20) * 12.5,
+      (a.size as number) >= (size[0] + 20) * 12.5 &&
+      (a.size as number) <= (size[1] + 20) * 12.5,
     bedroom: (a: IAuction) => {
       if (bedroom === -1) return true;
       else
-        return parseInt(a.bedroom.slice(0)) <= bedroom && parseInt(a.bedroom.slice(-1)) >= bedroom;
+        return (
+          parseInt(a.bedroom.slice(0)) <= bedroom &&
+          parseInt(a.bedroom.slice(-1)) >= bedroom
+        );
     },
     deposit: (a: IAuction) => (deposit ? a.deposit === deposit : true),
     builder: (a: IAuction) => (builder ? a.builder === builder : true),
@@ -199,7 +214,9 @@ const Inventory = () => {
     filteredAuctions = filteredAuctions.filter(FILTER_MAP[f]);
   });
 
-  const sortedAuctions = filteredAuctions.sort((a, b) => (b[sortBy] > a[sortBy] ? -1 : 1));
+  const sortedAuctions = filteredAuctions.sort((a, b) =>
+    b[sortBy] > a[sortBy] ? -1 : 1,
+  );
 
   const sortedAuctionsSelected = [
     ...sortedAuctions.filter((a) => a.id === selectedAuction.toString()),
@@ -225,12 +242,14 @@ const Inventory = () => {
   }
 
   const distanceToMouse = (
-    pt: { x: number; y: number }, mousePos: { x: number; y: number; }
+    pt: { x: number; y: number },
+    mousePos: { x: number; y: number },
   ): number => {
     if (pt && mousePos) {
       // return distance between the marker and mouse pointer
       return Math.sqrt(
-        (pt.x - mousePos.x) * (pt.x - mousePos.x) + (pt.y - mousePos.y) * (pt.y - mousePos.y)
+        (pt.x - mousePos.x) * (pt.x - mousePos.x) +
+          (pt.y - mousePos.y) * (pt.y - mousePos.y),
       );
     } else return 0;
   };
@@ -240,7 +259,15 @@ const Inventory = () => {
     setSelectedAuction(parseInt(id));
   };
 
-  const Marker = ({ text, id, selected }: { text: string; id: string; selected: boolean }) => {
+  const Marker = ({
+    text,
+    id,
+    selected,
+  }: {
+    text: string;
+    id: string;
+    selected: boolean;
+  }) => {
     return (
       <div
         style={{
@@ -318,7 +345,11 @@ const Inventory = () => {
         </Grid.Col>
         <Grid.Col xs={2.5} md={2} lg={1.5}>
           <Text>Size</Text>
-          <SizeFilter size={size} setSizeRange={setSizeRange} addFilter={addFilter} />
+          <SizeFilter
+            size={size}
+            setSizeRange={setSizeRange}
+            addFilter={addFilter}
+          />
         </Grid.Col>
         <Grid.Col xs={3} md={2.5} lg={1.5}>
           <Stack spacing="0">
@@ -399,15 +430,29 @@ const Inventory = () => {
       <Accordion chevronPosition="left" defaultValue="">
         <Accordion.Item value="customization">
           <Group position="apart" pb="10px">
-            <Accordion.Control style={{ width: '50%' }}>More Filters</Accordion.Control>
+            <Accordion.Control style={{ width: '50%' }}>
+              More Filters
+            </Accordion.Control>
             <div>
               <Switch
                 mr={20}
                 radius="md"
                 size="xl"
                 color="white"
-                onLabel={<IconLayoutGrid size="1rem" stroke={2.5} color={theme.colors.gray[0]} />}
-                offLabel={<IconMap size="1rem" stroke={2.5} color={theme.colors.blue[7]} />}
+                onLabel={
+                  <IconLayoutGrid
+                    size="1rem"
+                    stroke={2.5}
+                    color={theme.colors.gray[0]}
+                  />
+                }
+                offLabel={
+                  <IconMap
+                    size="1rem"
+                    stroke={2.5}
+                    color={theme.colors.blue[7]}
+                  />
+                }
                 checked={mapViewChecked}
                 onChange={(event) => {
                   setSelectedAuction(-1);
@@ -511,19 +556,21 @@ const Inventory = () => {
               defaultZoom={15}
               distanceToMouse={distanceToMouse}
             >
-              {sortedAuctionsSelected.map(({ lat, lng, id, address }: IAuction) => {
-                return (
-                  <Marker
-                    key={id}
-                    // lat={lat}
-                    // lng={lng}
-                    text={id}
-                    id={id}
-                    // icon={pinAsset}
-                    selected={selectedAuction.toString() === id}
-                  />
-                );
-              })}
+              {sortedAuctionsSelected.map(
+                ({ lat, lng, id, address }: IAuction) => {
+                  return (
+                    <Marker
+                      key={id}
+                      // lat={lat}
+                      // lng={lng}
+                      text={id}
+                      id={id}
+                      // icon={pinAsset}
+                      selected={selectedAuction.toString() === id}
+                    />
+                  );
+                },
+              )}
             </GoogleMapReact>
           </Box>
         </Grid.Col>
@@ -537,10 +584,15 @@ const Inventory = () => {
           >
             <Grid>
               {sortedAuctionsSelected.map((auction) => (
-                <Grid.Col {...(mapViewChecked ? { xs: 12 } : { sm: 6, lg: 4 })} key={auction.id}>
+                <Grid.Col
+                  {...(mapViewChecked ? { xs: 12 } : { sm: 6, lg: 4 })}
+                  key={auction.id}
+                >
                   <AuctionCard
                     auction={auction}
-                    price={bedroom >= 0 ? auction.price[bedroom] : auction.minPrice}
+                    price={
+                      bedroom >= 0 ? auction.price[bedroom] : auction.minPrice
+                    }
                     bedroomFilter={bedroom}
                     selected={selectedAuction.toString() === auction.id}
                   />

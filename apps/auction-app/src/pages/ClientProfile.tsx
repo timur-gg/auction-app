@@ -30,36 +30,32 @@ import FavoritesTable from '../components/ClientProfile/FavoritesTable.js';
 import AuctionsTable from '../components/ClientProfile/AuctionsTable.js';
 import ProjectsTable from '../components/ClientProfile/ProjectsTable.js';
 import { clientProfileStyle } from '../styles/theme.ts';
-import { auctionData, builderUserData as UserData, clientFavoriteLotData } from '@mocks/auction.tsx';
+import {
+  auctionData,
+  builderUserData as UserData,
+  clientFavoriteLotData,
+} from '@mocks/auction.tsx';
 import { IAuction, ILot } from '../types.ts';
 
 const useStyles = createStyles((theme: MantineTheme) =>
-  clientProfileStyle(theme)
+  clientProfileStyle(theme),
 );
 
 const auctionIds = ['1', '2', '3'];
 const projectIds = ['1', '2', '7'];
 
-let auctions = auctionData.filter((a) =>
-  auctionIds.includes(a.id)
-);
-let projects = auctionData.filter((a) =>
-  projectIds.includes(a.id)
-);
+let auctions = auctionData.filter((a) => auctionIds.includes(a.id));
+let projects = auctionData.filter((a) => projectIds.includes(a.id));
 
 export default function ClientProfile() {
   const { classes } = useStyles();
 
-  const [removedFaveRows, setRemovedFaveRows] = useState<
+  const [removedFaveRows, setRemovedFaveRows] = useState<number[]>([]);
+  const [removedFaveProjectRows, setRemovedFaveProjectRows] = useState<
     number[]
   >([]);
-  const [
-    removedFaveProjectRows,
-    setRemovedFaveProjectRows,
-  ] = useState<number[]>([]);
 
-  const [removedAuctionRows, setRemovedAuctionRows] =
-    useState<string[]>([]);
+  const [removedAuctionRows, setRemovedAuctionRows] = useState<string[]>([]);
 
   const deleteFave = (lot: ILot) => {
     setRemovedFaveRows([...removedFaveRows, lot.id]);
@@ -67,10 +63,7 @@ export default function ClientProfile() {
   };
 
   const deleteFaveProject = (lot: IAuction) => {
-    setRemovedFaveProjectRows([
-      ...removedFaveProjectRows,
-      Number(lot.id),
-    ]);
+    setRemovedFaveProjectRows([...removedFaveProjectRows, Number(lot.id)]);
     console.info('deleteFave', lot);
   };
 
@@ -80,27 +73,21 @@ export default function ClientProfile() {
   };
 
   const favorites = clientFavoriteLotData.filter(
-    (fave) => !removedFaveRows.includes(fave.id)
+    (fave) => !removedFaveRows.includes(fave.id),
   );
   auctions = auctions.filter(
-    (a: IAuction) => !removedAuctionRows.includes(a.id)
+    (a: IAuction) => !removedAuctionRows.includes(a.id),
   );
   projects = projects.filter(
-    (a: IAuction) => !removedFaveProjectRows.includes(Number(a.id))
+    (a: IAuction) => !removedFaveProjectRows.includes(Number(a.id)),
   );
 
   console.log(favorites);
 
-  const statusOrder = [
-    'Live Auction',
-    'upcoming',
-    'passed',
-  ];
+  const statusOrder = ['Live Auction', 'upcoming', 'passed'];
 
   auctions = auctions.sort(
-    (a, b) =>
-      statusOrder.indexOf(a.status) -
-      statusOrder.indexOf(b.status)
+    (a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status),
   );
 
   return (
@@ -117,26 +104,13 @@ export default function ClientProfile() {
             <Grid>
               <Grid.Col xs={12} md={8}>
                 <Group noWrap align="left">
-                  <Avatar
-                    src={UserData.avatar}
-                    size={94}
-                    radius="md"
-                  />
+                  <Avatar src={UserData.avatar} size={94} radius="md" />
                   <Stack align="flex-start" spacing={1}>
-                    <Text
-                      fz="xs"
-                      tt="uppercase"
-                      fw={700}
-                      c="dimmed"
-                    >
+                    <Text fz="xs" tt="uppercase" fw={700} c="dimmed">
                       {UserData.title}
                     </Text>
 
-                    <Text
-                      fz="lg"
-                      fw={500}
-                      className={classes.name}
-                    >
+                    <Text fz="lg" fw={500} className={classes.name}>
                       {UserData.name}
                     </Text>
 
@@ -171,24 +145,15 @@ export default function ClientProfile() {
                     style={{ textDecoration: 'none' }}
                     rel="noreferrer"
                   >
-                    <Text color="blue">
-                      Terms and Conditions
-                    </Text>
+                    <Text color="blue">Terms and Conditions</Text>
                   </a>
                 </Box>
               </Grid.Col>
               <Grid.Col xs={12} md={4}>
-                <Flex
-                  justify="flex-end"
-                  align="flex-end"
-                  direction="column"
-                >
+                <Flex justify="flex-end" align="flex-end" direction="column">
                   <Button size="4em">
                     {' '}
-                    <IconPencil
-                      size="1.7rem"
-                      stroke={1}
-                    />{' '}
+                    <IconPencil size="1.7rem" stroke={1} />{' '}
                   </Button>
                 </Flex>
               </Grid.Col>
@@ -208,20 +173,12 @@ export default function ClientProfile() {
               My Authorized Person
             </Title>
             <Stack align="flex-start" spacing={1}>
-              <Text
-                fz="md"
-                fw={500}
-                className={classes.name}
-              >
+              <Text fz="md" fw={500} className={classes.name}>
                 Alex James
               </Text>
 
               <Group noWrap spacing={10} mt={3}>
-                <IconAt
-                  stroke={1.5}
-                  size="1rem"
-                  className={classes.icon}
-                />
+                <IconAt stroke={1.5} size="1rem" className={classes.icon} />
                 <Text fz="xs" c="dimmed">
                   {UserData.email}
                 </Text>
@@ -288,11 +245,7 @@ export default function ClientProfile() {
                 </Group>
               </Grid.Col>
               <Grid.Col xs={12} md={4}>
-                <Flex
-                  justify="flex-end"
-                  align="flex-end"
-                  direction="row"
-                >
+                <Flex justify="flex-end" align="flex-end" direction="row">
                   <Button size="xs">Details</Button>
                 </Flex>
               </Grid.Col>
@@ -319,10 +272,7 @@ export default function ClientProfile() {
                 My Auctions
               </Title>
             </Group>
-            <AuctionsTable
-              auctions={auctions}
-              removeAuction={quitAuction}
-            />
+            <AuctionsTable auctions={auctions} removeAuction={quitAuction} />
           </Paper>
         </Grid.Col>
 
@@ -352,22 +302,10 @@ export default function ClientProfile() {
                   </Title>
                 </Group>
                 <Tabs.List pt={0} ml="20px">
-                  <Tabs.Tab
-                    fz="md"
-                    px="xl"
-                    pt="10px"
-                    fw={400}
-                    value="projects"
-                  >
+                  <Tabs.Tab fz="md" px="xl" pt="10px" fw={400} value="projects">
                     Projects
                   </Tabs.Tab>
-                  <Tabs.Tab
-                    fz="md"
-                    px="xl"
-                    pt="10px"
-                    fw={400}
-                    value="lots"
-                  >
+                  <Tabs.Tab fz="md" px="xl" pt="10px" fw={400} value="lots">
                     Units
                   </Tabs.Tab>
                 </Tabs.List>
@@ -382,10 +320,7 @@ export default function ClientProfile() {
                 />
               </Tabs.Panel>
               <Tabs.Panel value="lots">
-                <FavoritesTable
-                  favorites={favorites}
-                  deleteFave={deleteFave}
-                />
+                <FavoritesTable favorites={favorites} deleteFave={deleteFave} />
               </Tabs.Panel>
             </Tabs>
           </Paper>

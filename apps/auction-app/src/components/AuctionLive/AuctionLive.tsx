@@ -5,42 +5,46 @@ import {
   Group,
   Stack,
   Text,
-  createStyles, CSSObject
+  createStyles,
+  CSSObject,
 } from '@mantine/core';
 import ShowCounter from './ShowCounter.js';
 import AuctionProfileCardVert from './AuctionProfileCardVert.js';
 import { lotMockData as lotsData } from '@mocks/auction.tsx';
-import { ILot, IAuction} from '../../types.js';
+import { ILot, IAuction } from '../../types.js';
 import { BiddingTab } from './BiddingTab.js';
 import { auctionLiveStyle } from '../../styles/theme';
-import { IconCalendarEvent, IconClock, IconMoneybag } from '@tabler/icons-react';
+import {
+  IconCalendarEvent,
+  IconClock,
+  IconMoneybag,
+} from '@tabler/icons-react';
 
-export  const featureGrid = [
-  { label: "auctionDate", icon: IconCalendarEvent },
-  { label: "deposit", icon: IconMoneybag },
-  { label: "duration", icon: IconClock, unit: "hrs" },
+export const featureGrid = [
+  { label: 'auctionDate', icon: IconCalendarEvent },
+  { label: 'deposit', icon: IconMoneybag },
+  { label: 'duration', icon: IconClock, unit: 'hrs' },
 ];
 
-const useStyles = createStyles((theme): Record<string, CSSObject> =>
-  auctionLiveStyle(theme) as Record<string, CSSObject>
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    auctionLiveStyle(theme) as Record<string, CSSObject>,
 );
 
-export function AuctionLive({ auction }: { auction: IAuction, step: number}) {
+export function AuctionLive({ auction }: { auction: IAuction; step: number }) {
   const { classes } = useStyles();
 
-  const lots: ILot[] = auction.lots?.flatMap(lotId => lotsData.find(id => id.id === lotId) || []) ?? [];
+  const lots: ILot[] =
+    auction.lots?.flatMap(
+      (lotId) => lotsData.find((id) => id.id === lotId) || [],
+    ) ?? [];
 
   const auctionFeatures = featureGrid.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>
       <Group spacing="1">
-        <feature.icon
-          size="1.05rem"
-          className={classes.icon}
-          stroke={1.5}
-        />
+        <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
-          {auction[feature.label] +
-            (feature.unit ? feature.unit : '')}
+          {auction[feature.label] + (feature.unit ? feature.unit : '')}
         </Text>
       </Group>
     </Grid.Col>
@@ -63,45 +67,20 @@ export function AuctionLive({ auction }: { auction: IAuction, step: number}) {
         >
           <Grid>
             <Grid.Col xs={12} md={6}>
-              <Stack
-                spacing={6}
-                mb={-5}
-                align="flex-start"
-                p={0}
-              >
-                <Text
-                  fz="sm"
-                  c="dimmed"
-                  className={classes.label}
-                  align="left"
-                >
+              <Stack spacing={6} mb={-5} align="flex-start" p={0}>
+                <Text fz="sm" c="dimmed" className={classes.label} align="left">
                   Auction details
                 </Text>
                 <Grid w={'100%'}>{auctionFeatures}</Grid>
               </Stack>
             </Grid.Col>
             <Grid.Col xs={12} md={6}>
-              <Stack
-                spacing={6}
-                mb={-5}
-                align="flex-start"
-                p={0}
-              >
-                <Text
-                  fz="sm"
-                  c="dimmed"
-                  className={classes.label}
-                  align="left"
-                >
+              <Stack spacing={6} mb={-5} align="flex-start" p={0}>
+                <Text fz="sm" c="dimmed" className={classes.label} align="left">
                   Duration
                 </Text>
 
-                <ShowCounter
-                  days={20}
-                  hours={10}
-                  minutes={5}
-                  seconds={10}
-                />
+                <ShowCounter days={20} hours={10} minutes={5} seconds={10} />
               </Stack>
             </Grid.Col>
           </Grid>
@@ -110,16 +89,8 @@ export function AuctionLive({ auction }: { auction: IAuction, step: number}) {
 
         <Grid justify="center">
           {lots.map((lot: ILot, inx: number) => (
-            <Grid.Col
-              key={inx}
-              {...(lots.length > 1
-                ? { md: 6 }
-                : { md: 10 })}
-            >
-              <BiddingTab
-                lot={lot}
-                half={lots.length > 1}
-              />
+            <Grid.Col key={inx} {...(lots.length > 1 ? { md: 6 } : { md: 10 })}>
+              <BiddingTab lot={lot} half={lots.length > 1} />
             </Grid.Col>
           ))}
         </Grid>

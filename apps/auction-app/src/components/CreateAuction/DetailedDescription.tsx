@@ -1,7 +1,4 @@
-import {
-  IconX,
-  IconPlus,
-} from "@tabler/icons-react";
+import { IconX, IconPlus } from '@tabler/icons-react';
 import {
   Container,
   Textarea,
@@ -10,44 +7,44 @@ import {
   Space,
   ActionIcon,
   Group,
-} from "@mantine/core";
-import { useState } from "react";
+} from '@mantine/core';
+import { useState } from 'react';
 
 const defaultTabs = [
   {
-    title: "Deposit Structure",
-    description: "Deposit",
-    value: "deposit",
+    title: 'Deposit Structure',
+    description: 'Deposit',
+    value: 'deposit',
   },
-  { title: "Incentives", description: "Incentives", value: "incentives" },
+  { title: 'Incentives', description: 'Incentives', value: 'incentives' },
   {
-    title: "Amenities",
-    description: "Amenities",
-    value: "amenities",
+    title: 'Amenities',
+    description: 'Amenities',
+    value: 'amenities',
     optional: true,
   },
   {
-    title: "Appliances",
-    description: "Appliances",
-    value: "appliances",
+    title: 'Appliances',
+    description: 'Appliances',
+    value: 'appliances',
     optional: true,
   },
   {
-    title: "Bathrooms",
-    description: "Bathrooms",
-    value: "bathrooms",
+    title: 'Bathrooms',
+    description: 'Bathrooms',
+    value: 'bathrooms',
     optional: true,
   },
   {
-    title: "Ceilings/Floors/Paint",
-    description: "Ceilings/Floors/Paint",
-    value: "ceilings",
+    title: 'Ceilings/Floors/Paint',
+    description: 'Ceilings/Floors/Paint',
+    value: 'ceilings',
     optional: true,
   },
   {
-    title: "Kitchen",
-    description: "Kitchen",
-    value: "kitchen",
+    title: 'Kitchen',
+    description: 'Kitchen',
+    value: 'kitchen',
     optional: true,
   },
 ];
@@ -56,7 +53,7 @@ export default function DetailedDescripion() {
   const [newTabs, setNewTabs] = useState<string[]>([]);
 
   const addTab = () => {
-    setNewTabs([...newTabs, "newTab" + newTabs.length]);
+    setNewTabs([...newTabs, 'newTab' + newTabs.length]);
   };
 
   let tabs = defaultTabs;
@@ -64,8 +61,8 @@ export default function DetailedDescripion() {
   newTabs.forEach((t, i) => {
     if (!tabs.map((t) => t.value).includes(t)) {
       tabs.push({
-        title: "New Tab",
-        description: "",
+        title: 'New Tab',
+        description: '',
         value: t.toString(),
         optional: true,
       });
@@ -83,7 +80,9 @@ export default function DetailedDescripion() {
               {tab.optional && (
                 <ActionIcon
                   mx="1px"
-                  onClick={(e: React.MouseEvent) => setRemovedTabs([...removedTabs, tab.value])}
+                  onClick={(e: React.MouseEvent) =>
+                    setRemovedTabs([...removedTabs, tab.value])
+                  }
                 >
                   <IconX size={14} />
                 </ActionIcon>

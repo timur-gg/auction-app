@@ -6,23 +6,22 @@ import {
   Button,
   Group,
   ActionIcon,
-} from "@mantine/core";
-import {
-  IconCircleX,
-  IconEdit,
-  IconHomeCancel,
-} from "@tabler/icons-react";
-import { DataTable } from "mantine-datatable";
-import { useNavigate } from "react-router-dom";
+} from '@mantine/core';
+import { IconCircleX, IconEdit, IconHomeCancel } from '@tabler/icons-react';
+import { DataTable } from 'mantine-datatable';
+import { useNavigate } from 'react-router-dom';
 import { lotMockData as lots } from '@mocks/auction.tsx';
-import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { useDisclosure } from '@mantine/hooks';
+import { useState } from 'react';
 import { IAuction, ILot } from '../../types.ts';
 
-  export default function AuctionsTable({ auctions, removeAuction }: {
-    auctions: IAuction[],
-    removeAuction: (a: IAuction) => void
-  }) {
+export default function AuctionsTable({
+  auctions,
+  removeAuction,
+}: {
+  auctions: IAuction[];
+  removeAuction: (a: IAuction) => void;
+}) {
   const navigate = useNavigate();
   const [removedAuction, setRemovedAuction] = useState<IAuction>();
 
@@ -30,12 +29,12 @@ import { IAuction, ILot } from '../../types.ts';
     navigate(`/auction/${a.id}`);
   };
 
-  const removeAuctionAction = () =>{
+  const removeAuctionAction = () => {
     if (removedAuction) {
       removeAuction(removedAuction);
     }
     closeQuitModal();
-  }
+  };
 
   const [quitModalOpened, { open: openQuitModal, close: closeQuitModal }] =
     useDisclosure(false);
@@ -48,7 +47,7 @@ import { IAuction, ILot } from '../../types.ts';
         title=""
         centered
       >
-        {removedAuction?.status === "Live Auction" ? (
+        {removedAuction?.status === 'Live Auction' ? (
           <>
             <Text ta="center" size="md" fw={400}>
               Are you sure that you want to quit the auction?
@@ -75,26 +74,18 @@ import { IAuction, ILot } from '../../types.ts';
         <Space h={30} />
         <Group
           spacing={30}
-          {...(removedAuction?.status === "Live Auction"
+          {...(removedAuction?.status === 'Live Auction'
             ? { ml: 130 }
             : { ml: 80 })}
         >
-          {removedAuction?.status === "Live Auction" ? (
-            <Button
-              radius="sm"
-              color="red"
-              onClick={removeAuctionAction}
-            >
+          {removedAuction?.status === 'Live Auction' ? (
+            <Button radius="sm" color="red" onClick={removeAuctionAction}>
               <IconCircleX size="1.05rem" stroke={1.5} />
               <Space w={10} />
               Quit Auction
             </Button>
           ) : (
-            <Button
-              radius="sm"
-              color="red"
-              onClick={removeAuctionAction}
-            >
+            <Button radius="sm" color="red" onClick={removeAuctionAction}>
               <IconHomeCancel size="1.6rem" stroke={1.5} />
               <Space w={10} />
               Remove Registration
@@ -110,29 +101,29 @@ import { IAuction, ILot } from '../../types.ts';
 
       <DataTable
         highlightOnHover
-        style={{ textAlign: "left" }}
+        style={{ textAlign: 'left' }}
         onRowClick={rowClick}
         columns={[
-          { accessor: "name" },
-          { accessor: "builder" },
-          { accessor: "address" },
+          { accessor: 'name' },
+          { accessor: 'builder' },
+          { accessor: 'address' },
           {
-            accessor: "unit",
-            title: "Units",
+            accessor: 'unit',
+            title: 'Units',
             render: (a: IAuction) =>
               a.lotsAuctioned
                 ?.map((l: number) => lots.find((i) => i.id === l)?.unit)
-                .join(", ") || [],
+                .join(', ') || [],
           },
           {
-            accessor: "status",
-            title: "Auction Date",
+            accessor: 'status',
+            title: 'Auction Date',
             render: (a: IAuction) =>
-              a.status === "Live Auction" ? (
+              a.status === 'Live Auction' ? (
                 <Badge color="green" size="md" variant="filled">
                   {a.status}
                 </Badge>
-              ) : a.status === "passed" ? (
+              ) : a.status === 'passed' ? (
                 <Badge color="red" size="md" variant="filled">
                   {a.status}
                 </Badge>
@@ -141,12 +132,12 @@ import { IAuction, ILot } from '../../types.ts';
               ),
           },
           {
-            accessor: "actions",
+            accessor: 'actions',
             width: 50,
             title: <></>,
-            textAlignment: "right",
+            textAlignment: 'right',
             render: (a: IAuction) =>
-              a.status === "upcoming" && (
+              a.status === 'upcoming' && (
                 <Group spacing={2} position="right" noWrap>
                   <ActionIcon
                     color="gray"

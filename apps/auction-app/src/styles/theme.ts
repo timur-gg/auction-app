@@ -35,9 +35,7 @@ export const auctionLiveStyle = (theme: MantineTheme) => {
 export const auctionProfileCardVertStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
 
     label: {
@@ -51,9 +49,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     statusBadge: {
       marginBottom: theme.spacing.md,
@@ -61,7 +57,7 @@ white,
 
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -69,8 +65,7 @@ white,
 export const biddingTabStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
+      backgroundColor: theme.colors.white,
 
       border: '0.0625rem solid #dee2e6',
     },
@@ -93,16 +88,14 @@ white,
 
     cardWinning: {
       border: '2px solid #64DD17',
-
     },
-
 
     bidButton: {
       marginTop: rem(30),
     },
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -110,9 +103,7 @@ white,
 export const auctionPassedStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -128,14 +119,13 @@ white,
 
     section: {
       padding: theme.spacing.md,
-
     },
     bidButton: {
       marginTop: rem(30),
     },
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -143,9 +133,7 @@ white,
 export const auctionNotStartedStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -161,14 +149,13 @@ white,
 
     section: {
       padding: theme.spacing.md,
-
     },
     bidButton: {
       marginTop: rem(30),
     },
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -176,9 +163,7 @@ white,
 export const auctionProfileCardStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
 
     imageSection: {
@@ -186,9 +171,7 @@ white,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottom: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderBottom: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
 
     label: {
@@ -202,9 +185,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     statusBadge: {
       marginBottom: theme.spacing.md,
@@ -212,7 +193,7 @@ white,
 
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -220,9 +201,7 @@ white,
 export const auctionUpcomingStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -238,16 +217,14 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     bidButton: {
       marginTop: rem(30),
     },
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -255,9 +232,7 @@ white,
 export const lotPreviewTableStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -273,9 +248,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     bidButton: {
       marginTop: rem(30),
@@ -286,9 +259,7 @@ white,
 export const lotSelectionStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -304,9 +275,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     bidButton: {
       marginTop: rem(30),
@@ -316,13 +285,11 @@ white,
       height: rem(28),
       backgroundColor: theme.white,
       color: theme.colors.gray[5],
-      border: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      border: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -330,9 +297,7 @@ white,
 export const auctionsDetailsEditStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
 
     imageSection: {
@@ -340,9 +305,7 @@ white,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottom: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderBottom: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
 
     label: {
@@ -356,9 +319,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     statusBadge: {
       marginBottom: theme.spacing.md,
@@ -366,7 +327,7 @@ white,
 
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -374,9 +335,7 @@ white,
 export const auctionsProfileCardEditStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
 
     imageSection: {
@@ -384,9 +343,7 @@ white,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottom: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderBottom: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
 
     label: {
@@ -400,9 +357,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     statusBadge: {
       marginBottom: theme.spacing.md,
@@ -410,7 +365,7 @@ white,
 
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -418,9 +373,7 @@ white,
 export const unitTableEditStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -436,9 +389,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     bidButton: {
       marginTop: rem(30),
@@ -448,13 +399,11 @@ white,
       height: rem(28),
       backgroundColor: theme.white,
       color: theme.colors.gray[5],
-      border: `${rem(1)} solid ${
-      theme.colors.gray[3]
-      }`,
+      border: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };
@@ -462,8 +411,7 @@ white,
 export const auctionCardStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
+      backgroundColor: theme.colors.white,
 
       border: '0.0625rem solid #dee2e6',
     },
@@ -473,9 +421,7 @@ white,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottom: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderBottom: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
 
     label: {
@@ -489,9 +435,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
 
     favButton: {
@@ -522,7 +466,7 @@ white,
 
     icon: {
       marginRight: rem(5),
-            color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
     tooltip: {
       '&:hover': {
@@ -572,7 +516,7 @@ export const headerStyle = (theme: MantineTheme) => {
       fontWeight: 500,
 
       '&:hover': {
-        backgroundColor:  theme.colors.gray[0],
+        backgroundColor: theme.colors.gray[0],
       },
     },
 
@@ -582,7 +526,8 @@ export const headerStyle = (theme: MantineTheme) => {
           variant: 'light',
           color: theme.primaryColor,
         }).background,
-        color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+        color: theme.fn.variant({ variant: 'light', color: theme.primaryColor })
+          .color,
       },
     },
   };
@@ -591,9 +536,7 @@ export const headerStyle = (theme: MantineTheme) => {
 export const inventoryAuctionStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -609,9 +552,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     bidButton: {
       marginTop: rem(30),
@@ -622,8 +563,7 @@ white,
 export const builderStyle = (theme: MantineTheme) => {
   return {
     icon: {
-            color: theme.colors.gray[5],
-
+      color: theme.colors.gray[5],
     },
 
     name: {
@@ -649,8 +589,7 @@ export const builderStyle = (theme: MantineTheme) => {
 export const clientProfileStyle = (theme: MantineTheme) => {
   return {
     icon: {
-            color: theme.colors.gray[5],
-
+      color: theme.colors.gray[5],
     },
 
     name: {
@@ -662,9 +601,7 @@ export const clientProfileStyle = (theme: MantineTheme) => {
 export const confirmProjectStyles = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -680,9 +617,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
   };
 };
@@ -702,13 +637,10 @@ export const inventoryStyle = (theme: MantineTheme) => {
       height: rem(28),
       backgroundColor: theme.white,
       color: theme.colors.gray[5],
-      border: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      border: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
 
     pin2: {
-
       borderRadius: '50%',
       border: '8px solid #fff',
       width: '8px',
@@ -734,9 +666,9 @@ export const landingStyle = (theme: MantineTheme) => {
   return {
     icon: {
       marginRight: theme.spacing.md,
-      backgroundImage: `linear-gradient(135deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
-        theme.colors[theme.primaryColor][6]
-      } 100%)`,
+      backgroundImage: `linear-gradient(135deg, ${
+        theme.colors[theme.primaryColor][4]
+      } 0%, ${theme.colors[theme.primaryColor][6]} 100%)`,
       backgroundColor: 'transparent',
     },
     item: {
@@ -748,17 +680,15 @@ export const landingStyle = (theme: MantineTheme) => {
     },
 
     gradient: {
-      backgroundImage: `radial-gradient(${theme.colors[theme.primaryColor][6]} 0%, ${
-        theme.colors[theme.primaryColor][5]
-      } 100%)`,
+      backgroundImage: `radial-gradient(${
+        theme.colors[theme.primaryColor][6]
+      } 0%, ${theme.colors[theme.primaryColor][5]} 100%)`,
     },
 
     faq: {
-      backgroundImage:
-
-        `radial-gradient(${theme.colors[theme.primaryColor][6]} 0%, ${
-          theme.colors[theme.primaryColor][4]
-        } 100%)`,
+      backgroundImage: `radial-gradient(${
+        theme.colors[theme.primaryColor][6]
+      } 0%, ${theme.colors[theme.primaryColor][4]} 100%)`,
     },
   };
 };
@@ -766,9 +696,7 @@ export const landingStyle = (theme: MantineTheme) => {
 export const projectStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
     bidSelector: {
       minWidth: rem(245),
@@ -784,9 +712,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     bidButton: {
       marginTop: rem(30),
@@ -797,9 +723,7 @@ white,
 export const auctionDetailsStyle = (theme: MantineTheme) => {
   return {
     card: {
-      backgroundColor: theme.colors.
-white,
-
+      backgroundColor: theme.colors.white,
     },
 
     imageSection: {
@@ -807,9 +731,7 @@ white,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottom: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderBottom: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
 
     label: {
@@ -823,9 +745,7 @@ white,
 
     section: {
       padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${
-        theme.colors.gray[3]
-      }`,
+      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
     },
     statusBadge: {
       marginBottom: theme.spacing.md,
@@ -833,7 +753,7 @@ white,
 
     icon: {
       marginRight: rem(5),
-      color:  theme.colors.gray[5],
+      color: theme.colors.gray[5],
     },
   };
 };

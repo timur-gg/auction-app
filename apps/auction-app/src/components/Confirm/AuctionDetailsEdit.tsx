@@ -7,19 +7,22 @@ import {
   Grid,
   Tooltip,
   Tabs,
-  Textarea, MantineTheme, CSSObject
+  Textarea,
+  MantineTheme,
+  CSSObject,
 } from '@mantine/core';
 import {
   IconTemperature,
   IconBuildingCircus,
   IconPropeller,
-} from "@tabler/icons-react";
-import React from "react";
+} from '@tabler/icons-react';
+import React from 'react';
 import { auctionsDetailsEditStyle } from '../../styles/theme.ts';
 import { IAuction } from '../../types.ts';
 
-const useStyles = createStyles((theme): Record<string, CSSObject> =>
-  auctionsDetailsEditStyle(theme) as Record<string, CSSObject>
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    auctionsDetailsEditStyle(theme) as Record<string, CSSObject>,
 );
 
 const featureGrid = [
@@ -42,12 +45,12 @@ const featureGrid = [
   //   },
   //   { label: "parking", icon: IconCar, desc: "Parking spots" },
   //   { label: "locker", icon: IconLock, desc: "Storage lockers" },
-  { label: "amenities", icon: IconBuildingCircus, desc: "Amenities" },
-  { label: "heating", icon: IconTemperature, desc: "Heating" },
-  { label: "cooling", icon: IconPropeller, desc: "Cooling" },
+  { label: 'amenities', icon: IconBuildingCircus, desc: 'Amenities' },
+  { label: 'heating', icon: IconTemperature, desc: 'Heating' },
+  { label: 'cooling', icon: IconPropeller, desc: 'Cooling' },
 ];
 
-export function AuctionDetails({ auction }: { auction: IAuction}) {
+export function AuctionDetails({ auction }: { auction: IAuction }) {
   const { classes } = useStyles();
 
   const features = featureGrid.map((feature) => (
@@ -56,10 +59,10 @@ export function AuctionDetails({ auction }: { auction: IAuction}) {
         key={feature.label}
         multiline
         p={5}
-        h={feature.label === "address" ? 256 : "auto"}
+        h={feature.label === 'address' ? 256 : 'auto'}
         // h={500}
         withArrow
-        style={{ cursor: "pointer" }}
+        style={{ cursor: 'pointer' }}
         transitionProps={{ duration: 200 }}
         label={feature.desc}
       >
@@ -67,7 +70,7 @@ export function AuctionDetails({ auction }: { auction: IAuction}) {
           <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
           <Text size="sm">
             {/* {auction[feature.label] + (feature.unit ? feature.unit : "")} */}
-            {auction[feature.label] + " "}
+            {auction[feature.label] + ' '}
           </Text>
         </Group>
       </Tooltip>

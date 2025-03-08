@@ -6,14 +6,20 @@ type SizeFilterProps = {
   addFilter: (filterKey: string) => void;
 };
 
-export default function SizeFilter({ size, setSizeRange, addFilter }: SizeFilterProps) {
+export default function SizeFilter({
+  size,
+  setSizeRange,
+  addFilter,
+}: SizeFilterProps) {
   return (
     <Popover width={500} position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button>
           {size[0] > 0 ? (size[0] + 20) * 12.5 : 0}
           {size[1] === 100 && 'sqft'} -{' '}
-          {size[1] > 0 && size[1] < 100 ? (size[1] + 20) * 12.5 + 'sqft' : 'Max'}
+          {size[1] > 0 && size[1] < 100
+            ? (size[1] + 20) * 12.5 + 'sqft'
+            : 'Max'}
         </Button>
       </Popover.Target>
       <Popover.Dropdown>

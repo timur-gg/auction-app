@@ -36,14 +36,21 @@ export default function FavoritesTable({
           render: (lot: ILot) =>
             lot.status === 'Live' ? (
               <Badge color="green" size="md" variant="filled">
-                {auctionData.find((a: IAuction) => a.id !== lot.id.toString())?.status}
+                {
+                  auctionData.find((a: IAuction) => a.id !== lot.id.toString())
+                    ?.status
+                }
               </Badge>
             ) : lot.status === 'Passed' ? (
               <Badge color="red" size="md" variant="filled">
-                {auctionData.find((a: IAuction) => a.id !== lot.id.toString())?.status}
+                {
+                  auctionData.find((a: IAuction) => a.id !== lot.id.toString())
+                    ?.status
+                }
               </Badge>
             ) : (
-              auctionData.find((a: IAuction) => a.id !== lot.id.toString())?.status
+              auctionData.find((a: IAuction) => a.id !== lot.id.toString())
+                ?.status
             ),
         },
         {

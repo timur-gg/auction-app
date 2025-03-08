@@ -9,38 +9,48 @@ import {
   Center,
   Badge,
   Button,
-  Modal, CSSObject
+  Modal,
+  CSSObject,
 } from '@mantine/core';
-import ShowCounter from "../AuctionLive/ShowCounter.js";
-import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
+import ShowCounter from '../AuctionLive/ShowCounter.js';
+import AuctionProfileCardVert from '../AuctionLive/AuctionProfileCardVert.js';
 import {
   IconCalendarEvent,
   IconMoneybag,
   IconClock,
   IconHomeCancel,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 import { lotMockData as lotsData } from '@mocks/auction.tsx';
-import { notifications } from "@mantine/notifications";
-import { useDisclosure } from "@mantine/hooks";
-import { useNavigate } from "react-router-dom";
+import { notifications } from '@mantine/notifications';
+import { useDisclosure } from '@mantine/hooks';
+import { useNavigate } from 'react-router-dom';
 import { auctionNotStartedStyle } from '../../styles/theme.ts';
 import { IAuction, ILot } from '../../types.ts';
 
-const useStyles = createStyles((theme): Record<string, CSSObject> =>
-  auctionNotStartedStyle(theme) as Record<string, CSSObject>
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    auctionNotStartedStyle(theme) as Record<string, CSSObject>,
 );
 
-
 const auctionMockdata = [
-  { label: "auctionDate", icon: IconCalendarEvent },
-  { label: "deposit", icon: IconMoneybag },
-  { label: "duration", icon: IconClock, unit: "hrs" },
+  { label: 'auctionDate', icon: IconCalendarEvent },
+  { label: 'deposit', icon: IconMoneybag },
+  { label: 'duration', icon: IconClock, unit: 'hrs' },
 ];
 
-export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: number}) {
+export function AuctionNotStarted({
+  auction,
+  step,
+}: {
+  auction: IAuction;
+  step: number;
+}) {
   const { classes } = useStyles();
 
-  const lots: ILot[] = auction.lots?.flatMap(lotId => lotsData.find(id => id.id === lotId) || []) ?? [];
+  const lots: ILot[] =
+    auction.lots?.flatMap(
+      (lotId) => lotsData.find((id) => id.id === lotId) || [],
+    ) ?? [];
 
   const navigate = useNavigate();
 
@@ -49,7 +59,7 @@ export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: 
       <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
-          {auction[feature.label] + (feature.unit ? feature.unit : "")}
+          {auction[feature.label] + (feature.unit ? feature.unit : '')}
         </Text>
       </Group>
     </Grid.Col>
@@ -62,9 +72,9 @@ export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: 
       <td>{lot.size}sqft</td>
       <td>${lot.price}k</td>
       <td>
-        {lot.soldPrice??0 < 1000
-          ? `${lot.soldPrice??0}k`
-          : `${lot.soldPrice??0 / 1000}m`}
+        {lot.soldPrice ?? 0 < 1000
+          ? `${lot.soldPrice ?? 0}k`
+          : `${lot.soldPrice ?? 0 / 1000}m`}
       </td>
       <td>{lot.bid < 1000 ? `${lot.bid}k` : `${lot.bid / 1000}m`}</td>
       <td>{lot.totalBids}</td>
@@ -72,11 +82,11 @@ export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: 
 
       <td>
         <Badge
-          {...(lot.position === 1 ? { color: "green" } : { color: "orange" })}
+          {...(lot.position === 1 ? { color: 'green' } : { color: 'orange' })}
           size="lg"
           variant="filled"
         >
-          {lot.position === 1 ? "Won" : "Lost"}
+          {lot.position === 1 ? 'Won' : 'Lost'}
         </Badge>
       </td>
     </tr>
@@ -113,9 +123,9 @@ export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: 
             onClick={() => {
               notifications.show({
                 autoClose: 4000,
-                title: "Auction Registration Removed",
-                color: "red",
-                message: "You registration for this auction is removed",
+                title: 'Auction Registration Removed',
+                color: 'red',
+                message: 'You registration for this auction is removed',
               });
               closeQuitModal();
               // navigate(`/client_profile`);
@@ -158,7 +168,7 @@ export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: 
                   >
                     Auction details
                   </Text>
-                  <Grid w={"100%"}>{auctionFeatures}</Grid>
+                  <Grid w={'100%'}>{auctionFeatures}</Grid>
                 </Stack>
               </Grid.Col>
               <Grid.Col xs={12} md={6}>
@@ -173,7 +183,7 @@ export function AuctionNotStarted({ auction, step }: { auction: IAuction, step: 
             </Grid>
             <Space h={50} />
 
-            <Text fw={400} fz={"lg"}>
+            <Text fw={400} fz={'lg'}>
               Auction has not started yet!
             </Text>
             <Space h={30} />

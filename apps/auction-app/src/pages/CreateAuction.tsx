@@ -1,6 +1,6 @@
-import React from "react";
-import { useState, useRef } from "react";
-import { useForm } from "@mantine/form";
+import React from 'react';
+import { useState, useRef } from 'react';
+import { useForm } from '@mantine/form';
 
 import {
   Text,
@@ -16,45 +16,43 @@ import {
   Grid,
   SegmentedControl,
   Select,
-} from "@mantine/core";
-import { DatePickerInput, TimeInput, YearPickerInput } from "@mantine/dates";
+} from '@mantine/core';
+import { DatePickerInput, TimeInput, YearPickerInput } from '@mantine/dates';
 
-import { Link } from "react-router-dom";
-import FileDrop from "../components/signup/FileDrop";
-import DetailedDescripion from "../components/CreateAuction/DetailedDescription";
-import AddUnit from "../components/CreateAuction/AddUnit";
+import { Link } from 'react-router-dom';
+import FileDrop from '../components/signup/FileDrop';
+import DetailedDescripion from '../components/CreateAuction/DetailedDescription';
+import AddUnit from '../components/CreateAuction/AddUnit';
 
-import { IconCalendarEvent } from "@tabler/icons-react";
+import { IconCalendarEvent } from '@tabler/icons-react';
 
 export default function CreateAuction() {
   const [active, setActive] = useState(0);
 
-  const [unitUploadOption, setUnitUploadOption] = useState("excel");
-  const [detailsUploadOption, setDetailsUploadOption] = useState("manual");
+  const [unitUploadOption, setUnitUploadOption] = useState('excel');
+  const [detailsUploadOption, setDetailsUploadOption] = useState('manual');
 
   const [auctionDateValue, setAuctionValue] = useState<Date>(new Date());
 
   const [constructionStartValue, setConstructionStartValue] = useState<Date>(
-    new Date()
+    new Date(),
   );
   const [completionValue, setCompletionValue] = useState<Date>(new Date());
-  const [projectTitle, setProjectTitle] = useState("");
+  const [projectTitle, setProjectTitle] = useState('');
 
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState('');
 
   const [projectId, setProjectId] = useState(0);
 
   const form = useForm({
     initialValues: {
-      username: "",
-      password: "",
-      name: "",
-      email: "",
-      website: "",
-      github: "",
+      username: '',
+      password: '',
+      name: '',
+      email: '',
+      website: '',
+      github: '',
     },
-
-
   });
 
   const nextStep = () =>
@@ -68,12 +66,10 @@ export default function CreateAuction() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
-
-
   const submitAuction = () => {
     if (projectId > 0) {
-      console.log("submitting");
-     }
+      console.log('submitting');
+    }
   };
 
   return (
@@ -83,13 +79,13 @@ export default function CreateAuction() {
         shadow="md"
         p={15}
         radius="md"
-        style={{ height: "100%" }}
+        style={{ height: '100%' }}
       >
         <Stepper active={active} breakpoint="sm">
           <Stepper.Step label="Project Info" description="Profile settings">
             <Grid ta="left" justify="center">
               <Grid.Col md={6}>
-                {" "}
+                {' '}
                 <TextInput
                   maw={300}
                   mx="auto"
@@ -139,13 +135,13 @@ export default function CreateAuction() {
                       //   auction["completionDate"].length - 5
                       // )}
                       placeholder="Season"
-                      data={["Fall", "Winter", "Spring", "Summer"]}
+                      data={['Fall', 'Winter', 'Spring', 'Summer']}
                     />
                     <Space w={10} />
 
                     <YearPickerInput
-                       // value={completionValue}
-                      // onChange={setCompletionValue}
+                    // value={completionValue}
+                    // onChange={setCompletionValue}
                     />
                   </Group>
                 </Stack>
@@ -180,13 +176,13 @@ export default function CreateAuction() {
                       //   auction["completionDate"].length - 5
                       // )}
                       placeholder="Season"
-                      data={["Fall", "Winter", "Spring", "Summer"]}
+                      data={['Fall', 'Winter', 'Spring', 'Summer']}
                     />
                     <Space w={10} />
 
                     <YearPickerInput
-                       // value={completionValue}
-                      // onChange={setCompletionValue}
+                    // value={completionValue}
+                    // onChange={setCompletionValue}
                     />
                   </Group>
                 </Stack>
@@ -221,12 +217,12 @@ export default function CreateAuction() {
               value={detailsUploadOption}
               onChange={setDetailsUploadOption}
               data={[
-                { label: "Add Manually", value: "manual" },
-                { label: "Upload Excel", value: "excel" },
+                { label: 'Add Manually', value: 'manual' },
+                { label: 'Upload Excel', value: 'excel' },
               ]}
             />
             <Space h={40} />
-            {detailsUploadOption === "excel" ? (
+            {detailsUploadOption === 'excel' ? (
               <>
                 <Space h={20} />
                 <Container maw={600}>
@@ -254,7 +250,7 @@ export default function CreateAuction() {
                   ta="left"
                   // type="range"
                   label="Auction Date"
-                   value={auctionDateValue}
+                  value={auctionDateValue}
                   // onChange={setConstructionStartValue}
                   mx="auto"
                   maw={200}
@@ -287,12 +283,12 @@ export default function CreateAuction() {
               value={unitUploadOption}
               onChange={setUnitUploadOption}
               data={[
-                { label: "Upload Excel", value: "excel" },
-                { label: "Add Manually", value: "manual" },
+                { label: 'Upload Excel', value: 'excel' },
+                { label: 'Add Manually', value: 'manual' },
               ]}
             />
 
-            {unitUploadOption === "excel" ? (
+            {unitUploadOption === 'excel' ? (
               <>
                 <Space h={40} />
                 <Container maw={600}>

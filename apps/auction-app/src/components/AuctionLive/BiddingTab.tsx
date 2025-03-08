@@ -8,9 +8,10 @@ import {
   IconRuler,
   IconGavel,
   IconDoorExit,
-  IconSunHigh, TablerIconsProps
+  IconSunHigh,
+  TablerIconsProps,
 } from '@tabler/icons-react';
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 import {
   Card,
   Grid,
@@ -24,32 +25,39 @@ import {
   Center,
   Modal,
   Title,
-  NumberInputHandlers, CSSObject
+  NumberInputHandlers,
+  CSSObject,
 } from '@mantine/core';
-import PricePlot from "./PricePlot";
-import { BidSelector } from "./BidSelector";
-import ShowCounter from "./ShowCounter";
-import { useDisclosure } from "@mantine/hooks";
-import Countdown from "react-countdown";
-import { ILot } from "../../types";
+import PricePlot from './PricePlot';
+import { BidSelector } from './BidSelector';
+import ShowCounter from './ShowCounter';
+import { useDisclosure } from '@mantine/hooks';
+import Countdown from 'react-countdown';
+import { ILot } from '../../types';
 import { auctionNotStartedStyle, biddingTabStyle } from '../../styles/theme';
 
-const useStyles = createStyles((theme): Record<string, CSSObject> =>
-  biddingTabStyle(theme) as Record<string, CSSObject>
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    biddingTabStyle(theme) as Record<string, CSSObject>,
 );
 
-const unitFeatureGrid: { label: string; icon: React.ElementType; sz: number; unit?: string }[] = [
-  { label: "unit", icon: IconHash, sz: 1.5 },
-  { label: "bedroom", icon: IconBedFilled, sz: 1 },
-  { label: "facing", icon: IconSunHigh, sz: 1 },
+const unitFeatureGrid: {
+  label: string;
+  icon: React.ElementType;
+  sz: number;
+  unit?: string;
+}[] = [
+  { label: 'unit', icon: IconHash, sz: 1.5 },
+  { label: 'bedroom', icon: IconBedFilled, sz: 1 },
+  { label: 'facing', icon: IconSunHigh, sz: 1 },
 
-  { label: "size", icon: IconRuler, unit: "sqft", sz: 1.666 },
-  { label: "parking", icon: IconCar, sz: 1 },
-  { label: "locker", icon: IconLock, sz: 1 },
-  { label: "bathroom", icon: IconBath, sz: 1 },
+  { label: 'size', icon: IconRuler, unit: 'sqft', sz: 1.666 },
+  { label: 'parking', icon: IconCar, sz: 1 },
+  { label: 'locker', icon: IconLock, sz: 1 },
+  { label: 'bathroom', icon: IconBath, sz: 1 },
 ];
 
-export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
+export function BiddingTab({ lot, half }: { lot: ILot; half?: boolean }) {
   const { classes } = useStyles();
 
   const [
@@ -62,9 +70,9 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
   const currentPlace = lot.place || 2;
 
   const [tempValue, setTempValue] = useState<number | 0>(lot.bid * 1000);
-  const [value, setValue] = useState<number | "">(0);
+  const [value, setValue] = useState<number | ''>(0);
 
-  const [status, setStatus] = useState("live");
+  const [status, setStatus] = useState('live');
   const [betTime, setBetTime] = useState(-1);
   const [remainingTime, setRemainingTime] = useState(lot.timeLeft);
 
@@ -84,7 +92,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
       <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
-          {lot[feature.label] + (feature.unit ? feature.unit : "")}
+          {lot[feature.label] + (feature.unit ? feature.unit : '')}
         </Text>
       </Group>
     </Grid.Col>
@@ -143,11 +151,11 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
         <Group>
           <Text>Bid amount:</Text> <Text fw={700}>{tempValue || lot.bid}</Text>
           <Group spacing={2}>
-            {"("}
+            {'('}
             <Text fw={700} color="green" mx={0}>
               +{increment}
             </Text>
-            {")"}
+            {')'}
           </Group>
         </Group>
 
@@ -188,7 +196,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
             radius="sm"
             color="red"
             onClick={() => {
-              setStatus("finished");
+              setStatus('finished');
               closeQuitModal();
             }}
           >
@@ -205,15 +213,15 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
         p={15}
         radius="md"
         // className={classes.card}
-        {...(status === "finished"
+        {...(status === 'finished'
           ? { className: classes.cardWinning }
           : { className: classes.card })}
         maw={900}
         mx="auto"
       >
-        <Card.Section className={classes.section} p={20} bg={"#F5F5F5"}>
+        <Card.Section className={classes.section} p={20} bg={'#F5F5F5'}>
           <Stack spacing={6} align="flex-start">
-            <Grid w={"100%"} maw={750}>
+            <Grid w={'100%'} maw={750}>
               <Grid.Col xs={12} {...(!half ? { lg: 2 } : { lg: 4 })}>
                 <Text fz="sm" c="dimmed" className={classes.label} align="left">
                   Unit details
@@ -224,8 +232,8 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
           </Stack>
         </Card.Section>
 
-        {status === "live" && (
-          <Card.Section className={classes.section}  >
+        {status === 'live' && (
+          <Card.Section className={classes.section}>
             <Grid align="center" justify="center">
               <Grid.Col span="auto">
                 <Grid>
@@ -265,24 +273,23 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
                   <PricePlot />
                 </Center>
               </Grid.Col>
-
             </Grid>
           </Card.Section>
         )}
 
-        {status === "finished" && (
+        {status === 'finished' && (
           <Card.Section className={classes.section}>
             <Space h={10} />
             <Title order={4} h={55}>
               {lot.place === 1
                 ? `You are the winner of the lot #${lot.unit}!` +
-                  "\r\n" +
-                  "Congratulations!"
+                  '\r\n' +
+                  'Congratulations!'
                 : lot.place === 2
-                ? "You finished on 2nd place!" +
-                  "\r\n" +
-                  "You can become the winner of the auction if the winner resigns"
-                : ""}
+                ? 'You finished on 2nd place!' +
+                  '\r\n' +
+                  'You can become the winner of the auction if the winner resigns'
+                : ''}
             </Title>
             <Space h={15} />
             <Text>
@@ -321,7 +328,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
           </Card.Section>
         )}
 
-        {status === "live" && (
+        {status === 'live' && (
           <Card.Section className={classes.section} bg="#E8F5E9">
             <Grid align="center" justify="center">
               <Grid.Col span={12}>
@@ -342,7 +349,7 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
                     <Countdown
                       date={Date.now() + remainingTime}
                       renderer={ShowCounter}
-                      onComplete={() => setStatus("finished")}
+                      onComplete={() => setStatus('finished')}
                       onTick={({ total }) => {
                         setRemainingTime(total);
                       }}
@@ -390,18 +397,18 @@ export function BiddingTab({lot, half}:{lot: ILot, half?: boolean} ) {
               </Grid.Col>
 
               <Grid.Col span={12}>
-                <Text size={"sm"} mb={4}>
+                <Text size={'sm'} mb={4}>
                   You can raise your bid in 1% increments
                 </Text>
-                <Text size={"sm"} mb={10}>
+                <Text size={'sm'} mb={10}>
                   You bid will be live for <b>15 minutes</b>
                 </Text>
 
                 <Stack align="center" spacing={5}>
                   {valueChanged ? (
                     <Text color="green" fw={700} fz={17}>
-                        + {lot.bid * 1000 * 0.01}
-                      </Text>
+                      + {lot.bid * 1000 * 0.01}
+                    </Text>
                   ) : (
                     <Space h={26.64} />
                   )}

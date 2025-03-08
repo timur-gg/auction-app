@@ -39,7 +39,7 @@ import { IAuction } from '../../types.ts';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>
-    auctionsProfileCardEditStyle(theme) as Record<string, CSSObject>
+    auctionsProfileCardEditStyle(theme) as Record<string, CSSObject>,
 );
 
 const featureGrid = [
@@ -100,14 +100,18 @@ export function AuctionProfileCard({
       >
         <Group spacing="1">
           <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-          <Text size="sm">{auction[feature.label] + (feature.unit ? feature.unit : '')}</Text>
+          <Text size="sm">
+            {auction[feature.label] + (feature.unit ? feature.unit : '')}
+          </Text>
         </Group>
       </Tooltip>
     </Grid.Col>
   ));
 
-  const [galleryModalOpened, { open: openGalleryModal, close: closeGalleryModal }] =
-    useDisclosure(false);
+  const [
+    galleryModalOpened,
+    { open: openGalleryModal, close: closeGalleryModal },
+  ] = useDisclosure(false);
 
   const Images = auction.images.map((image: string, ind: number) => (
     <Carousel.Slide key={ind} onClick={openGalleryModal}>
@@ -123,7 +127,6 @@ export function AuctionProfileCard({
     </Carousel.Slide>
   ));
 
-
   const removeImage = (currentImage: string, images: string[]) => {
     const updatedImages = images.filter((image) => image !== currentImage);
     console.log('Updated Images:', updatedImages);
@@ -132,8 +135,18 @@ export function AuctionProfileCard({
   return (
     <div className="AuctionProfileCard">
       {galleryModalOpened && (
-        <Modal opened={galleryModalOpened} onClose={closeGalleryModal} size="xl">
-          <Carousel slideSize="95%" slideGap="sm" align="center" loop withIndicators>
+        <Modal
+          opened={galleryModalOpened}
+          onClose={closeGalleryModal}
+          size="xl"
+        >
+          <Carousel
+            slideSize="95%"
+            slideGap="sm"
+            align="center"
+            loop
+            withIndicators
+          >
             {ImagesModal}
           </Carousel>
         </Modal>
@@ -143,7 +156,9 @@ export function AuctionProfileCard({
         <Grid>
           <Grid.Col {...(cardSize === 'full' ? { sm: 12, md: 5 } : { xs: 12 })}>
             <Grid>
-              <Grid.Col {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 7 })}>
+              <Grid.Col
+                {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 7 })}
+              >
                 <Flex
                   {...(cardSize === 'full'
                     ? { direction: 'column' }
@@ -196,21 +211,32 @@ export function AuctionProfileCard({
                   />
                 </Flex>
               </Grid.Col>
-              <Grid.Col {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 5 })}>
+              <Grid.Col
+                {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 5 })}
+              >
                 <Group position="apart" mt="md">
                   <Stack spacing={6} mb={-5} align="flex-start">
-                    <Text fz="sm" c="dimmed" className={classes.label} align="left">
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
                       building details
                     </Text>
 
                     <Stack>
                       <Group spacing="1">
-                        <IconCalendarEvent size="1.05rem" className={classes.icon} stroke={1.5} />
+                        <IconCalendarEvent
+                          size="1.05rem"
+                          className={classes.icon}
+                          stroke={1.5}
+                        />
                         <Select
                           maw={120}
                           defaultValue={auction['completionDate'].substring(
                             0,
-                            auction['completionDate'].length - 5
+                            auction['completionDate'].length - 5,
                           )}
                           data={['Fall', 'Winter', 'Spring', 'Summer']}
                         />
@@ -218,7 +244,7 @@ export function AuctionProfileCard({
                         <YearPickerInput
                           placeholder={auction['completionDate'].substring(
                             auction['completionDate'].length - 4,
-                            auction['completionDate'].length
+                            auction['completionDate'].length,
                           )}
                           // value={completionValue}
                           // onChange={setCompletionValue}
@@ -226,8 +252,15 @@ export function AuctionProfileCard({
                       </Group>
 
                       <Group spacing="1">
-                        <IconAddressBook size="1.05rem" className={classes.icon} stroke={1.5} />
-                        <TextInput size="sm" defaultValue={auction['address']} />
+                        <IconAddressBook
+                          size="1.05rem"
+                          className={classes.icon}
+                          stroke={1.5}
+                        />
+                        <TextInput
+                          size="sm"
+                          defaultValue={auction['address']}
+                        />
                       </Group>
                     </Stack>
                     <Space h={20} />

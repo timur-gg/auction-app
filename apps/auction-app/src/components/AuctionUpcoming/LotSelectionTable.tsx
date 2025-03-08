@@ -28,7 +28,8 @@ import { lotSelectionStyle } from '../../styles/theme.ts';
 import { ILot } from '../../types.ts';
 
 const useStyles = createStyles(
-  (theme): Record<string, CSSObject> => lotSelectionStyle(theme) as Record<string, CSSObject>
+  (theme): Record<string, CSSObject> =>
+    lotSelectionStyle(theme) as Record<string, CSSObject>,
 );
 
 type LotSelectionProps = {
@@ -67,9 +68,12 @@ export function LotSelectionTable({
     priceRange: (lot: ILot) =>
       (lot.floor ?? 0) >= (priceRange[0] + 20) * 12.5 &&
       (lot.floor ?? 0) <= (priceRange[1] + 20) * 12.5,
-    size: (lot: ILot) => Number(lot.size) >= (size[0] + 20) * 12.5 && Number(lot.size) <= (size[1] + 20) * 12.5,
+    size: (lot: ILot) =>
+      Number(lot.size) >= (size[0] + 20) * 12.5 &&
+      Number(lot.size) <= (size[1] + 20) * 12.5,
     floor: (lot: ILot) =>
-      (lot.floor ?? 0) >= floorRange[0] / 2 && (lot.floor ?? 0) <= floorRange[1] / 2,
+      (lot.floor ?? 0) >= floorRange[0] / 2 &&
+      (lot.floor ?? 0) <= floorRange[1] / 2,
     bedroom: (lot: ILot) => {
       if (bedroom === -1) return true;
       return lot.bedroom === bedroom;
@@ -137,7 +141,7 @@ export function LotSelectionTable({
           size: 80,
         },
       ] as MRT_ColumnDef<ILot>[],
-    []
+    [],
   );
   const { classes } = useStyles();
 
@@ -169,7 +173,9 @@ export function LotSelectionTable({
       >
         <IconStar
           color="gold"
-          {...(faves.includes(lot.id) ? { style: { fill: 'gold' } } : { style: { fill: 'white' } })}
+          {...(faves.includes(lot.id)
+            ? { style: { fill: 'gold' } }
+            : { style: { fill: 'white' } })}
         />
       </UnstyledButton>
     );
@@ -197,7 +203,8 @@ export function LotSelectionTable({
     data: filteredLots,
     positionToolbarAlertBanner: 'none',
     enableRowSelection: (row) =>
-      Object.keys(rowSelection).includes(row.id) || Object.keys(rowSelection).length < 2,
+      Object.keys(rowSelection).includes(row.id) ||
+      Object.keys(rowSelection).length < 2,
     enablePagination: false,
     enableColumnActions: false,
     enableSorting: false,
@@ -225,7 +232,11 @@ export function LotSelectionTable({
         {backButtonAction && (
           <Grid.Col xs={6} sm={0.5} md={0.9} my="auto" ta="left">
             <UnstyledButton onClick={backClick}>
-              <IconArrowLeft size="1.5rem" stroke={2} className={classes.icon} />
+              <IconArrowLeft
+                size="1.5rem"
+                stroke={2}
+                className={classes.icon}
+              />
             </UnstyledButton>
           </Grid.Col>
         )}
@@ -261,10 +272,18 @@ export function LotSelectionTable({
         )}
 
         <Grid.Col xs={6} sm={3.5} lg={2.7}>
-          <SizeFilter size={size} setSizeRange={setSizeRange} addFilter={addFilter} />
+          <SizeFilter
+            size={size}
+            setSizeRange={setSizeRange}
+            addFilter={addFilter}
+          />
         </Grid.Col>
         <Grid.Col xs={6} sm={3.5} lg={2.7}>
-          <FloorFilter floor={floorRange} setFloor={setFloorRange} addFilter={addFilter} />
+          <FloorFilter
+            floor={floorRange}
+            setFloor={setFloorRange}
+            addFilter={addFilter}
+          />
         </Grid.Col>
       </Grid>
     ),

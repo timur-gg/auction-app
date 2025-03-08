@@ -7,39 +7,49 @@ import {
   Text,
   createStyles,
   Table,
-  Badge, CSSObject
+  Badge,
+  CSSObject,
 } from '@mantine/core';
-import AuctionProfileCardVert from "../AuctionLive/AuctionProfileCardVert.js";
+import AuctionProfileCardVert from '../AuctionLive/AuctionProfileCardVert.js';
 import {
   IconCalendarEvent,
   IconMoneybag,
   IconClock,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react';
 import { lotMockData as lotsData } from '@mocks/auction';
 import { auctionPassedStyle } from '../../styles/theme';
 import { IAuction, ILot } from '../../types';
 
-const useStyles = createStyles((theme): Record<string, CSSObject> =>
-  auctionPassedStyle(theme) as Record<string, CSSObject>
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    auctionPassedStyle(theme) as Record<string, CSSObject>,
 );
 
-
 const auctionMockdata = [
-  { label: "auctionDate", icon: IconCalendarEvent },
-  { label: "deposit", icon: IconMoneybag },
-  { label: "duration", icon: IconClock, unit: "hrs" },
+  { label: 'auctionDate', icon: IconCalendarEvent },
+  { label: 'deposit', icon: IconMoneybag },
+  { label: 'duration', icon: IconClock, unit: 'hrs' },
 ];
 
-export function AuctionPassed({ auction, step }: { auction: IAuction, step: number}) {
+export function AuctionPassed({
+  auction,
+  step,
+}: {
+  auction: IAuction;
+  step: number;
+}) {
   const { classes } = useStyles();
-  const lots: ILot[] = auction.lots?.flatMap(lotId => lotsData.find(id => id.id === lotId) || []) ?? [];
+  const lots: ILot[] =
+    auction.lots?.flatMap(
+      (lotId) => lotsData.find((id) => id.id === lotId) || [],
+    ) ?? [];
 
   const auctionFeatures = auctionMockdata.map((feature) => (
     <Grid.Col xs={4} py={5} key={feature.label}>
       <Group spacing="1">
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
         <Text size="sm">
-          {auction[feature.label] + (feature.unit ? feature.unit : "")}
+          {auction[feature.label] + (feature.unit ? feature.unit : '')}
         </Text>
       </Group>
     </Grid.Col>
@@ -52,9 +62,9 @@ export function AuctionPassed({ auction, step }: { auction: IAuction, step: numb
       <td>{lot.size}sqft</td>
       <td>${lot.price}k</td>
       <td>
-        {lot.soldPrice??0 < 1000
-          ? `${lot.soldPrice??0}k`
-          : `${lot.soldPrice??0 / 1000}m`}
+        {lot.soldPrice ?? 0 < 1000
+          ? `${lot.soldPrice ?? 0}k`
+          : `${lot.soldPrice ?? 0 / 1000}m`}
       </td>
       <td>{lot.bid < 1000 ? `${lot.bid}k` : `${lot.bid / 1000}m`}</td>
       <td>{lot.totalBids}</td>
@@ -62,11 +72,11 @@ export function AuctionPassed({ auction, step }: { auction: IAuction, step: numb
 
       <td>
         <Badge
-          {...(lot.position === 1 ? { color: "green" } : { color: "orange" })}
+          {...(lot.position === 1 ? { color: 'green' } : { color: 'orange' })}
           size="lg"
           variant="filled"
         >
-          {lot.position === 1 ? "Won" : "Lost"}
+          {lot.position === 1 ? 'Won' : 'Lost'}
         </Badge>
       </td>
     </tr>
@@ -93,7 +103,7 @@ export function AuctionPassed({ auction, step }: { auction: IAuction, step: numb
                 <Text fz="lg" c="dimmed" className={classes.label} align="left">
                   Auction details
                 </Text>
-                <Grid w={"100%"}>{auctionFeatures}</Grid>
+                <Grid w={'100%'}>{auctionFeatures}</Grid>
               </Stack>
             </Grid.Col>
             <Grid.Col xs={12} md={6}>
@@ -113,7 +123,7 @@ export function AuctionPassed({ auction, step }: { auction: IAuction, step: numb
           <Grid justify="center">
             <Grid.Col xs={12} md={11}>
               <Stack spacing={6} mb={-5} align="flex-start" p={0}>
-                <Table style={{ textAlign: "left" }}>
+                <Table style={{ textAlign: 'left' }}>
                   <thead>
                     <tr>
                       <th>Unit #</th>

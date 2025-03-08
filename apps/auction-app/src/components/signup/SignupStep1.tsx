@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Anchor,
   Text,
@@ -11,7 +11,7 @@ import {
   Container,
   SegmentedControl,
   Space,
-} from "@mantine/core";
+} from '@mantine/core';
 
 const SignupStep1 = () => {
   return (

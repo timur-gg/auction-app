@@ -1,4 +1,9 @@
-import { NumberInputHandlers, Group, ActionIcon, NumberInput } from '@mantine/core';
+import {
+  NumberInputHandlers,
+  Group,
+  ActionIcon,
+  NumberInput,
+} from '@mantine/core';
 import { rem } from '@mantine/styles';
 import { IconCurrencyDollarCanadian } from '@tabler/icons-react';
 import { useRef } from 'react';
@@ -20,7 +25,6 @@ export function BidSelector({
   decrementActive: boolean;
   incrementActive: boolean;
 }) {
-
   const handlers = useRef<NumberInputHandlers>();
   return (
     <Group spacing={5} className={className}>
@@ -36,7 +40,7 @@ export function BidSelector({
       <NumberInput
         hideControls
         value={value}
-        onChange={(val: number ) => setValue(val ?? 0)}
+        onChange={(val: number) => setValue(val ?? 0)}
         handlersRef={handlers}
         max={1000000}
         min={lot.bid}

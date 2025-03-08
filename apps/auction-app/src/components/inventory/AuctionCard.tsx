@@ -34,7 +34,8 @@ import { auctionCardStyle } from '../../styles/theme.ts';
 import { IAuction } from '../../types.ts';
 
 const useStyles = createStyles(
-  (theme): Record<string, CSSObject> => auctionCardStyle(theme) as Record<string, CSSObject>
+  (theme): Record<string, CSSObject> =>
+    auctionCardStyle(theme) as Record<string, CSSObject>,
 );
 
 const featureGrid = [
@@ -105,7 +106,9 @@ export function AuctionCard({
     >
       <Center className={classes.tooltip}>
         <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-        <Text size="sm">{auction[feature.label] + (feature.unit ? feature.unit : '')}</Text>
+        <Text size="sm">
+          {auction[feature.label] + (feature.unit ? feature.unit : '')}
+        </Text>
       </Center>
     </Tooltip>
   ));
@@ -142,7 +145,13 @@ export function AuctionCard({
       <Card.Section>
         <Image src={image} alt="Tesla Model S" height={250} />
 
-        <Button className={classes.favButton} size="md" pl={10} fw={400} onClick={addToFavorites}>
+        <Button
+          className={classes.favButton}
+          size="md"
+          pl={10}
+          fw={400}
+          onClick={addToFavorites}
+        >
           <IconStar
             className={classes.favIcon}
             color="Gold"
@@ -176,7 +185,8 @@ export function AuctionCard({
 
       <Card.Section className={classes.section} mt="sm" pb={0}>
         <Text fz="xs" align="left" m={'auto'}>
-          Allure Condos is a new condo development located at 250 King Street East, Toronto, ON
+          Allure Condos is a new condo development located at 250 King Street
+          East, Toronto, ON
         </Text>
       </Card.Section>
 

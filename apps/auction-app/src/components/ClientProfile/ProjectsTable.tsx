@@ -30,8 +30,9 @@ export default function ProjectsTable({
           accessor: 'unit',
           title: 'Units',
           render: (a) =>
-            a.lotsAuctioned?.map((l: number) => lots.find((i) => i.id === l)?.unit).join(', ') ||
-            [],
+            a.lotsAuctioned
+              ?.map((l: number) => lots.find((i) => i.id === l)?.unit)
+              .join(', ') || [],
         },
 
         {

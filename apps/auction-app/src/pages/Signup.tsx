@@ -10,35 +10,35 @@ import {
   Space,
   useMantineTheme,
   SegmentedControl,
-} from "@mantine/core";
-import { Link } from "react-router-dom";
-import SignupStep1 from "../components/signup/SignupStep1";
-import { useState } from "react";
-import SignupStep2 from "../components/signup/SignupStep2";
-import SignupStep3 from "../components/signup/SignupStep3";
-import SignupStep4 from "../components/signup/SignupStep4";
-import SignupStep4Realtor from "../components/signup/SignupStep4Realtor";
-import SignupStep4Builder from "../components/signup/SignupStep4Builder";
-import SignupStep5Builder from "../components/signup/SignupStep5Builder";
+} from '@mantine/core';
+import { Link } from 'react-router-dom';
+import SignupStep1 from '../components/signup/SignupStep1';
+import { useState } from 'react';
+import SignupStep2 from '../components/signup/SignupStep2';
+import SignupStep3 from '../components/signup/SignupStep3';
+import SignupStep4 from '../components/signup/SignupStep4';
+import SignupStep4Realtor from '../components/signup/SignupStep4Realtor';
+import SignupStep4Builder from '../components/signup/SignupStep4Builder';
+import SignupStep5Builder from '../components/signup/SignupStep5Builder';
 
-import SignupStep5 from "../components/signup/SignupStep5";
-import SignupStep6 from "../components/signup/SignupStep6";
+import SignupStep5 from '../components/signup/SignupStep5';
+import SignupStep6 from '../components/signup/SignupStep6';
 
 export default function Signup() {
   const [step, setStep] = useState(1);
 
-  const [role, setRole] = useState("buyer");
+  const [role, setRole] = useState('buyer');
   const theme = useMantineTheme();
 
-  if (step === 3 && (role === "builder" || role === "realtor")) {
+  if (step === 3 && (role === 'builder' || role === 'realtor')) {
     setStep(4);
   }
 
-  if (step === 4 && (role === "builder" || role === "realtor")) {
+  if (step === 4 && (role === 'builder' || role === 'realtor')) {
     setStep(5);
   }
 
-  if (step === 7 && (role === "realtor" || role === "buyer")) {
+  if (step === 7 && (role === 'realtor' || role === 'buyer')) {
     setStep(8);
   }
 
@@ -60,8 +60,8 @@ export default function Signup() {
 
       {step < 4 && (
         <Text color="dimmed" size="sm" align="center" mt={5}>
-          Already have an account ?{" "}
-          <Anchor<"a">
+          Already have an account ?{' '}
+          <Anchor<'a'>
             href="#"
             size="sm"
             onClick={(e: React.MouseEvent) => e.preventDefault()}
@@ -75,25 +75,25 @@ export default function Signup() {
           withBorder
           shadow="md"
           p={30}
-          {...(step != 5 ? { mt: 10 } : "")}
+          {...(step != 5 ? { mt: 10 } : '')}
           radius="md"
         >
           {step === 1 && <SignupStep1 />}
-          {step === 2 && role !== "builder" && <SignupStep2 />}
-          {step === 2 && role === "builder" && <SignupStep4Builder />}
+          {step === 2 && role !== 'builder' && <SignupStep2 />}
+          {step === 2 && role === 'builder' && <SignupStep4Builder />}
           {step === 3 && <SignupStep3 />}
-          {step === 4 && role === "buyer" && <SignupStep4 />}
-          {step === 5 && role === "realtor" && <SignupStep4Realtor />}
-          {step === 5 && role === "builder" && <SignupStep2 />}
-          {step === 5 && role === "buyer" && <SignupStep6 />}
+          {step === 4 && role === 'buyer' && <SignupStep4 />}
+          {step === 5 && role === 'realtor' && <SignupStep4Realtor />}
+          {step === 5 && role === 'builder' && <SignupStep2 />}
+          {step === 5 && role === 'buyer' && <SignupStep6 />}
 
-          {step === 6 && role === "builder" && <SignupStep5Builder />}
-          {step === 6 && role === "realtor" && <SignupStep6 />}
-          {step === 6 && role === "buyer" && (
+          {step === 6 && role === 'builder' && <SignupStep5Builder />}
+          {step === 6 && role === 'realtor' && <SignupStep6 />}
+          {step === 6 && role === 'buyer' && (
             <Title order={3}>Subscription Info</Title>
           )}
 
-          {step === 7 && role === "builder" && <SignupStep6 />}
+          {step === 7 && role === 'builder' && <SignupStep6 />}
 
           {step === 8 && (
             <>
@@ -101,7 +101,7 @@ export default function Signup() {
               <Title order={2}>Thank you for signing up!</Title>
               <Space h={20} />
 
-              {role === "buyer" && <SignupStep5 />}
+              {role === 'buyer' && <SignupStep5 />}
             </>
           )}
           {step === 1 && (
@@ -112,9 +112,9 @@ export default function Signup() {
                 value={role}
                 color="blue"
                 data={[
-                  { value: "buyer", label: "Buyer" },
-                  { value: "builder", label: "Builder" },
-                  { value: "realtor", label: "Authorized Person" },
+                  { value: 'buyer', label: 'Buyer' },
+                  { value: 'builder', label: 'Builder' },
+                  { value: 'realtor', label: 'Authorized Person' },
                 ]}
               />
             </>
@@ -130,8 +130,8 @@ export default function Signup() {
                 }}
                 styles={(theme) => ({
                   root: {
-                    border: "none",
-                    "&:hover": {
+                    border: 'none',
+                    '&:hover': {
                       color: theme.colors.grey,
                     },
                   },
@@ -146,21 +146,21 @@ export default function Signup() {
               <Button
                 onClick={() => setStep((prev) => prev + 1)}
                 color="customPurple.2"
-                {...(step > 5 && { mx: "auto" })}
+                {...(step > 5 && { mx: 'auto' })}
                 styles={{
                   root: {
-                    "&:hover": {
-                      opacity: "50%",
+                    '&:hover': {
+                      opacity: '50%',
                     },
                   },
                 }}
               >
-                {step === 5 ? "Agree & Proceed" : "Confirm"}
+                {step === 5 ? 'Agree & Proceed' : 'Confirm'}
               </Button>
             ) : step === 8 ? (
               <Center mx="auto">
                 <Group>
-                  <Link to={"/inventory"}>
+                  <Link to={'/inventory'}>
                     <Button
                       onClick={() => {
                         setStep((prev) => prev + 1);
@@ -169,8 +169,8 @@ export default function Signup() {
                       mx="auto"
                       styles={{
                         root: {
-                          "&:hover": {
-                            opacity: "50%",
+                          '&:hover': {
+                            opacity: '50%',
                           },
                         },
                       }}
@@ -180,15 +180,15 @@ export default function Signup() {
                   </Link>
                   <Space w={10} />
 
-                  {role === "builder" && (
+                  {role === 'builder' && (
                     <Button
                       // onClick={() => setStep((prev) => prev + 1)}
                       color="green"
                       mx="auto"
                       styles={{
                         root: {
-                          "&:hover": {
-                            opacity: "50%",
+                          '&:hover': {
+                            opacity: '50%',
                           },
                         },
                       }}
@@ -200,7 +200,7 @@ export default function Signup() {
               </Center>
             ) : (
               <Button
-                style={{ marginLeft: "auto" }}
+                style={{ marginLeft: 'auto' }}
                 onClick={() => setStep((prev) => prev + 1)}
                 color="customBlue.0"
               >

@@ -31,7 +31,8 @@ import { auctionProfileCardStyle } from '../../styles/theme.ts';
 import { IAuction } from '../../types.ts';
 
 const useStyles = createStyles(
-  (theme): Record<string, CSSObject> => auctionProfileCardStyle(theme) as Record<string, CSSObject>
+  (theme): Record<string, CSSObject> =>
+    auctionProfileCardStyle(theme) as Record<string, CSSObject>,
 );
 
 const featureGrid = [
@@ -86,14 +87,18 @@ export function AuctionProfileCard({
       >
         <Group spacing="1">
           <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
-          <Text size="sm">{auction[feature.label] + (feature.unit ? feature.unit : '')}</Text>
+          <Text size="sm">
+            {auction[feature.label] + (feature.unit ? feature.unit : '')}
+          </Text>
         </Group>
       </Tooltip>
     </Grid.Col>
   ));
 
-  const [galleryModalOpened, { open: openGalleryModal, close: closeGalleryModal }] =
-    useDisclosure(false);
+  const [
+    galleryModalOpened,
+    { open: openGalleryModal, close: closeGalleryModal },
+  ] = useDisclosure(false);
 
   const Images = auction.images.map((image: string, index) => (
     <Carousel.Slide key={index} onClick={openGalleryModal}>
@@ -120,8 +125,18 @@ export function AuctionProfileCard({
   return (
     <div className="AuctionProfileCard">
       {galleryModalOpened && (
-        <Modal opened={galleryModalOpened} onClose={closeGalleryModal} size="xl">
-          <Carousel slideSize="95%" slideGap="sm" align="center" loop withIndicators>
+        <Modal
+          opened={galleryModalOpened}
+          onClose={closeGalleryModal}
+          size="xl"
+        >
+          <Carousel
+            slideSize="95%"
+            slideGap="sm"
+            align="center"
+            loop
+            withIndicators
+          >
             {ImagesModal}
           </Carousel>
         </Modal>
@@ -131,7 +146,9 @@ export function AuctionProfileCard({
         <Grid>
           <Grid.Col {...(cardSize === 'full' ? { sm: 12, md: 5 } : { xs: 12 })}>
             <Grid>
-              <Grid.Col {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 7 })}>
+              <Grid.Col
+                {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 7 })}
+              >
                 <Flex
                   {...(cardSize === 'full'
                     ? { direction: 'column' }
@@ -173,17 +190,25 @@ export function AuctionProfileCard({
                     align="left"
                     m={'auto'}
                   >
-                    Allure Condos is a new condo development located at 250 King Street East,
-                    Toronto, ON. This project is bringing a modern collection of 509 condo units in
-                    a high-rise mixed-use building of 43 storeys. The estimated completion date for
+                    Allure Condos is a new condo development located at 250 King
+                    Street East, Toronto, ON. This project is bringing a modern
+                    collection of 509 condo units in a high-rise mixed-use
+                    building of 43 storeys. The estimated completion date for
                     occupancy of this property is 2027.
                   </Text>
                 </Flex>
               </Grid.Col>
-              <Grid.Col {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 5 })}>
+              <Grid.Col
+                {...(cardSize === 'full' ? { xs: 6, md: 12 } : { xs: 5 })}
+              >
                 <Group position="apart" mt="md">
                   <Stack spacing={6} mb={-5} align="flex-start">
-                    <Text fz="sm" c="dimmed" className={classes.label} align="left">
+                    <Text
+                      fz="sm"
+                      c="dimmed"
+                      className={classes.label}
+                      align="left"
+                    >
                       building details
                     </Text>
 
@@ -196,7 +221,13 @@ export function AuctionProfileCard({
 
           {cardSize === 'full' && (
             <Grid.Col sm={12} md={7}>
-              <Carousel slideSize="90%" height={310} slideGap="sm" align="start" loop>
+              <Carousel
+                slideSize="90%"
+                height={310}
+                slideGap="sm"
+                align="start"
+                loop
+              >
                 {Images}
               </Carousel>
             </Grid.Col>

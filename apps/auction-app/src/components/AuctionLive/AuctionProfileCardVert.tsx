@@ -29,7 +29,7 @@ import { IAuction } from '../../types.ts';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>
-    auctionProfileCardVertStyle(theme) as Record<string, CSSObject>
+    auctionProfileCardVertStyle(theme) as Record<string, CSSObject>,
 );
 
 const featureGrid = [
@@ -54,8 +54,7 @@ const featureGrid = [
   { label: 'locker', icon: IconLock, desc: 'Storage lockers' },
 ];
 
-
-export function AuctionProfileCardVert({auction}:{auction: IAuction}) {
+export function AuctionProfileCardVert({ auction }: { auction: IAuction }) {
   const { classes } = useStyles();
 
   const features = featureGrid.map((feature) => (

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Title,
   Text,
@@ -10,7 +10,7 @@ import {
   Grid,
   Group,
   useMantineTheme,
-} from "@mantine/core";
+} from '@mantine/core';
 
 const SignupStep5Builder = () => {
   const theme = useMantineTheme();

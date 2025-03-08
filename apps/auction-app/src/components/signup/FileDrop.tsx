@@ -1,9 +1,9 @@
-import React from "react";
-import { Text, Group, useMantineTheme } from "@mantine/core";
+import React from 'react';
+import { Text, Group, useMantineTheme } from '@mantine/core';
 
-import { useRef } from "react";
-import { Dropzone } from "@mantine/dropzone";
-import { IconUpload, IconFile, IconX } from "@tabler/icons-react";
+import { useRef } from 'react';
+import { Dropzone } from '@mantine/dropzone';
+import { IconUpload, IconFile, IconX } from '@tabler/icons-react';
 
 function FileDrop() {
   const openRef = useRef<() => void>(null);
@@ -11,15 +11,15 @@ function FileDrop() {
 
   return (
     <Dropzone
-      onDrop={(files) => console.log("accepted files", files)}
-      onReject={(files) => console.log("rejected files", files)}
+      onDrop={(files) => console.log('accepted files', files)}
+      onReject={(files) => console.log('rejected files', files)}
       openRef={openRef}
     >
       <Group
         position="center"
         spacing="lg"
         mih={100}
-        sx={{ pointerEvents: "none" }}
+        sx={{ pointerEvents: 'none' }}
       >
         <Dropzone.Accept>
           <IconUpload
@@ -27,7 +27,7 @@ function FileDrop() {
             stroke={1.5}
             color={
               theme.colors[theme.primaryColor][
-                theme.colorScheme === "dark" ? 4 : 6
+                theme.colorScheme === 'dark' ? 4 : 6
               ]
             }
           />
@@ -36,7 +36,7 @@ function FileDrop() {
           <IconX
             size="3.2rem"
             stroke={1.5}
-            color={theme.colors.red[theme.colorScheme === "dark" ? 4 : 6]}
+            color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
           />
         </Dropzone.Reject>
         <Dropzone.Idle>

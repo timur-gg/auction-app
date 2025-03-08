@@ -7,9 +7,9 @@ import {
   MessageInput,
   MessageList,
   SendButton,
-} from "@chatscope/chat-ui-kit-react";
-import "@chatscope/chat-ui-kit-styles/dist/default/styles.css";
-import { useRef, useState } from "react";
+} from '@chatscope/chat-ui-kit-react';
+import '@chatscope/chat-ui-kit-styles/dist/default/styles.css';
+import { useRef, useState } from 'react';
 
 const ExtendedInput = () => {
   return (
@@ -35,7 +35,7 @@ const messages = {};
 // }
 
 export const Chat = () => {
-  const [messageInputValue, setMessageInputValue] = useState("");
+  const [messageInputValue, setMessageInputValue] = useState('');
   const inputFile = useRef<HTMLInputElement>(null);
   const handleFileClick = () => {
     if (inputFile.current !== null) {
@@ -44,17 +44,17 @@ export const Chat = () => {
   };
 
   return (
-    <MainContainer style={{ border: "none" }}>
-      <input ref={inputFile} type="file" style={{ display: "none" }} />
+    <MainContainer style={{ border: 'none' }}>
+      <input ref={inputFile} type="file" style={{ display: 'none' }} />
       <ChatContainer>
         <MessageList>
           <Message
             model={{
-              message: "Hi! How can we help you?",
-              sentTime: "just now",
-              sender: "Joe",
-              direction: "incoming",
-              position: "single",
+              message: 'Hi! How can we help you?',
+              sentTime: 'just now',
+              sender: 'Joe',
+              direction: 'incoming',
+              position: 'single',
             }}
           />
         </MessageList>
@@ -63,7 +63,7 @@ export const Chat = () => {
           placeholder="Type message here"
           value={messageInputValue}
           onChange={(val) => setMessageInputValue(val)}
-          onSend={() => setMessageInputValue("")}
+          onSend={() => setMessageInputValue('')}
           onAttachClick={handleFileClick}
         />
         {/* <ExtendedInput as={MessageInput} /> */}

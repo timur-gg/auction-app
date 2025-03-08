@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Anchor,
   Space,
@@ -11,10 +11,10 @@ import {
   ThemeIcon,
   Title,
   Checkbox,
-} from "@mantine/core";
-import Countdown from "./Countdown.js";
-import { text} from "../../text.js";
-import { IconCircleCheck } from "@tabler/icons-react";
+} from '@mantine/core';
+import Countdown from './Countdown.js';
+import { text } from '../../text.js';
+import { IconCircleCheck } from '@tabler/icons-react';
 
 const SignupStep5 = () => {
   const conditionText = text.auctionRules.map((rule) => (

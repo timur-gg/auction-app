@@ -1,48 +1,48 @@
-import React from "react";
-import Autoplay from "embla-carousel-autoplay";
-import { Carousel } from "@mantine/carousel";
-import { useRef } from "react";
-import { Badge, Space, Box, Grid, Image, Title } from "@mantine/core";
-import "typeface-roboto";
-import comic1 from "../../assets/1B/1B.png";
-import comic2 from "../../assets/1A/1A.png";
-import comic3 from "../../assets/2A/2A.png";
-import comic4 from "../../assets/2B/2B.png";
-import comic5 from "../../assets/3A/3A.png";
-import comic6 from "../../assets/3B/3B.png";
-import comic7 from "../../assets/4A/4A.png";
-import comic8 from "../../assets/4B/4B.png";
+import React from 'react';
+import Autoplay from 'embla-carousel-autoplay';
+import { Carousel } from '@mantine/carousel';
+import { useRef } from 'react';
+import { Badge, Space, Box, Grid, Image, Title } from '@mantine/core';
+import 'typeface-roboto';
+import comic1 from '../../assets/1B/1B.png';
+import comic2 from '../../assets/1A/1A.png';
+import comic3 from '../../assets/2A/2A.png';
+import comic4 from '../../assets/2B/2B.png';
+import comic5 from '../../assets/3A/3A.png';
+import comic6 from '../../assets/3B/3B.png';
+import comic7 from '../../assets/4A/4A.png';
+import comic8 from '../../assets/4B/4B.png';
 
 const Slides = [
   {
     img: comic1,
-    txt: "Hours in lines in front of a sales office",
+    txt: 'Hours in lines in front of a sales office',
   },
   {
     img: comic2,
-    txt: "...Or just go to our website ",
+    txt: '...Or just go to our website ',
   },
   {
     img: comic3,
-    txt: "You spend a lot of time and sometimes you make a mistake",
+    txt: 'You spend a lot of time and sometimes you make a mistake',
   },
   {
     img: comic4,
-    txt: "Plenty of good options and no pressure to make a right decision ",
+    txt: 'Plenty of good options and no pressure to make a right decision ',
   },
-  { img: comic5, txt: "" },
+  { img: comic5, txt: '' },
   {
     img: comic6,
-    txt: "It’s an auction. So there is a fixed starting price for everyone",
+    txt: 'It’s an auction. So there is a fixed starting price for everyone',
   },
   {
     img: comic7,
-    txt: "Sometiemes the price includes hidden fees",
+    txt: 'Sometiemes the price includes hidden fees',
   },
   { img: comic8, txt: "It's such a great deal!" },
 ];
 
-const ComicPic =({ ind }: { ind: number }) => {
+const ComicPic = ({ ind }: { ind: number }) => {
   const [width, setWidth] = React.useState(window.innerWidth);
   const breakpoint1 = 1000;
   const breakpoint = 760;
@@ -58,7 +58,9 @@ const ComicPic =({ ind }: { ind: number }) => {
         mx={0}
         style={{
           background:
-            width > breakpoint ? 'linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)' : '#558DAB',
+            width > breakpoint
+              ? 'linear-gradient(90deg, #558DAB 46%,  #FAF3D8 54%)'
+              : '#558DAB',
         }}
       >
         <Grid.Col xs={12} sm={6} pt={30}>
@@ -106,7 +108,13 @@ const ComicPic =({ ind }: { ind: number }) => {
                   }}
                 >
                   {midSize && <Space h={20} />}
-                  <Image mah={500} maw={500} radius="sm" src={Slides[i].img} m="auto" />
+                  <Image
+                    mah={500}
+                    maw={500}
+                    radius="sm"
+                    src={Slides[i].img}
+                    m="auto"
+                  />
                   {Slides[i].txt.length > 0 && (
                     <div
                       style={{
@@ -149,7 +157,13 @@ const ComicPic =({ ind }: { ind: number }) => {
                   }}
                 >
                   {midSize && <Space h={20} />}
-                  <Image mah={500} maw={500} radius="sm" src={Slides[i + 1].img} m="auto" />
+                  <Image
+                    mah={500}
+                    maw={500}
+                    radius="sm"
+                    src={Slides[i + 1].img}
+                    m="auto"
+                  />
                   {Slides[i + 1].txt.length > 0 && (
                     <div
                       style={{

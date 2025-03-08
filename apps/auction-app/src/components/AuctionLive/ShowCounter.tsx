@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { Text, Group, Title } from "@mantine/core";
+import { Text, Group, Title } from '@mantine/core';
 
 type DateTimeDisplayProps = {
   value: number;
@@ -18,7 +18,7 @@ type ShowCounterProps = {
 
 const DateTimeDisplay = ({ value, type, isDanger }: DateTimeDisplayProps) => {
   return (
-    <Group className={isDanger ? "countdown danger" : "countdown"} spacing={5}>
+    <Group className={isDanger ? 'countdown danger' : 'countdown'} spacing={5}>
       <Title order={4}>{value}</Title>
       <Text>{type}</Text>
     </Group>
@@ -41,13 +41,13 @@ const ShowCounter = ({
       <Group className="show-counter" spacing="sm" position="center">
         {days > 0 && (
           <>
-            <DateTimeDisplay value={days} type={"Days"} isDanger={false} />
+            <DateTimeDisplay value={days} type={'Days'} isDanger={false} />
             <Text>:</Text>
           </>
         )}
         {hours >= 0 && (
           <>
-            <DateTimeDisplay value={hours} type={"h"} isDanger={hours <= 2} />
+            <DateTimeDisplay value={hours} type={'h'} isDanger={hours <= 2} />
             <Text>:</Text>
           </>
         )}
@@ -55,18 +55,14 @@ const ShowCounter = ({
           <>
             <DateTimeDisplay
               value={minutes}
-              type={"m"}
+              type={'m'}
               isDanger={minutes <= 2}
             />
             <Text>:</Text>
           </>
         )}
         {seconds >= 0 && (
-          <DateTimeDisplay
-              value={seconds}
-              type={"s"}
-              isDanger={minutes <= 1}
-            />
+          <DateTimeDisplay value={seconds} type={'s'} isDanger={minutes <= 1} />
         )}
       </Group>
     );

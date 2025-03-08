@@ -55,8 +55,10 @@ export function UnitTableEdit(props: LotSelectionProps) {
 
   const FILTER_MAP: Record<string, (lot: ILot) => boolean> = {
     All: () => true,
-    size: (lot: ILot) => lot.size >= (size[0] + 20) * 12.5 && lot.size <= (size[1] + 20) * 12.5,
-    floor: (lot: ILot) => lot.floor >= floorRange[0] / 2 && lot.floor <= floorRange[1] / 2,
+    size: (lot: ILot) =>
+      lot.size >= (size[0] + 20) * 12.5 && lot.size <= (size[1] + 20) * 12.5,
+    floor: (lot: ILot) =>
+      lot.floor >= floorRange[0] / 2 && lot.floor <= floorRange[1] / 2,
     bedroom: (lot: ILot) => {
       if (bedroom === -1) return true;
       else return lot.bedroom === bedroom;
@@ -117,7 +119,7 @@ export function UnitTableEdit(props: LotSelectionProps) {
           size: 80,
         },
       ] as MRT_ColumnDef<ILot>[],
-    []
+    [],
   );
 
   const { rowSelection, setRowSelection, lots } = props;
@@ -151,7 +153,8 @@ export function UnitTableEdit(props: LotSelectionProps) {
     data: filteredLots,
     positionToolbarAlertBanner: 'none',
     enableRowSelection: (row) =>
-      Object.keys(rowSelection).includes(row.id) || Object.keys(rowSelection).length < 2,
+      Object.keys(rowSelection).includes(row.id) ||
+      Object.keys(rowSelection).length < 2,
     enablePagination: false,
     enableColumnActions: false,
     enableSorting: false,
@@ -204,10 +207,18 @@ export function UnitTableEdit(props: LotSelectionProps) {
           />
         </Grid.Col> */}
         <Grid.Col xs={6} sm={3.5} lg={2}>
-          <SizeFilter size={size} setSizeRange={setSizeRange} addFilter={addFilter} />
+          <SizeFilter
+            size={size}
+            setSizeRange={setSizeRange}
+            addFilter={addFilter}
+          />
         </Grid.Col>
         <Grid.Col xs={6} sm={3.5} lg={2}>
-          <FloorFilter floor={floorRange} setFloor={setFloorRange} addFilter={addFilter} />
+          <FloorFilter
+            floor={floorRange}
+            setFloor={setFloorRange}
+            addFilter={addFilter}
+          />
         </Grid.Col>
       </Grid>
     ),

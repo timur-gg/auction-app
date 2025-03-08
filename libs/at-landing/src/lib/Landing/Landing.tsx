@@ -30,11 +30,7 @@ import {
 import { auctionData } from '@mocks/auction.tsx';
 // import AuctionCard from '../components/inventory/AuctionCard';
 // import { GetInTouchSimple } from '../components/inventory/GetInTouchSimple';
-import ComicPic from './ComicPic';
-import img1 from '../assets/1B/1B.png';
-import img2 from '../assets/1B/1B.png';
-import img3 from '../assets/1B/1B.png';
-import img4 from '../assets/1B/1B.png';
+
 import { landingStyle } from '../theme/theme.ts';
 import { IAuction } from '@auction-app/at-models';
 
@@ -44,7 +40,6 @@ const auctionSamples: IAuction[] = auctionData.filter((a) =>
   sampleIds.includes(a.id),
 );
 
-const Row1 = [img1, img2, img3, img4];
 
 const useStyles = createStyles((theme: MantineTheme) => landingStyle(theme));
 
@@ -111,28 +106,7 @@ export default function Landing() {
           </Group>
         </Center>
       </Paper>
-      <Space h={17} />
-      <Paper
-        style={{
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          // backgroundImage: bgImg,
-          // background: "rgb(148,204,221)",
-        }}
-        withBorder
-        shadow="sm"
-        // w="100%"
-        h="auto"
-        // p={25}
-        // pt={30}
-        radius="xs"
-        bg="#B4DDE9"
-      >
-        <ComicPic ind={0} />
-        {/* <Center>
-          <ComicPic ind={0} />
-        </Center> */}
-      </Paper>
+
       <Space h={10} />
 
       <Paper withBorder shadow="md" w="100%" p={15} radius="xs">

@@ -10,14 +10,14 @@ import Auction from './pages/Auction';
 import HeaderSimple from './components/Header';
 import React from 'react';
 import Signup from './pages/Signup';
-import Landing from './pages/Landing';
-import FAQ from './pages/Landing';
+
 
 import ClientProfile from './pages/ClientProfile';
 import BuilderProfile from './pages/BuilderProfile';
 import Project from './pages/Project';
 import CreateAuction from './pages/CreateAuction';
 import ConfirmProject from './pages/ConfirmProject';
+import {AtLanding} from "@auction-app/at-landing";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +26,7 @@ const Main = () => {
     <Routes>
       {' '}
       {/* The Switch decides which component to show based on the current URL.*/}
-      <Route path="/" element={<Landing />}></Route>
+      <Route path="/" element={<AtLanding />}></Route>
       <Route path="/inventory" element={<Inventory />}></Route>
       <Route path="/create_auction" element={<CreateAuction />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>
@@ -52,7 +52,6 @@ function App(): React.JSX.Element {
               <HeaderSimple
                 links={[
                   { link: '/inventory', label: 'Inventory' },
-                  { link: '/#faq', label: 'FAQ' },
                   { link: '/auction/1', label: 'Auction' },
                   { link: '/signup', label: 'Signup' },
                   { link: '/client_profile', label: 'Client Profile' },

@@ -31,7 +31,7 @@ import { notifications } from '@mantine/notifications';
 
 import mapImg from '../../img/map.png';
 import { auctionCardStyle } from '../../styles/theme.ts';
-import { IAuction } from '../../types.ts';
+import { IAuction } from '@auction-app/at-models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

@@ -29,7 +29,7 @@ import {
 import SizeFilter from '../inventory/SizeFilter';
 import FloorFilter from '../AuctionUpcoming/FloorFilter';
 import { unitTableEditStyle } from '../../styles/theme.ts';
-import { ILot } from '../../types.ts';
+import { ILot } from '@auction-app/at-models';
 
 type LotSelectionProps = {
   rowSelection: MRT_RowSelectionState;

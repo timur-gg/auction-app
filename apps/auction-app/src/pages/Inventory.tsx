@@ -41,7 +41,7 @@ import SizeFilter from '../components/inventory/SizeFilter';
 import { auctionData } from '@mocks/auction.tsx';
 import pinAsset from '../assets/pin.png';
 import { inventoryStyle } from '../styles/theme.ts';
-import { IAuction } from '../types.ts';
+import { IAuction } from '@auction-app/at-models';
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
@@ -406,7 +406,7 @@ const Inventory = () => {
           <DatePickerInput
             type="range"
             label="Completion date"
-             value={value}
+            value={value}
             onChange={setValue}
             mx="auto"
             maw={400}
@@ -416,7 +416,7 @@ const Inventory = () => {
           <DatePickerInput
             type="range"
             label="Auction date"
-             value={value}
+            value={value}
             onChange={setValue}
             mx="auto"
             maw={400}

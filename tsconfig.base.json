@@ -17,6 +17,20 @@
     "baseUrl": ".",
     "paths": {
       "@auction-app/app-state": ["libs/app-state/src/index.ts"],
+      "@auction-app/at-auction": ["libs/at-auction/src/index.ts"],
+      "@auction-app/at-builder-profile": [
+        "libs/at-builder-profile/src/index.ts"
+      ],
+      "@auction-app/at-client-profile": ["libs/at-client-profile/src/index.ts"],
+      "@auction-app/at-confirm-project": [
+        "libs/at-confirm-project/src/index.ts"
+      ],
+      "@auction-app/at-create-auction": ["libs/at-create-auction/src/index.ts"],
+      "@auction-app/at-inventory": ["libs/at-inventory/src/index.ts"],
+      "@auction-app/at-landing": ["libs/at-landing/src/index.ts"],
+      "@auction-app/at-models": ["libs/at-models/src/index.ts"],
+      "@auction-app/at-project": ["libs/at-project/src/index.ts"],
+      "@auction-app/at-signup": ["libs/at-signup/src/index.ts"],
       "@auction-app/ui-components": ["libs/ui-components/src/index.ts"],
       "@mocks/*": ["apps/auction-app/src/mocks/*"]
     }

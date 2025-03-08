@@ -1,4 +1,4 @@
-import {MantineTheme} from "@mantine/core";
+import { MantineTheme } from '@mantine/core';
 
 export const landingStyle = (theme: MantineTheme) => {
   return {

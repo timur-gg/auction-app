@@ -1,5 +1,5 @@
 import styles from './at-landing.module.css';
-import Landing from "./Landing/Landing.tsx";
+import Landing from './Landing/Landing.tsx';
 
 export function AtLanding() {
   return (

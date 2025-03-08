@@ -11,13 +11,13 @@ import HeaderSimple from './components/Header';
 import React from 'react';
 import Signup from './pages/Signup';
 
-
 import ClientProfile from './pages/ClientProfile';
 import BuilderProfile from './pages/BuilderProfile';
 import Project from './pages/Project';
 import CreateAuction from './pages/CreateAuction';
 import ConfirmProject from './pages/ConfirmProject';
-import {AtLanding} from "@auction-app/at-landing";
+import { AtLanding } from '@auction-app/at-landing';
+import {AtInventory} from "@auction-app/at-inventory";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +27,7 @@ const Main = () => {
       {' '}
       {/* The Switch decides which component to show based on the current URL.*/}
       <Route path="/" element={<AtLanding />}></Route>
-      <Route path="/inventory" element={<Inventory />}></Route>
+      <Route path="/inventory" element={<AtInventory />}></Route>
       <Route path="/create_auction" element={<CreateAuction />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>
       <Route path="/project/:id" element={<Project />}></Route>

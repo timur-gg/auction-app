@@ -40,7 +40,6 @@ const auctionSamples: IAuction[] = auctionData.filter((a) =>
   sampleIds.includes(a.id),
 );
 
-
 const useStyles = createStyles((theme: MantineTheme) => landingStyle(theme));
 
 // "url(https://images.unsplash.com/photo-1559869824-929df9dab35e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2639&q=80)",
@@ -313,9 +312,7 @@ export default function Landing() {
           Contact Us
         </Title>
         <Space h={40} />
-        <Container>
-          {/*<GetInTouchSimple />*/}
-        </Container>
+        <Container>{/*<GetInTouchSimple />*/}</Container>
       </Paper>
     </>
   );

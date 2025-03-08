@@ -25,7 +25,6 @@ export default defineConfig({
     alias: {
       // Add your folder here for easy imports
       '@mocks': path.resolve(__dirname, './src/mocks'),
-
     },
     extensions: ['.ts', '.js', '.tsx', '.jsx', '.json'], // Ensure these are auto-resolved
   },

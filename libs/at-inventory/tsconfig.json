@@ -5,7 +5,11 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "paths": {
+      "@assets/*": ["libs/at-inventory/src/assets/*"]
+    }
+
   },
   "files": [],
   "include": [],

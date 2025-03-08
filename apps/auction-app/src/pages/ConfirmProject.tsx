@@ -15,12 +15,7 @@ import {
   Container,
   CSSObject
 } from '@mantine/core';
-import { ref } from 'firebase/database';
-import { database } from '../db/firebase.js';
-import {
-  useDatabaseSnapshot,
-  useDatabaseUpdateMutation,
-} from '@react-query-firebase/database';
+
 
 import {
   IconCheck,
@@ -148,40 +143,11 @@ export default function ConfirmProject() {
     }
   };
 
-  const dbRef = ref(database, `projects/${id}`);
-  const mutation = useDatabaseUpdateMutation(dbRef);
 
-  useDatabaseSnapshot(
-    [`projects/${id}`],
-    dbRef,
-    { subscribe: true },
-    {
-      onSuccess(snapshot: any) {
-        const proj = snapshot.val();
-
-        console.log(proj.status);
-        setSubmitStatus(proj.status);
-
-        if (
-          proj.status === 'Ready for Auction' ||
-          proj.status === 'In Review'
-        ) {
-          setSubmitted(true);
-          setConfirmedTabs(tabs);
-          setActiveTab('overview');
-        }
-      },
-      onError(error: any) {
-        console.log(error);
-      },
-    }
-  );
 
   const submitAuction = () => {
     console.log('submitting');
-    mutation.mutate({
-      status: 'Ready for Auction',
-    });
+
   };
 
   return (

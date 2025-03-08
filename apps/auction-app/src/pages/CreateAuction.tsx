@@ -23,14 +23,7 @@ import { Link } from "react-router-dom";
 import FileDrop from "../components/signup/FileDrop";
 import DetailedDescripion from "../components/CreateAuction/DetailedDescription";
 import AddUnit from "../components/CreateAuction/AddUnit";
-import { ref } from "firebase/database";
-import { database } from "../db/firebase";
 
-import {
-  useDatabaseSnapshot,
-  useDatabaseSetMutation,
-  useDatabaseUpdateMutation,
-} from "@react-query-firebase/database";
 import { IconCalendarEvent } from "@tabler/icons-react";
 
 export default function CreateAuction() {
@@ -61,32 +54,7 @@ export default function CreateAuction() {
       github: "",
     },
 
-    // validate: (values) => {
-    //   if (active === 0) {
-    //     return {
-    //       username:
-    //         values.username.trim().length < 6
-    //           ? "Username must include at least 6 characters"
-    //           : null,
-    //       password:
-    //         values.password.length < 6
-    //           ? "Password must include at least 6 characters"
-    //           : null,
-    //     };
-    //   }
 
-    //   if (active === 1) {
-    //     return {
-    //       name:
-    //         values.name.trim().length < 2
-    //           ? "Name must include at least 2 characters"
-    //           : null,
-    //       email: /^\S+@\S+$/.test(values.email) ? null : "Invalid email",
-    //     };
-    //   }
-
-    //   return {};
-    // },
   });
 
   const nextStep = () =>
@@ -100,37 +68,12 @@ export default function CreateAuction() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
-  const dbRef = ref(database, "projects");
-  const mutation = useDatabaseUpdateMutation(dbRef);
 
-  // const loadedProjectId = useDatabaseSnapshot(
-  //   ["projects"],
-  //   dbRef,
-  //   { subscribe: true },
-  //   {
-  //     onSuccess(snapshot: any) {
-  //       const projects = snapshot.val();
-  //       setProjectId(Object.keys(projects).length + 100);
-  //     },
-  //     onError(error: any) {
-  //       console.log(error);
-  //     },
-  //   }
-  // );
 
   const submitAuction = () => {
     if (projectId > 0) {
-      mutation.mutate({
-        [projectId]: {
-          name: projectTitle,
-          address: address,
-          constructionStart: constructionStartValue,
-          completionDate: completionValue,
-          status: "In Review",
-          builder: "Construciton Inc",
-        },
-      });
-    }
+      console.log("submitting");
+     }
   };
 
   return (
@@ -201,8 +144,7 @@ export default function CreateAuction() {
                     <Space w={10} />
 
                     <YearPickerInput
-                      placeholder="Year"
-                      // value={completionValue}
+                       // value={completionValue}
                       // onChange={setCompletionValue}
                     />
                   </Group>
@@ -243,8 +185,7 @@ export default function CreateAuction() {
                     <Space w={10} />
 
                     <YearPickerInput
-                      placeholder="Year"
-                      // value={completionValue}
+                       // value={completionValue}
                       // onChange={setCompletionValue}
                     />
                   </Group>
@@ -313,8 +254,7 @@ export default function CreateAuction() {
                   ta="left"
                   // type="range"
                   label="Auction Date"
-                  placeholder="Pick auction date"
-                  value={auctionDateValue}
+                   value={auctionDateValue}
                   // onChange={setConstructionStartValue}
                   mx="auto"
                   maw={200}

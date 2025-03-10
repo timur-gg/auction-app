@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import AtLanding from './at-landing';
+import LandingPage from './landing.tsx';
 
 describe('AtLanding', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<AtLanding />);
+    const { baseElement } = render(<LandingPage />);
     expect(baseElement).toBeTruthy();
   });
 });

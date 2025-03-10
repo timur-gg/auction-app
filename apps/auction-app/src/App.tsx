@@ -16,7 +16,7 @@ import BuilderProfile from './pages/BuilderProfile';
 import Project from './pages/Project';
 import CreateAuction from './pages/CreateAuction';
 import ConfirmProject from './pages/ConfirmProject';
-import { AtLanding } from '@auction-app/at-landing';
+import { LandingPage } from '@auction-app/landing';
 import {AtInventory} from "@auction-app/at-inventory";
 
 const queryClient = new QueryClient();
@@ -26,7 +26,7 @@ const Main = () => {
     <Routes>
       {' '}
       {/* The Switch decides which component to show based on the current URL.*/}
-      <Route path="/" element={<AtLanding />}></Route>
+      <Route path="/" element={<LandingPage />}></Route>
       <Route path="/inventory" element={<AtInventory />}></Route>
       <Route path="/create_auction" element={<CreateAuction />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>

@@ -27,7 +27,7 @@
       ],
       "@auction-app/at-create-auction": ["libs/at-create-auction/src/index.ts"],
       "@auction-app/at-inventory": ["libs/at-inventory/src/index.ts"],
-      "@auction-app/at-landing": ["libs/at-landing/src/index.ts"],
+      "@auction-app/landing": ["libs/landing/src/index.ts"],
       "@auction-app/models": ["libs/models/src/index.ts"],
       "@auction-app/at-project": ["libs/at-project/src/index.ts"],
       "@auction-app/at-signup": ["libs/at-signup/src/index.ts"],

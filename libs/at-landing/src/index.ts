@@ -1,1 +1,1 @@
-export * from './lib/at-landing';
+export * from './lib/landing.tsx';

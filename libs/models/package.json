@@ -1,5 +1,5 @@
 {
-  "name": "@auction-app/at-models",
+  "name": "@auction-app/models",
   "version": "0.0.1",
   "private": true,
   "type": "module",

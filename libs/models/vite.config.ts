@@ -7,7 +7,7 @@ import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/libs/at-models',
+  cacheDir: '../../node_modules/.vite/libs/models',
   plugins: [
     nxViteTsPaths(),
     nxCopyAssetsPlugin(['*.md']),
@@ -23,7 +23,7 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../dist/libs/at-models',
+    outDir: '../../dist/libs/models',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
@@ -32,7 +32,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'at-models',
+      name: 'models',
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.

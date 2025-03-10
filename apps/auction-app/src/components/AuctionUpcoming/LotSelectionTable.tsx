@@ -25,7 +25,7 @@ import PriceFilter from '../inventory/PriceFilter';
 import SizeFilter from '../inventory/SizeFilter';
 import FloorFilter from './FloorFilter';
 import { lotSelectionStyle } from '../../styles/theme.ts';
-import { ILot } from '@auction-app/at-models';
+import { ILot } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

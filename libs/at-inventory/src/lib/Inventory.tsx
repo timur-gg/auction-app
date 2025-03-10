@@ -41,7 +41,7 @@ import SizeFilter from './inventory/SizeFilter';
 import { auctionData } from '@mocks/auction.tsx';
 // import pinAsset from '@assets/pin.png';
 import { inventoryStyle } from './theme/theme.ts';
-import { IAuction } from '@auction-app/at-models';
+import { IAuction } from '@auction-app/models';
 
 
 const pinAsset = "📍"

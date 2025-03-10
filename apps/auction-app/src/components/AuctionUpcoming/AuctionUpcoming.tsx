@@ -56,7 +56,7 @@ import floorPlan3 from '../../assets/floorPlan3.png';
 import floorPlan4 from '../../assets/floorPlan4.png';
 import pinAsset from '../../assets/pin.png';
 import { auctionUpcomingStyle } from '../../styles/theme.ts';
-import { IAuction } from '@auction-app/at-models';
+import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

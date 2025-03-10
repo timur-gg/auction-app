@@ -32,7 +32,7 @@ import { auctionData } from '@mocks/auction.tsx';
 // import { GetInTouchSimple } from '../components/inventory/GetInTouchSimple';
 
 import { landingStyle } from '../theme/theme.ts';
-import { IAuction } from '@auction-app/at-models';
+import { IAuction } from '@auction-app/models';
 
 const sampleIds = ['1', '2', '3', '4'];
 

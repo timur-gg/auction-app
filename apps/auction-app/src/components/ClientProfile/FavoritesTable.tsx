@@ -2,7 +2,7 @@ import { Badge, Group, ActionIcon } from '@mantine/core';
 import { IconBed, IconBath, IconRuler, IconTrash } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useNavigate } from 'react-router-dom';
-import { IAuction, ILot } from '@auction-app/at-models';
+import { IAuction, ILot } from '@auction-app/models';
 import { auctionData } from '@mocks/auction.tsx';
 
 export default function FavoritesTable({

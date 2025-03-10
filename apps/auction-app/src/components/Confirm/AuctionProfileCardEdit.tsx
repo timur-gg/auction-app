@@ -35,7 +35,7 @@ import RUG from 'react-upload-gallery';
 import 'react-upload-gallery/dist/style.css';
 import './rug_style.css';
 import { auctionsProfileCardEditStyle } from '../../styles/theme.ts';
-import { IAuction } from '@auction-app/at-models';
+import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

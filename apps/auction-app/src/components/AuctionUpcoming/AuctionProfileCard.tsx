@@ -28,7 +28,7 @@ import React from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import mapImg from '../../img/map.png';
 import { auctionProfileCardStyle } from '../../styles/theme.ts';
-import { IAuction } from '@auction-app/at-models';
+import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

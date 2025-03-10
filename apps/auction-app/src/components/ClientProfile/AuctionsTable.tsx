@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { lotMockData as lots } from '@mocks/auction.tsx';
 import { useDisclosure } from '@mantine/hooks';
 import { useState } from 'react';
-import { IAuction, ILot } from '@auction-app/at-models';
+import { IAuction, ILot } from '@auction-app/models';
 
 export default function AuctionsTable({
   auctions,

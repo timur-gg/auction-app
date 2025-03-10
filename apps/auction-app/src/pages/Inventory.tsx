@@ -41,7 +41,7 @@ import SizeFilter from '../components/inventory/SizeFilter';
 import { auctionData } from '@mocks/auction.tsx';
 import pinAsset from '../assets/pin.png';
 import { inventoryStyle } from '../styles/theme.ts';
-import { IAuction } from '@auction-app/at-models';
+import { IAuction } from '@auction-app/models';
 
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);

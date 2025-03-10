@@ -18,7 +18,7 @@ import {
   IconClock,
   IconMoneybag,
 } from '@tabler/icons-react';
-import { IAuction, ILot } from '@auction-app/at-models';
+import { IAuction, ILot } from '@auction-app/models';
 
 export const featureGrid = [
   { label: 'auctionDate', icon: IconCalendarEvent },

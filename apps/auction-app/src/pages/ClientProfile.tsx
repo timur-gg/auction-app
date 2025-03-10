@@ -35,7 +35,7 @@ import {
   builderUserData as UserData,
   clientFavoriteLotData,
 } from '@mocks/auction.tsx';
-import { IAuction, ILot } from '@auction-app/at-models';
+import { IAuction, ILot } from '@auction-app/models';
 
 const useStyles = createStyles((theme: MantineTheme) =>
   clientProfileStyle(theme),

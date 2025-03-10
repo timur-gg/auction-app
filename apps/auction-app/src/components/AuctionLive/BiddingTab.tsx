@@ -33,7 +33,7 @@ import { BidSelector } from './BidSelector';
 import ShowCounter from './ShowCounter';
 import { useDisclosure } from '@mantine/hooks';
 import Countdown from 'react-countdown';
-import { ILot } from '@auction-app/at-models';
+import { ILot } from '@auction-app/models';
 import { auctionNotStartedStyle, biddingTabStyle } from '../../styles/theme';
 
 const useStyles = createStyles(

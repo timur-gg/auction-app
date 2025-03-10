@@ -25,7 +25,7 @@ import {
 } from '@tabler/icons-react';
 import React from 'react';
 import mapImg from '../../img/map.png';
-import { IAuction } from '@auction-app/at-models';
+import { IAuction } from '@auction-app/models';
 import { auctionDetailsStyle } from '../../styles/theme.ts';
 
 const useStyles = createStyles(

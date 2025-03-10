@@ -3,10 +3,8 @@ import {
   Grid,
   Image,
   createStyles,
-  useMantineTheme,
   UnstyledButton,
   Modal,
-  MantineTheme,
   CSSObject,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -21,8 +19,7 @@ import {
   type MRT_RowSelectionState,
 } from 'mantine-react-table';
 
-import PriceFilter from '../inventory/PriceFilter';
-import SizeFilter from '../inventory/SizeFilter';
+import { PriceFilter, SizeFilter } from '@auction-app/components';
 import FloorFilter from './FloorFilter';
 import { lotSelectionStyle } from '../../styles/theme.ts';
 import { ILot } from '@auction-app/models';

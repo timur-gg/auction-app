@@ -1,24 +1,12 @@
 import {
   SegmentedControl,
-  Space,
   Grid,
-  Text,
   Image,
-  createStyles,
-  rem,
-  useMantineTheme,
-  Group,
-  Box,
   UnstyledButton,
-  Modal,
-  Button,
-  ActionIcon,
-  MantineTheme,
+  Modal
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-
-import { IconArrowLeft, IconZoomInArea } from '@tabler/icons-react';
-
+import { IconZoomInArea } from '@tabler/icons-react';
 import { useEffect, useMemo, useState } from 'react';
 import {
   MantineReactTable,
@@ -26,9 +14,8 @@ import {
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
 } from 'mantine-react-table';
-import SizeFilter from '../inventory/SizeFilter';
+import { SizeFilter } from '@auction-app/components';
 import FloorFilter from '../AuctionUpcoming/FloorFilter';
-import { unitTableEditStyle } from '../../styles/theme.ts';
 import { ILot } from '@auction-app/models';
 
 type LotSelectionProps = {
@@ -58,7 +45,7 @@ export function UnitTableEdit(props: LotSelectionProps) {
     size: (lot: ILot) =>
       lot.size >= (size[0] + 20) * 12.5 && lot.size <= (size[1] + 20) * 12.5,
     floor: (lot: ILot) =>
-      lot.floor >= floorRange[0] / 2 && lot.floor <= floorRange[1] / 2,
+      (lot.floor??0) >= floorRange[0] / 2 && (lot.floor??0) <= floorRange[1] / 2,
     bedroom: (lot: ILot) => {
       if (bedroom === -1) return true;
       else return lot.bedroom === bedroom;
@@ -131,7 +118,7 @@ export function UnitTableEdit(props: LotSelectionProps) {
 
   lots.forEach((lot: ILot) => {
     lot.plan = (
-      <UnstyledButton onClick={() => openModal(lot.planLink)}>
+      <UnstyledButton onClick={() => openModal(lot.planLink||'')}>
         <IconZoomInArea color="grey" />
       </UnstyledButton>
     );

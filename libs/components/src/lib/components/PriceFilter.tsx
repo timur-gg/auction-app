@@ -6,7 +6,7 @@ type PriceFilterProps = {
   addFilter: (filterName: string) => void;
 };
 
-export default function PriceFilter({
+export function PriceFilter({
   priceRange,
   setPriceRange,
   addFilter,

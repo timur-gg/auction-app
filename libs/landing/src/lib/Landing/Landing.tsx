@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Accordion,
   Container,
@@ -15,10 +15,9 @@ import {
   Text,
   Stack,
   MantineTheme,
+  createStyles
 } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { createStyles } from '@mantine/core';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   IconSearch,
   IconCoins,
@@ -27,12 +26,11 @@ import {
   IconGavel,
   IconLicense,
 } from '@tabler/icons-react';
-import { auctionData } from '@mocks/auction.tsx';
-// import AuctionCard from '../components/inventory/AuctionCard';
-// import { GetInTouchSimple } from '../components/inventory/GetInTouchSimple';
-
+import { auctionData, IAuction } from '@auction-app/models';
+import { AuctionCard } from '@auction-app/components';
+import ComicPic from './ComicPic';
+import GetInTouchSimple from './GetInTouchSimple';
 import { landingStyle } from '../theme/theme.ts';
-import { IAuction } from '@auction-app/models';
 
 const sampleIds = ['1', '2', '3', '4'];
 
@@ -105,6 +103,28 @@ export default function Landing() {
           </Group>
         </Center>
       </Paper>
+      <Space h={17} />
+      <Paper
+        style={{
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          // backgroundImage: bgImg,
+          // background: "rgb(148,204,221)",
+        }}
+        withBorder
+        shadow="sm"
+        // w="100%"
+        h="auto"
+        // p={25}
+        // pt={30}
+        radius="xs"
+        bg="#B4DDE9"
+      >
+        {/*<ComicPic ind={0} />*/}
+        {/* <Center>
+          <ComicPic ind={0} />
+        </Center> */}
+      </Paper>
 
       <Space h={10} />
 
@@ -117,7 +137,7 @@ export default function Landing() {
         <Grid>
           {auctionSamples.map((auction) => (
             <Grid.Col xs={4} sm={3}>
-              {/*<AuctionCard auction={auction} />*/}
+              <AuctionCard auction={auction} />
             </Grid.Col>
           ))}
         </Grid>
@@ -312,7 +332,9 @@ export default function Landing() {
           Contact Us
         </Title>
         <Space h={40} />
-        <Container>{/*<GetInTouchSimple />*/}</Container>
+        <Container>
+          <GetInTouchSimple />
+        </Container>
       </Paper>
     </>
   );

@@ -18,7 +18,6 @@ import {
   Group,
   Switch,
   useMantineTheme,
-  MantineTheme,
   CSSObject,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
@@ -33,15 +32,11 @@ import {
   IconLayoutGrid,
   IconMap,
 } from '@tabler/icons-react';
-
 // import GoogleMapReact from 'google-map-react';
-import AuctionCard from './AuctionCard';
-import PriceFilter from './PriceFilter';
-import SizeFilter from './SizeFilter';
-import { auctionData } from '@mocks/auction.tsx';
 // import pinAsset from '@assets/pin.png';
 import { inventoryStyle } from '../theme/theme.ts';
-import { IAuction } from '@auction-app/models';
+import { AuctionCard, PriceFilter, SizeFilter } from '@auction-app/components';
+import { auctionData, IAuction } from '@auction-app/models';
 
 const pinAsset = '📍';
 export function AutocompleteLoading() {
@@ -82,8 +77,7 @@ export function AutocompleteLoading() {
 }
 
 const useStyles = createStyles(
-  (theme): Record<string, CSSObject> =>
-    inventoryStyle(theme) as Record<string, CSSObject>,
+  (theme): Record<string, CSSObject> => inventoryStyle(theme),
 );
 
 const point = (
@@ -114,12 +108,12 @@ export function SliderMarks() {
   );
 }
 
-const builders = auctionData.map((a) => a.builder);
+const builders = auctionData.map((a: IAuction) => a.builder);
 
 const builderOptions = [...new Set(builders)].map((b) => ({
   label: b,
   value: b,
-}));
+})) as Array<{ label: string; value: string }>;
 
 const statusOptions = [
   { value: 'Live Auction', label: 'Live' },

@@ -6,7 +6,7 @@ type SizeFilterProps = {
   addFilter: (filterKey: string) => void;
 };
 
-export default function SizeFilter({
+export function SizeFilter({
   size,
   setSizeRange,
   addFilter,

@@ -29,8 +29,7 @@ import FileDrop from '../components/signup/FileDrop.js';
 import { Carousel } from '@mantine/carousel';
 import RUG from 'react-upload-gallery';
 import '../components/Confirm/rug_style.css';
-import AuctionCard from '../components/inventory/AuctionCard.js';
-
+import { AuctionCard } from '@auction-app/components';
 import floorPlan1 from '../assets/floorPlan1.png';
 import floorPlan2 from '../assets/floorPlan2.png';
 import floorPlan3 from '../assets/floorPlan3.png';
@@ -270,7 +269,7 @@ export default function ConfirmProject() {
                 <UnitTableEdit
                   lots={lots}
                   rowSelection={{}}
-                  setRowSelection={() => {}}
+                  setRowSelection={() => {return;}}
                   // rowSelection={rowSelection}
                   // setRowSelection={setRowSelection}
                   // backButtonAction={() => setStep(1)}
@@ -300,7 +299,7 @@ export default function ConfirmProject() {
             <LotSelectionTable
               lots={lots}
               rowSelection={{}}
-              setRowSelection={() => {}}
+              setRowSelection={() => {return;}}
               // rowSelection={rowSelection}
               // setRowSelection={setRowSelection}
               // backButtonAction={() => setStep(1)}

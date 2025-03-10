@@ -8,7 +8,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
-export function GetInTouchSimple() {
+export default function GetInTouchSimple() {
   const form = useForm({
     initialValues: {
       name: '',

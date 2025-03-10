@@ -1,6 +1,6 @@
 // https://v5.mantine.dev/theming/theme-object/
 
-import { MantineTheme } from '@mantine/core';
+import { CSSObject, MantineTheme } from '@mantine/core';
 import { rem } from '@mantine/core';
 
 export const auctionLiveStyle = (theme: MantineTheme) => {
@@ -482,8 +482,8 @@ export const auctionCardStyle = (theme: MantineTheme) => {
     selected: { border: '3px solid #1E88E5' },
   };
 };
-export const headerStyle = (theme: MantineTheme) => {
 
+export const headerStyle = (theme: MantineTheme): Record<string, CSSObject> => {
   return {
     header: {
       display: 'flex',

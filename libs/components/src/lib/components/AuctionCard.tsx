@@ -8,10 +8,8 @@ import {
   createStyles,
   Center,
   Button,
-  rem,
   Tooltip,
   Space,
-  MantineTheme,
   CSSObject,
 } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
@@ -29,8 +27,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
 
-import mapImg from '../../img/map.png';
-import { auctionCardStyle } from '../../styles/theme.ts';
+// import mapImg from '../../img/map.png';
+import { auctionCardStyle } from '../theme/theme.ts';
 import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
@@ -47,7 +45,8 @@ const featureGrid = [
   {
     label: 'address',
     icon: IconAddressBook,
-    desc: <Image h={200} w={300} src={mapImg} mb={47} />,
+    // desc: <Image h={200} w={300} src={mapImg} mb={47} />,
+    desc: '',
   },
   { label: 'bedroom', icon: IconBedFilled, desc: 'Number of bedrooms' },
   {

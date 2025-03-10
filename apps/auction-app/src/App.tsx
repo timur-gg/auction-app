@@ -2,15 +2,11 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { MantineProvider, AppShell, Header } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-
-import Inventory from './pages/Inventory';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Auction from './pages/Auction';
-
 import HeaderSimple from './components/Header';
 import React from 'react';
 import Signup from './pages/Signup';
-
 import ClientProfile from './pages/ClientProfile';
 import BuilderProfile from './pages/BuilderProfile';
 import Project from './pages/Project';

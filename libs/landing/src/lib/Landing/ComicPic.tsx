@@ -4,14 +4,14 @@ import { Carousel } from '@mantine/carousel';
 import { useRef } from 'react';
 import { Badge, Space, Box, Grid, Image, Title } from '@mantine/core';
 import 'typeface-roboto';
-import comic1 from '../../assets/1B/1B.png';
-import comic2 from '../../assets/1A/1A.png';
-import comic3 from '../../assets/2A/2A.png';
-import comic4 from '../../assets/2B/2B.png';
-import comic5 from '../../assets/3A/3A.png';
-import comic6 from '../../assets/3B/3B.png';
-import comic7 from '../../assets/4A/4A.png';
-import comic8 from '../../assets/4B/4B.png';
+import comic1 from '@auction-app/assets/1B/1B.png';
+import comic2 from '@auction-app/assets/1A/1A.png';
+import comic3 from '@auction-app/assets/2A/2A.png';
+import comic4 from '@auction-app/assets/2B/2B.png';
+import comic5 from '@auction-app/assets/3A/3A.png';
+import comic6 from '@auction-app/assets/3B/3B.png';
+import comic7 from '@auction-app/assets/4A/4A.png';
+import comic8 from '@auction-app/assets/4B/4B.png';
 
 const Slides = [
   {

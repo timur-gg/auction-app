@@ -35,16 +35,15 @@ import {
 } from '@tabler/icons-react';
 
 // import GoogleMapReact from 'google-map-react';
-import AuctionCard from './inventory/AuctionCard';
-import PriceFilter from './inventory/PriceFilter';
-import SizeFilter from './inventory/SizeFilter';
+import AuctionCard from './AuctionCard';
+import PriceFilter from './PriceFilter';
+import SizeFilter from './SizeFilter';
 import { auctionData } from '@mocks/auction.tsx';
 // import pinAsset from '@assets/pin.png';
-import { inventoryStyle } from './theme/theme.ts';
+import { inventoryStyle } from '../theme/theme.ts';
 import { IAuction } from '@auction-app/models';
 
-
-const pinAsset = "📍"
+const pinAsset = '📍';
 export function AutocompleteLoading() {
   const timeoutRef = useRef<number>(-1);
   const [value, setValue] = useState('');

@@ -33,7 +33,7 @@ import { notifications } from '@mantine/notifications';
 import { auctionCardStyle } from '../theme/theme.ts';
 import { IAuction } from '@auction-app/models';
 
-const mapImg = ""
+const mapImg = '';
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>
     auctionCardStyle(theme) as Record<string, CSSObject>,

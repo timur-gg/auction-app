@@ -7,9 +7,8 @@
     "strict": true,
     "types": ["vite/client"],
     "paths": {
-      "@assets/*": ["libs/at-inventory/src/assets/*"]
+      "@assets/*": ["libs/inventory/src/assets/*"]
     }
-
   },
   "files": [],
   "include": [],

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import AtInventory from './at-inventory';
+import InventoryPage from './inventory.tsx';
 
 describe('AtInventory', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<AtInventory />);
+    const { baseElement } = render(<InventoryPage />);
     expect(baseElement).toBeTruthy();
   });
 });

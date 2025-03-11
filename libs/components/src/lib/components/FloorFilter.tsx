@@ -6,11 +6,7 @@ type FloorFilterProps = {
   addFilter: (filterName: string) => void;
 };
 
-export function FloorFilter({
-  floor,
-  setFloor,
-  addFilter,
-}: FloorFilterProps) {
+export function FloorFilter({ floor, setFloor, addFilter }: FloorFilterProps) {
   return (
     <Popover width={500} position="bottom" withArrow shadow="md">
       <Popover.Target>

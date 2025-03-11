@@ -48,7 +48,7 @@ import {
   AuctionProfileCardVert,
   AuctionDetails,
   AuctionProfileCard,
-  LotSelectionTable
+  LotSelectionTable,
 } from '@auction-app/components';
 import { Carousel } from '@mantine/carousel';
 import floorPlan1 from '../../assets/floorPlan1.png';

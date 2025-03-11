@@ -30,7 +30,7 @@ import {
   AuctionCard,
   AuctionDetails,
   AuctionProfileCard,
-  LotSelectionTable
+  LotSelectionTable,
 } from '@auction-app/components';
 import floorPlan1 from '../assets/floorPlan1.png';
 import floorPlan2 from '../assets/floorPlan2.png';

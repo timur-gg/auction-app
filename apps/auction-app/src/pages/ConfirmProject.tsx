@@ -1,5 +1,5 @@
-import React, { FormEvent, useEffect } from 'react';
-import { useState, useRef } from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import 'react-chat-widget/lib/styles.css';
 import {
   Button,
@@ -19,17 +19,19 @@ import {
 import { IconCheck, IconFileDatabase, IconPencil } from '@tabler/icons-react';
 import AuctionProfileCardEdit from '../components/Confirm/AuctionProfileCardEdit.js';
 import { useParams } from 'react-router-dom';
-import AuctionProfileCard from '../components/AuctionUpcoming/AuctionProfileCard.js';
-import AuctionDetails from '../components/AuctionUpcoming/AuctionDetails.js';
 import AuctionDetailsEdit from '../components/Confirm/AuctionDetailsEdit.js';
-import { LotSelectionTable } from '../components/AuctionUpcoming/LotSelectionTable.js';
 import { UnitTableEdit } from '../components/Confirm/UnitTableEdit.js';
 import { lotMockData as lots, auctionData } from '@mocks/auction.tsx';
 import FileDrop from '../components/signup/FileDrop.js';
 import { Carousel } from '@mantine/carousel';
 import RUG from 'react-upload-gallery';
 import '../components/Confirm/rug_style.css';
-import { AuctionCard } from '@auction-app/components';
+import {
+  AuctionCard,
+  AuctionDetails,
+  AuctionProfileCard,
+  LotSelectionTable
+} from '@auction-app/components';
 import floorPlan1 from '../assets/floorPlan1.png';
 import floorPlan2 from '../assets/floorPlan2.png';
 import floorPlan3 from '../assets/floorPlan3.png';
@@ -269,7 +271,9 @@ export default function ConfirmProject() {
                 <UnitTableEdit
                   lots={lots}
                   rowSelection={{}}
-                  setRowSelection={() => {return;}}
+                  setRowSelection={() => {
+                    return;
+                  }}
                   // rowSelection={rowSelection}
                   // setRowSelection={setRowSelection}
                   // backButtonAction={() => setStep(1)}
@@ -299,7 +303,9 @@ export default function ConfirmProject() {
             <LotSelectionTable
               lots={lots}
               rowSelection={{}}
-              setRowSelection={() => {return;}}
+              setRowSelection={() => {
+                return;
+              }}
               // rowSelection={rowSelection}
               // setRowSelection={setRowSelection}
               // backButtonAction={() => setStep(1)}

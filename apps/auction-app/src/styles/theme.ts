@@ -483,7 +483,6 @@ export const auctionCardStyle = (theme: MantineTheme) => {
   };
 };
 export const headerStyle = (theme: MantineTheme) => {
-
   return {
     header: {
       display: 'flex',

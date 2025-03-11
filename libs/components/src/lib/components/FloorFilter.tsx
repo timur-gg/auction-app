@@ -6,7 +6,7 @@ type FloorFilterProps = {
   addFilter: (filterName: string) => void;
 };
 
-export default function FloorFilter({
+export function FloorFilter({
   floor,
   setFloor,
   addFilter,

@@ -12,8 +12,8 @@ import {
   Modal,
   CSSObject,
 } from '@mantine/core';
-import ShowCounter from '../AuctionLive/ShowCounter.js';
-import AuctionProfileCardVert from '../AuctionLive/AuctionProfileCardVert.js';
+
+import { AuctionProfileCardVert, ShowCounter } from '@auction-app/components';
 import {
   IconCalendarEvent,
   IconMoneybag,

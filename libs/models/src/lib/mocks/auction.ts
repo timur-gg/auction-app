@@ -375,7 +375,7 @@ export const lotPreviewData = [
     price: '500-600k',
     size: '300-400',
     units: '20',
-    plan:'',
+    plan: '',
     planLink:
       'https://condonow.com/The-Wyatt-Condos/Floor-Plan-Price/The-Chrome-1-bedroom/images/The-Wyatt-Condos-The-Chrome-1-bedroom-floorplan-v16.jpg',
   },

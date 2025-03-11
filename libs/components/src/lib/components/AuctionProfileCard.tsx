@@ -12,7 +12,6 @@ import {
   AspectRatio,
   Tooltip,
   Modal,
-  MantineTheme,
   CSSObject,
 } from '@mantine/core';
 import {
@@ -26,8 +25,8 @@ import {
 import { Carousel } from '@mantine/carousel';
 import React from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import mapImg from '../../img/map.png';
-import { auctionProfileCardStyle } from '../../styles/theme.ts';
+import mapImg from '../../assets/map.png';
+import { auctionProfileCardStyle } from '../theme/theme.ts';
 import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
@@ -237,5 +236,3 @@ export function AuctionProfileCard({
     </div>
   );
 }
-
-export default AuctionProfileCard;

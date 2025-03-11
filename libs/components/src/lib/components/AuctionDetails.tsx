@@ -24,9 +24,9 @@ import {
   IconPropeller,
 } from '@tabler/icons-react';
 import React from 'react';
-import mapImg from '../../img/map.png';
+import mapImg from '../../assets/map.png';
 import { IAuction } from '@auction-app/models';
-import { auctionDetailsStyle } from '../../styles/theme.ts';
+import { auctionDetailsStyle } from '../theme/theme.ts';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>
@@ -279,5 +279,3 @@ export function AuctionDetails({ auction }: { auction: IAuction }) {
     </Card.Section>
   );
 }
-
-export default AuctionDetails;

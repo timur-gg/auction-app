@@ -6,11 +6,7 @@ type SizeFilterProps = {
   addFilter: (filterKey: string) => void;
 };
 
-export function SizeFilter({
-  size,
-  setSizeRange,
-  addFilter,
-}: SizeFilterProps) {
+export function SizeFilter({ size, setSizeRange, addFilter }: SizeFilterProps) {
   return (
     <Popover width={500} position="bottom" withArrow shadow="md">
       <Popover.Target>

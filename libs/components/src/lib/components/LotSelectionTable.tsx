@@ -8,7 +8,6 @@ import {
   CSSObject,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-
 import { IconArrowLeft, IconZoomInArea, IconStar } from '@tabler/icons-react';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -19,9 +18,8 @@ import {
   type MRT_RowSelectionState,
 } from 'mantine-react-table';
 
-import { PriceFilter, SizeFilter } from '@auction-app/components';
-import FloorFilter from './FloorFilter';
-import { lotSelectionStyle } from '../../styles/theme.ts';
+import { PriceFilter, SizeFilter, FloorFilter } from '@auction-app/components';
+import { lotSelectionStyle } from '../theme/theme.ts';
 import { ILot } from '@auction-app/models';
 
 const useStyles = createStyles(

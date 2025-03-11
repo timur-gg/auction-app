@@ -15,7 +15,7 @@ import {
   Text,
   Stack,
   MantineTheme,
-  createStyles
+  createStyles,
 } from '@mantine/core';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {

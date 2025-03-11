@@ -10,7 +10,7 @@ import {
   Badge,
   CSSObject,
 } from '@mantine/core';
-import AuctionProfileCardVert from '../AuctionLive/AuctionProfileCardVert.js';
+import { AuctionProfileCardVert } from '@auction-app/components';
 import {
   IconCalendarEvent,
   IconMoneybag,

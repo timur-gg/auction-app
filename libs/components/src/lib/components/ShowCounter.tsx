@@ -25,7 +25,7 @@ const DateTimeDisplay = ({ value, type, isDanger }: DateTimeDisplayProps) => {
   );
 };
 
-const ShowCounter = ({
+export const ShowCounter = ({
   days = -1,
   hours,
   minutes,
@@ -68,5 +68,3 @@ const ShowCounter = ({
     );
   }
 };
-
-export default ShowCounter;

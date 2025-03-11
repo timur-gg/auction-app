@@ -2,16 +2,14 @@ import {
   IconBath,
   IconBedFilled,
   IconCar,
-  IconCurrencyDollarCanadian,
   IconHash,
   IconLock,
   IconRuler,
   IconGavel,
   IconDoorExit,
   IconSunHigh,
-  TablerIconsProps,
 } from '@tabler/icons-react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import {
   Card,
   Grid,
@@ -21,20 +19,18 @@ import {
   Button,
   Text,
   createStyles,
-  rem,
   Center,
   Modal,
   Title,
-  NumberInputHandlers,
   CSSObject,
 } from '@mantine/core';
 import PricePlot from './PricePlot';
 import { BidSelector } from './BidSelector';
-import ShowCounter from './ShowCounter';
 import { useDisclosure } from '@mantine/hooks';
 import Countdown from 'react-countdown';
 import { ILot } from '@auction-app/models';
-import { auctionNotStartedStyle, biddingTabStyle } from '../../styles/theme';
+import { biddingTabStyle } from '../../styles/theme';
+import { ShowCounter } from '@auction-app/components';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>
@@ -74,7 +70,7 @@ export function BiddingTab({ lot, half }: { lot: ILot; half?: boolean }) {
 
   const [status, setStatus] = useState('live');
   const [betTime, setBetTime] = useState(-1);
-  const [remainingTime, setRemainingTime] = useState(lot.timeLeft);
+  const [remainingTime, setRemainingTime] = useState(lot.timeLeft||0);
 
   console.log(remainingTime);
 
@@ -239,7 +235,7 @@ export function BiddingTab({ lot, half }: { lot: ILot; half?: boolean }) {
                 <Grid>
                   <Grid.Col xs={6} sm={10} {...(half ? { md: 6 } : { md: 12 })}>
                     <Text fz="xl" fw={700} sx={{ lineHeight: 1 }}>
-                      ${(value || (lot.price + 100) * 1000).toLocaleString()}
+                      ${(value || ((lot.price||0) + 100) * 1000).toLocaleString()}
                     </Text>
                     <Text
                       fz="sm"
@@ -254,7 +250,7 @@ export function BiddingTab({ lot, half }: { lot: ILot; half?: boolean }) {
 
                   <Grid.Col xs={6} sm={10} {...(half ? { md: 6 } : { md: 12 })}>
                     <Text fz="lg" fw={500} sx={{ lineHeight: 1 }}>
-                      ${(lot.price * 1000).toLocaleString()}
+                      ${((lot.price||0) * 1000).toLocaleString()}
                     </Text>
                     <Text
                       fz="sm"
@@ -303,7 +299,7 @@ export function BiddingTab({ lot, half }: { lot: ILot; half?: boolean }) {
                 Starting price
               </Text>
               <Text fz="lg" fw={500} sx={{ lineHeight: 1 }}>
-                ${(lot.price * 1000).toLocaleString()}
+                ${((lot.price||0) * 1000).toLocaleString()}
               </Text>
             </Group>
             <Group>
@@ -311,7 +307,7 @@ export function BiddingTab({ lot, half }: { lot: ILot; half?: boolean }) {
                 Winning bid
               </Text>
               <Text fz="lg" fw={700}>
-                ${(value || (lot.price + 100) * 1000).toLocaleString()}
+                ${(value || ((lot.price||0) + 100) * 1000).toLocaleString()}
               </Text>
             </Group>
 
@@ -342,7 +338,7 @@ export function BiddingTab({ lot, half }: { lot: ILot; half?: boolean }) {
                     ) : (
                       <Text fz="md" c="dimmed" fw={500}>
                         Winning bid: $
-                        {(value || (lot.price + 100) * 1000).toLocaleString()}
+                        {(value || ((lot.price||0) + 100) * 1000).toLocaleString()}
                       </Text>
                     )}
                     <Space h={10} />

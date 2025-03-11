@@ -3,7 +3,7 @@ import {
   Grid,
   Image,
   UnstyledButton,
-  Modal
+  Modal,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconZoomInArea } from '@tabler/icons-react';
@@ -14,8 +14,7 @@ import {
   type MRT_ColumnDef,
   type MRT_RowSelectionState,
 } from 'mantine-react-table';
-import { SizeFilter } from '@auction-app/components';
-import FloorFilter from '../AuctionUpcoming/FloorFilter';
+import { SizeFilter, FloorFilter } from '@auction-app/components';
 import { ILot } from '@auction-app/models';
 
 type LotSelectionProps = {
@@ -45,7 +44,8 @@ export function UnitTableEdit(props: LotSelectionProps) {
     size: (lot: ILot) =>
       lot.size >= (size[0] + 20) * 12.5 && lot.size <= (size[1] + 20) * 12.5,
     floor: (lot: ILot) =>
-      (lot.floor??0) >= floorRange[0] / 2 && (lot.floor??0) <= floorRange[1] / 2,
+      (lot.floor ?? 0) >= floorRange[0] / 2 &&
+      (lot.floor ?? 0) <= floorRange[1] / 2,
     bedroom: (lot: ILot) => {
       if (bedroom === -1) return true;
       else return lot.bedroom === bedroom;
@@ -118,7 +118,7 @@ export function UnitTableEdit(props: LotSelectionProps) {
 
   lots.forEach((lot: ILot) => {
     lot.plan = (
-      <UnstyledButton onClick={() => openModal(lot.planLink||'')}>
+      <UnstyledButton onClick={() => openModal(lot.planLink || '')}>
         <IconZoomInArea color="grey" />
       </UnstyledButton>
     );

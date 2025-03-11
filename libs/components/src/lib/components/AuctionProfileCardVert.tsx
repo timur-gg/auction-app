@@ -6,11 +6,8 @@ import {
   Badge,
   createStyles,
   Group,
-  Button,
   Grid,
-  Space,
   Flex,
-  rem,
   Tooltip,
   CSSObject,
 } from '@mantine/core';
@@ -23,8 +20,8 @@ import {
   IconLock,
 } from '@tabler/icons-react';
 import React from 'react';
-import mapImg from '../../img/map.png';
-import { auctionProfileCardVertStyle } from '../../styles/theme';
+import mapImg from '../../assets/map.png';
+import { auctionProfileCardVertStyle } from '../theme/theme';
 import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
@@ -130,5 +127,3 @@ export function AuctionProfileCardVert({ auction }: { auction: IAuction }) {
     </div>
   );
 }
-
-export default AuctionProfileCardVert;

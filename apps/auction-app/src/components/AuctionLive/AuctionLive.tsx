@@ -8,8 +8,6 @@ import {
   createStyles,
   CSSObject,
 } from '@mantine/core';
-import ShowCounter from './ShowCounter.js';
-import AuctionProfileCardVert from './AuctionProfileCardVert.js';
 import { lotMockData as lotsData } from '@mocks/auction.tsx';
 import { BiddingTab } from './BiddingTab.js';
 import { auctionLiveStyle } from '../../styles/theme';
@@ -19,6 +17,7 @@ import {
   IconMoneybag,
 } from '@tabler/icons-react';
 import { IAuction, ILot } from '@auction-app/models';
+import { AuctionProfileCardVert, ShowCounter } from '@auction-app/components';
 
 export const featureGrid = [
   { label: 'auctionDate', icon: IconCalendarEvent },

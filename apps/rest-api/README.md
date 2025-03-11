@@ -11,19 +11,23 @@ The system follows a **microservices-inspired architecture** with a modular Nest
 ### Components:
 
 - **Authentication & User Management:**
+
   - Uses JWT authentication.
   - Handles user roles (Buyer, Builder, Admin).
 
 - **Project & Unit Management:**
+
   - Builders can create projects with address and unit details.
   - Each unit can have an associated auction.
 
 - **Auction Service:**
+
   - Auctions are created for individual units.
   - Auctions have a whitelist of users allowed to participate.
   - Bids are placed in real time.
 
 - **Bid Processing:**
+
   - Bids are sent via WebSockets to the **Go auction service**.
   - The Go service validates and processes bids before broadcasting updates.
 
@@ -48,7 +52,6 @@ The system follows a **microservices-inspired architecture** with a modular Nest
 - `POST /projects/:id/units` - Add a unit to a project.
 - `DELETE /projects/:id/units` - Delete a unit on a project.
 - `DELETE /projects/:id` - Delete a project (project data will be updated with a 'deleted' flag.
-
 
 ### Auctions
 

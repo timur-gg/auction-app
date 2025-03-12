@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { createStyles, Container, CSSObject } from '@mantine/core';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { AuctionLive } from '../components/AuctionLive/AuctionLive.js';
 import { AuctionPassed } from '../components/AuctionPassed/AuctionPassed.js';
 import { AuctionNotStarted } from '../components/AuctionUpcoming/AuctionNotStarted.js';

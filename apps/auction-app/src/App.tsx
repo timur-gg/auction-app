@@ -2,22 +2,18 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { MantineProvider, AppShell, Header } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-
-import Inventory from './pages/Inventory';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Auction from './pages/Auction';
-
 import HeaderSimple from './components/Header';
 import React from 'react';
 import Signup from './pages/Signup';
-import Landing from './pages/Landing';
-import FAQ from './pages/Landing';
-
 import ClientProfile from './pages/ClientProfile';
 import BuilderProfile from './pages/BuilderProfile';
 import Project from './pages/Project';
 import CreateAuction from './pages/CreateAuction';
 import ConfirmProject from './pages/ConfirmProject';
+import { LandingPage } from '@auction-app/landing';
+import { InventoryPage } from '@auction-app/inventory';
 
 const queryClient = new QueryClient();
 
@@ -26,8 +22,8 @@ const Main = () => {
     <Routes>
       {' '}
       {/* The Switch decides which component to show based on the current URL.*/}
-      <Route path="/" element={<Landing />}></Route>
-      <Route path="/inventory" element={<Inventory />}></Route>
+      <Route path="/" element={<LandingPage />}></Route>
+      <Route path="/inventory" element={<InventoryPage />}></Route>
       <Route path="/create_auction" element={<CreateAuction />}></Route>
       <Route path="/auction/:id" element={<Auction />}></Route>
       <Route path="/project/:id" element={<Project />}></Route>
@@ -52,7 +48,6 @@ function App(): React.JSX.Element {
               <HeaderSimple
                 links={[
                   { link: '/inventory', label: 'Inventory' },
-                  { link: '/#faq', label: 'FAQ' },
                   { link: '/auction/1', label: 'Auction' },
                   { link: '/signup', label: 'Signup' },
                   { link: '/client_profile', label: 'Client Profile' },

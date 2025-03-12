@@ -3,7 +3,7 @@ import { IconTrash } from '@tabler/icons-react';
 import { DataTable } from 'mantine-datatable';
 import { useNavigate } from 'react-router-dom';
 import { lotMockData as lots } from '@mocks/auction.tsx';
-import { IAuction } from '../../types.ts';
+import { IAuction } from '@auction-app/models';
 
 export default function ProjectsTable({
   auctions,

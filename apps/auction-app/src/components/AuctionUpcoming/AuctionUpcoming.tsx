@@ -22,13 +22,9 @@ import {
   Table,
   CSSObject,
 } from '@mantine/core';
-import AuctionProfileCard from './AuctionProfileCard.js';
 import AuctionConfirmation from './AuctionConfirmation.js';
-import AuctionDetails from './AuctionDetails.js';
-
 import { LotPreviewTable } from './LotPreviewTable.js';
 import { JSX, useState } from 'react';
-import { LotSelectionTable } from './LotSelectionTable.js';
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
@@ -48,7 +44,12 @@ import { lotMockData as lots } from '@mocks/auction.tsx';
 import { text } from '../../text.js';
 
 import { useDisclosure } from '@mantine/hooks';
-import AuctionProfileCardVert from '../AuctionLive/AuctionProfileCardVert.js';
+import {
+  AuctionProfileCardVert,
+  AuctionDetails,
+  AuctionProfileCard,
+  LotSelectionTable
+} from '@auction-app/components';
 import { Carousel } from '@mantine/carousel';
 import floorPlan1 from '../../assets/floorPlan1.png';
 import floorPlan2 from '../../assets/floorPlan2.png';
@@ -56,7 +57,7 @@ import floorPlan3 from '../../assets/floorPlan3.png';
 import floorPlan4 from '../../assets/floorPlan4.png';
 import pinAsset from '../../assets/pin.png';
 import { auctionUpcomingStyle } from '../../styles/theme.ts';
-import { IAuction } from '../../types.ts';
+import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

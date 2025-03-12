@@ -42,7 +42,7 @@ import {
 } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 import { builderStyle } from '../styles/theme.ts';
-import { IAuction } from '../types.ts';
+import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

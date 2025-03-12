@@ -5,20 +5,22 @@ import {
   Container,
   Group,
   Burger,
-  rem,
   Text,
   ThemeIcon,
   Center,
   Space,
   Menu,
-  MantineTheme,
+  CSSObject,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link } from 'react-router-dom';
 import { IconGavel } from '@tabler/icons-react';
 import { headerStyle } from '../styles/theme.ts';
 
-const useStyles = createStyles((theme: MantineTheme) => headerStyle(theme));
+const useStyles = createStyles(
+  (theme): Record<string, CSSObject> =>
+    headerStyle(theme) as Record<string, CSSObject>,
+);
 
 interface HeaderSimpleProps {
   links: { link: string; label: string }[];

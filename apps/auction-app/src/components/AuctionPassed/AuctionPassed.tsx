@@ -10,7 +10,7 @@ import {
   Badge,
   CSSObject,
 } from '@mantine/core';
-import AuctionProfileCardVert from '../AuctionLive/AuctionProfileCardVert.js';
+import { AuctionProfileCardVert } from '@auction-app/components';
 import {
   IconCalendarEvent,
   IconMoneybag,
@@ -18,7 +18,7 @@ import {
 } from '@tabler/icons-react';
 import { lotMockData as lotsData } from '@mocks/auction';
 import { auctionPassedStyle } from '../../styles/theme';
-import { IAuction, ILot } from '../../types';
+import { IAuction, ILot } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

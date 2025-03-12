@@ -18,7 +18,7 @@ import {
 } from '@tabler/icons-react';
 import React from 'react';
 import { auctionsDetailsEditStyle } from '../../styles/theme.ts';
-import { IAuction } from '../../types.ts';
+import { IAuction } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

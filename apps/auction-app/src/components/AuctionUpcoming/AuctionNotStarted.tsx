@@ -12,8 +12,8 @@ import {
   Modal,
   CSSObject,
 } from '@mantine/core';
-import ShowCounter from '../AuctionLive/ShowCounter.js';
-import AuctionProfileCardVert from '../AuctionLive/AuctionProfileCardVert.js';
+
+import { AuctionProfileCardVert, ShowCounter } from '@auction-app/components';
 import {
   IconCalendarEvent,
   IconMoneybag,
@@ -25,7 +25,7 @@ import { notifications } from '@mantine/notifications';
 import { useDisclosure } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
 import { auctionNotStartedStyle } from '../../styles/theme.ts';
-import { IAuction, ILot } from '../../types.ts';
+import { IAuction, ILot } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

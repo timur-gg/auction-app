@@ -482,7 +482,6 @@ export const auctionCardStyle = (theme: MantineTheme) => {
     selected: { border: '3px solid #1E88E5' },
   };
 };
-
 export const headerStyle = (theme: MantineTheme) => {
   return {
     header: {

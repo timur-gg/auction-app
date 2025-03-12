@@ -24,7 +24,7 @@ import swaggerConfig from './common/config/swagger.config';
       validate,
     }),
     DatabaseModule,
-    RedisModule,
+    // RedisModule,
     AuthModule,
     UsersModule,
   ],

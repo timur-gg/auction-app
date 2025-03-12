@@ -1,4 +1,4 @@
-export interface IAuctionDetails {
+export interface IAuction {
   [key: string]: any;
   id: string;
   images: string[];

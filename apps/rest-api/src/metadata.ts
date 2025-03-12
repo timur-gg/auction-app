@@ -1,4 +1,10 @@
 /* eslint-disable */
+
+/**
+ * Asynchronously imports and returns metadata for various models and controllers.
+ *
+ * @returns {Promise<Object>} A promise that resolves to an object containing metadata for models and controllers.
+ */
 export default async () => {
   const t = {
     ['./users/entities/user.entity']: await import(

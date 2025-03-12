@@ -406,7 +406,7 @@ const Inventory = () => {
           <DatePickerInput
             type="range"
             label="Completion date"
-             value={value}
+            value={value}
             onChange={setValue}
             mx="auto"
             maw={400}
@@ -416,7 +416,7 @@ const Inventory = () => {
           <DatePickerInput
             type="range"
             label="Auction date"
-             value={value}
+            value={value}
             onChange={setValue}
             mx="auto"
             maw={400}

@@ -1,4 +1,5 @@
 # Auction App - NestJS Backend
+
 psql -U artur -d auction_db -h localhost -W
 
 ## Overview

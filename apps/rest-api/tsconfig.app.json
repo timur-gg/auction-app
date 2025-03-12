@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "target": "es2021",
     "allowImportingTsExtensions": true,
-    "noEmit": true,
+    "noEmit": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]

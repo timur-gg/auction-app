@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import {Logger, ValidationPipe} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
@@ -8,6 +8,8 @@ import { setupSwagger } from './swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const globalPrefix = 'api';
+  app.setGlobalPrefix(globalPrefix);
 
   setupSwagger(app);
 
@@ -26,10 +28,13 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   const port = configService.get('PORT');
-
-  await app.listen(port, () => {
-    console.log(`Application running at ${port}`);
-  });
+  await app.listen(port);
+  Logger.log(
+    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
+  );
 }
 
 bootstrap();
+
+
+

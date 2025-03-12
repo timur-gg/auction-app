@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npx npx nx serve auction-app --verbose --open",
+    "start-api": "npx npx nx serve rest-api --verbose",
     "build": "npx npx nx build auction-app --verbose --open",
     "lint-app": "npx nx lint auction-app --fix --quiet",
     "lint": "nx run-many --target=lint --all --fix --quiet",

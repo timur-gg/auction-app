@@ -1,7 +1,8 @@
 import { CSSObject, MantineTheme, rem } from '@mantine/core';
 
-
-export const auctionUpcomingStyle = (theme: MantineTheme): Record<string, CSSObject>  => {
+export const auctionUpcomingStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -32,8 +33,9 @@ export const auctionUpcomingStyle = (theme: MantineTheme): Record<string, CSSObj
   };
 };
 
-
-export const auctionNotStartedStyle = (theme: MantineTheme): Record<string, CSSObject>  => {
+export const auctionNotStartedStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -63,8 +65,9 @@ export const auctionNotStartedStyle = (theme: MantineTheme): Record<string, CSSO
   };
 };
 
-
-export const auctionPassedStyle = (theme: MantineTheme): Record<string, CSSObject>  => {
+export const auctionPassedStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -94,7 +97,9 @@ export const auctionPassedStyle = (theme: MantineTheme): Record<string, CSSObjec
   };
 };
 
-export const auctionLiveStyle = (theme: MantineTheme): Record<string, CSSObject> => {
+export const auctionLiveStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.white,
@@ -123,7 +128,9 @@ export const auctionLiveStyle = (theme: MantineTheme): Record<string, CSSObject>
   };
 };
 
-export const inventoryAuctionStyle = (theme: MantineTheme): Record<string, CSSObject> => {
+export const inventoryAuctionStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -150,7 +157,9 @@ export const inventoryAuctionStyle = (theme: MantineTheme): Record<string, CSSOb
   };
 };
 
-export const biddingTabStyle = (theme: MantineTheme): Record<string, CSSObject>  => {
+export const biddingTabStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -188,7 +197,9 @@ export const biddingTabStyle = (theme: MantineTheme): Record<string, CSSObject> 
   };
 };
 
-export const projectStyle = (theme: MantineTheme): Record<string, CSSObject>  => {
+export const projectStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -214,5 +225,3 @@ export const projectStyle = (theme: MantineTheme): Record<string, CSSObject>  =>
     },
   };
 };
-
-

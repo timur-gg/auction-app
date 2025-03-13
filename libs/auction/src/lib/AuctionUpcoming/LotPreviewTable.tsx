@@ -16,7 +16,7 @@ export function LotPreviewTable() {
 
   lots.forEach((lot: ILotPreview) => {
     lot.plan = (
-      <UnstyledButton onClick={() => openModal(lot.planLink||'')}>
+      <UnstyledButton onClick={() => openModal(lot.planLink || '')}>
         <IconZoomInArea color="grey" />
       </UnstyledButton>
     );

@@ -1,6 +1,8 @@
 import { CSSObject, MantineTheme } from '@mantine/core';
 
-export const clientProfileStyle = (theme: MantineTheme): Record<string, CSSObject> => {
+export const clientProfileStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     icon: {
       color: theme.colors.gray[5],
@@ -11,4 +13,3 @@ export const clientProfileStyle = (theme: MantineTheme): Record<string, CSSObjec
     },
   };
 };
-

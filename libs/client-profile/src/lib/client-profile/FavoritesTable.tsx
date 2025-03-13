@@ -4,7 +4,6 @@ import { DataTable } from 'mantine-datatable';
 import { useNavigate } from 'react-router-dom';
 import { IAuction, ILot, auctionData } from '@auction-app/models';
 
-
 export default function FavoritesTable({
   favorites,
   deleteFave,

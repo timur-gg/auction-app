@@ -38,7 +38,11 @@ import { builderStyle } from '../theme/theme.ts';
 import { Chat } from './Chat';
 import ExampleDoc from '../../assets/terms_conditions.pdf';
 
-import { IAuction, builderFavoritesData, builderUserData as UserData, } from '@auction-app/models';
+import {
+  IAuction,
+  builderFavoritesData,
+  builderUserData as UserData,
+} from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> => builderStyle(theme),

@@ -1,7 +1,8 @@
 import { CSSObject, MantineTheme } from '@mantine/core';
 
-
-export const builderStyle = (theme: MantineTheme): Record<string, CSSObject>  => {
+export const builderStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     icon: {
       color: theme.colors.gray[5],

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import { useForm } from '@mantine/form';
+import { IconCalendarEvent } from '@tabler/icons-react';
 
 import {
   Text,
@@ -17,14 +18,12 @@ import {
   SegmentedControl,
   Select,
 } from '@mantine/core';
-import { DatePickerInput, TimeInput, YearPickerInput } from '@mantine/dates';
+import { DatePickerInput, YearPickerInput } from '@mantine/dates';
 
-import { Link } from 'react-router-dom';
-import FileDrop from '../components/signup/FileDrop';
-import DetailedDescripion from '../components/CreateAuction/DetailedDescription';
-import AddUnit from '../components/CreateAuction/AddUnit';
+import { FileDrop } from '@auction-app/components';
+import DetailedDescripion from './DetailedDescription';
+import AddUnit from './AddUnit';
 
-import { IconCalendarEvent } from '@tabler/icons-react';
 
 export default function CreateAuction() {
   const [active, setActive] = useState(0);

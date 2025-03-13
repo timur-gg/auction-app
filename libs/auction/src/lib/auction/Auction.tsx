@@ -5,7 +5,7 @@ import { AuctionLive } from '../AuctionLive/AuctionLive.tsx';
 import { AuctionPassed } from '../AuctionPassed/AuctionPassed.tsx';
 import { AuctionNotStarted } from '../AuctionNotStarted/AuctionNotStarted.tsx';
 import { inventoryAuctionStyle } from '../theme/theme.ts';
-import { auctionData} from '@auction-app/models';
+import { auctionData } from '@auction-app/models';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

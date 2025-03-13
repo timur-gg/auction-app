@@ -49,7 +49,6 @@ export interface ILot {
   place?: number;
 }
 
-
 export interface ILotPreview {
   [key: string]: any;
   id: number;
@@ -60,4 +59,3 @@ export interface ILotPreview {
   sizeRange?: string;
   units: number;
 }
-

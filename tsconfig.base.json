@@ -31,6 +31,7 @@
       "@auction-app/builder-profile": ["libs/builder-profile/src/index.ts"],
       "@auction-app/client-profile": ["libs/client-profile/src/index.ts"],
       "@auction-app/components": ["libs/components/src/index.ts"],
+      "@auction-app/create-auction": ["libs/create-auction/src/index.ts"],
       "@auction-app/inventory": ["libs/inventory/src/index.ts"],
       "@auction-app/landing": ["libs/landing/src/index.ts"],
       "@auction-app/models": ["libs/models/src/index.ts"],

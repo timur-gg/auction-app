@@ -34,7 +34,8 @@ import {
   auctionData,
   builderUserData as UserData,
   clientFavoriteLotData,
-  IAuction, ILot
+  IAuction,
+  ILot,
 } from '@auction-app/models';
 
 const useStyles = createStyles((theme: MantineTheme) =>

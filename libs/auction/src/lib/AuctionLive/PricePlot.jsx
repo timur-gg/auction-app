@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-  XYPlot,
-  LineMarkSeries,
-} from 'react-vis';
+import { XYPlot, LineMarkSeries } from 'react-vis';
 
 export default function PricePlot() {
   return (

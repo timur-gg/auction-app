@@ -12,11 +12,11 @@ const useStyles = createStyles(
   (theme): Record<string, CSSObject> => projectStyle(theme),
 );
 
-
-export function Project({ registered = false  }: { registered?: boolean }) {
+export function Project({ registered = false }: { registered?: boolean }) {
   const { id } = useParams();
   const [auctionStep, setAuctionStep] = useState(1);
-  const auction = auctionData.find((x: IAuction) => x.id === id) || auctionData[0];
+  const auction =
+    auctionData.find((x: IAuction) => x.id === id) || auctionData[0];
 
   return (
     <Container className="Auction" maw={1500}>
@@ -37,6 +37,6 @@ export function Project({ registered = false  }: { registered?: boolean }) {
       )}
     </Container>
   );
-};
+}
 
 export default Project;

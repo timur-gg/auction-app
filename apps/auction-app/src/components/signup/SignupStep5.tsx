@@ -13,7 +13,7 @@ import {
   Checkbox,
 } from '@mantine/core';
 import Countdown from './Countdown.js';
-import { text } from '../../text.js';
+import { text } from '../../../../../libs/auction/src/assets/text.js';
 import { IconCircleCheck } from '@tabler/icons-react';
 
 const SignupStep5 = () => {

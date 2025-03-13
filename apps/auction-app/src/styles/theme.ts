@@ -100,66 +100,6 @@ export const biddingTabStyle = (theme: MantineTheme) => {
   };
 };
 
-export const auctionPassedStyle = (theme: MantineTheme) => {
-  return {
-    card: {
-      backgroundColor: theme.colors.white,
-    },
-    bidSelector: {
-      minWidth: rem(245),
-    },
-    label: {
-      marginBottom: theme.spacing.xs,
-      lineHeight: 1,
-      fontWeight: 700,
-      fontSize: theme.fontSizes.xs,
-      letterSpacing: rem(-0.25),
-      textTransform: 'uppercase',
-    },
-
-    section: {
-      padding: theme.spacing.md,
-    },
-    bidButton: {
-      marginTop: rem(30),
-    },
-    icon: {
-      marginRight: rem(5),
-      color: theme.colors.gray[5],
-    },
-  };
-};
-
-export const auctionNotStartedStyle = (theme: MantineTheme) => {
-  return {
-    card: {
-      backgroundColor: theme.colors.white,
-    },
-    bidSelector: {
-      minWidth: rem(245),
-    },
-    label: {
-      marginBottom: theme.spacing.xs,
-      lineHeight: 1,
-      fontWeight: 700,
-      fontSize: theme.fontSizes.xs,
-      letterSpacing: rem(-0.25),
-      textTransform: 'uppercase',
-    },
-
-    section: {
-      padding: theme.spacing.md,
-    },
-    bidButton: {
-      marginTop: rem(30),
-    },
-    icon: {
-      marginRight: rem(5),
-      color: theme.colors.gray[5],
-    },
-  };
-};
-
 export const auctionProfileCardStyle = (theme: MantineTheme) => {
   return {
     card: {
@@ -191,37 +131,6 @@ export const auctionProfileCardStyle = (theme: MantineTheme) => {
       marginBottom: theme.spacing.md,
     },
 
-    icon: {
-      marginRight: rem(5),
-      color: theme.colors.gray[5],
-    },
-  };
-};
-
-export const auctionUpcomingStyle = (theme: MantineTheme) => {
-  return {
-    card: {
-      backgroundColor: theme.colors.white,
-    },
-    bidSelector: {
-      minWidth: rem(245),
-    },
-    label: {
-      marginBottom: theme.spacing.xs,
-      lineHeight: 1,
-      fontWeight: 700,
-      fontSize: theme.fontSizes.xs,
-      letterSpacing: rem(-0.25),
-      textTransform: 'uppercase',
-    },
-
-    section: {
-      padding: theme.spacing.md,
-      borderTop: `${rem(1)} solid ${theme.colors.gray[3]}`,
-    },
-    bidButton: {
-      marginTop: rem(30),
-    },
     icon: {
       marginRight: rem(5),
       color: theme.colors.gray[5],

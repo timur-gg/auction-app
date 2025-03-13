@@ -15,7 +15,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { Link } from 'react-router-dom';
 import { IconGavel } from '@tabler/icons-react';
-import { headerStyle } from '../styles/theme.ts';
+import { headerStyle } from '../theme/theme.ts';
 
 const useStyles = createStyles(
   (theme): Record<string, CSSObject> =>

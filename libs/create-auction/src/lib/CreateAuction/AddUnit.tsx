@@ -15,7 +15,7 @@ import {
   NumberInput,
 } from '@mantine/core';
 import { useState } from 'react';
-import FileDrop from '../signup/FileDrop.js';
+import { FileDrop } from '@auction-app/components';
 import { notifications } from '@mantine/notifications';
 
 const unitTabs = [{ title: 'New Unit', value: 'new', id: 1 }];

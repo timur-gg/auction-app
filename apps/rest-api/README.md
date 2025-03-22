@@ -95,7 +95,9 @@ curl -X POST http://localhost:3000/api/auth/sign-up \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
-    "password": "Password123!"
+    "password": "Password123!",
+    "passwordConfirm": "Password123!"
+
   }'
 ```
 

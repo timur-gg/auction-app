@@ -1,5 +1,7 @@
 # Auction App - NestJS Backend
 
+psql -U artur -d auction_db -h localhost -W
+
 ## Overview
 
 This project is a backend service for an auction platform, built using **NestJS**. It handles user authentication, project and unit management, auction creation, bidding functionality, and real-time bid updates.

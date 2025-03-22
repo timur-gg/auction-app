@@ -8,12 +8,27 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "webpack-cli build",
-        "args": ["node-env=production"]
+        "commands": [
+          {
+            "command": "webpack-cli build --config apps/rest-api/webpack.config.js"
+          }
+        ],
+        "cwd": "."
       },
       "configurations": {
         "development": {
-          "args": ["node-env=development"]
+          "commands": [
+            {
+              "command": "NODE_ENV=development webpack-cli build --config apps/rest-api/webpack.config.js"
+            }
+          ]
+        },
+        "production": {
+          "commands": [
+            {
+              "command": "NODE_ENV=production webpack-cli build --config apps/rest-api/webpack.config.js"
+            }
+          ]
         }
       }
     },

@@ -52,6 +52,7 @@
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
     "axios": "^1.6.0",
+    "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dayjs": "^1.11.9",
@@ -77,6 +78,7 @@
     "ts-node": "^10.9.1",
     "typeface-raleway": "^1.1.13",
     "typeface-roboto": "^1.1.13",
+    "typeorm": "^0.3.21",
     "web-vitals": "^3.4.0"
   },
   "devDependencies": {

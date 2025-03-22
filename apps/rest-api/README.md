@@ -79,8 +79,53 @@ The system follows a **microservices-inspired architecture** with a modular Nest
 
 ## Building
 
-Run `nx build models` to build the library.
 
 ## Running unit tests
 
 Run `nx test models` to execute the unit tests via [Jest](https://jestjs.io).
+
+
+## Running E2E tests
+
+Here are some curl commands to test your NestJS authentication API endpoints:
+
+## 1. Sign Up
+```bash
+curl -X POST http://localhost:3000/api/auth/sign-up \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "Password123!"
+  }'
+```
+
+## 2. Sign In
+```bash
+curl -X POST http://localhost:3000/api/auth/sign-in \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "Password123!"
+  }'
+```
+This will return an access token that you'll need to save for the next requests.
+
+## 3. Get User Profile
+```bash
+curl -X GET http://localhost:3000/api/users/me \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+## 4. Sign Out
+```bash
+curl -X POST http://localhost:3000/api/auth/sign-out \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+For convenience, you can save the token in an environment variable:
+```bash
+TOKEN=$(curl -s -X POST http://localhost:3000/api/auth/sign-in -H "Content-Type: application/json" -d '{"email":"user@example.com","password":"Password123!"}' | grep -o '"accessToken":"[^"]*' | sed 's/"accessToken":"//')
+
+# Then use it in subsequent requests
+curl -X GET http://localhost:3000/api/users/me -H "Authorization: Bearer $TOKEN"
+```

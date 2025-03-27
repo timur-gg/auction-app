@@ -86,6 +86,13 @@ Run `nx test models` to execute the unit tests via [Jest](https://jestjs.io).
 ## Running E2E tests
 
 Here are some curl commands to test your NestJS authentication API endpoints:
+For convenience, you can save the token in an environment variable:
+
+```bash
+TOKEN=$(curl -s -X POST http://localhost:3000/api/auth/sign-in -H "Content-Type: application/json" -d '{"email":"user@example.com","password":"Password123!"}' | grep -o '"accessToken":"[^"]*' | sed 's/"accessToken":"//')
+
+# Then use it in subsequent requests
+```
 
 ## 1. Sign Up
 
@@ -127,11 +134,46 @@ curl -X POST http://localhost:3000/api/auth/sign-out \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
+## 5. Create Auction
+
 For convenience, you can save the token in an environment variable:
 
 ```bash
-TOKEN=$(curl -s -X POST http://localhost:3000/api/auth/sign-in -H "Content-Type: application/json" -d '{"email":"user@example.com","password":"Password123!"}' | grep -o '"accessToken":"[^"]*' | sed 's/"accessToken":"//')
-
-# Then use it in subsequent requests
-curl -X GET http://localhost:3000/api/users/me -H "Authorization: Bearer $TOKEN"
+curl -X POST http://localhost:3000/api/auctions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -d '{
+    "unitId": "72a592cc-8a77-4dbd-94e1-dbaa710a4f21",
+    "startPrice": 999.99,
+    "startTime": "2023-12-01T10:00:00Z",
+    "endTime": "2023-12-31T23:59:59Z"
+  }'
 ```
+
+## 6. Get Auctions
+```bash 
+curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json"
+  ```
+
+## 7. Get Auction by Id
+
+```bash 
+curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json"
+```
+
+
+## 8. Update Auction by Id
+```bash 
+curl -X PUT http://localhost:3000/api/auctions/AUCTION_ID \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -d '{
+    "startPrice": 1299.99,
+    "status": "active"
+  }'
+```
+

@@ -97,7 +97,7 @@ curl -X POST http://localhost:3000/api/auth/sign-up \
     "passwordConfirm": "Password123!"
 
   }'
-  
+
 TOKEN=$(curl -s -X POST http://localhost:3000/api/auth/sign-in -H "Content-Type: application/json" -d '{"email":"user@example.com","password":"Password123!"}' | grep -o '"accessToken":"[^"]*' | sed 's/"accessToken":"//')
 
 # Then use it in subsequent requests
@@ -160,23 +160,24 @@ curl -X POST http://localhost:3000/api/auctions \
 ```
 
 ## 6. Get Auctions
-```bash 
-curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json"
-  ```
 
-## 7. Get Auction by Id
-
-```bash 
+```bash
 curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json"
 ```
 
+## 7. Get Auction by Id
+
+```bash
+curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json"
+```
 
 ## 8. Update Auction by Id
-```bash 
+
+```bash
 curl -X PUT http://localhost:3000/api/auctions/AUCTION_ID \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
@@ -185,4 +186,3 @@ curl -X PUT http://localhost:3000/api/auctions/AUCTION_ID \
     "status": "active"
   }'
 ```
-

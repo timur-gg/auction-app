@@ -37,7 +37,10 @@ export class AuctionsService {
     return auction;
   }
 
-  async update(id: string, updateAuctionDto: UpdateAuctionDto): Promise<Auction> {
+  async update(
+    id: string,
+    updateAuctionDto: UpdateAuctionDto,
+  ): Promise<Auction> {
     const auction = await this.findOne(id);
 
     Object.assign(auction, updateAuctionDto);

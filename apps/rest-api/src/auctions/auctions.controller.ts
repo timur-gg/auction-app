@@ -1,5 +1,14 @@
 // apps/rest-api/src/auctions/auctions.controller.ts
-import { Body, Controller, Get, Param, Post, Put, UseGuards, HttpStatus } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+  HttpStatus,
+} from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -10,14 +19,14 @@ import {
   ApiResponse,
   ApiUnauthorizedResponse,
   ApiNotFoundResponse,
-  ApiBadRequestResponse
+  ApiBadRequestResponse,
 } from '@nestjs/swagger';
 
 import { CreateAuctionDto } from './dto/create-auction.dto';
 import { UpdateAuctionDto } from './dto/update-auction.dto';
 import { Auction } from './entities/auction.entity';
 import { AuctionsService } from './auctions.service';
-import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard.ts";
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.ts';
 
 @ApiTags('auctions')
 @Controller('auctions')
@@ -30,7 +39,7 @@ export class AuctionsController {
   @ApiOperation({ summary: 'Create a new auction' })
   @ApiCreatedResponse({
     description: 'The auction has been successfully created',
-    type: Auction
+    type: Auction,
   })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @ApiBadRequestResponse({ description: 'Invalid input data' })
@@ -42,7 +51,7 @@ export class AuctionsController {
   @ApiOperation({ summary: 'Get all auctions' })
   @ApiOkResponse({
     description: 'Returns all auctions',
-    type: [Auction]
+    type: [Auction],
   })
   findAll(): Promise<Auction[]> {
     return this.auctionsService.findAll();
@@ -53,7 +62,7 @@ export class AuctionsController {
   @ApiParam({ name: 'id', description: 'Auction ID' })
   @ApiOkResponse({
     description: 'Returns an auction by id',
-    type: Auction
+    type: Auction,
   })
   @ApiNotFoundResponse({ description: 'Auction not found' })
   findOne(@Param('id') id: string): Promise<Auction> {
@@ -67,7 +76,7 @@ export class AuctionsController {
   @ApiParam({ name: 'id', description: 'Auction ID' })
   @ApiOkResponse({
     description: 'The auction has been successfully updated',
-    type: Auction
+    type: Auction,
   })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @ApiNotFoundResponse({ description: 'Auction not found' })

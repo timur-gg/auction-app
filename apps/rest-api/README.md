@@ -89,6 +89,15 @@ Here are some curl commands to test your NestJS authentication API endpoints:
 For convenience, you can save the token in an environment variable:
 
 ```bash
+curl -X POST http://localhost:3000/api/auth/sign-up \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "Password123!",
+    "passwordConfirm": "Password123!"
+
+  }'
+  
 TOKEN=$(curl -s -X POST http://localhost:3000/api/auth/sign-in -H "Content-Type: application/json" -d '{"email":"user@example.com","password":"Password123!"}' | grep -o '"accessToken":"[^"]*' | sed 's/"accessToken":"//')
 
 # Then use it in subsequent requests
@@ -124,14 +133,14 @@ This will return an access token that you'll need to save for the next requests.
 
 ```bash
 curl -X GET http://localhost:3000/api/users/me \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+  -H "Authorization: Bearer $TOKEN"
 ```
 
 ## 4. Sign Out
 
 ```bash
 curl -X POST http://localhost:3000/api/auth/sign-out \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+  -H "Authorization: Bearer $TOKEN"
 ```
 
 ## 5. Create Auction
@@ -141,7 +150,7 @@ For convenience, you can save the token in an environment variable:
 ```bash
 curl -X POST http://localhost:3000/api/auctions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Authorization: Bearer $TOKEN" \
   -d '{
     "unitId": "72a592cc-8a77-4dbd-94e1-dbaa710a4f21",
     "startPrice": 999.99,
@@ -153,7 +162,7 @@ curl -X POST http://localhost:3000/api/auctions \
 ## 6. Get Auctions
 ```bash 
 curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json"
   ```
 
@@ -161,7 +170,7 @@ curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
 
 ```bash 
 curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json"
 ```
 
@@ -170,7 +179,7 @@ curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
 ```bash 
 curl -X PUT http://localhost:3000/api/auctions/AUCTION_ID \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Authorization: Bearer $TOKEN" \
   -d '{
     "startPrice": 1299.99,
     "status": "active"

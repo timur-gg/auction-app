@@ -42,7 +42,7 @@ export class Auction {
     nullable: true,
     example: '62f018dc-9b45-4dbd-94e1-dbaa710f3d78',
   })
-  @Column({ type: 'string', nullable: true })
+  @Column({ type: 'uuid', nullable: true })
   highestBidId: string | null;
 
   @ApiProperty({ description: 'Status of Auction', example: 'pending' })

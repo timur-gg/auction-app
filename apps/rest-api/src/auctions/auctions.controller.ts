@@ -48,22 +48,31 @@ export class AuctionsController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all auctions' })
-  @ApiOkResponse({
+   @ApiOkResponse({
     description: 'Returns all auctions',
     type: [Auction],
   })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+
   findAll(): Promise<Auction[]> {
     return this.auctionsService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get auction by ID' })
   @ApiParam({ name: 'id', description: 'Auction ID' })
+
   @ApiOkResponse({
     description: 'Returns an auction by id',
     type: Auction,
   })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+
   @ApiNotFoundResponse({ description: 'Auction not found' })
   findOne(@Param('id') id: string): Promise<Auction> {
     return this.auctionsService.findOne(id);

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-
+import { ProjectsModule } from './projects/projects.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service.ts';
 import { AuthModule } from './auth/auth.module';
@@ -26,6 +26,7 @@ import swaggerConfig from './common/config/swagger.config';
     }),
     DatabaseModule,
     // RedisModule,
+    ProjectsModule,
     AuthModule,
     UsersModule,
     AuctionsModule,

@@ -162,7 +162,7 @@ curl -X POST http://localhost:3000/api/auctions \
 ## 6. Get Auctions
 
 ```bash
-curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
+curl -X GET http://localhost:3000/api/auctions \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json"
 ```
@@ -178,7 +178,7 @@ curl -X GET http://localhost:3000/api/auctions/AUCTION_ID \
 ## 8. Update Auction by Id
 
 ```bash
-curl -X PUT http://localhost:3000/api/auctions/AUCTION_ID \
+curl -X PUT http://localhost:3000/api/auctions/06629ee5-b521-443d-83b6-feae4321d8dd \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{

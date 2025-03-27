@@ -31,10 +31,10 @@ export class ProjectsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all projects with pagination' }) // 📘 Swagger route summary
-  @ApiQuery({ name: 'page', required: false, type: Number })     // 📘 Document query params
+  @ApiQuery({ name: 'page', required: false, type: Number }) // 📘 Document query params
   @ApiQuery({ name: 'limit', required: false, type: Number })
-  @ApiResponse({ status: 200, type: [ProjectResponseDto] })       // 📘 Expected response
-  @UsePipes(new ValidationPipe({ transform: true }))              // ✅ Applies validation to query params
+  @ApiResponse({ status: 200, type: [ProjectResponseDto] }) // 📘 Expected response
+  @UsePipes(new ValidationPipe({ transform: true })) // ✅ Applies validation to query params
   async getProjects(@Query() query: GetProjectsDto) {
     const page = Number(query.page || 1);
     const limit = Number(query.limit || 10);
@@ -44,7 +44,7 @@ export class ProjectsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a project by ID' })
-  @ApiParam({ name: 'id', type: String })                          // 📘 Document route param
+  @ApiParam({ name: 'id', type: String }) // 📘 Document route param
   @ApiResponse({ status: 200, type: ProjectResponseDto })
   async getProject(@Param('id', ParseUUIDPipe) id: string) {
     const project = await this.projectsService.findOne(id);
@@ -54,7 +54,7 @@ export class ProjectsController {
   @Post()
   @ApiOperation({ summary: 'Create a new project' })
   @ApiResponse({ status: 201, type: ProjectResponseDto })
-  @UsePipes(new ValidationPipe({ whitelist: true }))              // ✅ Enforces DTO schema (extra fields are stripped)
+  @UsePipes(new ValidationPipe({ whitelist: true })) // ✅ Enforces DTO schema (extra fields are stripped)
   async createProject(@Body() dto: CreateProjectDto) {
     const created = await this.projectsService.create(dto);
     return plainToInstance(ProjectResponseDto, created);

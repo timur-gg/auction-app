@@ -186,3 +186,19 @@ curl -X PUT http://localhost:3000/api/auctions/06629ee5-b521-443d-83b6-feae4321d
     "status": "active"
   }'
 ```
+
+## 9. Create Project
+
+```bash
+curl -X POST http://localhost:3000/api/projects \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer $TOKEN" \
+-d '{
+"name": "Test Project",
+"address": "456 Queen St",
+"postalCode": "M5A 1S2",
+"builderId": "builder-001",
+"constructionStartDate": "2024-06-01",
+"completionDate": "2025-06-01"
+}'
+```

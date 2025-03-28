@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { Project } from './entities/project.entity';
+import { UpdateProjectDto } from './dto/update-project.dto.ts';
 
 @Injectable()
 export class ProjectsService {
@@ -32,5 +33,26 @@ export class ProjectsService {
       completionDate: new Date(dto.completionDate),
     });
     return this.projectRepo.save(project);
+  }
+
+  async update(id: string, dto: UpdateProjectDto): Promise<Project> {
+    const project = await this.projectRepo.findOne({ where: { id } });
+
+    if (!project) {
+      throw new NotFoundException(`Project with ID ${id} not found`);
+    }
+
+    // Apply only the fields provided
+    const updated = this.projectRepo.merge(project, {
+      ...dto,
+      constructionStartDate: dto.constructionStartDate
+        ? new Date(dto.constructionStartDate)
+        : project.constructionStartDate,
+      completionDate: dto.completionDate
+        ? new Date(dto.completionDate)
+        : project.completionDate,
+    });
+
+    return this.projectRepo.save(updated);
   }
 }

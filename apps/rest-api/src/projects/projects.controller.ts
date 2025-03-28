@@ -3,26 +3,27 @@ import {
   Get,
   Post,
   Param,
-  Query,
   Body,
-  ParseUUIDPipe,
-  UsePipes,
-  ValidationPipe,
+  UseGuards, Put
 } from '@nestjs/common';
 
 import {
   ApiTags,
   ApiOperation,
-  ApiResponse,
-  ApiQuery,
   ApiParam,
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiUnauthorizedResponse,
+  ApiNotFoundResponse,
+  ApiCreatedResponse,
+  ApiBadRequestResponse
 } from '@nestjs/swagger';
 
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
-import { GetProjectsDto } from './dto/get-projects.dto';
-import { ProjectResponseDto } from './dto/get-project.response.dto';
-import { plainToInstance } from 'class-transformer';
+import { UpdateProjectDto } from './dto/update-project.dto.ts';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.ts';
+import { Project } from './entities/project.entity.ts';
 
 @ApiTags('Projects') // 🧠 Groups all endpoints under "Projects" in Swagger UI
 @Controller('projects') // 🧠 All routes will be prefixed with /projects
@@ -30,33 +31,61 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get all projects with pagination' }) // 📘 Swagger route summary
-  @ApiQuery({ name: 'page', required: false, type: Number }) // 📘 Document query params
-  @ApiQuery({ name: 'limit', required: false, type: Number })
-  @ApiResponse({ status: 200, type: [ProjectResponseDto] }) // 📘 Expected response
-  @UsePipes(new ValidationPipe({ transform: true })) // ✅ Applies validation to query params
-  async getProjects(@Query() query: GetProjectsDto) {
-    const page = Number(query.page || 1);
-    const limit = Number(query.limit || 10);
-    const projects = await this.projectsService.findAll(page, limit);
-    return plainToInstance(ProjectResponseDto, projects); // ✅ Map raw entities → clean response DTOs
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get all projects with pagination' }) // 📘 Swagger route summary/ ✅ Applies validation to query params
+  @ApiOkResponse({
+    description: 'Returns all projects',
+    type: [Project],
+  })
+  findProjects(): Promise<Project[]> {
+    return this.projectsService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get a project by ID' })
   @ApiParam({ name: 'id', type: String }) // 📘 Document route param
-  @ApiResponse({ status: 200, type: ProjectResponseDto })
-  async getProject(@Param('id', ParseUUIDPipe) id: string) {
-    const project = await this.projectsService.findOne(id);
-    return plainToInstance(ProjectResponseDto, project);
+  @ApiOkResponse({
+    description: 'Returns an project by id',
+    type: Project,
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+  @ApiNotFoundResponse({ description: 'Project not found' })
+  findOne(@Param('id') id: string): Promise<Project> {
+    return this.projectsService.findOne(id);
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new project' })
-  @ApiResponse({ status: 201, type: ProjectResponseDto })
-  @UsePipes(new ValidationPipe({ whitelist: true })) // ✅ Enforces DTO schema (extra fields are stripped)
-  async createProject(@Body() dto: CreateProjectDto) {
-    const created = await this.projectsService.create(dto);
-    return plainToInstance(ProjectResponseDto, created);
+  @ApiCreatedResponse({
+    description: 'The project has been successfully created',
+    type: Project,
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+  @ApiBadRequestResponse({ description: 'Invalid input data' })
+  create(@Body() createProjectDto: CreateProjectDto): Promise<Project> {
+    return this.projectsService.create(createProjectDto);
   }
+
+@Put(':id')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
+@ApiOperation({ summary: 'Update a project' })
+@ApiParam({ name: 'id', description: 'Project ID' })
+@ApiOkResponse({
+  description: 'The project has been successfully updated',
+  type: Project,
+})
+@ApiUnauthorizedResponse({ description: 'Unauthorized' })
+@ApiNotFoundResponse({ description: 'Auction not found' })
+@ApiBadRequestResponse({ description: 'Invalid input data' })
+update(
+  @Param('id') id: string,
+  @Body() updateProjectsDto: UpdateProjectDto,
+): Promise<Project> {
+  return this.projectsService.update(id, updateProjectsDto);
+}
 }

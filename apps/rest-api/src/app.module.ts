@@ -16,7 +16,7 @@ import redisConfig from './common/config/redis.config';
 import { RedisModule } from './redis/redis.module';
 import { AuctionsModule } from './auctions/auctions.module';
 import swaggerConfig from './common/config/swagger.config';
-import {UnitsModule} from "./units/units.module.ts";
+import { UnitsModule } from './units/units.module.ts';
 
 @Module({
   imports: [
@@ -31,7 +31,7 @@ import {UnitsModule} from "./units/units.module.ts";
     AuthModule,
     UsersModule,
     AuctionsModule,
-    UnitsModule
+    UnitsModule,
   ],
   controllers: [AppController],
   providers: [

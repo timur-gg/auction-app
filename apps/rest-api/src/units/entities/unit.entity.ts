@@ -53,7 +53,7 @@ export class Unit {
     example: 2.5,
     required: true,
   })
-  @Column({ type: 'decimal', precision: 3, scale: 1 , nullable: false })
+  @Column({ type: 'decimal', precision: 3, scale: 1, nullable: false })
   bathrooms: number;
 
   @ApiProperty({

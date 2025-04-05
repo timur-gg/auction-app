@@ -4,7 +4,8 @@ import {
   Post,
   Param,
   Body,
-  UseGuards, Put
+  UseGuards,
+  Put,
 } from '@nestjs/common';
 
 import {
@@ -16,7 +17,7 @@ import {
   ApiUnauthorizedResponse,
   ApiNotFoundResponse,
   ApiCreatedResponse,
-  ApiBadRequestResponse
+  ApiBadRequestResponse,
 } from '@nestjs/swagger';
 
 import { ProjectsService } from './projects.service';
@@ -70,22 +71,22 @@ export class ProjectsController {
     return this.projectsService.create(createProjectDto);
   }
 
-@Put(':id')
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
-@ApiOperation({ summary: 'Update a project' })
-@ApiParam({ name: 'id', description: 'Project ID' })
-@ApiOkResponse({
-  description: 'The project has been successfully updated',
-  type: Project,
-})
-@ApiUnauthorizedResponse({ description: 'Unauthorized' })
-@ApiNotFoundResponse({ description: 'Auction not found' })
-@ApiBadRequestResponse({ description: 'Invalid input data' })
-update(
-  @Param('id') id: string,
-  @Body() updateProjectsDto: UpdateProjectDto,
-): Promise<Project> {
-  return this.projectsService.update(id, updateProjectsDto);
-}
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Update a project' })
+  @ApiParam({ name: 'id', description: 'Project ID' })
+  @ApiOkResponse({
+    description: 'The project has been successfully updated',
+    type: Project,
+  })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
+  @ApiNotFoundResponse({ description: 'Auction not found' })
+  @ApiBadRequestResponse({ description: 'Invalid input data' })
+  update(
+    @Param('id') id: string,
+    @Body() updateProjectsDto: UpdateProjectDto,
+  ): Promise<Project> {
+    return this.projectsService.update(id, updateProjectsDto);
+  }
 }

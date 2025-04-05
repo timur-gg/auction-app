@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 
 import { CreateUnitDto } from './dto/create-unit.dto.ts';
 import { UpdateUnitDto } from './dto/update-unit.dto.ts';
-import {Unit} from "./entities/unit.entity.ts";
+import { Unit } from './entities/unit.entity.ts';
 
 @Injectable()
 export class UnitsService {
   constructor(
-    @InjectRepository(Unit )
+    @InjectRepository(Unit)
     private auctionsRepository: Repository<Unit>,
   ) {}
 
@@ -35,10 +35,7 @@ export class UnitsService {
     return Units;
   }
 
-  async update(
-    id: string,
-    updateUnitDto: UpdateUnitDto,
-  ): Promise<Unit> {
+  async update(id: string, updateUnitDto: UpdateUnitDto): Promise<Unit> {
     const Units = await this.findOne(id);
 
     Object.assign(Units, updateUnitDto);

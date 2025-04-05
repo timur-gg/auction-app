@@ -1,6 +1,12 @@
 // apps/rest-api/src/units/dto/create-unit.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsOptional, IsNumber, IsPositive } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+  IsNumber,
+  IsPositive,
+} from 'class-validator';
 
 export class CreateUnitDto {
   @ApiProperty({

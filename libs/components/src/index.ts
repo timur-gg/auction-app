@@ -7,3 +7,4 @@ export * from './lib/components/ShowCounter.tsx';
 export * from './lib/components/FloorFilter.tsx';
 export * from './lib/components/AuctionDetails.tsx';
 export * from './lib/components/LotSelectionTable.tsx';
+export * from './lib/components/FileDrop.tsx';

@@ -124,3 +124,14 @@ export interface ILot {
   timeLeft?: number;
   place?: number;
 }
+
+export interface ILotPreview {
+  [key: string]: any;
+  id: number;
+  floorRange?: string;
+  planLink?: string;
+  bedroom: number | string;
+  priceRange?: string;
+  sizeRange?: string;
+  units: number;
+}

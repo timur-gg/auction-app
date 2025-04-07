@@ -26,12 +26,17 @@
         "libs/at-confirm-project/src/index.ts"
       ],
       "@auction-app/at-create-auction": ["libs/at-create-auction/src/index.ts"],
-      "@auction-app/at-project": ["libs/at-project/src/index.ts"],
       "@auction-app/at-signup": ["libs/at-signup/src/index.ts"],
+      "@auction-app/auction": ["libs/auction/src/index.ts"],
+      "@auction-app/builder-profile": ["libs/builder-profile/src/index.ts"],
+      "@auction-app/client-profile": ["libs/client-profile/src/index.ts"],
       "@auction-app/components": ["libs/components/src/index.ts"],
+      "@auction-app/confirm-project": ["libs/confirm-project/src/index.ts"],
+      "@auction-app/create-auction": ["libs/create-auction/src/index.ts"],
       "@auction-app/inventory": ["libs/inventory/src/index.ts"],
       "@auction-app/landing": ["libs/landing/src/index.ts"],
       "@auction-app/models": ["libs/models/src/index.ts"],
+      "@auction-app/signup": ["libs/signup/src/index.ts"],
       "@mocks/*": ["apps/auction-app/src/mocks/*"]
     }
   },

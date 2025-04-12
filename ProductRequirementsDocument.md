@@ -1,4 +1,3 @@
-
 # Product Requirements Document: Pre-Construction Auction Platform
 
 ## 1. Elevator Pitch
@@ -14,12 +13,14 @@ A live auction platform for pre-construction condo units in Ontario, Canada, con
 ## 3. Functional Requirements
 
 ### For Builders
+
 - Register and authenticate as verified builder users.
 - Create and manage projects with unit details, location, floor plans, and auction eligibility.
 - Set minimum prices per unit and schedule them for curated auction.
 - View auction results and manage post-auction document workflows.
 
 ### For Buyers
+
 - Explore an open map interface of upcoming and past projects.
 - Save favorites and register for upcoming auctions.
 - Register, verify identity and documents to gain access to live bidding.
@@ -27,12 +28,14 @@ A live auction platform for pre-construction condo units in Ontario, Canada, con
 - Get notified if they win and proceed with purchase documentation flow.
 
 ### Auction Mechanics
+
 - Live auction with 2-minute countdown resets after each new bid.
 - Open bidding: all participants can see the current highest bid.
 - Bid increments are enforced at 1.5%.
 - Winning bid is finalized when no new bids are placed within 2 minutes.
 
 ### Post-Auction
+
 - Notify winners and builders.
 - Facilitate signing of purchase agreements.
 - Collect and compile buyer documentation into a legal package for builder/legal team review.
@@ -40,6 +43,7 @@ A live auction platform for pre-construction condo units in Ontario, Canada, con
 ## 4. User Stories
 
 ### As a buyer:
+
 - I want to explore condos on a map so I can find projects by location.
 - I want to favorite units so I can come back to them later.
 - I want to register and verify my identity so I can participate in auctions.
@@ -47,6 +51,7 @@ A live auction platform for pre-construction condo units in Ontario, Canada, con
 - I want to receive confirmation and start the purchase process if I win.
 
 ### As a builder:
+
 - I want to register and verify my company so I can list projects.
 - I want to upload units and set minimum prices to prepare them for auction.
 - I want to see auction results to understand buyer behavior.
@@ -55,18 +60,20 @@ A live auction platform for pre-construction condo units in Ontario, Canada, con
 ## 5. User Interface
 
 ### General (Public)
+
 - Interactive map view showing all available and upcoming projects (buildings).
 - Search/filter by location, price range, developer, unit size.
 - Unit detail pages with renderings, floorplans, auction dates, unit details.
 - Project detail pages with renderings, floorplans, auction dates, building and project details.
 
 ### Buyer Portal
+
 - Dashboard with registered auctions and saved units.
 - Verification process and document upload section.
 - Live auction screen showing countdown, highest bid, unit details, and bid button.
 
 ### Builder Portal
+
 - Project management dashboard with unit status (upcoming, live, sold).
 - Upload tools for units, pricing, documents, renderings.
 - Post-auction dashboard to view buyer info and download completed paperwork packages.
-

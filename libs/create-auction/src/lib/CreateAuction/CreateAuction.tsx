@@ -24,7 +24,6 @@ import { FileDrop } from '@auction-app/components';
 import DetailedDescripion from './DetailedDescription';
 import AddUnit from './AddUnit';
 
-
 export default function CreateAuction() {
   const [active, setActive] = useState(0);
 

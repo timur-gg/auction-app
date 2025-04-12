@@ -1,4 +1,3 @@
-
 # Software Requirements Specification: Pre-Construction Auction Platform
 
 ## System Design
@@ -62,21 +61,25 @@
 ## Route Design
 
 ### Public
+
 - `/` – Landing page (map and trending units)
 - `/unit/:id` – Unit details
 - `/project/:id` – Project overview
 
 ### Buyer Portal
+
 - `/buyer/dashboard` – Favorites, current/registered auctions
 - `/buyer/verify` – KYC document upload
 - `/buyer/auction/:id` – Live auction room
 
 ### Builder Portal
+
 - `/builder/dashboard` – Projects and auctions
 - `/builder/project/:id/edit` – Update units and floorplans
 - `/builder/documents` – View and upload documents
 
 ### Admin (optional)
+
 - `/admin/users` – Verify and manage users
 - `/admin/projects` – Approve or flag project info
 - `/admin/auctions` – Moderate auction rules
@@ -84,24 +87,37 @@
 ## API Design
 
 ### Authentication
+
 - `POST /auth/register` – Create new account
 - `POST /auth/login` – JWT-based login
 - `GET /auth/profile` – Get current user info
 - `PUT /auth/profile` – Update profile data
 
-### Projects & Units
+### Units
+
+- `POST /unit` – Create project (Builder)
+- `GET /unit/:id` – View unit
+- `GET /unit` – View units
+- `DELETE /unit/:id` – Remove unit
+
+### Projects 
+
 - `POST /projects` – Create project (Builder)
 - `GET /projects/:id` – View project
+- `GET /projects` – View projects
 - `POST /projects/:id/units` – Add unit
-- `DELETE /projects/:id/units` – Delete unit
+- `DELETE /projects/:id/units` – Delete unit from project
 - `DELETE /projects/:id` – Flag project as deleted
+- `PUT /projects/:id` – Update project details
 
 ### Auctions
+
 - `POST /auctions` – Create auction (Builder)
 - `GET /auctions/:id` – Get auction details
 - `POST /auctions/:id` – Add buyer to whitelist
 
 ### WebSocket Events
+
 - `connect/auction/:id`
   - `emit: bid {amount}`
   - `receive: bid-update {highestBid, bidder}`

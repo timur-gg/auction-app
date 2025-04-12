@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text } from '@mantine/core';
 
-function Countdown({ initialSeconds=60 }: { initialSeconds:number }) {
+function Countdown({ initialSeconds = 60 }: { initialSeconds: number }) {
   const [seconds, setSeconds] = React.useState(initialSeconds);
 
   useEffect(() => {

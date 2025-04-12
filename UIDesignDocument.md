@@ -1,9 +1,9 @@
-
 # User Interface Design Document: Pre-Construction Auction Platform
 
 ## Layout Structure
 
 ### Landing Page
+
 - **Header**: Logo, navigation links (Buy, How It Works, For Builders, Login/Register), and a centered search bar.
 - **Hero Section**: Full-width cityscape image background with a large search bar and filters (Price, Beds, Auction Status).
 - **Trending Units Strip**: Horizontally scrollable row of featured units (Zillow-style cards).
@@ -12,11 +12,13 @@
 - **Footer**: Site info, legal links, social media, builder CTA.
 
 ### Buyer Portal
+
 - **Sidebar Navigation**: Dashboard, My Favorites, Auctions (Upcoming, Current, Past), Documents, Profile.
 - **Dashboard**: Summary of registered auctions, current bids, and alerts.
 - **Live Auction View**: Unit info, bid history feed, countdown timer, "Place Bid" button, watcher count.
 
 ### Builder Portal
+
 - **Sidebar Navigation**: My Projects, Upcoming Auctions, Documents, Profile.
 - **Dashboard**: Tile-based overview (Project Status, Active Units, Uploads).
 - **Project Management View**: Table view of units per project with edit options and auction configuration.
@@ -41,11 +43,13 @@
 ## Visual Design Elements & Color Scheme
 
 - **Primary Colors**:
+
   - Deep Blue (#1B3A57) – trust and professionalism
   - Sky Blue (#4BA3C7) – accents and highlights
   - Soft Gray (#F5F6F8) – backgrounds and card surfaces
 
 - **Status Colors**:
+
   - Green (#28A745) – verified, active
   - Red (#DC3545) – error, expired
   - Yellow (#FFC107) – pending, countdown
@@ -56,11 +60,13 @@
 ## Mobile, Web App, Desktop Considerations
 
 - **Mobile**:
+
   - Responsive layout with stacked panels
   - Hamburger menu for navigation
   - Horizontal scroll for trending units
 
 - **Web App**:
+
   - Optimized for 1280px+
   - Toggle between map/listing views
   - Fixed headers for persistent access to search/navigation
@@ -96,4 +102,3 @@
 - **Bid Feed**: A live stream of auction activity showing the latest bids.
 - **Verified User**: A buyer or builder whose documents and identity have been approved.
 - **Document Package**: Compiled legal and identity documentation shared post-auction for processing.
-

@@ -3,8 +3,9 @@
 import { CSSObject, MantineTheme } from '@mantine/core';
 import { rem } from '@mantine/core';
 
-
-export const auctionsDetailsEditStyle = (theme: MantineTheme): Record<string, CSSObject> => {
+export const auctionsDetailsEditStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -42,8 +43,9 @@ export const auctionsDetailsEditStyle = (theme: MantineTheme): Record<string, CS
   };
 };
 
-
-export const auctionsProfileCardEditStyle = (theme: MantineTheme): Record<string, CSSObject> => {
+export const auctionsProfileCardEditStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -81,7 +83,9 @@ export const auctionsProfileCardEditStyle = (theme: MantineTheme): Record<string
   };
 };
 
-export const confirmProjectStyles = (theme: MantineTheme): Record<string, CSSObject> => {
+export const confirmProjectStyles = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -105,7 +109,9 @@ export const confirmProjectStyles = (theme: MantineTheme): Record<string, CSSObj
   };
 };
 
-export const unitTableEditStyle = (theme: MantineTheme): Record<string, CSSObject> => {
+export const unitTableEditStyle = (
+  theme: MantineTheme,
+): Record<string, CSSObject> => {
   return {
     card: {
       backgroundColor: theme.colors.white,
@@ -142,5 +148,3 @@ export const unitTableEditStyle = (theme: MantineTheme): Record<string, CSSObjec
     },
   };
 };
-
-

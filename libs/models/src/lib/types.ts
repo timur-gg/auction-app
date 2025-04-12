@@ -1,8 +1,18 @@
-// User Roles
 export enum UserRole {
   BUYER = 'buyer',
   BUILDER = 'builder',
   ADMIN = 'admin',
+}
+
+export enum UnitStatus {
+  SOLD = 'sold',
+  PENDING = 'pending',
+}
+
+export enum VerificationStatus {
+  PENDING = 0,
+  APPROVED = 1,
+  REJECTED = 2,
 }
 
 // User Interfaces

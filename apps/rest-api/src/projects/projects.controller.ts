@@ -26,8 +26,8 @@ import { UpdateProjectDto } from './dto/update-project.dto.ts';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.ts';
 import { Project } from './entities/project.entity.ts';
 
-@ApiTags('Projects') // 🧠 Groups all endpoints under "Projects" in Swagger UI
-@Controller('projects') // 🧠 All routes will be prefixed with /projects
+@ApiTags('projects')
+@Controller('projects')
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 

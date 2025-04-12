@@ -9,7 +9,7 @@ import {
   isEnum,
   IsEnum,
 } from 'class-validator';
-import { unitStatus } from '../../common/enums/unit.enum.ts';
+import { UnitStatus } from '@auction-app/models';
 
 export class CreateUnitDto {
   @ApiProperty({
@@ -65,12 +65,12 @@ export class CreateUnitDto {
 
   @ApiProperty({
     description: 'Status of the unit',
-    enum: unitStatus,
+    enum: UnitStatus,
     example: 'pending',
     required: true,
   })
-  @IsEnum(unitStatus)
-  status: unitStatus;
+  @IsEnum(UnitStatus)
+  status: UnitStatus;
 
   @ApiProperty({
     description: 'Base price of the unit',

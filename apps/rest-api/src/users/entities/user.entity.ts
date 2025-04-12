@@ -31,14 +31,13 @@ export class User {
   @Column({
     type: 'enum',
     enum: UserRole,
-    default: UserRole.BUYER
+    default: UserRole.BUYER,
   })
   role: UserRole;
 
-
   @ApiProperty({ description: 'VerificationStatus' })
   @Column({ default: VerificationStatus.PENDING })
-  verificationStatus: VerificationStatus;
+  verificationStatus: number;
 
   @ApiProperty({ description: 'Created date of user' })
   @CreateDateColumn({ name: 'created_at' })

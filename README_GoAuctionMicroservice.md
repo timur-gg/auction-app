@@ -54,17 +54,21 @@ auction-service/
 ## 📦 Setup
 
 ### 1. Install Dependencies
+
 ```bash
 go mod tidy
 ```
 
 ### 2. Run the Service
+
 ```bash
 go run cmd/main.go
 ```
 
 ### 3. Connect to WebSocket
+
 Connect from frontend to:
+
 ```
 ws://localhost:8080/ws?auction_id=123&token=JWT_TOKEN
 ```
@@ -74,6 +78,7 @@ ws://localhost:8080/ws?auction_id=123&token=JWT_TOKEN
 ## 🔁 Example Auction Workflow
 
 ### ⏱ Auction Starts (from NestJS)
+
 - Auction is created in DB
 - NestJS seeds Redis:
   - `auction:123:status = open`
@@ -86,12 +91,14 @@ ws://localhost:8080/ws?auction_id=123&token=JWT_TOKEN
 
 1. **Frontend connects via WebSocket** to `ws://.../ws?auction_id=123&token=abc`
 2. **Client sends bid JSON:**
+
 ```json
 {
   "user_id": "uid1",
   "amount": 505000
 }
 ```
+
 3. **Go service:**
    - Validates bid (increment, eligibility)
    - Updates Redis: `highestBid`, `bids`, resets `timer`
@@ -127,13 +134,13 @@ ws://localhost:8080/ws?auction_id=123&token=JWT_TOKEN
 
 ## 📌 Redis Key Format
 
-| Key | Type | Example |
-|-----|------|---------|
-| `auction:123:status` | string | `open` / `ended` |
-| `auction:123:highestBid` | hash | `{ "uid1": 600000 }` |
-| `auction:123:bids` | ZSET | `{score: timestamp, value: "uid1:600000"}` |
-| `auction:123:participants` | set | `uid1`, `uid2` |
-| `auction:123:timer` | string | TTL-managed countdown |
+| Key                        | Type   | Example                                    |
+| -------------------------- | ------ | ------------------------------------------ |
+| `auction:123:status`       | string | `open` / `ended`                           |
+| `auction:123:highestBid`   | hash   | `{ "uid1": 600000 }`                       |
+| `auction:123:bids`         | ZSET   | `{score: timestamp, value: "uid1:600000"}` |
+| `auction:123:participants` | set    | `uid1`, `uid2`                             |
+| `auction:123:timer`        | string | TTL-managed countdown                      |
 
 ---
 
@@ -147,7 +154,7 @@ ws://localhost:8080/ws?auction_id=123&token=JWT_TOKEN
 
 ---
 
-## 📂 File Implementation Structure 
+## 📂 File Implementation Structure
 
 ```
 auction-service/
@@ -215,6 +222,7 @@ auction-service/
 ## 🔐 Authentication & Validation Strategy
 
 ### 1. WebSocket (Frontend ↔ Go)
+
 **JWT (Bearer token via query param)**
 
 - Validate token signature and expiry.
@@ -222,6 +230,7 @@ auction-service/
 - Check `auction:{id}:status == open`.
 
 **Flow:**
+
 1. Client connects to: `ws://.../ws?auction_id=123&token=JWT`
 2. Go parses and validates JWT.
 3. Checks Redis participant list.
@@ -230,12 +239,14 @@ auction-service/
 ---
 
 ### 2. gRPC (Go → NestJS)
+
 **Service-to-service auth using metadata**
 
 - Add shared `authorization` token in metadata header.
 - NestJS validates that token before processing gRPC calls.
 
 **Example:**
+
 ```go
 md := metadata.Pairs("authorization", "Bearer SERVICE_SECRET")
 ```
@@ -244,10 +255,10 @@ md := metadata.Pairs("authorization", "Bearer SERVICE_SECRET")
 
 ## 🔑 Shared Auth Strategy Summary
 
-| Layer      | Auth Type        | What’s Validated                          |
-|------------|------------------|-------------------------------------------|
-| WebSocket  | JWT               | userID, token expiry, Redis participant   |
-| Redis      | Internal logic    | Auction rules, validated in Go            |
-| gRPC       | Bearer/mTLS       | Service identity via metadata header      |
+| Layer     | Auth Type      | What’s Validated                        |
+| --------- | -------------- | --------------------------------------- |
+| WebSocket | JWT            | userID, token expiry, Redis participant |
+| Redis     | Internal logic | Auction rules, validated in Go          |
+| gRPC      | Bearer/mTLS    | Service identity via metadata header    |
 
 **Bonus:** Use short-lived JWTs (5–15 min) with auction ID in the payload to limit misuse.

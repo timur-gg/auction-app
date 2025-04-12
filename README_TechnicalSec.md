@@ -100,7 +100,7 @@
 - `GET /unit` – View units
 - `DELETE /unit/:id` – Remove unit
 
-### Projects 
+### Projects
 
 - `POST /projects` – Create project (Builder)
 - `GET /projects/:id` – View project

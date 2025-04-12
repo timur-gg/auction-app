@@ -12,7 +12,7 @@ run-be:
 	docker-compose up -d postgres redis
 	@echo "Waiting for PostgreSQL to start..."
 	@sleep 5
-	npx nx serve rest-api
+	npx nx serve rest-api --watch
 
 .PHONY: run-all
 run-all:

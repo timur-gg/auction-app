@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserRole, VerificationStatus } from '@auction-app/models';
 
 @Entity({
   name: 'users',
@@ -27,6 +28,17 @@ export class User {
   @Column()
   @Exclude({ toPlainOnly: true })
   password: string;
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.BUYER
+  })
+  role: UserRole;
+
+  @ApiProperty({ description: 'VerificationStatus' })
+
+  @Column({default:VerificationStatus.PENDING})
+  verificationStatus: VerificationStatus
 
   @ApiProperty({ description: 'Created date of user' })
   @CreateDateColumn({ name: 'created_at' })

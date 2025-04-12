@@ -5,14 +5,14 @@ export enum UserRole {
 }
 
 export enum UnitStatus {
-  SOLD="sold",
-  PENDING = "pending",
+  SOLD = 'sold',
+  PENDING = 'pending',
 }
 
-export  enum VerificationStatus {
-  PENDING=0,
+export enum VerificationStatus {
+  PENDING = 0,
   APPROVED = 1,
-  REJECTED  =2
+  REJECTED = 2,
 }
 
 // User Interfaces

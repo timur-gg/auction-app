@@ -5,7 +5,9 @@ import {
   IsString,
   IsOptional,
   IsNumber,
-  IsPositive, isEnum, IsEnum,
+  IsPositive,
+  isEnum,
+  IsEnum,
 } from 'class-validator';
 import { unitStatus } from '../../common/enums/unit.enum.ts';
 
@@ -65,11 +67,10 @@ export class CreateUnitDto {
     description: 'Status of the unit',
     enum: unitStatus,
     example: 'pending',
-    required: true
+    required: true,
   })
   @IsEnum(unitStatus)
   status: unitStatus;
-
 
   @ApiProperty({
     description: 'Base price of the unit',

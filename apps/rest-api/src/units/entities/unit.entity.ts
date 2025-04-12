@@ -65,10 +65,9 @@ export class Unit {
   @Column({ type: 'decimal', precision: 12, scale: 2, nullable: true })
   basePrice: number;
 
-
   @ApiProperty({
     description: 'ID of the project this unit belongs to',
-    example: '1e9a5c9c-8f3d-4c2a-a1c8-88bd59c9315f'
+    example: '1e9a5c9c-8f3d-4c2a-a1c8-88bd59c9315f',
   })
   @Column({ type: 'uuid' })
   projectId: string;
@@ -77,15 +76,14 @@ export class Unit {
     description: 'Status of the unit',
     enum: UnitStatus,
     example: 'pending',
-    required: true
+    required: true,
   })
   @Column({
     type: 'enum',
     enum: UnitStatus,
-    default: 'pending'
+    default: 'pending',
   })
   status: UnitStatus;
-
 
   @ApiProperty({ description: 'Created date of Unit' })
   @CreateDateColumn({ type: 'timestamp with time zone' })

@@ -21,7 +21,6 @@ export class UpdateUnitDto {
   @IsString()
   description?: string;
 
-
   @ApiProperty({
     description: 'Size of the unit in square feet',
     example: 850,

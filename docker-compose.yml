@@ -62,6 +62,20 @@ services:
     depends_on:
       - backend
 
+  go-service:
+    build:
+      context: ./go-service
+      dockerfile: Dockerfile.goservice
+    ports:
+      - "8080:8080" # Go WebSocket port
+    depends_on:
+      - redis
+    environment:
+      - REDIS_ADDR=redis:${REDIS_PORT}
+      - NEST_HOST=backend:3000
+    networks:
+      - default
+
 volumes:
   postgres_data:
   redis_data:

@@ -36,8 +36,8 @@ export class User {
   role: UserRole;
 
   @ApiProperty({ description: 'VerificationStatus' })
-  @Column({ default: VerificationStatus.PENDING })
-  verificationStatus: number;
+  @Column({type:'enum', enum:VerificationStatus, default: VerificationStatus.PENDING })
+  verificationStatus: VerificationStatus;
 
   @ApiProperty({ description: 'Created date of user' })
   @CreateDateColumn({ name: 'created_at' })

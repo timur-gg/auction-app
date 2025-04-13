@@ -31,6 +31,8 @@ services:
       timeout: 5s
       retries: 5
 
+
+
   backend:
     build:
       context: .
@@ -52,6 +54,29 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+  supabase:
+    image: supabase/supabase-dev:latest
+    ports:
+      - '54321:8000'  # REST API port
+      - '54322:5432'  # Database port (if you need direct access)
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ANON_KEY: ${SUPABASE_KEY}
+      API_EXTERNAL_URL: ${SUPABASE_URL}
+      STUDIO_PORT: 54323
+      DASHBOARD_PORT: 54324
+      KONG_HTTP_PORT: 54321
+    volumes:
+      - supabase_data:/var/lib/postgresql/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   frontend:
     build:
@@ -65,3 +90,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  supabase_data:

@@ -71,7 +71,14 @@ export class CreateUnitDto {
   })
   @IsEnum(UnitStatus)
   status: UnitStatus;
-
+  @ApiProperty({
+    description: 'Image URLs of the unit',
+    example: ['https://example.com/image1.jpg', 'https://example.com/image2.png'],
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ each: true })
+  documents?: string[];
   @ApiProperty({
     description: 'Base price of the unit',
     example: 450000,

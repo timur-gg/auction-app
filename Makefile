@@ -9,7 +9,7 @@ run-fe:
 .PHONY: run-be
 run-be:
 	-@lsof -ti:${API_PORT} | xargs kill -9 2>/dev/null || true
-	docker-compose up -d postgres redis
+	docker-compose up -d postgres redis supabase
 	@echo "Waiting for PostgreSQL to start..."
 	@sleep 5
 	npx nx serve rest-api --watch
@@ -18,7 +18,7 @@ run-be:
 run-all:
 	-@lsof -ti:${API_PORT} | xargs kill -9 2>/dev/null || true
 	-@lsof -ti:${CLIENT_PORT} | xargs kill -9 2>/dev/null || true
-	docker-compose up -d postgres redis
+	docker-compose up -d postgres redis supabase
 	@echo "Waiting for PostgreSQL to start..."
 	@sleep 5
 	npx nx run-many --target=serve --projects=rest-api,auction-app --parallel=true

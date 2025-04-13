@@ -17,6 +17,7 @@ import { RedisModule } from './redis/redis.module';
 import { AuctionsModule } from './auctions/auctions.module';
 import swaggerConfig from './common/config/swagger.config';
 import { UnitsModule } from './units/units.module.ts';
+import { UploadModule } from './upload/upload.module.ts';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { UnitsModule } from './units/units.module.ts';
     }),
     DatabaseModule,
     // RedisModule,
+    UploadModule,
     ProjectsModule,
     AuthModule,
     UsersModule,

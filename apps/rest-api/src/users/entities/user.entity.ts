@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserRole, VerificationStatus } from '@auction-app/models';
+import { IsOptional, IsString } from 'class-validator';
 
 @Entity({
   name: 'users',
@@ -38,6 +39,15 @@ export class User {
   @ApiProperty({ description: 'VerificationStatus' })
   @Column({type:'enum', enum:VerificationStatus, default: VerificationStatus.PENDING })
   verificationStatus: VerificationStatus;
+
+  @ApiProperty({
+    description: 'Document URLs of the user',
+    example: ['https://example.com/doc.pdf', 'https://example.com/doc.png'],
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ each: true })
+  documents?: string[];
 
   @ApiProperty({ description: 'Created date of user' })
   @CreateDateColumn({ name: 'created_at' })

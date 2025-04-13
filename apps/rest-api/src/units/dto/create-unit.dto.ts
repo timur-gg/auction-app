@@ -31,7 +31,7 @@ export class CreateUnitDto {
 
   @ApiProperty({
     description: 'Size of the unit in square feet',
-    example: 850,
+    example: '850',
     required: true,
   })
   @IsOptional()
@@ -41,7 +41,7 @@ export class CreateUnitDto {
 
   @ApiProperty({
     description: 'Number of bedrooms',
-    example: 2,
+    example: '2',
     required: true,
   })
   @IsOptional()
@@ -51,7 +51,7 @@ export class CreateUnitDto {
 
   @ApiProperty({
     description: 'Number of bathrooms',
-    example: 2.5,
+    example: '2.5',
     required: true,
   })
   @IsOptional()
@@ -81,7 +81,7 @@ export class CreateUnitDto {
   documents?: string[];
   @ApiProperty({
     description: 'Base price of the unit',
-    example: 450000,
+    example: '450000',
     required: false,
   })
   @IsOptional()

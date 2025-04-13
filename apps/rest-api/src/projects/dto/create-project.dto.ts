@@ -1,4 +1,4 @@
-import { IsString, IsDateString, IsOptional } from 'class-validator';
+import { IsString, IsDateString, IsOptional, IsISO8601, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProjectDto {
@@ -27,11 +27,21 @@ export class CreateProjectDto {
   @IsString({ each: true })
   documents?: string[];
 
-  @ApiProperty()
-  @IsDateString()
+  @IsISO8601()
+  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Construction start date in ISO 8601 format',
+    example: '2024-06-01',
+    format: 'date'
+  })
   constructionStartDate: string;
 
-  @ApiProperty()
-  @IsDateString()
+  @IsISO8601()
+  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Expected completion date in ISO 8601 format',
+    example: '2025-12-01',
+    format: 'date'
+  })
   completionDate: string;
 }

@@ -16,7 +16,7 @@ import {
   ApiConsumes,
   ApiOperation,
   ApiBody,
-  ApiResponse,
+  ApiResponse, ApiBearerAuth,
 } from '@nestjs/swagger';
 import 'multer';
 
@@ -73,6 +73,7 @@ export class UploadController {
   @ApiResponse({ status: 400, description: 'Invalid file format, size or entity' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 500, description: 'Upload failed' })
+  @ApiBearerAuth()
   @UseInterceptors(FilesInterceptor('files', 10))
   async uploadFiles(
     @UploadedFiles(

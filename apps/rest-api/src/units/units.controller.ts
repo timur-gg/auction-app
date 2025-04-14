@@ -31,7 +31,8 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.ts';
 @ApiTags('units')
 @Controller('units')
 export class UnitsController {
-  unitService: UnitsService;
+  constructor(private readonly unitService: UnitsService) {}
+
   @Post()
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()

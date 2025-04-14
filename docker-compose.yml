@@ -52,6 +52,9 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      s3rver:
+        condition: service_healthy
+
 
   frontend:
     build:
@@ -76,6 +79,23 @@ services:
     networks:
       - default
 
+  s3rver:
+    image: node:18-alpine
+    ports:
+      - "${S3_PORT}:4569"
+    volumes:
+      - ./local-storage:/data
+    environment:
+      - NODE_ENV=development
+    command: >
+      sh -c "npm install -g s3rver &&
+             mkdir -p /data &&
+             s3rver --address 0.0.0.0 --port 4569 --directory /data --configure-bucket auction"
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "http://localhost:4569" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 volumes:
   postgres_data:
   redis_data:

@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 @Entity('projects')
 export class Project {
@@ -36,6 +37,18 @@ export class Project {
   @ApiProperty({ example: '2025-12-01' })
   @Column({ type: 'date' })
   completionDate: Date;
+
+  @ApiProperty({
+    description: 'Image URLs of the project',
+    example: [
+      'https://example.com/image1.jpg',
+      'https://example.com/image2.png',
+    ],
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ each: true })
+  documents?: string[];
 
   @ApiProperty({ example: '2024-03-27T10:00:00.000Z' })
   @CreateDateColumn()

@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { UnitStatus } from '@auction-app/models';
+import { IsUUID } from 'class-validator';
 
 @Entity('unit')
 export class Unit {
@@ -68,7 +69,9 @@ export class Unit {
   @ApiProperty({
     description: 'ID of the project this unit belongs to',
     example: '1e9a5c9c-8f3d-4c2a-a1c8-88bd59c9315f',
+    format: 'uuid',
   })
+  @IsUUID(4)
   @Column({ type: 'uuid' })
   projectId: string;
 
@@ -84,6 +87,10 @@ export class Unit {
     default: 'pending',
   })
   status: UnitStatus;
+
+  @ApiProperty({ description: 'Image URLs of the unit' })
+  @Column({ type: 'json', nullable: true })
+  documents: string[];
 
   @ApiProperty({ description: 'Created date of Unit' })
   @CreateDateColumn({ type: 'timestamp with time zone' })

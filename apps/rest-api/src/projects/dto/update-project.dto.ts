@@ -1,5 +1,5 @@
 import { IsOptional, IsString, IsDateString } from 'class-validator';
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateProjectDto {
   @ApiPropertyOptional({ example: 'Updated Project Name' })
@@ -21,6 +21,18 @@ export class UpdateProjectDto {
   @IsOptional()
   @IsString()
   builderId?: string;
+
+  @ApiProperty({
+    description: 'Image URLs of the project',
+    example: [
+      'https://example.com/image1.jpg',
+      'https://example.com/image2.png',
+    ],
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ each: true })
+  documents?: string[];
 
   @ApiPropertyOptional({ example: '2024-08-01' })
   @IsOptional()

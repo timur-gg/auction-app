@@ -8,10 +8,14 @@ run-fe:
 
 .PHONY: run-be
 run-be:
-	-@lsof -ti:${API_PORT} | xargs kill -9 2>/dev/null || true
-	docker-compose up -d postgres redis
-	@echo "Waiting for PostgreSQL to start..."
-	@sleep 5
+	@lsof -ti:${API_PORT} | xargs -r kill -9 2>/dev/null || true
+	docker-compose up -d postgres redis s3rver
+
+	@until docker-compose exec -T postgres pg_isready -h localhost -q 2>/dev/null; do \
+		echo "Waiting for Postgres..."; sleep 1; \
+	done
+
+	@echo "All Docker containers are running."
 	npx nx serve rest-api --watch
 
 .PHONY: run-be

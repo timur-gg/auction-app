@@ -8,13 +8,14 @@ import { File } from './entities/file.entity';
 import { User } from '../users/entities/user.entity';
 import { Project } from '../projects/entities/project.entity';
 import { Unit } from '../units/entities/unit.entity';
+import { BucketService } from './bucket.service.ts';
 
 @Module({
   imports: [
     ConfigModule,
     TypeOrmModule.forFeature([File, User, Project, Unit]),
   ],
-  providers: [UploadService],
+  providers: [UploadService, BucketService],
   controllers: [UploadController],
   exports: [UploadService],
 })

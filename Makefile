@@ -8,35 +8,17 @@ run-fe:
 
 .PHONY: run-be
 run-be:
-	-@lsof -ti:${API_PORT} | xargs kill -9 2>/dev/null || true
-	docker-compose up -d postgres redis
-	@echo "Waiting for PostgreSQL to start..."
-	@until docker-compose exec -T postgres pg_isready -h localhost -q; do sleep 1; echo "Waiting..."; done
+	@lsof -ti:${API_PORT} | xargs -r kill -9 2>/dev/null || true
+	docker-compose up -d postgres redis s3rver
+
+	@until docker-compose exec -T postgres pg_isready -h localhost -q 2>/dev/null; do \
+		echo "Waiting for Postgres..."; sleep 1; \
+	done
+
+	@echo "All Docker containers are running."
 	npx nx serve rest-api --watch
 
-.PHONY: run-all
-run-all:
-	-@lsof -ti:${API_PORT} | xargs kill -9 2>/dev/null || true
-	-@lsof -ti:${CLIENT_PORT} | xargs kill -9 2>/dev/null || true
-	docker-compose up -d postgres redis
-	@echo "Waiting for PostgreSQL to start..."
-	@until docker-compose exec -T postgres pg_isready -q; do sleep 1; done
 
-	npx nx run-many --target=serve --projects=rest-api,auction-app --parallel=true
-
-.PHONY: docker-run-fe
-docker-run-fe:
-	docker-compose up -d frontend
-
-.PHONY: docker-run-be
-docker-run-be:
-	docker-compose up -d postgres redis backend
-
-.PHONY: docker-run-all
-docker-run-all:
-	docker-compose up -d
-
-.PHONY: stop
 stop:
 	-@lsof -ti:${API_PORT} | xargs kill -9 2>/dev/null || true
 	-@lsof -ti:${CLIENT_PORT} | xargs kill -9 2>/dev/null || true

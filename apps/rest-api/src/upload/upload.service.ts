@@ -1,12 +1,12 @@
+// apps/rest-api/src/upload/bucket.service.ts
 import { Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../users/entities/user.entity';
 import { Project } from '../projects/entities/project.entity';
 import { Unit } from '../units/entities/unit.entity';
 import { File } from './entities/file.entity';
+import { BucketService } from './bucket.service';
 
 interface FileUploadResult {
   id: string;
@@ -18,12 +18,10 @@ interface FileUploadResult {
 
 @Injectable()
 export class UploadService {
-  private supabase: SupabaseClient;
   private readonly logger = new Logger(UploadService.name);
-  private readonly bucketName = 'auction';
 
   constructor(
-    private configService: ConfigService,
+    private bucketService: BucketService,
     @InjectRepository(File)
     private fileRepository: Repository<File>,
     @InjectRepository(User)
@@ -32,41 +30,12 @@ export class UploadService {
     private projectRepository: Repository<Project>,
     @InjectRepository(Unit)
     private unitRepository: Repository<Unit>,
-  ) {
-    // For development environments, disable SSL verification
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
-    const supabaseUrl = this.configService.get<string>('SUPABASE_URL');
-    const supabaseKey = this.configService.get<string>('SUPABASE_KEY');
-
-
-    console.log(`Supabase URL: ${supabaseUrl}`, `Supabase Key: ${supabaseKey}`);
-
-    // Create client with simpler configuration
-    this.supabase = createClient(supabaseUrl, supabaseKey);
-    this.logger.log(`Supabase client initialized for bucket: ${this.bucketName}`);
-
-    // Test bucket access immediately
-    this.testBucketAccess();
-  }
-
-  private async testBucketAccess() {
-    try {
-      const { data, error } = await this.supabase.storage.getBucket(this.bucketName);
-      if (error) {
-        this.logger.error(`Cannot access bucket "${this.bucketName}": ${error.message}`);
-      } else {
-        this.logger.log(`Successfully connected to bucket "${this.bucketName}"`);
-      }
-    } catch (err) {
-      this.logger.error(`Error testing bucket access: ${err.message}`);
-    }
-  }
+  ) {}
 
   async uploadAndAssociateFiles(
     files: Express.Multer.File[],
     entityId: string,
-    entityType: 'project' | 'unit' | 'user'
+    entityType: 'project' | 'unit' | 'user',
   ): Promise<FileUploadResult[]> {
     const entity = await this.verifyEntityExists(entityId, entityType);
     const path = `${entityType}/${entityId}`;
@@ -79,8 +48,12 @@ export class UploadService {
           const file = new File();
           file.name = uploadedFile.name;
           file.url = uploadedFile.url;
-          file.mimeType = files.find(f => uploadedFile.name.includes(f.originalname))?.mimetype || 'application/octet-stream';
-          file.size = files.find(f => uploadedFile.name.includes(f.originalname))?.size || 0;
+          file.mimeType =
+            files.find((f) => uploadedFile.name.includes(f.originalname))
+              ?.mimetype || 'application/octet-stream';
+          file.size =
+            files.find((f) => uploadedFile.name.includes(f.originalname))
+              ?.size || 0;
 
           const savedFile = await this.fileRepository.save(file);
           await this.associateFileWithEntity(savedFile, entity, entityType);
@@ -92,7 +65,7 @@ export class UploadService {
             entityId,
             entityType,
           };
-        })
+        }),
       );
     } catch (error) {
       this.logger.error(`Upload process failed: ${error.message}`);
@@ -102,56 +75,40 @@ export class UploadService {
 
   private async uploadFiles(
     files: Express.Multer.File[],
-    path: string
+    path: string,
   ): Promise<Array<{ name: string; url: string }>> {
     return Promise.all(
       files.map(async (file) => {
         try {
-          const fileName = `${path}/${Date.now()}-${file.originalname.replace(/\s/g, '_')}`;
-
-          // Log before upload attempt
-          this.logger.log(`Attempting to upload ${fileName} to ${this.bucketName}`);
-
-          const { data, error } = await this.supabase.storage
-            .from(this.bucketName)
-            .upload(fileName, file.buffer, {
-              contentType: file.mimetype,
-              upsert: true,
-            });
-
-          if (error) {
-            this.logger.error(`Upload failed: ${error.message}`);
-            throw new Error(`Supabase upload error: ${error.message}`);
-          }
-
-          this.logger.log(`File uploaded successfully: ${fileName}`);
-
-          // Get public URL for the file
-          const { data: urlData } = this.supabase.storage
-            .from(this.bucketName)
-            .getPublicUrl(fileName);
-
-          return {
-            name: fileName,
-            url: urlData.publicUrl,
-          };
+          const fileName = `${Date.now()}-${file.originalname.replace(
+            /\s/g,
+            '_',
+          )}`;
+          return await this.bucketService.uploadFile(
+            file.buffer,
+            path,
+            fileName,
+            file.mimetype,
+          );
         } catch (err) {
           this.logger.error(`Error in file upload: ${err.message}`);
           throw err;
         }
-      })
+      }),
     );
   }
 
   private async verifyEntityExists(
     entityId: string,
-    entityType: 'project' | 'unit' | 'user'
+    entityType: 'project' | 'unit' | 'user',
   ): Promise<User | Project | Unit> {
     let entity;
 
     switch (entityType) {
       case 'project':
-        entity = await this.projectRepository.findOne({ where: { id: entityId } });
+        entity = await this.projectRepository.findOne({
+          where: { id: entityId },
+        });
         break;
       case 'unit':
         entity = await this.unitRepository.findOne({ where: { id: entityId } });
@@ -162,7 +119,9 @@ export class UploadService {
     }
 
     if (!entity) {
-      throw new BadRequestException(`${entityType} with ID ${entityId} not found`);
+      throw new BadRequestException(
+        `${entityType} with ID ${entityId} not found`,
+      );
     }
 
     return entity;
@@ -171,7 +130,7 @@ export class UploadService {
   private async associateFileWithEntity(
     file: File,
     entity: User | Project | Unit,
-    entityType: 'project' | 'unit' | 'user'
+    entityType: 'project' | 'unit' | 'user',
   ): Promise<void> {
     switch (entityType) {
       case 'project':

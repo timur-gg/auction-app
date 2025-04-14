@@ -40,7 +40,10 @@ export class Project {
 
   @ApiProperty({
     description: 'Image URLs of the project',
-    example: ['https://example.com/image1.jpg', 'https://example.com/image2.png'],
+    example: [
+      'https://example.com/image1.jpg',
+      'https://example.com/image2.png',
+    ],
     required: false,
   })
   @IsOptional()

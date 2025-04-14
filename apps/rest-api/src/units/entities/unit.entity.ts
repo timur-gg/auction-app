@@ -88,11 +88,9 @@ export class Unit {
   })
   status: UnitStatus;
 
-
   @ApiProperty({ description: 'Image URLs of the unit' })
   @Column({ type: 'json', nullable: true })
   documents: string[];
-
 
   @ApiProperty({ description: 'Created date of Unit' })
   @CreateDateColumn({ type: 'timestamp with time zone' })

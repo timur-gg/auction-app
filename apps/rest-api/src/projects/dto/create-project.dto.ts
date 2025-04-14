@@ -1,4 +1,10 @@
-import { IsString, IsDateString, IsOptional, IsISO8601, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  IsDateString,
+  IsOptional,
+  IsISO8601,
+  IsNotEmpty,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProjectDto {
@@ -20,7 +26,10 @@ export class CreateProjectDto {
 
   @ApiProperty({
     description: 'Image URLs of the project',
-    example: ['https://example.com/image1.jpg', 'https://example.com/image2.png'],
+    example: [
+      'https://example.com/image1.jpg',
+      'https://example.com/image2.png',
+    ],
     required: false,
   })
   @IsOptional()
@@ -32,7 +41,7 @@ export class CreateProjectDto {
   @ApiProperty({
     description: 'Construction start date in ISO 8601 format',
     example: '2024-06-01',
-    format: 'date'
+    format: 'date',
   })
   constructionStartDate: string;
 
@@ -41,7 +50,7 @@ export class CreateProjectDto {
   @ApiProperty({
     description: 'Expected completion date in ISO 8601 format',
     example: '2025-12-01',
-    format: 'date'
+    format: 'date',
   })
   completionDate: string;
 }

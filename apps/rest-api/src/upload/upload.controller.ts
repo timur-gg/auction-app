@@ -16,7 +16,8 @@ import {
   ApiConsumes,
   ApiOperation,
   ApiBody,
-  ApiResponse, ApiBearerAuth,
+  ApiResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import 'multer';
 
@@ -64,13 +65,22 @@ export class UploadController {
           id: { type: 'string', description: 'The file ID in database' },
           name: { type: 'string', description: 'The file name in storage' },
           url: { type: 'string', description: 'The public URL of the file' },
-          entityId: { type: 'string', description: 'ID of the associated entity' },
-          entityType: { type: 'string', description: 'Type of the associated entity' },
+          entityId: {
+            type: 'string',
+            description: 'ID of the associated entity',
+          },
+          entityType: {
+            type: 'string',
+            description: 'Type of the associated entity',
+          },
         },
       },
     },
   })
-  @ApiResponse({ status: 400, description: 'Invalid file format, size or entity' })
+  @ApiResponse({
+    status: 400,
+    description: 'Invalid file format, size or entity',
+  })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 500, description: 'Upload failed' })
   @ApiBearerAuth()
@@ -80,14 +90,20 @@ export class UploadController {
       new ParseFilePipe({
         validators: [
           new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }), // 5MB max
-          new FileTypeValidator({ fileType: /(jpg|jpeg|png|pdf|doc|docx|xls|xlsx)$/ }),
+          new FileTypeValidator({
+            fileType: /(jpg|jpeg|png|pdf|doc|docx|xls|xlsx)$/,
+          }),
         ],
-      })
+      }),
     )
     files: Express.Multer.File[],
-    @Body() body: { entityId: string; entityType: 'project' | 'unit' | 'user' }
+    @Body() body: { entityId: string; entityType: 'project' | 'unit' | 'user' },
   ) {
     const { entityId, entityType } = body;
-    return this.uploadService.uploadAndAssociateFiles(files, entityId, entityType);
+    return this.uploadService.uploadAndAssociateFiles(
+      files,
+      entityId,
+      entityType,
+    );
   }
 }

@@ -37,7 +37,11 @@ export class User {
   role: UserRole;
 
   @ApiProperty({ description: 'VerificationStatus' })
-  @Column({type:'enum', enum:VerificationStatus, default: VerificationStatus.PENDING })
+  @Column({
+    type: 'enum',
+    enum: VerificationStatus,
+    default: VerificationStatus.PENDING,
+  })
   verificationStatus: VerificationStatus;
 
   @ApiProperty({

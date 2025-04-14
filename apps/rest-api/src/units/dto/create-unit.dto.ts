@@ -73,7 +73,10 @@ export class CreateUnitDto {
   status: UnitStatus;
   @ApiProperty({
     description: 'Image URLs of the unit',
-    example: ['https://example.com/image1.jpg', 'https://example.com/image2.png'],
+    example: [
+      'https://example.com/image1.jpg',
+      'https://example.com/image2.png',
+    ],
     required: false,
   })
   @IsOptional()

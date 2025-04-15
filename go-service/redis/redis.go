@@ -20,6 +20,9 @@ func InitRedis() *redis.Client {
         addr = "localhost:6379"
     }
 
+   fmt.Println("📡 Connecting to Redis at:", addr)
+
+
     rdb = redis.NewClient(&redis.Options{
         Addr: addr,
         DB:   0,
@@ -31,6 +34,7 @@ func InitRedis() *redis.Client {
     }
 
     fmt.Println("✅ Connected to Redis")
+    fmt.Println("🚀 Redis ping successful")
     return rdb
 }
 
@@ -45,8 +49,17 @@ func SaveBid(auctionID, userID string, amount float64) error {
         return err
     }
 
+    fmt.Printf("📝 SaveBid called → auctionID: %s, userID: %s, amount: %.2f\n", auctionID, userID, amount)
+
+
     // Update highest bid
-    return rdb.HSet(ctx, fmt.Sprintf("auction:%s:highestBid", auctionID), "userID", userID, "amount", amount).Err()
+    key := fmt.Sprintf("auction:%s:highestBid", auctionID)
+    err := rdb.HSet(ctx, key, "userID", userID, "amount", amount).Err()
+    if err != nil {
+        fmt.Println("❌ HSet error:", err)
+    }
+
+    return err
 }
 
 func GetCurrentHighestBid(auctionID string) (float64, string, error) {

@@ -4,13 +4,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"go-service/redis"
 )
+
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello from Go Auction Service 🚀")
 }
 
 func main() {
+  redisdb.InitRedis()
 	http.HandleFunc("/", handleRoot)
 
 	port := "8080"

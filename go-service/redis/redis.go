@@ -33,8 +33,7 @@ func InitRedis() *redis.Client {
         panic(fmt.Sprintf("❌ Failed to connect to Redis: %v", err))
     }
 
-    fmt.Println("✅ Connected to Redis")
-    fmt.Println("🚀 Redis ping successful")
+    fmt.Println("✅  Connected")
     return rdb
 }
 
